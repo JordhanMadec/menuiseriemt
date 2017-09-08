@@ -1,0 +1,12 @@
+@import "../../colors";
+
+section {
+  background-color: $light-grey;
+}
+
+.back-button {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  background-color: $green;
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "escalier",
+    "title": "Pose d'escalier",
+    "thumbnail": "/assets/img/gallery/escalier.png",
+    "path": "/assets/img/gallery/escalier",
+    "length": 7
+  },
+  {
+    "id": "fenetre",
+    "title": "Portes & fenêtres",
+    "thumbnail": "/assets/img/gallery/fenetre.png",
+    "path": "/assets/img/gallery/fenetre",
+    "length": 13
+  },
+  {
+    "id": "terrasse",
+    "title": "Terrasse",
+    "thumbnail": "/assets/img/gallery/terrasse.png",
+    "path": "/assets/img/gallery/terrasse",
+    "length": 5
+  },
+  {
+    "id": "isolation",
+    "title": "Isolation",
+    "thumbnail": "/assets/img/gallery/isolation.png",
+    "path": "/assets/img/gallery/isolation",
+    "length": 15
+  },
+  {
+    "id": "charpente",
+    "title": "Charpente",
+    "thumbnail": "/assets/img/gallery/charpente.png",
+    "path": "/assets/img/gallery/charpente",
+    "length": 10
+  },
+  {
+    "id": "interieur",
+    "title": "Aménagement intérieur",
+    "thumbnail": "/assets/img/gallery/interieur.png",
+    "path": "/assets/img/gallery/interieur",
+    "length": 15
+  }
+]

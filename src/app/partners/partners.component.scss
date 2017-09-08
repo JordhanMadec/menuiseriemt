@@ -1,0 +1,27 @@
+@import "../../colors";
+
+#partners-section{
+  background-color: $white;
+  color: $black;
+}
+
+.partner {
+  height: 200px;
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 120px;
+    max-width: 80%;
+    height: auto;
+    width: auto;
+    filter: grayscale(100%);
+    margin: auto;
+  }
+}
+
+.partners-img {
+  filter: grayscale(100%);
+  width: 100%;
+  height: auto;
+}

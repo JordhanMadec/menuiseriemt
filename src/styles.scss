@@ -1,0 +1,328 @@
+/* You can add global styles to this file, and also import other style files */
+@import "colors";
+@import "assets/fonts/atami/stylesheet.css";
+@import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
+
+html, body{
+  color: $black;
+  font-family: 'Quicksand';
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Julius Sans One', 'Archivo';
+}
+
+a, a:hover, a:visited{
+  color: inherit;
+  text-decoration: none;
+}
+
+section{
+  padding: 64px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.green-line {
+  width: 100px;
+  height: 2px;
+  display: inline-block;
+  background-color: $green;
+  margin: 24px 0;
+}
+
+
+
+
+
+//Loader
+#loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: $light-grey;
+  z-index: 10000;
+}
+
+#loader>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  .cssload-loader-inner {
+  bottom: 0;
+  height: 105px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: -100;
+  width: 175px;
+}
+
+.cssload-cssload-loader-line-wrap-wrap {
+  animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -o-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -ms-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -webkit-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -moz-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 88px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  width: 175px;
+}
+.cssload-loader-line-wrap {
+  border: 7px solid transparent;
+  border-radius: 100%;
+  -o-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 175px;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 175px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(1) { animation-delay: -65ms;
+  -o-animation-delay: -65ms;
+  -ms-animation-delay: -65ms;
+  -webkit-animation-delay: -65ms;
+  -moz-animation-delay: -65ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(2) { animation-delay: -130ms;
+  -o-animation-delay: -130ms;
+  -ms-animation-delay: -130ms;
+  -webkit-animation-delay: -130ms;
+  -moz-animation-delay: -130ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(3) { animation-delay: -195ms;
+  -o-animation-delay: -195ms;
+  -ms-animation-delay: -195ms;
+  -webkit-animation-delay: -195ms;
+  -moz-animation-delay: -195ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(4) { animation-delay: -260ms;
+  -o-animation-delay: -260ms;
+  -ms-animation-delay: -260ms;
+  -webkit-animation-delay: -260ms;
+  -moz-animation-delay: -260ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(5) { animation-delay: -325ms;
+  -o-animation-delay: -325ms;
+  -ms-animation-delay: -325ms;
+  -webkit-animation-delay: -325ms;
+  -moz-animation-delay: -325ms; }
+
+.cssload-cssload-loader-line-wrap-wrap:nth-child(1) .cssload-loader-line-wrap {
+  border-color: rgb(0,0,0);
+  height: 158px;
+  width: 158px;
+  top: 12px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(2) .cssload-loader-line-wrap {
+  border-color: rgb(178,231,55);
+  height: 133px;
+  width: 133px;
+  top: 25px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(3) .cssload-loader-line-wrap {
+  border-color: rgb(0,0,0);
+  height: 109px;
+  width: 109px;
+  top: 37px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(4) .cssload-loader-line-wrap {
+  border-color: rgb(178,231,55);
+  height: 84px;
+  width: 84px;
+  top: 49px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(5) .cssload-loader-line-wrap {
+  border-color: rgb(0,0,0);
+  height: 60px;
+  width: 60px;
+  top: 61px;
+}
+
+
+
+
+@keyframes cssload-spin {
+  0%, 15% {
+    transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes cssload-spin {
+  0%, 15% {
+    -o-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes cssload-spin {
+  0%, 15% {
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes cssload-spin {
+  0%, 15% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes cssload-spin {
+  0%, 15% {
+    -moz-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
+.circle-button {
+  height: 60px;
+  width: 60px;
+  padding: 8px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+  cursor: pointer;
+
+  img {
+    height: 30px;
+    transform: rotate(0deg);
+    transition: .3s;
+  }
+}
+
+.circle-button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+
+  img {
+    height: 32px;
+  }
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .section-title:after,
+  .section-title:before {
+    content: '';
+    display: inline-block;
+    width: 70px;
+    height: 2px;
+    background-color: $green;
+    position: relative;
+    top: -12px;
+  }
+
+  .section-title:before {
+    right: 12px;
+  }
+
+  .section-title:after {
+    left: 12px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-title {
+    margin-bottom: 32px;
+  }
+
+  .section-title:before {
+    content: '';
+    display: inline-block;
+    width: 70px;
+    height: 2px;
+    background-color: $green;
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    margin-left: -35px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.3rem;
+  }
+  h5 {
+    font-size: 1.2rem;
+  }
+  h6 {
+    font-size: 1rem;
+  }
+
+  .circle-button {
+    height: 40px;
+    width: 40px;
+  }
+}
