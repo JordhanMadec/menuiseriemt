@@ -1,4 +1,4 @@
-@import "../../colors";
+@import "../../assets/style/variables";
 
 .album-container{
   overflow: hidden;
@@ -108,6 +108,7 @@
 
 .full-screen-photo-container {
   display: none;
+  z-index: 1000;
 }
 
 .full-screen-photo-filter {
