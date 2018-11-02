@@ -258,6 +258,16 @@ section{
   }
 }
 
+.circle-button.circle-button-small {
+  height: 30px;
+  width: 30px;
+  padding: 4px;
+
+  img {
+    height: 20px;
+  }
+}
+
 .circle-button:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
