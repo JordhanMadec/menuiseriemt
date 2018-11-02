@@ -13,12 +13,20 @@ header {
 }
 
 .navbar {
-  height: 60px;
+  height: $navbar-height;
   background-color: $black;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.navbar-brand {
-  height: $navbar-height;
+.navbar-brand img {
+  height: 70px;
+  width: 70px;
 }
 
 #navbar {
