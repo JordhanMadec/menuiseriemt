@@ -1,4 +1,4 @@
-import {BrowserModule, HammerGestureConfig} from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -16,12 +16,14 @@ import { PersonComponent } from './contact/person/person.component';
 import { AlbumComponent } from './album/album.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { Ng2PageScrollModule } from "ng2-page-scroll";
-import { Ng2BootstrapModule } from "ngx-bootstrap";
-import { ScrollSpyModule, ScrollSpyService } from "ng2-scrollspy";
-import { NgsRevealModule } from "ng2-scrollreveal";
-import {PageSliderModule} from "ng2-page-slider";
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { Ng2BootstrapModule } from 'ngx-bootstrap';
+import { ScrollSpyModule,  } from 'ng2-scrollspy';
+import { NgsRevealModule } from 'ng2-scrollreveal';
+import {PageSliderModule} from 'ng2-page-slider';
 import { LegalsComponent } from './legals/legals.component';
+import { SvgIconsComponent } from './svg-icons/svg-icons.component';
+import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -43,7 +45,9 @@ const APP_ROUTES: Routes = [
     PersonComponent,
     AlbumComponent,
     HomeComponent,
-    LegalsComponent
+    LegalsComponent,
+    SvgIconsComponent,
+    SvgIconsDefinitionsComponent
   ],
   imports: [
     BrowserModule,
