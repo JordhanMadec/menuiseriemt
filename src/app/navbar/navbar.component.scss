@@ -1,4 +1,4 @@
-@import "../../colors";
+@import "../../assets/style/variables";
 
 header {
   display: flex;
@@ -6,10 +6,19 @@ header {
   position: fixed;
   //top: 50%;
   //margin-top: -226px;
-  bottom: 16px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+.navbar {
+  height: 60px;
+  background-color: $black;
+}
+
+.navbar-brand {
+  height: $navbar-height;
 }
 
 #navbar {

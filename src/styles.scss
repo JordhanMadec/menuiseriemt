@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "colors";
+@import "assets/style/variables";
 @import "assets/fonts/atami/stylesheet.css";
 @import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
 
@@ -8,6 +8,10 @@ html, body{
   font-family: 'Quicksand';
   overflow-x: hidden;
   position: relative;
+}
+
+body {
+  margin-top: $navbar-height;
 }
 
 h1, h2, h3, h4, h5, h6 {
