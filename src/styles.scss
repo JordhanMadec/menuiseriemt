@@ -58,15 +58,7 @@ section{
   z-index: 10000;
 }
 
-#loader>div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-  .cssload-loader-inner {
-  bottom: 0;
+.cssload-loader-inner {
   height: 105px;
   left: 0;
   margin: auto;
