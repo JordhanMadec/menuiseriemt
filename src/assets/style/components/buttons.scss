@@ -1,0 +1,65 @@
+.circle-button {
+  height: 60px;
+  width: 60px;
+  padding: 8px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s;
+  cursor: pointer;
+
+  img {
+    height: 30px;
+    transform: rotate(0deg);
+    transition: .3s;
+  }
+}
+
+.circle-button.circle-button-small {
+  height: 30px;
+  width: 30px;
+  padding: 4px;
+
+  img {
+    height: 20px;
+  }
+}
+
+.circle-button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+
+  img {
+    height: 32px;
+  }
+}
+
+.my-button {
+  border-radius: 4px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: .3s;
+
+  app-svg-icon.button-icon, .button-icon {
+    margin-left: 10px;
+  }
+}
+
+.my-button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.my-button.accent {
+  background-color: $green;
+}
+
+.my-button.primary {
+  background-color: $black;
+  color: $white;
+}

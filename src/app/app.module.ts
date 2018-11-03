@@ -24,6 +24,7 @@ import {PageSliderModule} from 'ng2-page-slider';
 import { LegalsComponent } from './legals/legals.component';
 import { SvgIconsComponent } from './svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
+import { ClientComponent } from './home/client/client.component';
 
 const APP_ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -47,7 +48,8 @@ const APP_ROUTES: Routes = [
     HomeComponent,
     LegalsComponent,
     SvgIconsComponent,
-    SvgIconsDefinitionsComponent
+    SvgIconsDefinitionsComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

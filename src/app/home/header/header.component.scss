@@ -1,4 +1,4 @@
-@import "../../../assets/style/colors";
+@import "../../../assets/style/variables/colors";
 
 #header-section {
   padding: 0;
@@ -16,10 +16,10 @@
   height: 500px;
   width: 100%;
   background-color: rgba(0, 0, 0, .4);
-  background-image: -webkit-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: -o-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: -moz-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,0));;
+  background-image: -webkit-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));
+  background-image: -o-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));
+  background-image: -moz-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));
+  background-image: linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,0));
   color: $white;
   display: flex;
   align-items: center;
