@@ -1,4 +1,4 @@
-@import "../../assets/style/colors";
+@import "../../../assets/style/colors";
 
 #header-section {
   padding: 0;
@@ -7,7 +7,7 @@
 .header-container {
   height: 500px;
   background-color: $white;
-  background-image: url("../../assets/img/background6.png");
+  background-image: url("../../../assets/img/background6.png");
   background-size: cover;
   background-position: center;
 }
