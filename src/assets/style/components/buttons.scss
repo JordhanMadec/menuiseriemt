@@ -47,6 +47,7 @@
   transition: .3s;
 
   app-svg-icon.button-icon, .button-icon {
+    fill: white;
     margin-left: 10px;
   }
 }
@@ -57,9 +58,45 @@
 
 .my-button.accent {
   background-color: $green;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $black;
+  }
 }
 
 .my-button.primary {
   background-color: $black;
   color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $green;
+  }
+}
+
+.icon-button {
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s;
+  cursor: pointer;
+
+  app-svg-icon {
+    fill: $dark-grey;
+  }
+
+  &:hover app-svg-icon {
+    fill: $green;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .circle-button {
+    height: 40px;
+    width: 40px;
+  }
 }

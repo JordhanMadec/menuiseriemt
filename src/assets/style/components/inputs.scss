@@ -1,0 +1,39 @@
+input {
+  border: none;
+  background-color: $light-grey;
+  color: $dark-grey;
+  border-radius: 4px;
+  padding: 10px 20px;
+  width: 100%;
+  outline: none !important;
+}
+
+.input-wrapper {
+  width: 100%;
+  position: relative;
+
+  input {
+    padding-left: 40px;
+  }
+
+
+}
+
+.input-group {
+  margin: -10px 0;
+  width: 100%;
+
+  .input-wrapper {
+    margin: 10px 0;
+
+    app-svg-icon.input-icon {
+      fill: $dark-grey;
+      position: absolute;
+      left: 10px;
+      height: 20px;
+      width: 20px;
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
+}

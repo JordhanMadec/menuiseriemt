@@ -25,12 +25,8 @@ import { LegalsComponent } from './legals/legals.component';
 import { SvgIconsComponent } from './svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
-
-const APP_ROUTES: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'album/:id', component: AlbumComponent},
-  {path: 'mentions_legales', component: LegalsComponent}
-];
+import { LoginComponent } from './login/login.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -49,18 +45,19 @@ const APP_ROUTES: Routes = [
     LegalsComponent,
     SvgIconsComponent,
     SvgIconsDefinitionsComponent,
-    ClientComponent
+    ClientComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     Ng2PageScrollModule,
-    RouterModule.forRoot(APP_ROUTES),
     Ng2BootstrapModule,
     ScrollSpyModule.forRoot(),
     NgsRevealModule.forRoot(),
-    PageSliderModule
+    PageSliderModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

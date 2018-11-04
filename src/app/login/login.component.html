@@ -1,0 +1,34 @@
+<section id="login-section">
+  <div class="login-wrapper shadow-strong" [ngsReveal]="{scale: .5, origin: 'bottom', delay:100, distance: '100px', duration: 500}">
+    <h4 class="title">Mon espace client</h4>
+
+    <div class="badge-mt" routerLink="/">
+      <img src="/assets/img/logo_mt.jpg">
+    </div>
+
+    <small>Entrez votre identifiant adresse mail et votre mot de passe pour accéder à votre espace client.</small>
+
+    <form>
+      <div class="input-group">
+        <div class="input-wrapper">
+          <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+          <input type="email" placeholder="Adresse mail">
+        </div>
+        <div class="input-wrapper">
+          <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
+          <input type="password" placeholder="Mot de passe">
+        </div>
+
+        <div class="input-wrapper row-center">
+          <button class="my-button accent">
+            Se connecter
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <small>Pas encore de compte ?</small><br>
+    <a class="signup-link">Créer mon compte client</a>
+
+  </div>
+</section>

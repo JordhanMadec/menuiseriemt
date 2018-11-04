@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class SvgIconsComponent {
   @Input() name: String;
+  @Input() size: Number = 30;
 
   constructor() {}
 

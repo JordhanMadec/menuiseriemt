@@ -1,0 +1,62 @@
+@import "~assets/style/variables";
+@import "~assets/style/variables";
+
+#login-section {
+  background-image: url("../../assets/img/login-background.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-wrapper {
+  background-color: $white;
+  padding: 30px;
+  width: 350px;
+  border-radius: 5px;
+
+  .title {
+    color: $green;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.badge-mt {
+  background-color: $black;
+  height: 100px;
+  width: 100px;
+  margin: 15px auto;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-grow: 2;
+  cursor: pointer;
+  outline: none;
+
+  img {
+    height: 80px;
+    width: 80px;
+    transition: .3s;
+  }
+
+  &:hover img {
+    height: 60px;
+    width: 60px;
+
+  }
+}
+
+.input-group {
+  margin: 15px 0;
+}
