@@ -29,7 +29,7 @@
 .header-title {
   font-size: 70px;
   margin: 0;
-  transition: .3s;
+  transition: $transition-fast;
 }
 
 .back-button {
@@ -70,7 +70,7 @@
   padding: 8px 16px;
   height: 100%;
   width: 100%;
-  transition: .3s;
+  transition: $transition-fast;
   overflow: hidden;
   opacity: 0;
   cursor: pointer;
@@ -92,7 +92,7 @@
     display: inline-block;
     transform: translateY(0px);
     opacity: 1;
-    transition: .3s;
+    transition: $transition-fast;
   }
 }
 

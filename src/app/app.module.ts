@@ -27,6 +27,8 @@ import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/
 import { ClientComponent } from './home/client/client.component';
 import { LoginComponent } from './login/login.component';
 import {AppRoutingModule} from './app-routing.module';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {AppRoutingModule} from './app-routing.module';
     SvgIconsComponent,
     SvgIconsDefinitionsComponent,
     ClientComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

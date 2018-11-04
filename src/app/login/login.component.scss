@@ -19,9 +19,9 @@
 
 .login-wrapper {
   background-color: $white;
-  padding: 30px;
+  padding: $big-gap;
   width: 350px;
-  border-radius: 5px;
+  border-radius: $small-radius;
 
   .title {
     color: $green;
@@ -34,7 +34,7 @@
   background-color: $black;
   height: 100px;
   width: 100px;
-  margin: 15px auto;
+  margin: $middle-gap auto;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@
   img {
     height: 80px;
     width: 80px;
-    transition: .3s;
+    transition: $transition-fast;
   }
 
   &:hover img {
@@ -58,5 +58,5 @@
 }
 
 .input-group {
-  margin: 15px 0;
+  margin: $very-small-gap 0;
 }

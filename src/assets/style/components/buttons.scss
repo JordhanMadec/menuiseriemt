@@ -1,19 +1,19 @@
 .circle-button {
   height: 60px;
   width: 60px;
-  padding: 8px;
+  padding: $small-gap;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: .3s;
+  transition: $transition-fast;
   cursor: pointer;
 
   img {
     height: 30px;
     transform: rotate(0deg);
-    transition: .3s;
+    transition: $transition-fast;
   }
 }
 
@@ -29,26 +29,22 @@
 
 .circle-button:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-
-  img {
-    height: 32px;
-  }
 }
 
 .my-button {
-  border-radius: 4px;
-  padding: 8px 16px;
+  border-radius: $small-radius;
+  padding: $small-gap $middle-gap;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
   cursor: pointer;
-  transition: .3s;
+  transition: $transition-fast;
 
   app-svg-icon.button-icon, .button-icon {
     fill: white;
-    margin-left: 10px;
+    margin-left: $small-gap;
   }
 }
 
@@ -82,7 +78,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: .2s;
+  transition: $transition-fast;
   cursor: pointer;
 
   app-svg-icon {
