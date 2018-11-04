@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -14,7 +14,6 @@ import { ServicesComponent } from './home/services/services.component';
 import { GalleryComponent } from './home/gallery/gallery.component';
 import { PersonComponent } from './home/contact/person/person.component';
 import { AlbumComponent } from './album/album.component';
-import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
@@ -61,7 +60,8 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     ScrollSpyModule.forRoot(),
     NgsRevealModule.forRoot(),
     PageSliderModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

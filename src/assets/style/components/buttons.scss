@@ -46,6 +46,13 @@
     fill: white;
     margin-left: $small-gap;
   }
+
+  &:disabled {
+    background-color: $light-grey !important;
+    color: $white !important;
+    box-shadow: none !important;
+    cursor: default;
+  }
 }
 
 .my-button:hover {

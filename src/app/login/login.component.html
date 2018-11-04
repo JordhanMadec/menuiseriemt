@@ -8,21 +8,25 @@
 
     <small>Entrez votre identifiant adresse mail et votre mot de passe pour accéder à votre espace client.</small>
 
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="input-group">
         <div class="input-wrapper">
+          <input id="mail" type="email" placeholder="Adresse mail" formControlName="mail">
           <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
-          <input type="email" placeholder="Adresse mail">
         </div>
+
         <div class="input-wrapper">
           <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
-          <input type="password" placeholder="Mot de passe">
+          <input id="password" type="password" placeholder="Mot de passe" formControlName="password">
+          <div class="input-hint" *ngIf="loginFailed">
+            Addresse mail ou mot de passe invalide.
+          </div>
         </div>
 
         <small><a class="signup-link" routerLink="/forgot-password">Mot de passe oublié ?</a></small>
 
         <div class="input-wrapper row-center">
-          <button class="my-button accent">
+          <button class="my-button accent" type="submit" [disabled]="!loginForm.valid">
             Se connecter
           </button>
         </div>
