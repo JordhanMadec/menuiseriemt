@@ -2,10 +2,6 @@
   <div class="login-wrapper shadow-strong" [ngsReveal]="{scale: .5, origin: 'bottom', delay:100, distance: '100px', duration: 500}">
     <h4 class="title">Mon espace client</h4>
 
-    <div class="badge-mt" routerLink="/">
-      <img src="/assets/img/logo_mt.jpg">
-    </div>
-
     <small>Entrez votre identifiant adresse mail et votre mot de passe pour accéder à votre espace client.</small>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -18,7 +14,7 @@
         <div class="input-wrapper">
           <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
           <input id="password" type="password" placeholder="Mot de passe" formControlName="password">
-          <div class="input-hint" *ngIf="loginFailed">
+          <div class="input-hint error" *ngIf="loginFailed">
             Addresse mail ou mot de passe invalide.
           </div>
         </div>

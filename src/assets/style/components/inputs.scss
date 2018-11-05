@@ -41,8 +41,12 @@ input {
     }
 
     .input-hint {
-      color: $red;
+      color: $dark-grey;
       font-size: 12px;
+
+      &.error {
+        color: $red;
+      }
     }
   }
 }
