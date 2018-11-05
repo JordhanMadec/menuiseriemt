@@ -4,12 +4,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>-->
 
-    <a class="navbar-brand" pageScroll href="#header-section" routerLink="/">
+    <a class="navbar-brand" routerLink="/">
       <img src="/assets/img/logo_mt.jpg">
     </a>
 
     <div class="nav-buttons-container">
-      <a class="nav-link" routerLink="login">
+      <a class="nav-link" routerLink="/login" *ngIf="router.url === '/'">
         <div>Espace Client</div>
         <app-svg-icon class="button-icon" name="user"></app-svg-icon>
       </a>
