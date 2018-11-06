@@ -6,6 +6,7 @@ import {AlbumComponent} from './album/album.component';
 import {LegalsComponent} from './legals/legals.component';
 import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
+import {CustomerAreaHomeComponent} from './customer-area/customer-area-home/customer-area-home.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'mentions_legales', component: LegalsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'reset-password', component: ResetPasswordComponent}
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'espace-client', component: CustomerAreaHomeComponent},
 ];
 
 @NgModule({

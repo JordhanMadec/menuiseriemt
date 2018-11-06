@@ -1,19 +1,25 @@
 <header>
   <nav class="navbar">
-   <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <div class="container">
+      <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>-->
+      </button>-->
 
-    <a class="navbar-brand" routerLink="/">
-      <img src="/assets/img/logo_mt.jpg">
-    </a>
-
-    <div class="nav-buttons-container">
-      <a class="nav-link" routerLink="/login" *ngIf="router.url === '/'">
-        <div>Espace Client</div>
-        <app-svg-icon class="button-icon" name="user"></app-svg-icon>
+      <a class="navbar-brand" routerLink="/">
+        <img src="/assets/img/logo_mt.jpg">
       </a>
-    </div>
 
+      <div class="nav-links-container">
+        <a class="nav-link" routerLink="/login" *ngIf="router.url === '/'">
+          <div>Espace Client</div>
+          <app-svg-icon class="button-icon" name="user"></app-svg-icon>
+        </a>
+
+        <a class="nav-link" routerLink="/login">
+          <div>Nom Prénom</div>
+          <app-svg-icon class="button-icon" name="user"></app-svg-icon>
+        </a>
+      </div>
+    </div>
   </nav>
 </header>

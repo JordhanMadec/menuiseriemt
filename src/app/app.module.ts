@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import {AppRoutingModule} from './app-routing.module';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/customer-area-home.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ResetPasswordComponent } from './login/reset-password/reset-password.co
     ClientComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CustomerAreaHomeComponent
   ],
   imports: [
     BrowserModule,
