@@ -1,4 +1,4 @@
-<div class="album-container" scroll="no" [ngsReveal]="{scale: 0, delay:150, distance: 0, duration: 1000}">
+<div class="album-container" scroll="no">
   <header *ngIf="(album | async)">
     <div class="header-container"
          [style.background-image]="'url(' + (album | async)?.thumbnail + ')'">
@@ -26,9 +26,9 @@
 
 </div>
 
-<div class="circle-button back-button" (click)="goToHome()">
+<a class="circle-button back-button" routerLink="/" href="#gallery-section" pageScroll>
   <img src="../../assets/img/back-arrow.svg">
-</div>
+</a>
 
 
 <div class="full-screen-photo-container">

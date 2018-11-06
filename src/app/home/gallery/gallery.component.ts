@@ -5,7 +5,7 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {map} from 'rxjs/operators';
-import {of} from "rxjs";
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-gallery',

@@ -45,7 +45,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
             this.getAllPhotos(album.path);
             // Get the number of photos to display
             this.numbers = Array(album.length).fill(0).map((x, i) => i + 1);
-            this.album = Observable.of(album);
+            this.album = of(album);
             this.mAlbum = album;
             console.log('GetAlbum SUCCESS: ', album);
           },
