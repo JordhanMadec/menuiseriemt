@@ -15,11 +15,9 @@ import { GalleryComponent } from './home/gallery/gallery.component';
 import { PersonComponent } from './home/contact/person/person.component';
 import { AlbumComponent } from './album/album.component';
 import { HomeComponent } from './home/home.component';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { Ng2BootstrapModule } from 'ngx-bootstrap';
-import { ScrollSpyModule,  } from 'ng2-scrollspy';
-import { NgsRevealModule } from 'ng2-scrollreveal';
-import {PageSliderModule} from 'ng2-page-slider';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { ScrollSpyModule } from 'ngx-scrollspy';
+import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
 import { SvgIconsComponent } from './svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
@@ -57,11 +55,9 @@ import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/cu
     BrowserModule,
     FormsModule,
     HttpModule,
-    Ng2PageScrollModule,
-    Ng2BootstrapModule,
+    NgxPageScrollModule,
     ScrollSpyModule.forRoot(),
-    NgsRevealModule.forRoot(),
-    PageSliderModule,
+    NgsRevealModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],

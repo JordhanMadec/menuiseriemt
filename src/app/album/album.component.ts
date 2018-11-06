@@ -1,10 +1,12 @@
-import {AfterViewInit, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {AlbumInfo} from './album-info.model';
 import {Http} from '@angular/http';
 import 'rxjs/add/observable/of';
 import {Subscription} from 'rxjs/Subscription';
+import {catchError, map} from 'rxjs/operators';
+import {of} from 'rxjs/internal/observable/of';
 
 declare var $: any;
 
@@ -43,7 +45,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
             this.getAllPhotos(album.path);
             // Get the number of photos to display
             this.numbers = Array(album.length).fill(0).map((x, i) => i + 1);
-            this.album = Observable.of(album);
+            this.album = of(album);
             this.mAlbum = album;
             console.log('GetAlbum SUCCESS: ', album);
           },
@@ -59,22 +61,29 @@ export class AlbumComponent implements OnInit, OnDestroy {
   }
 
   private getAlbum(id:  string): Observable<AlbumInfo> {
-    return this.http.get('/assets/gallery-db.json')
-      .map((res: any) => {
+    return this.http.get('/assets/gallery-db.json').pipe(
+      map((res: any) => {
         const albums = res.json();
         for (const album of albums) {
-          if (album.id === id)
+          if (album.id === id) {
             return album;
+          }
         }
         return null;
-      });
+      })
+    );
   }
 
   private getAllPhotos(path:  string): Observable<any> {
-    return this.http.get(path)
-      .map((res: any) => {
+    return this.http.get(path).pipe(
+      map((res: any) => {
         console.log('ALL PHOTOS: ', res);
-      }, error => console.log('ALL PHOTOS ERROR: ', error));
+      }),
+      catchError(error => {
+        console.log('ALL PHOTOS ERROR: ', error);
+        return of(error);
+      })
+    );
   }
 
   showFullScreen(id: number) {
