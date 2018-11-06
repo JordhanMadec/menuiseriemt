@@ -2,6 +2,9 @@
 @import "assets/style/variables";
 @import "assets/fonts/atami/stylesheet.css";
 @import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap';
 
 html, body{
   color: $black;

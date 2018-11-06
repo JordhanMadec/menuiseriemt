@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PageScrollConfig} from 'ngx-page-scroll';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+  constructor() {
+    PageScrollConfig.defaultScrollOffset = 80;
+  }
 }

@@ -16,11 +16,9 @@ import { PersonComponent } from './home/contact/person/person.component';
 import { AlbumComponent } from './album/album.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { Ng2PageScrollModule } from "ng2-page-scroll";
-import { Ng2BootstrapModule } from "ngx-bootstrap";
-import { ScrollSpyModule, ScrollSpyService } from "ng2-scrollspy";
-import { NgsRevealModule } from "ng2-scrollreveal";
-import {PageSliderModule} from "ng2-page-slider";
+import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { ScrollSpyModule } from 'ngx-scrollspy';
+import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
 
 const APP_ROUTES: Routes = [
@@ -49,12 +47,10 @@ const APP_ROUTES: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    Ng2PageScrollModule,
+    NgxPageScrollModule,
     RouterModule.forRoot(APP_ROUTES),
-    Ng2BootstrapModule,
     ScrollSpyModule.forRoot(),
-    NgsRevealModule.forRoot(),
-    PageSliderModule
+    NgsRevealModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
