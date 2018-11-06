@@ -4,6 +4,8 @@ import {AlbumInfo} from '../../album/album-info.model';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
+import {map} from 'rxjs/operators';
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-gallery',
@@ -32,7 +34,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.getAllAlbums().subscribe(
       data => {
-        this.albums = Observable.of(data);
+        this.albums = of(data);
         console.log('GetAllAlbums SUCCESS: ', data);
       },
       error => {
@@ -45,8 +47,9 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   private getAllAlbums(): Observable<AlbumInfo[]> {
-    return this.http.get('/assets/gallery-db.json')
-      .map((res: any) => res.json());
+    return this.http.get('/assets/gallery-db.json').pipe(
+      map((res: any) => res.json())
+    );
 
   }
 
