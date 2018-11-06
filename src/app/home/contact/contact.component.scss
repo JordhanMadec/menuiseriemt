@@ -1,4 +1,5 @@
 @import "../../../assets/style/colors";
+@import "../../../assets/style/variables";
 
 #contact-section{
   background-color: $light-grey;
@@ -10,7 +11,7 @@
 
 .map-container {
   img {
-    border-radius: 15px;
+    border-radius: $radius;
   }
 }
 
