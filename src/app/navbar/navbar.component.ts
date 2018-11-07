@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 declare var $: any;
 
@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     $('body').scrollspy({ target: '#navbar' });

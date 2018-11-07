@@ -1,6 +1,6 @@
-import {BrowserModule, HammerGestureConfig} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 
@@ -24,7 +24,7 @@ import { SvgIconsComponent } from './svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
 import { LoginComponent } from './login/login.component';
-import {AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/customer-area-home.component';
@@ -53,18 +53,17 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    CustomerAreaHomeComponent
+    CustomerAreaHomeComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(APP_ROUTES),
     NgxPageScrollModule,
     ScrollSpyModule.forRoot(),
     NgsRevealModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
