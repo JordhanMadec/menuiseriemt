@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -5,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/notAuth.guard';
 import { AboutComponent } from './home/about/about.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { FooterComponent } from './home/footer/footer.component';
@@ -20,6 +23,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ScrollSpyModule } from 'ngx-scrollspy';
 import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
+import { AuthService } from './services/auth.service';
 import { SvgIconsComponent } from './svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
@@ -59,6 +63,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     NgxPageScrollModule,
     ScrollSpyModule.forRoot(),
     NgsRevealModule,
@@ -68,7 +73,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    NotAuthGuard,
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
