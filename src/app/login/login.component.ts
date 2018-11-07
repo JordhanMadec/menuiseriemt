@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   private loginForm: FormGroup;
   private loginFailed = false;
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -23,10 +25,33 @@ export class LoginComponent implements OnInit {
         Validators.required,
       ])
     });
+
+    // Reset login status
+    this.authService.logout()
+  }
+
+  private login(username: string, password: string) {
+    this.authService.login(username, password).then(
+      res => {
+        console.log(res);
+        this.loginFailed = false;
+        this.router.navigate(['espace-client'])
+      },
+      error => {
+        console.log(error);
+        this.loginFailed = true;
+        return null
+      }
+    );
   }
 
   onSubmit() {
-    this.loginFailed = true;
-  }
+    if (this.loginForm.invalid) {
+      return;
+    }
 
+    const username = this.loginForm.controls.mail.value.toString();
+    const password = this.loginForm.controls.password.value.toString();
+    this.login(username, password);
+  }
 }

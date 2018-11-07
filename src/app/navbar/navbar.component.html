@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
       </button>-->
 
-      <a class="navbar-brand" routerLink="/">
+      <a class="navbar-brand" (click)="goToHome()">
         <img src="/assets/img/logo_mt.jpg">
       </a>
 
@@ -15,9 +15,8 @@
           <app-svg-icon class="button-icon" name="user"></app-svg-icon>
         </a>
 
-        <a class="nav-link" routerLink="/login">
-          <div>Nom Prénom</div>
-          <app-svg-icon class="button-icon" name="user"></app-svg-icon>
+        <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated()">
+          <div>Se déconnecter</div>
         </a>
       </div>
     </div>
