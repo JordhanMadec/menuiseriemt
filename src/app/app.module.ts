@@ -1,7 +1,8 @@
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HammerGestureConfig} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './home/about/about.component';
@@ -27,6 +28,9 @@ import {AppRoutingModule} from './app-routing.module';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/customer-area-home.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -55,11 +59,15 @@ import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/cu
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(APP_ROUTES),
     NgxPageScrollModule,
     ScrollSpyModule.forRoot(),
     NgsRevealModule,
     AppRoutingModule,
     ReactiveFormsModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

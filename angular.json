@@ -118,5 +118,12 @@
       }
     }
   },
-  "defaultProject": "menuiseriemt"
+  "defaultProject": "menuiseriemt",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": false
+      }
+    }
+  }
 }
