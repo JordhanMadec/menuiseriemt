@@ -10,12 +10,12 @@
       </a>
 
       <div class="nav-links-container">
-        <a class="nav-link" routerLink="/login" *ngIf="router.url === '/'">
+        <a class="nav-link" routerLink="/login" *ngIf="isHome">
           <div>Espace Client</div>
           <app-svg-icon class="button-icon" name="user"></app-svg-icon>
         </a>
 
-        <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated()">
+        <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
           <div>Se déconnecter</div>
         </a>
       </div>
