@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'home', redirectTo: '/'},
   {path: 'album/:id', component: AlbumComponent, canActivate: [NotAuthGuard]},
   {path: 'mentions_legales', component: LegalsComponent},
-  {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
+  {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NotAuthGuard]},
   {path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuard]},
   {path: 'espace-client', component: CustomerAreaHomeComponent, canActivate: [AuthGuard]},
