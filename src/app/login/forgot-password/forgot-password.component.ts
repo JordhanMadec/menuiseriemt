@@ -8,8 +8,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  private forgotPasswordForm: FormGroup;
-  private mailFailed = false;
+  public forgotPasswordForm: FormGroup;
+  public mailFailed = false;
 
   constructor() { }
 

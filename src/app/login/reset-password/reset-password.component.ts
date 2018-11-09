@@ -23,7 +23,7 @@ export const passwordMatcher = (control: AbstractControl): {[key: string]: boole
 })
 export class ResetPasswordComponent implements OnInit {
 
-  private resetPasswordForm: FormGroup;
+  public resetPasswordForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
   }

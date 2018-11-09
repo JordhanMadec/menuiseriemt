@@ -35,6 +35,7 @@ import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/cu
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SignupComponent } from './login/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     CustomerAreaHomeComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

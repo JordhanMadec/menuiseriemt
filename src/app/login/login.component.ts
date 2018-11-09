@@ -10,8 +10,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup;
-  private loginFailed = false;
+  public loginForm: FormGroup;
+  public loginFailed = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
