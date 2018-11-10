@@ -47,10 +47,10 @@ export class AuthService implements OnInit, OnDestroy {
   login(email: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(res => {
+        .then(user => {
           this.isAuthenticatedEmitter.emit(true);
-          resolve(res);
-        }, err => reject(err))
+          resolve(user);
+        }, error => reject(error))
     })
   }
 
@@ -64,6 +64,16 @@ export class AuthService implements OnInit, OnDestroy {
     ).catch(
       error => console.log(error)
     );
+  }
+
+  signup(email: string, password: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(user => {
+          console.log('CREATE USER', user);
+          resolve(user);
+        }, error => reject(error))
+    })
   }
 
   get isAuthenticatedEmitter(): EventEmitter<boolean> {

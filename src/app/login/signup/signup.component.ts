@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { PasswordValidator } from '../../shared/password-validator';
 
 export const phonePattern = '^[0-9]{10}$';
@@ -9,11 +11,11 @@ export const phonePattern = '^[0-9]{10}$';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss', '../login.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   public signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.signupForm = this.fb.group({
       contact: this.fb.group({
         firstName: ['', Validators.required],
@@ -43,10 +45,27 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  private signup(username: string, password: string) {
+    this.authService.signup(username, password).then(
+      res => {
+        console.log('Signup successful', res);
+        this.router.navigate(['login'])
+      },
+      error => {
+        console.log('Signup error', error);
+        return null
+      }
+    );
   }
 
   onSubmit() {
+    if (this.signupForm.invalid) {
+      return;
+    }
+
+    const username = this.signupForm.get('contact').get('email').value.toString();
+    const password = this.signupForm.get('password').get('password').value.toString();
+    this.signup(username, password);
   }
 
 }
