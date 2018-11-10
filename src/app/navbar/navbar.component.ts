@@ -32,10 +32,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
 
     this.isAuthenticatedSubscription = this.authService.isAuthenticatedEmitter.subscribe(
-      res => {
-        console.log('User event login', res);
-        this.isAuthenticated = res;
-      }
+      res => this.isAuthenticated = res
     );
   }
 

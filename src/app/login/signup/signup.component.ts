@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PasswordValidator } from '../../shared/password-validator';
 
 export const phonePattern = '^[0-9]{10}$';
 
@@ -14,9 +15,9 @@ export class SignupComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
       contact: this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
         email: ['', [
           Validators.required,
           Validators.email
@@ -36,7 +37,9 @@ export class SignupComponent implements OnInit {
           Validators.pattern('^[0-9]{5}$')
         ]],
         address: ['', Validators.required],
-      })
+      }),
+      password: new PasswordValidator(this.fb).passwordValidator,
+      acceptConditions: ['', Validators.requiredTrue]
     });
   }
 

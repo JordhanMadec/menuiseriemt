@@ -1,4 +1,7 @@
-input {
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
   border: none;
   background-color: $light-grey;
   background-position: 10px;
@@ -25,7 +28,10 @@ input {
   position: relative;
   padding: $small-gap !important;
 
-  input {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
     padding-left: 40px;
   }
 

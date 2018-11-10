@@ -1,0 +1,46 @@
+@import "../../../assets/style/variables";
+
+$checkbox-size: 25px;
+
+.check-container {
+  display: flex;
+  align-items: center;
+}
+
+.check-wrapper {
+  position: absolute;
+  height: $checkbox-size;
+  width: $checkbox-size;
+  background-color: $light-grey;
+  border-radius: $small-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  app-svg-icon.check-icon {
+    fill: $green;
+    transition: $transition-fast;
+    transform: scale(0);
+  }
+}
+
+:host /deep/ span {
+  margin-left: $very-small-gap;
+}
+
+:host /deep/ input[type="checkbox"] {
+  height: $checkbox-size;
+  width: $checkbox-size;
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  opacity: 0;
+  cursor: pointer !important;
+}
+
+:host /deep/ input[type="checkbox"]:checked ~ .check-wrapper {
+  & .check-icon {
+    transform: scale(1);
+  }
+}

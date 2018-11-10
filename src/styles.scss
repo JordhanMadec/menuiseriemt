@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a, a:hover, a:visited{
-  color: inherit;
+  color: $green !important;
   text-decoration: none;
   cursor: pointer;
 
@@ -34,6 +34,7 @@ a, a:hover, a:visited{
 
 a:hover {
   color: $green !important;
+  text-decoration: underline !important;
 
   app-svg-icon {
     fill: $green;

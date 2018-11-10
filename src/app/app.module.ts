@@ -36,6 +36,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { SignupComponent } from './login/signup/signup.component';
+import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SignupComponent } from './login/signup/signup.component';
     ResetPasswordComponent,
     CustomerAreaHomeComponent,
     SignupComponent,
+    CheckboxComponent,
   ],
   imports: [
     BrowserModule,

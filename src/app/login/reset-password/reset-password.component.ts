@@ -1,20 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
-export const passwordMatcher = (control: AbstractControl): {[key: string]: boolean} => {
-  const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
-
-  if  (!password) {
-    return null;
-  }
-
-  if (password.value === confirmPassword.value) {
-    return null;
-  }
-
-  return {mismatch: true};
-};
+import { PasswordValidator } from '../../shared/password-validator';
 
 @Component({
   selector: 'app-reset-password',
@@ -29,13 +15,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resetPasswordForm = this.fb.group({
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-      ]],
-      confirmPassword: ['', Validators.required]
-    }, {validator: passwordMatcher});
+    this.resetPasswordForm = new PasswordValidator(this.fb).passwordValidator;
   }
 
   onSubmit() {

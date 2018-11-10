@@ -1,25 +1,24 @@
-<section id="login-section">
+<section id="signup-section" class="signup-section">
   <div class="login-wrapper shadow-strong" [ngsReveal]="{scale: .5, origin: 'bottom', delay:100, distance: '100px', duration: 500}">
     <h4 class="title">Créer un compte</h4>
 
     <small>Les champs avec une astérisque (*) sont obligatoires.</small>
 
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <div class="input-container row">
-        <div class="input-wrapper col-lg-6">
-          <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
-          <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
-        </div>
-        <div class="input-wrapper col-lg-6">
-          <input id="lastName" type="text" placeholder="Nom*" formControlName="lastName">
-          <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
-        </div>
-      </div>
-
       <div formGroupName="contact">
-        <h4 class="input-setcion-title">Contact</h4>
+        <h5 class="input-setcion-title">Contact</h5>
 
         <div class="input-container row">
+          <div class="input-wrapper col-lg-6">
+            <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
+            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+          </div>
+
+          <div class="input-wrapper col-lg-6">
+            <input id="lastName" type="text" placeholder="Nom*" formControlName="lastName">
+            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+          </div>
+
           <div class="input-wrapper col-lg-12">
             <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email">
             <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
@@ -35,6 +34,7 @@
               Le format attendu est XX XX XX XX XX
             </div>
           </div>
+
           <div class="input-wrapper col-lg-6">
             <input id="mobilePhone" type="text" placeholder="Téléphone portable" formControlName="mobilePhone">
             <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
@@ -46,7 +46,7 @@
       </div>
 
       <div formGroupName="addressFields">
-        <h4 class="input-setcion-title">Adresse</h4>
+        <h5 class="input-setcion-title">Adresse</h5>
 
         <div class="input-container row">
           <div class="input-wrapper col-lg-6">
@@ -69,10 +69,41 @@
         </div>
       </div>
 
+      <div formGroupName="password">
+        <h5 class="input-setcion-title">Mot de passe</h5>
+
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-6">
+            <input id="password" type="password" placeholder="Mot de passe*" formControlName="password">
+            <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
+            <div class="input-hint" *ngIf="!signupForm.get('password').controls.password.valid">
+              8 caractères minimum dont 1 chiffre au moins.
+            </div>
+          </div>
+
+          <div class="input-wrapper col-lg-6">
+            <input id="confirmPassword" type="password" placeholder="Confirmation*" formControlName="confirmPassword">
+            <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
+            <div class="input-hint error" *ngIf="signupForm.get('password').hasError('mismatch')">
+              Les deux mots de passe doivent être identiques.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container row">
+        <div class="input-wrapper col-lg-12">
+          <app-checkbox>
+            <input role="checkbox" id="acceptConditions" type="checkbox" formControlName="acceptConditions">
+            <span role="text">J'accepte les conditions <a>générales d'utilisation</a></span>
+          </app-checkbox>
+        </div>
+      </div>
+
       <div class="input-container row-center">
         <div class="input-wrapper">
           <button class="my-button accent" type="submit" [disabled]="!signupForm.valid">
-            Suivant
+            Confirmer mon inscription
           </button>
         </div>
       </div>
