@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   private login(username: string, password: string) {
     this.authService.login(username, password).then(
       res => {
-        console.log('Login successful', res);
         this.loginFailed = false;
         this.router.navigate(['espace-client'])
       },

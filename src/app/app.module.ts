@@ -35,6 +35,7 @@ import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/cu
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignupComponent } from './login/signup/signup.component';
 import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 
@@ -76,6 +77,7 @@ import { CheckboxComponent } from './shared/checkbox/checkbox.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
     AuthGuard,
