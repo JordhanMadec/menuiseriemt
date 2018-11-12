@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -17,24 +17,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isAuthenticated: boolean;
   public isHome = false;
 
-  constructor(public router: Router, private authService: AuthService) {
+  constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     $('body').scrollspy({ target: '#navbar' });
 
-    this.router.events.subscribe(
-      event => this.isHome = this.router.url === '/'
-    );
-
-    this.authService.isAuthenticated().subscribe(
-      res => this.isAuthenticated = res
+    this.routerSubscription = this.router.events.subscribe(
+      event => {
+        this.isHome = this.router.url === '/';
+        this.cd.detectChanges();
+      }
     );
 
     this.isAuthenticatedSubscription = this.authService.isAuthenticatedEmitter.subscribe(
       res => {
-        console.log('User event login', res);
         this.isAuthenticated = res;
+        this.cd.detectChanges();
       }
     );
   }
