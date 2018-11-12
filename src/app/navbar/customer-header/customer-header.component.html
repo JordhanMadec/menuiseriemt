@@ -1,0 +1,23 @@
+<div class="customer-header">
+  <div class="container">
+    <div *ngIf="user; else spinner" class="welcome-message">
+      <h4>Bonjour,</h4>
+      <h1 class="user-name">{{user?.firstName}} {{user?.lastName}}</h1>
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner [size]="50"></app-spinner>
+    </ng-template>
+  </div>
+
+  <div class="sub-nav">
+    <div class="container">
+      <a [class.selected]="selectedNavItem === 'accueil'" (click)="onSelectNavItem('accueil')">Accueil</a>
+      <a [class.selected]="selectedNavItem === 'factures'" (click)="onSelectNavItem('factures')">Factures</a>
+      <a [class.selected]="selectedNavItem === 'suivi-chantier'" (click)="onSelectNavItem('suivi-chantier')">Suivre mon chantier</a>
+      <a [class.selected]="selectedNavItem === 'infos-perso'" (click)="onSelectNavItem('infos-perso')">Informations personnelles</a>
+    </div>
+  </div>
+</div>
+
+

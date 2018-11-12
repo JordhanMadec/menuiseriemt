@@ -1,17 +1,2 @@
 @import "../../../assets/style/variables";
 
-header {
-  background-color: $light-grey;
-  color: $dark-grey;
-
-  .container {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .user-name {
-    color: $green;
-  }
-}

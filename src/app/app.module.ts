@@ -39,6 +39,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignupComponent } from './login/signup/signup.component';
 import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     SignupComponent,
     CheckboxComponent,
     SpinnerComponent,
+    CustomerHeaderComponent,
   ],
   imports: [
     BrowserModule,

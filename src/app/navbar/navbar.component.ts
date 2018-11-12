@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 
 declare var $: any;
@@ -14,8 +15,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private routerSubscription: Subscription;
   private isAuthenticatedSubscription: Subscription;
+  private userSubscription: Subscription;
+
   public isAuthenticated: boolean;
   public isHome = false;
+  public user: User;
 
   constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef) {
   }
@@ -33,6 +37,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isAuthenticatedSubscription = this.authService.isAuthenticatedEmitter.subscribe(
       res => {
         this.isAuthenticated = res;
+        this.cd.detectChanges();
+      }
+    );
+
+    this.userSubscription = this.authService.currentUser.subscribe(
+      user => {
+        this.user = user;
         this.cd.detectChanges();
       }
     );
@@ -56,6 +67,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();
+    }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 }

@@ -1,16 +1,3 @@
-<header>
-  <div class="container">
-    <div *ngIf="user; else spinner">
-      <h4>Bonjour,</h4>
-      <h1 class="user-name">{{user?.firstName}} {{user?.lastName}}</h1>
-    </div>
-
-    <ng-template #spinner>
-      <app-spinner [size]="50"></app-spinner>
-    </ng-template>
-  </div>
-</header>
-
 <section>
   <div class="container">
     <h2>Bienvenue dans votre espace client</h2>
