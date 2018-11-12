@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { PasswordValidator } from '../../shared/password-validator';
 
@@ -46,7 +47,8 @@ export class SignupComponent {
   }
 
   private signup(username: string, password: string) {
-    this.authService.signup(username, password).then(
+    const user = this.getUserFromForm();
+    this.authService.signup(user, password).then(
       res => {
         console.log('Signup successful', res);
         this.router.navigate(['login'])
@@ -56,6 +58,20 @@ export class SignupComponent {
         return null
       }
     );
+  }
+
+  private getUserFromForm(): User {
+    const user = {
+      firstName: this.signupForm.get('contact').get('firstName').value,
+      lastName: this.signupForm.get('contact').get('lastName').value,
+      email: this.signupForm.get('contact').get('email').value,
+      homePhone: this.signupForm.get('contact').get('homePhone').value,
+      mobilePhone: this.signupForm.get('contact').get('mobilePhone').value,
+      city: this.signupForm.get('addressFields').get('city').value,
+      zipcode: this.signupForm.get('addressFields').get('zipcode').value,
+      address: this.signupForm.get('addressFields').get('address').value,
+    }
+    return new User(user);
   }
 
   onSubmit() {

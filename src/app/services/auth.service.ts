@@ -94,12 +94,13 @@ export class AuthService implements OnInit, OnDestroy {
     );
   }
 
-  signup(email: string, password: string): Promise<any> {
+  signup(user: User, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(user => {
-          console.log('CREATE USER', user);
-          resolve(user);
+      firebase.auth().createUserWithEmailAndPassword(user.email, password)
+        .then(fbUser => {
+          user.id = fbUser.user.uid;
+          this.databaseService.createUser(user)
+            .then(res => resolve(res));
         }, error => reject(error))
     })
   }
