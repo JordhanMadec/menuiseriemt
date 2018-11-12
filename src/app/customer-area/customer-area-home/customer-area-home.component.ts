@@ -19,7 +19,6 @@ export class CustomerAreaHomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSubscription = this.authService.currentUser.subscribe(
       user => {
-        console.log('get user', user);
         this.user = user;
         this.cd.detectChanges();
       }

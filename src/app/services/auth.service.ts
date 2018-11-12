@@ -27,8 +27,6 @@ export class AuthService implements OnInit, OnDestroy {
         if (user) {
           this.databaseService.getCurrentUser().then(
             userData => {
-              console.log('get user', user);
-              console.log('get user', userData);
               this._isAuthenticatedEmitter.emit(true);
               this._currentUser.next(userData);
             }
