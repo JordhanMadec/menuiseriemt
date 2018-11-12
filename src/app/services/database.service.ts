@@ -15,9 +15,7 @@ export class DatabaseService {
     return firebase.database()
       .ref('/users/' + userId)
       .once('value')
-      .then(user => {
-        console.log('get user', user.val);
-        return new User(user.val());
-    });
+      .then(user => new User(user.val())
+    );
   }
 }
