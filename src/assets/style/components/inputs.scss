@@ -1,4 +1,7 @@
-input {
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
   border: none;
   background-color: $light-grey;
   background-position: 10px;
@@ -12,41 +15,42 @@ input {
   outline: none !important;
 }
 
-.input-wrapper {
-  width: 100%;
-  position: relative;
+.input-setcion-title {
+  color: $green;
+  margin: $small-gap 0;
+}
 
-  input {
+.input-container.row {
+  margin: -$small-gap !important;
+}
+
+.input-wrapper {
+  position: relative;
+  padding: $small-gap !important;
+
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  textarea {
     padding-left: 40px;
   }
 
+  app-svg-icon.input-icon {
+    fill: $dark-grey;
+    position: absolute;
+    left: $small-gap + $small-gap;
+    height: 20px;
+    width: 20px;
+    top: 25px + $small-gap;
+    margin-top: -10px;
+  }
 
-}
+  .input-hint {
+    color: $dark-grey;
+    font-size: 12px;
 
-.input-group {
-  margin: -$small-gap 0;
-  width: 100%;
-
-  .input-wrapper {
-    margin: $small-gap 0;
-
-    app-svg-icon.input-icon {
-      fill: $dark-grey;
-      position: absolute;
-      left: $small-gap;
-      height: 20px;
-      width: 20px;
-      top: 25px;
-      margin-top: -10px;
-    }
-
-    .input-hint {
-      color: $dark-grey;
-      font-size: 12px;
-
-      &.error {
-        color: $red;
-      }
+    &.error {
+      color: $red;
     }
   }
 }

@@ -1,27 +1,29 @@
-<section id="login-section">
+<section id="login-section" class="login-section">
   <div class="login-wrapper shadow-strong" [ngsReveal]="{scale: .5, origin: 'bottom', delay:100, distance: '100px', duration: 500}">
     <h4 class="title">Mon espace client</h4>
 
     <small>Entrez votre identifiant adresse mail et votre mot de passe pour accéder à votre espace client.</small>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="input-group">
-        <div class="input-wrapper">
+      <div class="input-container row">
+        <div class="input-wrapper col-lg-12">
           <input id="mail" type="email" placeholder="Adresse mail" formControlName="mail">
           <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
         </div>
 
-        <div class="input-wrapper">
+        <div class="input-wrapper col-lg-12">
           <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
           <input id="password" type="password" placeholder="Mot de passe" formControlName="password">
           <div class="input-hint error" *ngIf="loginFailed">
             Addresse mail ou mot de passe invalide.
           </div>
         </div>
+      </div>
 
-        <small><a class="signup-link" routerLink="/forgot-password">Mot de passe oublié ?</a></small>
+      <small><a class="signup-link" routerLink="/forgot-password">Mot de passe oublié ?</a></small>
 
-        <div class="input-wrapper row-center">
+      <div class="input-container row-center">
+        <div class="input-wrapper">
           <button class="my-button accent" type="submit" [disabled]="!loginForm.valid">
             Se connecter
           </button>
@@ -29,7 +31,7 @@
       </div>
     </form>
 
-    <small><a class="signup-link">Créer mon compte</a></small>
+    <small><a class="signup-link" routerLink="/signup">Créer mon compte</a></small>
 
   </div>
 </section>

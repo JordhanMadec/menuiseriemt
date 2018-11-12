@@ -34,12 +34,18 @@ header {
   margin: -$small-gap;
 }
 
-.nav-link {
+a.nav-link {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
   margin: $small-gap;
+  color: white !important;
+
+  &:hover {
+    text-decoration: none !important;
+    color: $green !important;
+  }
 }
 
 .button-icon {
