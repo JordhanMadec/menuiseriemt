@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import { DatabaseService } from '../../services/database.service';
 import { UserProfileValidator } from '../../shared/user-profile-validator';
 
 @Component({
@@ -15,12 +16,19 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
 
   public user: User;
   public profileForm: FormGroup;
-  public asChanged = false;
 
   private userSubscription: Subscription;
   private formChangesSubscription: Subscription;
 
-  constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef, private fb: FormBuilder) {
+  public asChanged = false;
+  private updateLoading = false;
+
+  constructor(
+    public router: Router,
+    private authService: AuthService,
+    private cd: ChangeDetectorRef,
+    private fb: FormBuilder,
+    private databaseService: DatabaseService) {
     this.profileForm = new UserProfileValidator(this.fb).userProfileValidator;
   }
 
@@ -29,6 +37,8 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
       user => {
         this.user = user;
         this.profileForm = new UserProfileValidator(this.fb, user).userProfileValidator;
+        this.asChanged = false;
+        this.updateLoading = false;
 
         this.formChangesSubscription = this.profileForm.valueChanges.subscribe(res => {
           this.asChanged = !this.getUserFromForm().equals(this.user);
@@ -42,6 +52,7 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
 
   private getUserFromForm(): User {
     const user = {
+      id: this.user.id,
       firstName: this.profileForm.get('contact').get('firstName').value,
       lastName: this.profileForm.get('contact').get('lastName').value,
       email: this.profileForm.get('contact').get('email').value,
@@ -59,7 +70,16 @@ export class CustomerProfileComponent implements OnInit, OnDestroy {
       return
     }
 
+    this.updateLoading = true;
 
+    this.databaseService.createOrUpdateUser(this.getUserFromForm()).then(
+      res => {
+        this.authService.refreshCurrentUser();
+      },
+      error => {
+        this.updateLoading = false;
+      }
+    );
   }
 
   ngOnDestroy() {

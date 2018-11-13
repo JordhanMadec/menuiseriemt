@@ -73,9 +73,13 @@
 
         <div class="input-container row-center">
           <div class="input-wrapper">
-            <button class="my-button accent" type="submit" [disabled]="!profileForm.valid || !asChanged">
+            <button class="my-button accent" type="submit" *ngIf="!updateLoading; else buttonSpinner" [disabled]="!profileForm.valid || !asChanged">
               Enregistrer
             </button>
+
+            <ng-template #buttonSpinner>
+              <app-spinner [size]="30"></app-spinner>
+            </ng-template>
           </div>
         </div>
       </form>
