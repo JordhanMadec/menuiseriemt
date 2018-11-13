@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user';
@@ -9,7 +9,7 @@ declare var $: any;
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
@@ -21,11 +21,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isHome = false;
   public user: User;
 
+  public sidenavVisible = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
+  }
+
   constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef, private ngZone: NgZone) {
   }
 
   ngOnInit() {
     $('body').scrollspy({ target: '#navbar' });
+
+    this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
 
     this.routerSubscription = this.router.events.subscribe(
       event => {
@@ -59,6 +68,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     } else {
       this.ngZone.run(() => this.router.navigate(['']));
     }
+  }
+
+  toggleSidenav() {
+    this.sidenavVisible = !this.sidenavVisible;
+    this.cd.detectChanges();
   }
 
   ngOnDestroy() {

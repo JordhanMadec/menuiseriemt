@@ -26,19 +26,11 @@ a, a:hover, a:visited{
   color: $green !important;
   text-decoration: none;
   cursor: pointer;
-
-  app-svg-icon {
-    fill: $white;
-  }
 }
 
 a:hover {
   color: $green !important;
   text-decoration: underline !important;
-
-  app-svg-icon {
-    fill: $green;
-  }
 }
 
 app-svg-icon {
