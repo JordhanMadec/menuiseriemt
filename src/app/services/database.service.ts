@@ -18,7 +18,7 @@ export class DatabaseService {
       .then(user => new User(user.val()));
   }
 
-  createUser(user: User): Promise<any> {
+  createOrUpdateUser(user: User): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.database()
         .ref('users/' + user.id).set({

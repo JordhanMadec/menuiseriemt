@@ -31,13 +31,16 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
-import { CustomerAreaHomeComponent } from './customer-area/customer-area-home/customer-area-home.component';
+import { CustomerHomeComponent } from './customer-area/customer-home/customer-home.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SignupComponent } from './login/signup/signup.component';
 import { CheckboxComponent } from './shared/checkbox/checkbox.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
+import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 
 @NgModule({
   declarations: [
@@ -60,9 +63,12 @@ import { CheckboxComponent } from './shared/checkbox/checkbox.component';
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    CustomerAreaHomeComponent,
+    CustomerHomeComponent,
     SignupComponent,
     CheckboxComponent,
+    SpinnerComponent,
+    CustomerHeaderComponent,
+    CustomerProfileComponent,
   ],
   imports: [
     BrowserModule,

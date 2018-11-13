@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -19,7 +19,7 @@ export class AuthService implements OnInit, OnDestroy {
 
   private _isAuthenticatedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private router: Router, public fireAuth: AngularFireAuth, private databaseService: DatabaseService) {
+  constructor(private router: Router, public fireAuth: AngularFireAuth, private databaseService: DatabaseService, private ngZone: NgZone) {
     this.firebaseUser = this.fireAuth.authState;
 
     firebase.auth().onAuthStateChanged(
@@ -43,17 +43,20 @@ export class AuthService implements OnInit, OnDestroy {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user) {
-          this.databaseService.getCurrentUser().then(
-            userData => {
-              console.log('get user', userData);
-              this._isAuthenticatedEmitter.emit(true);
-              this._currentUser.next(userData);
-            }
-          );
+          this.refreshCurrentUser();
         } else {
           this._isAuthenticatedEmitter.emit(false);
           this._currentUser.next(null);
         }
+      }
+    );
+  }
+
+  refreshCurrentUser() {
+    this.databaseService.getCurrentUser().then(
+      userData => {
+        this._isAuthenticatedEmitter.emit(true);
+        this._currentUser.next(userData);
       }
     );
   }
@@ -69,12 +72,7 @@ export class AuthService implements OnInit, OnDestroy {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
-          this.databaseService.getCurrentUser().then(
-            user => {
-              this._currentUser.next(user);
-              this.isAuthenticatedEmitter.emit(true);
-            }
-          );
+          this.refreshCurrentUser();
           resolve(res);
         }, error => reject(error))
     })
@@ -85,7 +83,7 @@ export class AuthService implements OnInit, OnDestroy {
       res => {
         this._currentUser.next(null);
         this.isAuthenticatedEmitter.emit(false);
-        this.router.navigate(['login']);
+        this.ngZone.run(() => this.router.navigate(['login']));
       }
     ).catch(
       error => {
@@ -99,7 +97,7 @@ export class AuthService implements OnInit, OnDestroy {
       firebase.auth().createUserWithEmailAndPassword(user.email, password)
         .then(fbUser => {
           user.id = fbUser.user.uid;
-          this.databaseService.createUser(user)
+          this.databaseService.createOrUpdateUser(user)
             .then(res => resolve(res));
         }, error => reject(error))
     })

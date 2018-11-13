@@ -1,0 +1,76 @@
+@import "../../../assets/style/variables";
+
+.customer-header {
+  background-color: $light-grey;
+  color: $dark-grey;
+  box-shadow: $shadow-light;
+
+  .welcome-message {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .user-name {
+    color: $green;
+    margin: 0;
+  }
+}
+
+.sub-nav {
+  margin-top: -$small-gap;
+  margin-bottom: -$small-gap;
+  margin-left: -$middle-gap;
+  margin-right: -$middle-gap;
+
+  a {
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: $small-gap $middle-gap;
+    color: $dark-grey !important;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    app-svg-icon {
+      fill: $dark-grey;
+      margin-right: $very-small-gap;
+    }
+
+    &:hover {
+      text-decoration: none !important;
+      color: $green !important;
+
+      app-svg-icon {
+        fill: $green;
+      }
+    }
+
+    &.selected {
+      color: $green !important;
+      position: relative;
+
+      app-svg-icon {
+        fill: $green;
+      }
+    }
+
+    &::after {
+      position: relative;
+      content: "";
+      bottom: -$small-gap;
+      left: 0;
+      display: block;
+      height: 4px;
+      width: 0;
+      background-color: $green;
+      transition: $transition-slow;
+    }
+
+    &.selected::after {
+      width: calc(100% + #{$small-gap * 2});
+    }
+  }
+}
+

@@ -1,16 +1,11 @@
 @import "../../assets/style/variables";
 
-header {
-  display: flex;
-  justify-content: center;
+.navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-}
-
-.navbar {
   height: $navbar-height;
   background-color: $black;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);

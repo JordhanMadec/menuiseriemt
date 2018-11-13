@@ -21,4 +21,6 @@
       </div>
     </div>
   </nav>
+
+  <app-customer-header [user]="user" *ngIf="isAuthenticated"></app-customer-header>
 </header>
