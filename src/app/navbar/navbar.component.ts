@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user';
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isHome = false;
   public user: User;
 
-  constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef) {
+  constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -55,9 +55,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   goToHome() {
     if (this.isAuthenticated === true) {
-      this.router.navigate(['esapce-client']);
+      this.ngZone.run(() => this.router.navigate(['esapce-client']));
     } else {
-      this.router.navigate(['']);
+      this.ngZone.run(() => this.router.navigate(['']));
     }
   }
 

@@ -19,31 +19,48 @@
 }
 
 .sub-nav {
-  background-color: $light-grey;
+  margin-top: -$small-gap;
+  margin-bottom: -$small-gap;
+  margin-left: -$middle-gap;
+  margin-right: -$middle-gap;
 
   a {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: $small-gap;
-    padding-top: 0;
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: $small-gap $middle-gap;
     color: $dark-grey !important;
     font-weight: bold;
+    box-sizing: border-box;
+
+    app-svg-icon {
+      fill: $dark-grey;
+      margin-right: $very-small-gap;
+    }
 
     &:hover {
       text-decoration: none !important;
       color: $green !important;
+
+      app-svg-icon {
+        fill: $green;
+      }
     }
 
     &.selected {
       color: $green !important;
       position: relative;
+
+      app-svg-icon {
+        fill: $green;
+      }
     }
 
     &::after {
       position: relative;
       content: "";
       bottom: -$small-gap;
-      left: -$small-gap;
+      left: 0;
       display: block;
       height: 4px;
       width: 0;
