@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
         Validators.required,
       ])
     });
-
-    // Reset login status
-    this.authService.logout()
   }
 
   private login(username: string, password: string) {

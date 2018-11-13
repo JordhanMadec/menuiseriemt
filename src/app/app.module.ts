@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,9 +24,10 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ScrollSpyModule } from 'ngx-scrollspy';
 import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
+import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
-import { SvgIconsComponent } from './svg-icons/svg-icons.component';
-import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
+import { SvgIconsComponent } from './shared/svg-icons/svg-icons.component';
+import { SvgIconsDefinitionsComponent } from './shared/svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +43,7 @@ import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
+import { AlertMessageComponent } from './alert-message/alert-message.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,7 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
     SpinnerComponent,
     CustomerHeaderComponent,
     CustomerProfileComponent,
+    AlertMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,11 +88,13 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FlexLayoutModule,
   ],
   providers: [
     AuthGuard,
     NotAuthGuard,
     AuthService,
+    AlertService,
   ],
   bootstrap: [AppComponent]
 })
