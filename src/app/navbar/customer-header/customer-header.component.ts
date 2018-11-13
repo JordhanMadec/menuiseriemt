@@ -51,7 +51,7 @@ export class CustomerHeaderComponent implements OnInit {
         targetUrl = '/espace-client/profil';
         break;
       default:
-        this.router.navigate(['/espace-client']);
+        targetUrl = '/espace-client'
     }
 
     this.ngZone.run(() => this.router.navigate([targetUrl]));

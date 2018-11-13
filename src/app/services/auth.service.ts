@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -19,7 +19,7 @@ export class AuthService implements OnInit, OnDestroy {
 
   private _isAuthenticatedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private router: Router, public fireAuth: AngularFireAuth, private databaseService: DatabaseService) {
+  constructor(private router: Router, public fireAuth: AngularFireAuth, private databaseService: DatabaseService, private ngZone: NgZone) {
     this.firebaseUser = this.fireAuth.authState;
 
     firebase.auth().onAuthStateChanged(
@@ -85,7 +85,7 @@ export class AuthService implements OnInit, OnDestroy {
       res => {
         this._currentUser.next(null);
         this.isAuthenticatedEmitter.emit(false);
-        this.router.navigate(['login']);
+        this.ngZone.run(() => this.router.navigate(['login']));
       }
     ).catch(
       error => {

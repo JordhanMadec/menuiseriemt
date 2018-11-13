@@ -1,5 +1,5 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {AlbumInfo} from './album-info.model';
 import {Http} from '@angular/http';
@@ -31,7 +31,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   private path: string;
   private fullsScreenId = 0;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: Http) {}
+  constructor(private route: ActivatedRoute, private http: Http) {}
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -54,10 +54,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
           });
       }
     );
-  }
-
-  goToHome() {
-    this.router.navigate([''], {fragment: 'gallery-section'});
   }
 
   private getAlbum(id:  string): Observable<AlbumInfo> {
