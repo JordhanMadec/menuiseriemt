@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,8 +26,8 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
-import { SvgIconsComponent } from './svg-icons/svg-icons.component';
-import { SvgIconsDefinitionsComponent } from './svg-icons/svg-icons-definitions/svg-icons-definitions.component';
+import { SvgIconsComponent } from './shared/svg-icons/svg-icons.component';
+import { SvgIconsDefinitionsComponent } from './shared/svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -87,6 +88,7 @@ import { AlertMessageComponent } from './alert-message/alert-message.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FlexLayoutModule,
   ],
   providers: [
     AuthGuard,

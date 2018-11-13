@@ -76,6 +76,7 @@ a.nav-link {
    background-color: $light-grey;
    box-shadow: $shadow-strong;
    transition: $transition-slow;
+   z-index: 1000;
 
    &.visible {
      left: 0;
@@ -88,6 +89,28 @@ a.nav-link {
    flex: 1;
  }
 
- .page-content.hasSidenav {
-   margin-left: $sidenav-width;
+ .page-content {
+   transition: $transition-slow;
+
+   &.hasSidenav {
+     margin-left: $sidenav-width;
+   }
  }
+
+ .toggleButton {
+   margin-right: $small-gap;
+ }
+
+@media (max-width: 992px) {
+  &.hasSidenav {
+    margin-left: 0 !important;
+  }
+
+  .sidenav-container {
+    left: -60%;
+
+    &.visible {
+      width: 60%;
+    }
+  }
+}

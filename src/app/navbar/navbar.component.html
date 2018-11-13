@@ -1,12 +1,15 @@
 <header>
   <nav class="navbar">
-    <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>-->
 
-    <a class="navbar-brand" (click)="goToHome()">
-      <img src="/assets/img/logo_mt.jpg">
-    </a>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <a class="toggleButton" (click)="toggleSidenav()" *ngIf="isAuthenticated">
+        <app-svg-icon name="menu"></app-svg-icon>
+      </a>
+
+      <a class="navbar-brand" (click)="goToHome()">
+        <img src="/assets/img/logo_mt.jpg">
+      </a>
+    </div>
 
     <div class="nav-links-container">
       <a class="nav-link" routerLink="/login" *ngIf="isHome">
@@ -23,11 +26,11 @@
 
 
 <div class="main-container">
-  <div class="sidenav-container" [class.visible]="isAuthenticated">
+  <div class="sidenav-container" [class.visible]="isAuthenticated && sidenavVisible">
     <app-customer-header class="sidenav" [user]="user"></app-customer-header>
   </div>
 
-  <div class="page-content" [class.hasSidenav]="isAuthenticated">
+  <div class="page-content" [class.hasSidenav]="isAuthenticated && sidenavVisible">
     <router-outlet></router-outlet>
   </div>
 </div>

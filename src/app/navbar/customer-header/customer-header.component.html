@@ -1,14 +1,14 @@
 <div class="sub-nav">
   <a [class.selected]="selectedNavItem === 'accueil'" (click)="onSelectNavItem('accueil')">
-    <app-svg-icon name="user" [size]="20"></app-svg-icon>
+    <app-svg-icon name="home" [size]="20"></app-svg-icon>
     <div>Accueil</div>
   </a>
   <a [class.selected]="selectedNavItem === 'factures'" (click)="onSelectNavItem('factures')">
-    <app-svg-icon name="user" [size]="20"></app-svg-icon>
+    <app-svg-icon name="invoice" [size]="20"></app-svg-icon>
     <div>Factures</div>
   </a>
   <a [class.selected]="selectedNavItem === 'suivi-chantier'" (click)="onSelectNavItem('suivi-chantier')">
-    <app-svg-icon name="user" [size]="20"></app-svg-icon>
+    <app-svg-icon name="build" [size]="20"></app-svg-icon>
     <div>Suivre mon chantier</div>
   </a>
   <a [class.selected]="selectedNavItem === 'profil'" (click)="onSelectNavItem('profil')">
