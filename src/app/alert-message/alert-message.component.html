@@ -1,0 +1,5 @@
+<div class="container alert-message-container" *ngIf="alert" [ngsReveal]="{scale: .5, origin: 'bottom', delay:100, distance: '100px', duration: 1000}">
+  <div class="alert-message-wrapper" [ngClass]="alert.status === statusEnum.ERROR ? 'error' : alert.status === statusEnum.SUCCESS ? 'success' : 'info'">
+    {{alert.message}}
+  </div>
+</div>

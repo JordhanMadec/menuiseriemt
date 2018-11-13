@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { User } from '../models/user';
+import { AlertService } from './alert.service';
 import { DatabaseService } from './database.service';
 
 @Injectable({
@@ -19,7 +20,11 @@ export class AuthService implements OnInit, OnDestroy {
 
   private _isAuthenticatedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private router: Router, public fireAuth: AngularFireAuth, private databaseService: DatabaseService, private ngZone: NgZone) {
+  constructor(private router: Router,
+              public fireAuth: AngularFireAuth,
+              private databaseService: DatabaseService,
+              private alertService: AlertService,
+              private ngZone: NgZone) {
     this.firebaseUser = this.fireAuth.authState;
 
     firebase.auth().onAuthStateChanged(
@@ -74,7 +79,10 @@ export class AuthService implements OnInit, OnDestroy {
         .then(res => {
           this.refreshCurrentUser();
           resolve(res);
-        }, error => reject(error))
+        }, error => {
+          this.alertService.error('Identifiant ou mot de passe incorrect');
+          reject(error);
+        })
     })
   }
 
