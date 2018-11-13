@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Alert, AlertService, StatusEnum } from '../services/alert.service';
 
@@ -9,19 +9,26 @@ import { Alert, AlertService, StatusEnum } from '../services/alert.service';
 })
 export class AlertMessageComponent implements OnInit, OnDestroy {
 
-  public alert: Alert;
+  public alerts: Alert[] = [];
   public statusEnum = StatusEnum;
 
   private alertSubscription: Subscription;
 
-  constructor(private alertService: AlertService) {
+  constructor(private alertService: AlertService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.alertSubscription = this.alertService.alertEmitter.subscribe(
       (alert: Alert) => {
-        this.alert = alert;
-        setTimeout(() => this.alert = null, alert.duration);
+        this.alerts.push(alert);
+        this.cd.detectChanges();
+        setTimeout(
+          () => {
+            this.alerts = this.alerts.filter(obj => obj !== alert);
+            this.cd.detectChanges();
+          },
+          alert.duration
+        );
       }
     )
   }

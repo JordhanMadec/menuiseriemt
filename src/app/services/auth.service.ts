@@ -78,6 +78,7 @@ export class AuthService implements OnInit, OnDestroy {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
           this.refreshCurrentUser();
+          this.alertService.success('Bienvenue dans votre espace client !');
           resolve(res);
         }, error => {
           this.alertService.error('Identifiant ou mot de passe incorrect');
@@ -92,10 +93,11 @@ export class AuthService implements OnInit, OnDestroy {
         this._currentUser.next(null);
         this.isAuthenticatedEmitter.emit(false);
         this.ngZone.run(() => this.router.navigate(['login']));
+        this.alertService.success('Déconnexion réussie');
       }
     ).catch(
       error => {
-        console.log(error);
+        this.alertService.error('Impossible de se déconnecter');
       }
     );
   }
@@ -105,9 +107,14 @@ export class AuthService implements OnInit, OnDestroy {
       firebase.auth().createUserWithEmailAndPassword(user.email, password)
         .then(fbUser => {
           user.id = fbUser.user.uid;
+          this.alertService.success('Votre compte a bien été créé');
+
           this.databaseService.createOrUpdateUser(user)
             .then(res => resolve(res));
-        }, error => reject(error))
+        }, error => {
+          this.alertService.error('Impossible de créer votre compte, veuillez réessayer plus tard');
+          reject(error);
+        })
     })
   }
 
