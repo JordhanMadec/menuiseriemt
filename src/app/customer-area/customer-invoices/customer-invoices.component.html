@@ -1,20 +1,27 @@
 <section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
   <div class="container">
 
-    <div *ngIf="user; else spinner">
+    <div>
       <h1>Mes factures</h1>
 
-      <div class="invoices-list">
+      <div *ngIf="invoices; else spinner">
+        <div class="invoices-list" *ngIf="invoices.length; else emptyList">
+          <ng-container *ngFor="let invoice of invoices">
+            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date"></app-list-item>
+          </ng-container>
+        </div>
 
-        <ng-container *ngFor="let invoice of invoices">
-          <app-list-item icon="invoice-icon" title="Facture fenêtres" subtitle="18 mars 2018"></app-list-item>
-        </ng-container>
-
+        <ng-template #emptyList>
+          <div class="invoices-list empty-list">
+            <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
+            Aucune facture
+          </div>
+        </ng-template>
       </div>
-    </div>
 
-    <ng-template #spinner>
-      <app-spinner></app-spinner>
-    </ng-template>
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
   </div>
 </section>

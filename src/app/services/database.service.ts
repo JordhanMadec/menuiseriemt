@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { Invoice } from '../models/invoice';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 
@@ -43,5 +44,22 @@ export class DatabaseService {
         }
       );
     });
+  }
+
+  getUserInvoices(userId: string): Promise<Invoice[]> {
+    const invoices: Invoice[] = [];
+
+    return firebase.database()
+      .ref('/invoices/' + userId)
+      .once('value')
+      .then(res => {
+        res.forEach(invoice => {
+          invoices.push(new Invoice(invoice.val()))
+        });
+        return invoices;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les factures');
+        return invoices;
+      });
   }
 }
