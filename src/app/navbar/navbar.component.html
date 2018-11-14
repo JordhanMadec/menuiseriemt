@@ -1,26 +1,36 @@
 <header>
   <nav class="navbar">
-    <div class="container">
-      <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>-->
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <a class="toggleButton" (click)="toggleSidenav()" *ngIf="isAuthenticated">
+        <app-svg-icon name="menu-icon"></app-svg-icon>
+      </a>
 
       <a class="navbar-brand" (click)="goToHome()">
         <img src="/assets/img/logo_mt.jpg">
       </a>
+    </div>
 
-      <div class="nav-links-container">
-        <a class="nav-link" routerLink="/login" *ngIf="isHome">
-          <div>Espace Client</div>
-          <app-svg-icon class="button-icon" name="user"></app-svg-icon>
-        </a>
+    <div class="nav-links-container">
+      <a class="nav-link" routerLink="/login" *ngIf="isHome">
+        <div>Espace Client</div>
+        <app-svg-icon class="button-icon" name="user-icon"></app-svg-icon>
+      </a>
 
-        <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
-          <div>Se déconnecter</div>
-        </a>
-      </div>
+      <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
+        <div>Se déconnecter</div>
+      </a>
     </div>
   </nav>
-
-  <app-customer-header [user]="user" *ngIf="isAuthenticated"></app-customer-header>
 </header>
+
+
+<div class="main-container">
+  <div class="sidenav-container" [class.visible]="isAuthenticated && sidenavVisible">
+    <app-customer-header class="sidenav" [user]="user"></app-customer-header>
+  </div>
+
+  <div class="page-content" [class.hasSidenav]="isAuthenticated && sidenavVisible">
+    <router-outlet></router-outlet>
+  </div>
+</div>

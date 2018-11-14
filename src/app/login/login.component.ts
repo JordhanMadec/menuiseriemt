@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public loginFailed = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private ngZone: NgZone) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -25,16 +25,13 @@ export class LoginComponent implements OnInit {
         Validators.required,
       ])
     });
-
-    // Reset login status
-    this.authService.logout()
   }
 
   private login(username: string, password: string) {
     this.authService.login(username, password).then(
       res => {
         this.loginFailed = false;
-        this.router.navigate(['espace-client'])
+        this.ngZone.run(() => this.router.navigate(['espace-client']));
       },
       error => {
         console.log('Login error', error);

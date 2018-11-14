@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from '../models/user';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  constructor() {
+  constructor(private alertService: AlertService) {
   }
 
   getCurrentUser(): Promise<User> {
@@ -18,7 +19,7 @@ export class DatabaseService {
       .then(user => new User(user.val()));
   }
 
-  createUser(user: User): Promise<any> {
+  createOrUpdateUser(user: User): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.database()
         .ref('users/' + user.id).set({
@@ -32,7 +33,15 @@ export class DatabaseService {
         zipcode: user.zipcode,
         address: user.address
       })
-      .then(res => resolve(res));
+      .then(
+        res => {
+          this.alertService.success('Vos informations personnelles ont bien été modifiées');
+          resolve(res)
+        },
+        error => {
+          this.alertService.error('Impossible de créer votre compte, veuillez réessayer plus tard');
+        }
+      );
     });
   }
 }

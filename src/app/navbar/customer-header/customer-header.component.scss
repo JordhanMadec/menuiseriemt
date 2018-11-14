@@ -1,58 +1,41 @@
 @import "../../../assets/style/variables";
-
-.customer-header {
-  background-color: $light-grey;
-  color: $dark-grey;
-  box-shadow: $shadow-light;
-
-  .welcome-message {
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .user-name {
-    color: $green;
-    margin: 0;
-  }
-}
-
 .sub-nav {
-  background-color: $light-grey;
-
   a {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: $small-gap;
-    padding-top: 0;
-    color: $dark-grey !important;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: $small-gap $middle-gap;
+    color: rgba($dark-grey, .7) !important;
     font-weight: bold;
+    box-sizing: border-box;
+    border-radius: $small-radius;
+    margin: $very-small-gap 0;
+    transition: $transition-fast;
+
+    app-svg-icon {
+      fill: rgba($dark-grey, .7);
+      margin-right: $very-small-gap;
+    }
 
     &:hover {
+      background-color: rgba($dark-grey, .1);
       text-decoration: none !important;
-      color: $green !important;
+      color: $dark-grey !important;
+
+      app-svg-icon {
+        fill: $dark-grey;
+      }
     }
 
     &.selected {
-      color: $green !important;
-      position: relative;
-    }
+      background-color: rgba($dark-grey, .1);
+      color: $dark-grey !important;
+      border-left: solid 8px $green;
 
-    &::after {
-      position: relative;
-      content: "";
-      bottom: -$small-gap;
-      left: -$small-gap;
-      display: block;
-      height: 4px;
-      width: 0;
-      background-color: $green;
-      transition: $transition-slow;
-    }
-
-    &.selected::after {
-      width: calc(100% + #{$small-gap * 2});
+      app-svg-icon {
+        fill: $dark-grey;
+      }
     }
   }
 }

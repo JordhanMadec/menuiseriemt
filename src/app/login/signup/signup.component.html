@@ -11,17 +11,17 @@
         <div class="input-container row">
           <div class="input-wrapper col-lg-6">
             <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
           </div>
 
           <div class="input-wrapper col-lg-6">
             <input id="lastName" type="text" placeholder="Nom*" formControlName="lastName">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
           </div>
 
           <div class="input-wrapper col-lg-12">
             <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="email-icon" [size]="20"></app-svg-icon>
             <div class="input-hint error" *ngIf="signupForm.get('contact').get('email').hasError('email')">
               Le format attendu est example@mail.com
             </div>
@@ -29,7 +29,7 @@
 
           <div class="input-wrapper col-lg-6">
             <input id="homePhone" type="text" placeholder="Téléphone domicile" formControlName="homePhone">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="phone-icon" [size]="20"></app-svg-icon>
             <div class="input-hint error" *ngIf="signupForm.get('contact').get('homePhone').hasError('pattern')">
               Le format attendu est XX XX XX XX XX
             </div>
@@ -37,7 +37,7 @@
 
           <div class="input-wrapper col-lg-6">
             <input id="mobilePhone" type="text" placeholder="Téléphone portable" formControlName="mobilePhone">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="mobile-phone-icon" [size]="20"></app-svg-icon>
             <div class="input-hint error" *ngIf="signupForm.get('contact').get('mobilePhone').hasError('pattern')">
               Le format attendu est XX XX XX XX XX
             </div>
@@ -51,12 +51,12 @@
         <div class="input-container row">
           <div class="input-wrapper col-lg-6">
             <input id="city" type="text" placeholder="Ville*" formControlName="city">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
           </div>
 
           <div class="input-wrapper col-lg-6">
             <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
             <div class="input-hint error" *ngIf="signupForm.get('addressFields').get('zipcode').hasError('pattern')">
               Doit contenir 5 chiffres
             </div>
@@ -64,7 +64,7 @@
 
           <div class="input-wrapper col-lg-12">
             <input id="address" type="text" placeholder="Adresse*" formControlName="address">
-            <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@
         <div class="input-container row">
           <div class="input-wrapper col-lg-6">
             <input id="password" type="password" placeholder="Mot de passe*" formControlName="password">
-            <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="lock-icon" [size]="20"></app-svg-icon>
             <div class="input-hint" *ngIf="!signupForm.get('password').controls.password.valid">
               8 caractères minimum dont 1 chiffre au moins.
             </div>
@@ -83,7 +83,7 @@
 
           <div class="input-wrapper col-lg-6">
             <input id="confirmPassword" type="password" placeholder="Confirmation*" formControlName="confirmPassword">
-            <app-svg-icon class="input-icon" name="locker" [size]="20"></app-svg-icon>
+            <app-svg-icon class="input-icon" name="lock-icon" [size]="20"></app-svg-icon>
             <div class="input-hint error" *ngIf="signupForm.get('password').hasError('mismatch')">
               Les deux mots de passe doivent être identiques.
             </div>

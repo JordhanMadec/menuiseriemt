@@ -1,15 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/style/variables";
 @import "assets/style/components";
-@import "assets/fonts/atami/stylesheet.css";
-@import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Julius+Sans+One|Nanum+Gothic');
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/bootstrap';
 
 html, body{
   color: $black;
-  font-family: 'Quicksand';
+  font-family: 'Nanum Gothic', 'Quicksand';
   overflow-x: hidden;
   position: relative;
 }
@@ -19,26 +18,18 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Julius Sans One', 'Archivo';
+  font-family: 'Julius Sans One';
 }
 
 a, a:hover, a:visited{
   color: $green !important;
   text-decoration: none;
   cursor: pointer;
-
-  app-svg-icon {
-    fill: $white;
-  }
 }
 
 a:hover {
   color: $green !important;
   text-decoration: underline !important;
-
-  app-svg-icon {
-    fill: $green;
-  }
 }
 
 app-svg-icon {

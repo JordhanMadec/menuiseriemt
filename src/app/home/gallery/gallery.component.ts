@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {AlbumInfo} from '../../album/album-info.model';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import {map} from 'rxjs/operators';
-import {of} from 'rxjs';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlbumInfo } from '../../album/album-info.model';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -14,22 +14,11 @@ import {of} from 'rxjs';
 })
 export class GalleryComponent implements OnInit, OnDestroy {
 
-  // public albums: AlbumInfo[] = [
-  //   new AlbumInfo('Fenêtres', '/assets/img/services/fenetre.png'),
-  //   new AlbumInfo('Parquet', '/assets/img/services/parquet.png'),
-  //   new AlbumInfo('Aménagement intérieur', '/assets/img/services/amenagement_inte.png'),
-  //   new AlbumInfo('Volets roulants', '/assets/img/services/fenetre.png'),
-  //   new AlbumInfo('Charpente', '/assets/img/services/charpente.png'),
-  //   new AlbumInfo('Pose d\'escaliers', '/assets/img/services/escalier.png'),
-  //   new AlbumInfo('Isolation intérieure', '/assets/img/services/isolation_inte.png'),
-  //   new AlbumInfo('Isolation extérieure', '/assets/img/services/isolation_exte.png')
-  // ];
-
   public albums: Observable<AlbumInfo[]>;
 
   private subscription: Subscription;
 
-  constructor(private router: Router, private http: Http) {}
+  constructor(private router: Router, private http: Http, private ngZone: NgZone) {}
 
   ngOnInit() {
     this.subscription = this.getAllAlbums().subscribe(
@@ -43,7 +32,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   goToAlbum(id: string) {
-    this.router.navigate(['album', id]);
+    this.ngZone.run(() => this.router.navigate(['album', id]));
   }
 
   private getAllAlbums(): Observable<AlbumInfo[]> {
