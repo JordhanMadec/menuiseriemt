@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { LegalsComponent } from './legals/legals.component';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
+import { DatabaseService } from './services/database.service';
+import { StorageService } from './services/storage.service';
 import { SvgIconsComponent } from './shared/svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './shared/svg-icons/svg-icons-definitions/svg-icons-definitions.component';
 import { ClientComponent } from './home/client/client.component';
@@ -38,6 +41,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { SignupComponent } from './login/signup/signup.component';
 import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
@@ -46,6 +50,7 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
 import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
+import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +82,7 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     AlertMessageComponent,
     CustomerInvoicesComponent,
     ListItemComponent,
+    CustomerInvoiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,13 +98,17 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     FlexLayoutModule,
+    PdfViewerModule,
   ],
   providers: [
     AuthGuard,
     NotAuthGuard,
     AuthService,
     AlertService,
+    DatabaseService,
+    StorageService,
   ],
   bootstrap: [AppComponent]
 })

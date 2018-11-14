@@ -53,13 +53,27 @@ export class DatabaseService {
       .ref('/invoices/' + userId)
       .once('value')
       .then(res => {
-        res.forEach(invoice => {
-          invoices.push(new Invoice(invoice.val()))
+        res.forEach(_invoice => {
+          const invoice: Invoice = new Invoice(_invoice.val());
+          invoice.id = _invoice.key;
+          invoices.push(invoice);
         });
         return invoices;
       }, error => {
         this.alertService.error('Impossible de récupérer les factures');
         return invoices;
+      });
+  }
+
+  getUserInvoice(userId: string, invoiceId: string): Promise<Invoice> {
+    return firebase.database()
+      .ref('/invoices/' + userId + '/' + invoiceId)
+      .once('value')
+      .then(invoice => {
+        return new Invoice(invoice.val());
+      }, error => {
+        this.alertService.error('Impossible de récupérer la facture');
+        return null;
       });
   }
 }

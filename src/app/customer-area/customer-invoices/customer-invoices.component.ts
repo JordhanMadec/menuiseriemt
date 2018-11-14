@@ -26,7 +26,7 @@ export class CustomerInvoicesComponent implements OnInit, OnDestroy {
         this.user = user;
         this.cd.detectChanges();
 
-        if (user === null) {
+        if (!user) {
           return;
         }
 

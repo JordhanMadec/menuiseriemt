@@ -315,7 +315,10 @@ section{
   box-shadow: $shadow-strong;
 }
 
-button {
-  outline: none !important;
-  cursor: pointer;
+.pdfViewer .page {
+  box-shadow: $shadow-strong !important;
+}
+
+.ng2-pdf-viewer-container[_ngcontent-c7] {
+  overflow: visible !important;
 }

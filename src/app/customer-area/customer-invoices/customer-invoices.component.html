@@ -7,7 +7,7 @@
       <div *ngIf="invoices; else spinner">
         <div class="invoices-list" *ngIf="invoices.length; else emptyList">
           <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date"></app-list-item>
+            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
           </ng-container>
         </div>
 

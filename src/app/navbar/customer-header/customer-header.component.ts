@@ -21,19 +21,17 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routerSubscription = this.router.events.subscribe(
       event => {
-        switch (this.router.url) {
-          case '/espace-client':
-            this.selectedNavItem = 'accueil';
-            break;
-          case '/espace-client/factures':
-            this.selectedNavItem = 'factures';
-            break;
-          case '/espace-client/suivi-chantier':
-            this.selectedNavItem = 'suivi-chantier';
-            break;
-          case '/espace-client/profil':
-            this.selectedNavItem = 'profil';
-            break;
+        if (this.router.url.match('^/espace-client$')) {
+          this.selectedNavItem = 'accueil';
+        }
+        if (this.router.url.match('^/espace-client/factures')) {
+          this.selectedNavItem = 'factures';
+        }
+        if (this.router.url.match('^/espace-client/suivi-chantier')) {
+          this.selectedNavItem = 'suivi-chantier';
+        }
+        if (this.router.url.match('^/espace-client/profil$')) {
+          this.selectedNavItem = 'profil';
         }
 
         this.cd.detectChanges();
@@ -53,7 +51,7 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
         targetUrl = '/espace-client';
         break;
       case 'factures':
-        targetUrl = '/espace-client/factures';
+        targetUrl = '/espace-client/factures/';
         break;
       case 'suivi-chantier':
         break;

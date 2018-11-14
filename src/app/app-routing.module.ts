@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -25,7 +26,10 @@ const routes: Routes = [
   {path: 'espace-client', canActivate: [AuthGuard], children: [
     {path: '', component: CustomerHomeComponent},
     {path: 'profil', component: CustomerProfileComponent},
-    {path: 'factures', component: CustomerInvoicesComponent},
+    {path: 'factures', children: [
+      {path: '', component: CustomerInvoicesComponent},
+      {path: ':invoiceId', component: CustomerInvoiceComponent},
+    ]},
   ]},
   // default
   {path: '**', redirectTo: '/'},

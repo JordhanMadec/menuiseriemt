@@ -7,9 +7,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ListItemComponent implements OnInit {
 
-  @Input() icon: String;
-  @Input() title: String;
-  @Input() subtitle: String;
+  @Input() icon: string;
+  @Input() title: string;
+  @Input() subtitle: string;
+  @Input() link: string;
 
   constructor() { }
 

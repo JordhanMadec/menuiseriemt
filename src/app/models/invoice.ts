@@ -1,6 +1,7 @@
 export class Invoice {
-  title: String;
-  date: String;
+  id: string;
+  title: string;
+  date: string;
   url: string;
 
   constructor(invoice: any) {
