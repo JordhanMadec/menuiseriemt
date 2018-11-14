@@ -13,17 +13,17 @@
           <div class="input-container row">
             <div class="input-wrapper col-lg-6">
               <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
             </div>
 
             <div class="input-wrapper col-lg-6">
               <input id="lastName" type="text" placeholder="Nom*" formControlName="lastName">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
             </div>
 
             <div class="input-wrapper col-lg-12">
               <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="email-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('contact').get('email').hasError('email')">
                 Le format attendu est example@mail.com
               </div>
@@ -31,7 +31,7 @@
 
             <div class="input-wrapper col-lg-6">
               <input id="homePhone" type="text" placeholder="Téléphone domicile" formControlName="homePhone">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="phone-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('contact').get('homePhone').hasError('pattern')">
                 Le format attendu est XX XX XX XX XX
               </div>
@@ -39,7 +39,7 @@
 
             <div class="input-wrapper col-lg-6">
               <input id="mobilePhone" type="text" placeholder="Téléphone portable" formControlName="mobilePhone">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="mobile-phone-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('contact').get('mobilePhone').hasError('pattern')">
                 Le format attendu est XX XX XX XX XX
               </div>
@@ -53,12 +53,12 @@
           <div class="input-container row">
             <div class="input-wrapper col-lg-6">
               <input id="city" type="text" placeholder="Ville*" formControlName="city">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
             </div>
 
             <div class="input-wrapper col-lg-6">
               <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('addressFields').get('zipcode').hasError('pattern')">
                 Doit contenir 5 chiffres
               </div>
@@ -66,7 +66,7 @@
 
             <div class="input-wrapper col-lg-12">
               <input id="address" type="text" placeholder="Adresse*" formControlName="address">
-              <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+              <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
             </div>
           </div>
         </div>

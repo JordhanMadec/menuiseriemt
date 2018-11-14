@@ -3,7 +3,7 @@
 
     <div fxLayout="row" fxLayoutAlign="start center">
       <a class="toggleButton" (click)="toggleSidenav()" *ngIf="isAuthenticated">
-        <app-svg-icon name="menu"></app-svg-icon>
+        <app-svg-icon name="menu-icon"></app-svg-icon>
       </a>
 
       <a class="navbar-brand" (click)="goToHome()">
@@ -14,7 +14,7 @@
     <div class="nav-links-container">
       <a class="nav-link" routerLink="/login" *ngIf="isHome">
         <div>Espace Client</div>
-        <app-svg-icon class="button-icon" name="user"></app-svg-icon>
+        <app-svg-icon class="button-icon" name="user-icon"></app-svg-icon>
       </a>
 
       <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
