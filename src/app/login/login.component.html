@@ -8,12 +8,12 @@
       <div class="input-container row">
         <div class="input-wrapper col-lg-12">
           <input id="mail" type="email" placeholder="Adresse mail" formControlName="mail">
-          <app-svg-icon class="input-icon" name="user" [size]="20"></app-svg-icon>
+          <app-svg-icon class="input-icon" name="email-icon" [size]="20"></app-svg-icon>
         </div>
 
         <div class="input-wrapper col-lg-12">
-          <app-svg-icon class="input-icon" name="lock" [size]="20"></app-svg-icon>
           <input id="password" type="password" placeholder="Mot de passe" formControlName="password">
+          <app-svg-icon class="input-icon" name="lock-icon" [size]="20"></app-svg-icon>
           <div class="input-hint error" *ngIf="loginFailed">
             Addresse mail ou mot de passe invalide.
           </div>

@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public sidenavVisible = false;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
   }
 
