@@ -53,6 +53,7 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
         targetUrl = '/espace-client';
         break;
       case 'factures':
+        targetUrl = '/espace-client/factures';
         break;
       case 'suivi-chantier':
         break;

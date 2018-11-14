@@ -4,14 +4,16 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-customer-area-home',
-  templateUrl: './customer-home.component.html',
-  styleUrls: ['./customer-home.component.scss']
+  selector: 'app-customer-invoices',
+  templateUrl: './customer-invoices.component.html',
+  styleUrls: ['./customer-invoices.component.scss']
 })
-export class CustomerHomeComponent implements OnInit, OnDestroy {
+export class CustomerInvoicesComponent implements OnInit, OnDestroy {
 
   public user: User;
   private userSubscription: Subscription;
+
+  public invoices = [1, 1, 1, 1, 1];
 
   constructor(private cd: ChangeDetectorRef, private authService: AuthService) {
   }

@@ -44,6 +44,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { AlertMessageComponent } from './alert-message/alert-message.component';
+import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
+import { ListItemComponent } from './shared/list-item/list-item.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,8 @@ import { AlertMessageComponent } from './alert-message/alert-message.component';
     CustomerHeaderComponent,
     CustomerProfileComponent,
     AlertMessageComponent,
+    CustomerInvoicesComponent,
+    ListItemComponent,
   ],
   imports: [
     BrowserModule,
