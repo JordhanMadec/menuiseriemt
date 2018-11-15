@@ -15,10 +15,10 @@
           <div class="invoice-date">{{invoice?.date}}</div>
         </div>
 
-        <button class="my-button accent">
+        <a class="my-button accent" [href]="invoiceUrl" target="_blank" *ngIf="invoiceUrl">
           Télécharger ma facture
           <app-svg-icon class="button-icon" name="download-icon"></app-svg-icon>
-        </button>
+        </a>
       </div>
 
       <div class="invoice-container">
