@@ -48,7 +48,7 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
             this.invoice = invoice;
             this.cd.detectChanges();
 
-            this.storageService.getInvoiceUrl(this.invoice.url).then(url => {
+            this.storageService.getInvoiceUrl(this.invoice.fileName).then(url => {
               this.invoiceUrl = url;
               this.cd.detectChanges();
             });
