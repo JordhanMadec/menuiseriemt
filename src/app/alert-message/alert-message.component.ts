@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Alert, AlertService, StatusEnum } from '../services/alert.service';
+import { Alert, AlertService, AlertStatus } from '../services/alert.service';
 
 @Component({
   selector: 'app-alert-message',
@@ -10,7 +10,7 @@ import { Alert, AlertService, StatusEnum } from '../services/alert.service';
 export class AlertMessageComponent implements OnInit, OnDestroy {
 
   public alerts: Alert[] = [];
-  public statusEnum = StatusEnum;
+  public statusEnum = AlertStatus;
 
   private alertSubscription: Subscription;
 

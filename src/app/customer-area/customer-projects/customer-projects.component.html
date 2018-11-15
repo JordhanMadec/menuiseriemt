@@ -1,0 +1,27 @@
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+  <div class="container">
+
+    <div>
+      <h1>Suivi de mes chantiers</h1>
+
+      <div *ngIf="projects; else spinner">
+        <div class="projects-list" *ngIf="projects.length; else emptyList">
+          <ng-container *ngFor="let project of projects">
+            <app-list-item icon="calendar-icon" [title]="project.title" [subtitle]="project.startDate" link="/espace-client/suivi-chantier/{{project.id}}"></app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyList>
+          <div class="projects-list empty-list">
+            <app-svg-icon name="calendar-icon" [size]="200"></app-svg-icon>
+            Vous n'avez pas de chantier pour le moment
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>

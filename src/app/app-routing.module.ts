@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
+import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
+import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import {HomeComponent} from './home/home.component';
@@ -26,6 +28,10 @@ const routes: Routes = [
   {path: 'espace-client', canActivate: [AuthGuard], children: [
     {path: '', component: CustomerHomeComponent},
     {path: 'profil', component: CustomerProfileComponent},
+    {path: 'suivi-chantier', children: [
+        {path: '', component: CustomerProjectsComponent},
+        {path: ':projectId', component: CustomerProjectComponent},
+    ]},
     {path: 'factures', children: [
       {path: '', component: CustomerInvoicesComponent},
       {path: ':invoiceId', component: CustomerInvoiceComponent},
