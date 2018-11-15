@@ -17,15 +17,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private isAuthenticatedSubscription: Subscription;
   private userSubscription: Subscription;
 
-  public isAuthenticated: boolean;
-  public isHome = false;
   public user: User;
 
+  public isAuthenticated: boolean;
+  public isHome = false;
+
   public sidenavVisible = false;
+  private smallScreen = false;
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
+    this.smallScreen = window.matchMedia('(max-width: 992px').matches;
   }
 
   constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef, private ngZone: NgZone) {
@@ -39,6 +42,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.routerSubscription = this.router.events.subscribe(
       event => {
         this.isHome = this.router.url === '/';
+console.log(event)
+        if (this.smallScreen) {
+          this.sidenavVisible = false;
+        }
+
         this.cd.detectChanges();
       }
     );
