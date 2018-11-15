@@ -1,3 +1,8 @@
+button {
+  outline: none !important;
+  cursor: pointer;
+}
+
 .circle-button {
   height: 60px;
   width: 60px;
@@ -29,6 +34,10 @@
 
 .circle-button:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+a.my-button, a.my-button:hover {
+  text-decoration: none;
 }
 
 .my-button {
@@ -64,7 +73,7 @@
   color: $white;
 
   app-svg-icon.button-icon, .button-icon {
-    fill: $black;
+    fill: $dark-grey;
   }
 }
 

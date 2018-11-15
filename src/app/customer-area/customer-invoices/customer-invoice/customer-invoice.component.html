@@ -1,0 +1,40 @@
+<section id="invoice-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+  <div class="container">
+
+    <div *ngIf="invoice; else spinner">
+
+      <div fxLayoutAlign="space-between start">
+        <div>
+          <div fxLayoutAlign="start center">
+            <div class="back-button" routerLink="/espace-client/factures">
+              <app-svg-icon name="left-arrow-icon"></app-svg-icon>
+            </div>
+            <h1 class="invoice-title">{{invoice?.title}}</h1>
+          </div>
+
+          <div class="invoice-date">{{invoice?.date}}</div>
+        </div>
+
+        <a class="my-button accent" [href]="invoiceUrl" target="_blank" *ngIf="invoiceUrl">
+          Télécharger ma facture
+          <app-svg-icon class="button-icon" name="download-icon"></app-svg-icon>
+        </a>
+      </div>
+
+      <div class="invoice-container">
+        <div *ngIf="invoiceUrl; else invoiceSpinner">
+          <pdf-viewer [src]="invoiceUrl"></pdf-viewer>
+        </div>
+
+        <ng-template #invoiceSpinner>
+          <app-spinner></app-spinner>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>

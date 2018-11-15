@@ -11,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
 export class CustomerHomeComponent implements OnInit, OnDestroy {
 
   public user: User;
-
   private userSubscription: Subscription;
 
   constructor(private cd: ChangeDetectorRef, private authService: AuthService) {

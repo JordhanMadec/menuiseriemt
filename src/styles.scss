@@ -22,14 +22,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a, a:hover, a:visited{
-  color: $green !important;
+  color: $green;
   text-decoration: none;
   cursor: pointer;
 }
 
 a:hover {
-  color: $green !important;
-  text-decoration: underline !important;
+  color: $green;
+  text-decoration: underline;
 }
 
 app-svg-icon {
@@ -315,7 +315,10 @@ section{
   box-shadow: $shadow-strong;
 }
 
-button {
-  outline: none !important;
-  cursor: pointer;
+.pdfViewer .page {
+  box-shadow: $shadow-strong !important;
+}
+
+.ng2-pdf-viewer-container[_ngcontent-c7] {
+  overflow: visible !important;
 }

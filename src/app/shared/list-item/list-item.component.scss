@@ -1,0 +1,60 @@
+@import "../../../assets/style/variables";
+
+.list-item-wrapper {
+  border-radius: $small-radius;
+  transition: $transition-fast;
+  margin-top: -1px;
+  overflow: hidden;
+  cursor: pointer;
+
+  & > div {
+    display: flex;
+  }
+
+  &:hover {
+    background-color: $light-grey;
+
+    .list-item-icon {
+      background-color: $green;
+      padding-left: $middle-gap;
+
+
+      app-svg-icon {
+        fill: $white;
+      }
+    }
+
+    .list-item app-svg-icon {
+      fill: rgba($dark-grey, .5);
+    }
+  }
+}
+
+.list-item {
+  margin-top: -1px;
+  padding: $small-gap;
+  box-sizing: border-box;
+  border-bottom: solid 1px $light-grey;
+  flex: 1 0 auto;
+
+  .title {
+    color: $green;
+    font-size: 20px;
+  }
+
+  app-svg-icon {
+    fill: transparent;
+    transition: $transition-fast;
+  }
+}
+
+.list-item-icon {
+  padding: $middle-gap;
+  padding-left: 0;
+  transition: $transition-fast;
+
+  app-svg-icon {
+    fill: $light-grey;
+    transition: $transition-fast;
+  }
+}
