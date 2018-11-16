@@ -17,9 +17,25 @@ export class Project {
     this.startDate = project.startDate;
     this.endDate = project.endDate;
     this.status = project.status;
-    this.city = project.zipcode;
+    this.city = project.city;
+    this.zipcode = project.zipcode;
     this.address = project.address;
     this.notes = project.notes;
+  }
+
+  getStatus(): string {
+    switch (this.status) {
+      case ProjectStatus.COMPLETED:
+        return 'Terminé';
+      case ProjectStatus.NOT_STARTED:
+        return 'En préparation';
+      case ProjectStatus.ONGOING:
+        return 'En cours';
+      case ProjectStatus.PENDING:
+        return 'En attente';
+      case ProjectStatus.WAITING_PAYMENT:
+        return 'En attente de paiement';
+    }
   }
 }
 
@@ -28,4 +44,5 @@ export enum ProjectStatus {
   ONGOING = 'ONGOING',
   PENDING = 'PENDING',
   NOT_STARTED = 'NOT_STARTED',
+  WAITING_PAYMENT = 'WAITING_PAYMENT',
 }

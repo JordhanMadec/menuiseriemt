@@ -1,0 +1,19 @@
+@import "../../../../assets/style/variables";
+
+.project-container {
+  margin-top: $big-gap;
+}
+
+.project-subsection {
+  margin-top: $big-gap;
+}
+
+.label {
+  display: inline-block;
+  width: 150px;
+  margin-right: $small-gap;
+}
+
+.invoices-list {
+  margin-top: $middle-gap;
+}

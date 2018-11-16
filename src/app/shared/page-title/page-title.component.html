@@ -1,0 +1,15 @@
+<div fxLayoutAlign="space-between start">
+  <div>
+    <div fxLayoutAlign="start center">
+      <div *ngIf="hasBackButton" class="back-button" (click)="goBack()">
+        <app-svg-icon name="left-arrow-icon"></app-svg-icon>
+      </div>
+
+      <h1 *ngIf="title" class="title">{{title}}</h1>
+    </div>
+
+    <div *ngIf="subtitle" class="subtitle">{{subtitle}}</div>
+  </div>
+
+  <ng-content></ng-content>
+</div>

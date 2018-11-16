@@ -108,4 +108,10 @@ export class DatabaseService {
         return null;
       });
   }
+
+  getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
+    return this.getUserInvoices(userId).then(
+      (_invoices: Invoice[]) => _invoices.filter(invoice => invoice.projectId + '' === projectId)
+    )
+  }
 }

@@ -53,6 +53,8 @@ import { ListItemComponent } from './shared/list-item/list-item.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
+import { PageTitleComponent } from './shared/page-title/page-title.component';
+import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import { CustomerProjectComponent } from './customer-area/customer-projects/cust
     CustomerInvoiceComponent,
     CustomerProjectsComponent,
     CustomerProjectComponent,
+    PageTitleComponent,
+    ProjectTimelineComponent,
   ],
   imports: [
     BrowserModule,

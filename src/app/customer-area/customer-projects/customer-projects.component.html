@@ -2,12 +2,12 @@
   <div class="container">
 
     <div>
-      <h1>Suivi de mes chantiers</h1>
+      <app-page-title title="Suivi de mes chantiers"></app-page-title>
 
       <div *ngIf="projects; else spinner">
         <div class="projects-list" *ngIf="projects.length; else emptyList">
           <ng-container *ngFor="let project of projects">
-            <app-list-item icon="calendar-icon" [title]="project.title" [subtitle]="project.startDate" link="/espace-client/suivi-chantier/{{project.id}}"></app-list-item>
+            <app-list-item icon="calendar-icon" [title]="project.title" [subtitle]="project.getStatus()" link="/espace-client/suivi-chantier/{{project.id}}"></app-list-item>
           </ng-container>
         </div>
 

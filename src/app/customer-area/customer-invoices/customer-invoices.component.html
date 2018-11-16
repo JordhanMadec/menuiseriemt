@@ -2,7 +2,7 @@
   <div class="container">
 
     <div>
-      <h1>Mes factures</h1>
+      <app-page-title title="Mes factures"></app-page-title>
 
       <div *ngIf="invoices; else spinner">
         <div class="invoices-list" *ngIf="invoices.length; else emptyList">

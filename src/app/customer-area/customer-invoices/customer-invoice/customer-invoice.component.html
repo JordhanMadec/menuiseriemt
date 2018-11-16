@@ -3,23 +3,12 @@
 
     <div *ngIf="invoice; else spinner">
 
-      <div fxLayoutAlign="space-between start">
-        <div>
-          <div fxLayoutAlign="start center">
-            <div class="back-button" routerLink="/espace-client/factures">
-              <app-svg-icon name="left-arrow-icon"></app-svg-icon>
-            </div>
-            <h1 class="invoice-title">{{invoice?.title}}</h1>
-          </div>
-
-          <div class="invoice-date">{{invoice?.date}}</div>
-        </div>
-
+      <app-page-title [title]="invoice?.title" [subtitle]="invoice?.date" [hasBackButton]="true">
         <a class="my-button accent" [href]="invoiceUrl" target="_blank" *ngIf="invoiceUrl">
           Télécharger ma facture
           <app-svg-icon class="button-icon" name="download-icon"></app-svg-icon>
         </a>
-      </div>
+      </app-page-title>
 
       <div class="invoice-container">
         <div *ngIf="invoiceUrl; else invoiceSpinner">
