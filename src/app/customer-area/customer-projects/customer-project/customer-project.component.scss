@@ -5,7 +5,7 @@
 }
 
 .project-subsection {
-  margin-top: $big-gap;
+  margin-top: $very-big-gap;
 }
 
 .label {
@@ -16,4 +16,13 @@
 
 .invoices-list {
   margin-top: $middle-gap;
+}
+
+.project-info {
+  margin-left: -$middle-gap;
+  margin-right: -$middle-gap;
+
+  & > div {
+    padding: $middle-gap;
+  }
 }

@@ -9,7 +9,7 @@
           <app-project-timeline [project]="project"></app-project-timeline>
         </div>
 
-        <div class="row project-subsection">
+        <div class="row project-subsection project-info">
           <div class="col-lg-6">
             <h4 class="green-text">Adresse</h4>
             <div>{{project?.address}}</div>
@@ -29,7 +29,11 @@
             </div>
             <div>
               <b class="label">Statut</b>
-              <span [class.red-text]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'">{{project?.getStatus()}}</span>
+              <span [class.red-text]="project?.status === 'PENDING' || project?.status === 'WAITING_PAYMENT'">{{project?.getStatus()}}</span>
+            </div>
+            <div *ngIf="project?.notes?.length">
+              <b class="label">Commentaires</b>
+              <span>{{project?.notes}}</span>
             </div>
           </div>
         </div>

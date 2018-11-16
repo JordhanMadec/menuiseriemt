@@ -35,6 +35,8 @@ export class Project {
         return 'En attente';
       case ProjectStatus.WAITING_PAYMENT:
         return 'En attente de paiement';
+      case ProjectStatus.ORDERED:
+        return 'Commande en cours';
     }
   }
 }
@@ -43,6 +45,7 @@ export enum ProjectStatus {
   COMPLETED = 'COMPLETED',
   ONGOING = 'ONGOING',
   PENDING = 'PENDING',
+  ORDERED = 'ORDERED',
   NOT_STARTED = 'NOT_STARTED',
   WAITING_PAYMENT = 'WAITING_PAYMENT',
 }
