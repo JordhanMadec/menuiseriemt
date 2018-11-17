@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Invoice } from '../../models/invoice';
+import { Quote } from '../../models/quote';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
@@ -16,6 +17,7 @@ export class CustomerInvoicesComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription;
 
   public invoices: Invoice[];
+  public quotes: Quote[];
 
   constructor(private cd: ChangeDetectorRef, private authService: AuthService, private databaseService: DatabaseService) {
   }
@@ -33,6 +35,13 @@ export class CustomerInvoicesComponent implements OnInit, OnDestroy {
         this.databaseService.getUserInvoices(this.user.id).then(
           (invoices: Invoice[]) => {
             this.invoices = invoices;
+            this.cd.detectChanges();
+          }
+        );
+
+        this.databaseService.getUserQuotes(this.user.id).then(
+          (quotes: Quote[]) => {
+            this.quotes = quotes;
             this.cd.detectChanges();
           }
         );

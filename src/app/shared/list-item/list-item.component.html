@@ -6,7 +6,7 @@
   <div class="list-item" fxLayout="row" fxLayoutAlign="space-between center">
     <div>
       <div class="title">{{title}}</div>
-      <small class="subtitle">{{subtitle}}</small>
+      <small class="subtitle" [class.red-text]="alert">{{subtitle}}</small>
     </div>
 
     <app-svg-icon name="right-arrow-icon"></app-svg-icon>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
+import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-invoice/customer-quote.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
       {path: '', component: CustomerInvoicesComponent},
       {path: ':invoiceId', component: CustomerInvoiceComponent},
     ]},
+    {path: 'devis/:quoteId', component: CustomerQuoteComponent}
   ]},
   // default
   {path: '**', redirectTo: '/'},

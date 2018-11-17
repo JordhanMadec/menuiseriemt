@@ -42,13 +42,13 @@
       <div class="project-subsection">
         <h4 class="green-text">Devis</h4>
 
-        <div class="invoices-list" *ngIf="invoices?.length; else emptyList">
-          <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
+        <div class="invoices-list" *ngIf="quotes?.length; else emptyQuotes">
+          <ng-container *ngFor="let quote of quotes">
+            <app-list-item icon="invoice-icon" [title]="quote.title" [subtitle]="quote.done ? 'Signé' : 'En attente'" [alert]="!quote.done" link="/espace-client/devis/{{quote.id}}"></app-list-item>
           </ng-container>
         </div>
 
-        <ng-template #emptyList>
+        <ng-template #emptyQuotes>
           <div class="invoices-list empty-list">
             <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
             Pas encore de devis
@@ -59,13 +59,13 @@
       <div class="project-subsection">
         <h4 class="green-text">Factures</h4>
 
-        <div class="invoices-list" *ngIf="invoices?.length; else emptyList">
+        <div class="invoices-list" *ngIf="invoices?.length; else emptyInvoices">
           <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
+            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.done ? 'Payée' : 'À payer'" [alert]="!invoice.done" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
           </ng-container>
         </div>
 
-        <ng-template #emptyList>
+        <ng-template #emptyInvoices>
           <div class="invoices-list empty-list">
             <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
             Pas encore de facture

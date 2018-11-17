@@ -55,6 +55,7 @@ import { CustomerProjectsComponent } from './customer-area/customer-projects/cus
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
+import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-invoice/customer-quote.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ProjectTimelineComponent } from './shared/project-timeline/project-time
     CustomerProjectComponent,
     PageTitleComponent,
     ProjectTimelineComponent,
+    CustomerQuoteComponent,
   ],
   imports: [
     BrowserModule,
