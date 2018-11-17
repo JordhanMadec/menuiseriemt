@@ -1,0 +1,75 @@
+@import "../../../assets/style/variables";
+
+.timeline-container {
+  padding-bottom: 30px + $small-gap;
+}
+
+.step {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: solid 3px $light-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: $light-grey;
+
+  app-svg-icon {
+    fill: $light-grey;
+  }
+
+  .step-label {
+    position: absolute;
+    left: 0;
+    bottom: -30px -$small-gap;
+    width: 300px;
+    height: 30px;
+  }
+
+  &.done {
+    background-color: $green;
+    border-color: $green;
+    color: $green;
+
+    app-svg-icon {
+      fill: $white;
+    }
+  }
+
+  &.ongoing {
+    border-color: $green;
+    color: $green;
+
+    app-svg-icon {
+      fill: $green;
+    }
+  }
+
+  &.missed {
+    background-color: $red;
+    border-color: $red;
+    color: $red;
+
+    app-svg-icon {
+      fill: $white;
+    }
+  }
+}
+
+.link {
+  height: 3px;
+  width: 100%;
+  flex: 1;
+  background-color: $light-grey;
+  border-radius: $small-radius;
+  margin: 0 $small-gap;
+
+  &.done {
+    background-color: $green;
+  }
+
+  &.missed {
+    background-color: $red;
+  }
+}

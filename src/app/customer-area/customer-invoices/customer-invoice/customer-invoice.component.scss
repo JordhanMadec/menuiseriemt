@@ -1,32 +1,5 @@
 @import "../../../../assets/style/variables";
 
-.invoice-title {
-  margin: 0;
-}
-
-.invoice-date {
-  color: $green;
-}
-
-.back-button {
-  cursor: pointer;
-  margin-right: $very-small-gap;
-  outline: none !important;
-  transition: $transition-fast;
-
-  app-svg-icon {
-    fill: $dark-grey;
-    transition: $transition-fast;
-  }
-
-  &:hover {
-    margin-right: $small-gap;
-
-    app-svg-icon {
-      fill: $green;
-    }
-  }
-}
 .invoice-container {
   margin-top: $big-gap;
 }

@@ -6,6 +6,7 @@
   margin-top: -1px;
   overflow: hidden;
   cursor: pointer;
+  outline: none !important;
 
   & > div {
     display: flex;
@@ -17,7 +18,7 @@
     .list-item-icon {
       background-color: $green;
       padding-left: $middle-gap;
-
+      z-index: 10000;
 
       app-svg-icon {
         fill: $white;
@@ -31,9 +32,10 @@
 }
 
 .list-item {
-  margin-top: -1px;
+  //margin-top: -1px;
   padding: $small-gap;
   box-sizing: border-box;
+  border-top: solid 1px $light-grey;
   border-bottom: solid 1px $light-grey;
   flex: 1 0 auto;
 

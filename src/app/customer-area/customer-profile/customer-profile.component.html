@@ -2,7 +2,7 @@
   <div class="container">
 
     <div *ngIf="user; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
-      <h1>Mes informations personnelles</h1>
+      <app-page-title title="Mes informations personnelles"></app-page-title>
 
       <small>Les champs avec une astérisque (*) sont obligatoires.</small>
 

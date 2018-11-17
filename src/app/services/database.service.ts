@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Invoice } from '../models/invoice';
+import { Project } from '../models/project';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 
@@ -75,5 +76,42 @@ export class DatabaseService {
         this.alertService.error('Impossible de récupérer la facture');
         return null;
       });
+  }
+
+  getUserProjects(userId: string): Promise<Project[]> {
+    const projects: Project[] = [];
+
+    return firebase.database()
+      .ref('/projects/' + userId)
+      .once('value')
+      .then(res => {
+        res.forEach(_project => {
+          const project: Project = new Project(_project.val());
+          project.id = _project.key;
+          projects.push(project);
+        });
+        return projects;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les chantiers');
+        return projects;
+      });
+  }
+
+  getUserProject(userId: string, projectId: string): Promise<Project> {
+    return firebase.database()
+      .ref('/projects/' + userId + '/' + projectId)
+      .once('value')
+      .then(project => {
+        return new Project(project.val());
+      }, error => {
+        this.alertService.error('Impossible de récupérer le chantier');
+        return null;
+      });
+  }
+
+  getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
+    return this.getUserInvoices(userId).then(
+      (_invoices: Invoice[]) => _invoices.filter(invoice => invoice.projectId + '' === projectId)
+    )
   }
 }

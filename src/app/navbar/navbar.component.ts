@@ -42,7 +42,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.routerSubscription = this.router.events.subscribe(
       event => {
         this.isHome = this.router.url === '/';
-console.log(event)
         if (this.smallScreen) {
           this.sidenavVisible = false;
         }

@@ -10,15 +10,15 @@ export class AlertService {
   }
 
   success(message: string, duration = defaultDuration) {
-    this._alertEmitter.emit(new Alert(message, duration, StatusEnum.SUCCESS));
+    this._alertEmitter.emit(new Alert(message, duration, AlertStatus.SUCCESS));
   }
 
   error(message: string, duration = defaultDuration) {
-    this._alertEmitter.emit(new Alert(message, duration, StatusEnum.ERROR));
+    this._alertEmitter.emit(new Alert(message, duration, AlertStatus.ERROR));
   }
 
   info(message: string, duration = defaultDuration) {
-    this._alertEmitter.emit(new Alert(message, duration, StatusEnum.INFO));
+    this._alertEmitter.emit(new Alert(message, duration, AlertStatus.INFO));
   }
 
   get alertEmitter(): EventEmitter<Alert> {
@@ -29,13 +29,13 @@ export class AlertService {
 export class Alert {
   message: String;
   duration: number;
-  status: StatusEnum;
+  status: AlertStatus;
 
-  constructor(message: String, duration: number, status: StatusEnum) {
+  constructor(message: String, duration: number, status: AlertStatus) {
     this.message = message;
     this.status = status;
     this.duration = duration;
   }
 }
 
-export enum StatusEnum { SUCCESS, ERROR, INFO }
+export enum AlertStatus { SUCCESS, ERROR, INFO }
