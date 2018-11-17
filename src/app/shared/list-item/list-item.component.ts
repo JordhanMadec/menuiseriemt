@@ -11,6 +11,7 @@ export class ListItemComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() link: string;
+  @Input() alert = false;
 
   constructor() { }
 

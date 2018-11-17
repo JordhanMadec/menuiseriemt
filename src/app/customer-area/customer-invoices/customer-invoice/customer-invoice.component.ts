@@ -10,8 +10,8 @@ import { StorageService } from '../../../services/storage.service';
 
 @Component({
   selector: 'app-customer-invoice',
-  templateUrl: './customer-invoice.component.html',
-  styleUrls: ['./customer-invoice.component.scss']
+  templateUrl: './customer-document.component.html',
+  styleUrls: ['./customer-document.component.scss']
 })
 export class CustomerInvoiceComponent implements OnInit, OnDestroy {
 
@@ -19,9 +19,9 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
   private routeSubscription: Subscription;
 
   public user: User;
-  public invoice: Invoice;
-  private invoiceId: string;
-  public invoiceUrl: string;
+  public document: Invoice;
+  private documentId: string;
+  public documentUrl: string;
 
   constructor(private cd: ChangeDetectorRef,
               private authService: AuthService,
@@ -33,7 +33,7 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
-      this.invoiceId = params['invoiceId'];
+      this.documentId = params['invoiceId'];
     });
 
     this.userSubscription = this.authService.currentUser.subscribe(
@@ -41,27 +41,23 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
         this.user = user;
         this.cd.detectChanges();
 
-        if (!user || !this.invoiceId ) {
+        if (!user || !this.documentId ) {
           return;
         }
 
-        this.databaseService.getUserInvoice(this.user.id, this.invoiceId).then(
+        this.databaseService.getUserInvoice(this.user.id, this.documentId).then(
           (invoice: Invoice) => {
-            this.invoice = invoice;
+            this.document = invoice;
             this.cd.detectChanges();
 
-            this.storageService.getInvoiceUrl(this.invoice.fileName).then(url => {
-              this.invoiceUrl = url;
+            this.storageService.getInvoiceUrl(this.document.fileName).then(url => {
+              this.documentUrl = url;
               this.cd.detectChanges();
             });
           }
         );
       }
     );
-  }
-
-  goBack() {
-    this.location.back();
   }
 
   ngOnDestroy() {

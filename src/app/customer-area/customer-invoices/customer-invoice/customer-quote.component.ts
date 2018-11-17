@@ -1,39 +1,39 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Invoice } from '../../../models/invoice';
-import { Project, ProjectStatus } from '../../../models/project';
 import { Quote } from '../../../models/quote';
 import { User } from '../../../models/user';
 import { AuthService } from '../../../services/auth.service';
 import { DatabaseService } from '../../../services/database.service';
+import { StorageService } from '../../../services/storage.service';
 
 @Component({
-  selector: 'app-customer-project',
-  templateUrl: './customer-project.component.html',
-  styleUrls: ['./customer-project.component.scss']
+  selector: 'app-customer-quote',
+  templateUrl: './customer-document.component.html',
+  styleUrls: ['./customer-document.component.scss']
 })
-export class CustomerProjectComponent implements OnInit, OnDestroy {
+export class CustomerQuoteComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
   private routeSubscription: Subscription;
 
   public user: User;
-  public invoices: Invoice[];
-  public quotes: Quote[];
-  public project: Project;
-  private projectId: string;
-  public subtitle = '';
+  public document: Quote;
+  private documentId: string;
+  public documentUrl: string;
 
   constructor(private cd: ChangeDetectorRef,
               private authService: AuthService,
               private databaseService: DatabaseService,
+              private storageService: StorageService,
+              private location: Location,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
-      this.projectId = params['projectId'];
+      this.documentId = params['quoteId'];
     });
 
     this.userSubscription = this.authService.currentUser.subscribe(
@@ -41,36 +41,24 @@ export class CustomerProjectComponent implements OnInit, OnDestroy {
         this.user = user;
         this.cd.detectChanges();
 
-        if (!user || !this.projectId ) {
+        if (!user || !this.documentId ) {
           return;
         }
 
-        this.databaseService.getUserProject(this.user.id, this.projectId).then(
-          (project: Project) => {
-            this.project = project;
-            this.subtitle = project.startDate + ' - ' + (project.endDate ? project.endDate : this.project.getStatus());
+        this.databaseService.getUserQuote(this.user.id, this.documentId).then(
+          (quote: Quote) => {
+            this.document = quote;
             this.cd.detectChanges();
-          }
-        );
 
-        this.databaseService.getProjectInvoices(this.user.id, this.projectId).then(
-          (invoices: Invoice[]) => {
-            this.invoices = invoices;
-            this.cd.detectChanges();
-          }
-        );
-
-        this.databaseService.getProjectQuotes(this.user.id, this.projectId).then(
-          (quotes: Quote[]) => {
-            this.quotes = quotes;
-            this.cd.detectChanges();
+            this.storageService.getQuoteUrl(this.document.fileName).then(url => {
+              this.documentUrl = url;
+              this.cd.detectChanges();
+            });
           }
         );
       }
     );
   }
-
-
 
   ngOnDestroy() {
     if (this.userSubscription) {
@@ -80,5 +68,4 @@ export class CustomerProjectComponent implements OnInit, OnDestroy {
       this.routeSubscription.unsubscribe();
     }
   }
-
 }

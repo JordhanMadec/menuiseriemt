@@ -2,19 +2,38 @@
   <div class="container">
 
     <div>
-      <app-page-title title="Mes factures"></app-page-title>
+      <app-page-title title="Mes devis"></app-page-title>
 
-      <div *ngIf="invoices; else spinner">
-        <div class="invoices-list" *ngIf="invoices.length; else emptyList">
-          <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.date" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
+      <div *ngIf="quotes; else spinner">
+        <div class="invoices-list" *ngIf="quotes.length; else emptyQuotes">
+          <ng-container *ngFor="let quote of quotes">
+            <app-list-item icon="invoice-icon" [title]="quote.title" [subtitle]="quote.done ? 'Payée' : 'À payer'" [alert]="!quote.done" link="/espace-client/devis/{{quote.id}}"></app-list-item>
           </ng-container>
         </div>
 
-        <ng-template #emptyList>
+        <ng-template #emptyQuotes>
           <div class="invoices-list empty-list">
             <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
-            Aucune facture
+            Vous n'aveez pas de devis
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="gap"></div>
+
+      <app-page-title title="Mes factures"></app-page-title>
+
+      <div *ngIf="invoices; else spinner">
+        <div class="invoices-list" *ngIf="invoices.length; else emptyInvoices">
+          <ng-container *ngFor="let invoice of invoices">
+            <app-list-item icon="invoice-icon" [title]="invoice.title" [subtitle]="invoice.done ? 'Payée' : 'À payer'" [alert]="!invoice.done" link="/espace-client/factures/{{invoice.id}}"></app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyInvoices>
+          <div class="invoices-list empty-list">
+            <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
+            Vous n'avez pas de facture
           </div>
         </ng-template>
       </div>

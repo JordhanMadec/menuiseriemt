@@ -13,6 +13,15 @@ export class StorageService {
     const userId = firebase.auth().currentUser.uid;
     return firebase.storage().ref('invoices/' + userId + '/' + fileName)
       .getDownloadURL()
-      .then(url => url);
+      .then(url => url,
+        error => this.alertService.error('Impossible de récupérer le document'));
+  }
+
+  getQuoteUrl(fileName: string): Promise<string> {
+    const userId = firebase.auth().currentUser.uid;
+    return firebase.storage().ref('quotes/' + userId + '/' + fileName)
+      .getDownloadURL()
+      .then(url => url,
+        error => this.alertService.error('Impossible de récupérer le document'));
   }
 }
