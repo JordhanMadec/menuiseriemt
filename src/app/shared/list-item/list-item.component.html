@@ -5,8 +5,16 @@
 
   <div class="list-item" fxLayout="row" fxLayoutAlign="space-between center">
     <div>
-      <div class="title">{{title}}</div>
-      <small class="subtitle" [class.red-text]="alert">{{subtitle}}</small>
+      <div fxLayoutAlign="start center">
+        <div class="title">{{title}}</div>
+
+        <div class="tag-list">
+          <ng-container *ngFor="let tag of tags">
+            <div class="tag" [class.dark]="!error && !success" [class.error]="error" [class.success]="success">{{tag}}</div>
+          </ng-container>
+        </div>
+      </div>
+      <small class="subtitle">{{subtitle}}</small>
     </div>
 
     <app-svg-icon name="right-arrow-icon"></app-svg-icon>

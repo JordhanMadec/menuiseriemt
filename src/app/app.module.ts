@@ -52,12 +52,12 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
 import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
-import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
+import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
-import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-invoice/customer-quote.component';
+import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 
 @NgModule({
   declarations: [

@@ -7,7 +7,14 @@
       <div *ngIf="projects; else spinner">
         <div class="projects-list" *ngIf="projects.length; else emptyList">
           <ng-container *ngFor="let project of projects">
-            <app-list-item icon="calendar-icon" [title]="project.title" [subtitle]="project.getStatus()" link="/espace-client/suivi-chantier/{{project.id}}"></app-list-item>
+            <app-list-item icon="calendar-icon"
+                           [title]="project.title"
+                           [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
+                           [tags]="[project.getStatus()]"
+                           [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
+                           [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
+                           link="/espace-client/suivi-chantier/{{project.id}}">
+            </app-list-item>
           </ng-container>
         </div>
 

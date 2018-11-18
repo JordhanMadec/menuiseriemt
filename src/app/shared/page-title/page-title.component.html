@@ -6,6 +6,12 @@
       </div>
 
       <h1 *ngIf="title" class="title">{{title}}</h1>
+
+      <ng-container *ngIf="tags && tags.length">
+        <div class="tag-list">
+          <div class="tag" [class.error]="tagError" [class.success]="tagSuccess" *ngFor="let tag of tags">{{tag}}</div>
+        </div>
+      </ng-container>
     </div>
 
     <div *ngIf="subtitle" class="subtitle">{{subtitle}}</div>

@@ -3,7 +3,11 @@
 
     <div *ngIf="document; else spinner">
 
-      <app-page-title [title]="document?.title" [subtitle]="document?.date" [hasBackButton]="true">
+      <app-page-title [title]="document?.title"
+                      [tags]="[tag]"
+                      [tagError]="!document?.done"
+                      [tagSuccess]="document?.done"
+                      [hasBackButton]="true">
         <a class="my-button accent" [href]="documentUrl" target="_blank" *ngIf="documentUrl">
           Télécharger ma facture
           <app-svg-icon class="button-icon" name="download-icon"></app-svg-icon>
