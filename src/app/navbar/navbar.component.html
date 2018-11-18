@@ -12,11 +12,40 @@
     </div>
 
     <div class="nav-links-container">
+
+      <!-- Notifications -->
+      <span dropdown class="dropdown-container" [hidden]="!isAuthenticated">
+        <a href id="basic-link" class="nav-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+          <app-svg-icon [name]="notifs.length ? 'notif-on-icon' : 'notif-off-icon'"></app-svg-icon>
+        </a>
+
+        <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="basic-link">
+
+            <ng-container *ngIf="notifs.length; else emptyNotifs">
+              <ng-container *ngFor="let notif of notifs">
+                <li [routerLink]="notif.link" class="my-dropdown-item">
+                  <div class="my-dropdown-title">{{notif.text}}</div>
+                  <small class="my-dropdown-subtitle">{{notif.date}}</small>
+                </li>
+              </ng-container>
+            </ng-container>
+
+            <ng-template #emptyNotifs>
+              <li class="my-dropdown-item disabled">Vous n'avez pas de notification</li>
+            </ng-template>
+
+          </ul>
+      </span>
+
+
+      <!-- Espace client -->
       <a class="nav-link" routerLink="/login" *ngIf="isHome">
         <div>Espace Client</div>
         <app-svg-icon class="button-icon" name="user-icon"></app-svg-icon>
       </a>
 
+      <!-- Déconnexion -->
       <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
         <div>Se déconnecter</div>
       </a>

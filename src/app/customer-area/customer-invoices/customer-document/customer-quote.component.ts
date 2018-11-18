@@ -23,6 +23,8 @@ export class CustomerQuoteComponent implements OnInit, OnDestroy {
   private documentId: string;
   public documentUrl: string;
 
+  public tag: string;
+
   constructor(private cd: ChangeDetectorRef,
               private authService: AuthService,
               private databaseService: DatabaseService,
@@ -48,6 +50,7 @@ export class CustomerQuoteComponent implements OnInit, OnDestroy {
         this.databaseService.getUserQuote(this.user.id, this.documentId).then(
           (quote: Quote) => {
             this.document = quote;
+            this.tag = quote.done ? 'Signé' : 'À valider';
             this.cd.detectChanges();
 
             this.storageService.getQuoteUrl(this.document.fileName).then(url => {

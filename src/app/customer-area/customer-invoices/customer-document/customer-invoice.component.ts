@@ -23,6 +23,8 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
   private documentId: string;
   public documentUrl: string;
 
+  public tag: string;
+
   constructor(private cd: ChangeDetectorRef,
               private authService: AuthService,
               private databaseService: DatabaseService,
@@ -48,6 +50,7 @@ export class CustomerInvoiceComponent implements OnInit, OnDestroy {
         this.databaseService.getUserInvoice(this.user.id, this.documentId).then(
           (invoice: Invoice) => {
             this.document = invoice;
+            this.tag = invoice.done ? 'Payée' : 'À payer';
             this.cd.detectChanges();
 
             this.storageService.getInvoiceUrl(this.document.fileName).then(url => {

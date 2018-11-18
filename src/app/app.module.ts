@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { LegalsComponent } from './legals/legals.component';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { DatabaseService } from './services/database.service';
+import { NotificationsService } from './services/notifications.service';
 import { StorageService } from './services/storage.service';
 import { SvgIconsComponent } from './shared/svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './shared/svg-icons/svg-icons-definitions/svg-icons-definitions.component';
@@ -50,12 +52,12 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
 import { AlertMessageComponent } from './alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
-import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-invoice/customer-invoice.component';
+import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
-import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-invoice/customer-quote.component';
+import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +113,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
     AngularFireStorageModule,
     FlexLayoutModule,
     PdfViewerModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     AuthGuard,
@@ -119,6 +122,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
     AlertService,
     DatabaseService,
     StorageService,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })

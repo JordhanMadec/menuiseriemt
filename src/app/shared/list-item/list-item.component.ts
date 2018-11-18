@@ -10,8 +10,10 @@ export class ListItemComponent implements OnInit {
   @Input() icon: string;
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() tags: string[];
   @Input() link: string;
-  @Input() alert = false;
+  @Input() error = false;
+  @Input() success = false;
 
   constructor() { }
 

@@ -11,7 +11,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss",
-          "spec": false,
+          "spec": false
         }
       },
       "architect": {
@@ -28,6 +28,8 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -80,6 +82,8 @@
               "../node_modules/scrollreveal/dist/scrollreveal.js"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.scss"
             ],
             "assets": [

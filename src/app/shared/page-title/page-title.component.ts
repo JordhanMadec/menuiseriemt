@@ -8,8 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PageTitleComponent implements OnInit {
 
-  @Input() title;
-  @Input() subtitle;
+  @Input() title: string;
+  @Input() subtitle: string;
+  @Input() tags: string[];
+  @Input() tagError = false;
+  @Input() tagSuccess = false;
   @Input() hasBackButton = false;
 
   constructor(private location: Location) { }

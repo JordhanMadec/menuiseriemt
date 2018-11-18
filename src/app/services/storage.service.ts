@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import 'firebase/app';
 import { AlertService } from './alert.service';
 
 @Injectable({
