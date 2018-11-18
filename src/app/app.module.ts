@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { LegalsComponent } from './legals/legals.component';
 import { AlertService } from './services/alert.service';
 import { AuthService } from './services/auth.service';
 import { DatabaseService } from './services/database.service';
+import { NotificationsService } from './services/notifications.service';
 import { StorageService } from './services/storage.service';
 import { SvgIconsComponent } from './shared/svg-icons/svg-icons.component';
 import { SvgIconsDefinitionsComponent } from './shared/svg-icons/svg-icons-definitions/svg-icons-definitions.component';
@@ -111,6 +113,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
     AngularFireStorageModule,
     FlexLayoutModule,
     PdfViewerModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     AuthGuard,
@@ -119,6 +122,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
     AlertService,
     DatabaseService,
     StorageService,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })

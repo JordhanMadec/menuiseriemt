@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, HostListener, NgZone, OnDestroy, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Notif } from '../models/notif';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
+import { NotificationsService } from '../services/notifications.service';
 
 declare var $: any;
 
@@ -15,6 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private routerSubscription: Subscription;
   private isAuthenticatedSubscription: Subscription;
+  private hasNotificationSubscription: Subscription;
   private userSubscription: Subscription;
 
   public user: User;
@@ -25,13 +28,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public sidenavVisible = false;
   private smallScreen = false;
 
+  public notifs: Notif[] = [];
+
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
     this.smallScreen = window.matchMedia('(max-width: 992px').matches;
   }
 
-  constructor(public router: Router, private authService: AuthService, private cd: ChangeDetectorRef, private ngZone: NgZone) {
+  constructor(public router: Router,
+              private authService: AuthService,
+              private notificationService: NotificationsService,
+              private cd: ChangeDetectorRef,
+              private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -53,6 +62,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isAuthenticatedSubscription = this.authService.isAuthenticatedEmitter.subscribe(
       res => {
         this.isAuthenticated = res;
+        this.cd.detectChanges();
+      }
+    );
+
+    this.hasNotificationSubscription = this.notificationService.hasNotification.subscribe(
+      (notifs: Notif[]) => {
+        this.notifs = notifs;
+        console.log(notifs);
         this.cd.detectChanges();
       }
     );
@@ -91,6 +108,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
+    }
+    if (this.hasNotificationSubscription) {
+      this.hasNotificationSubscription.unsubscribe();
     }
   }
 }
