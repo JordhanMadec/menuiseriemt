@@ -1,0 +1,9 @@
+@import "../../../../assets/style/variables";
+
+.document-container {
+  margin-top: $big-gap;
+}
+
+.pdfViewer .page {
+  box-shadow: $shadow-light !important;
+}

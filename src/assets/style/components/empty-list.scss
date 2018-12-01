@@ -1,0 +1,13 @@
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $light-grey;
+  font-size: 30px;
+
+  app-svg-icon {
+    fill: $light-grey;
+    margin-bottom: $middle-gap;
+  }
+}

@@ -1,0 +1,35 @@
+@import "../../assets/style/variables";
+@import "../../assets/style/variables";
+
+.login-section {
+  background-image: url("../../assets/img/login-background.jpg");
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  padding-top: $navbar-height;
+}
+
+.login-wrapper {
+  background-color: $white;
+  padding: $big-gap;
+  width: 350px;
+  border-radius: $small-radius;
+
+  .title {
+    color: $green;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.input-container {
+  padding: $small-gap 0;
+}

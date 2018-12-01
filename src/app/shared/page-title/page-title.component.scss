@@ -1,0 +1,33 @@
+@import "../../../assets/style/variables";
+
+.title {
+  margin: 0;
+}
+
+.subtitle {
+  color: $green;
+}
+
+.tag-list {
+  margin-left: $small-gap;
+}
+
+.back-button {
+  cursor: pointer;
+  margin-right: $very-small-gap;
+  outline: none !important;
+  transition: $transition-fast;
+
+  app-svg-icon {
+    fill: $dark-grey;
+    transition: $transition-fast;
+  }
+
+  &:hover {
+    margin-right: $small-gap;
+
+    app-svg-icon {
+      fill: $green;
+    }
+  }
+}

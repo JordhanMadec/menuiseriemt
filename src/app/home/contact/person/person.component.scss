@@ -1,8 +1,7 @@
-@import "../../../../assets/style/colors";
 @import "../../../../assets/style/variables";
 
 .person{
-  border-radius: $radius;
+  border-radius: $middle-radius;
   margin: 16px 0;
   padding: 32px 16px;
   text-align: left;

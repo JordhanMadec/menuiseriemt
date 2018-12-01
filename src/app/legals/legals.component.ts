@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
 declare var $: any;
@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class LegalsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ngZone: NgZone) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -18,7 +18,7 @@ export class LegalsComponent implements OnInit {
 
   goToHome() {
     window.scrollTo(0, 0);
-    this.router.navigate(['']);
+    this.ngZone.run(() => this.router.navigate(['']));
   }
 
 }

@@ -1,0 +1,22 @@
+<div class="list-item-wrapper" fxLayout="row" fxLayoutAlign="start" [routerLink]="link">
+  <div class="list-item-icon">
+    <app-svg-icon [name]="icon"></app-svg-icon>
+  </div>
+
+  <div class="list-item" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <div fxLayoutAlign="start center">
+        <div class="title">{{title}}</div>
+
+        <div class="tag-list">
+          <ng-container *ngFor="let tag of tags">
+            <div class="tag" [class.dark]="!error && !success" [class.error]="error" [class.success]="success">{{tag}}</div>
+          </ng-container>
+        </div>
+      </div>
+      <small class="subtitle">{{subtitle}}</small>
+    </div>
+
+    <app-svg-icon name="right-arrow-icon"></app-svg-icon>
+  </div>
+</div>

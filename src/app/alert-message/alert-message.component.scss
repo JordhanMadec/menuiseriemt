@@ -1,0 +1,34 @@
+@import "../../assets/style/variables";
+
+.alert-message-container {
+  position: fixed;
+  bottom: $middle-gap;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-message-wrapper {
+  background-color: $dark-grey;
+  color: $white;
+  border-radius: $small-radius;
+  padding: $middle-gap;
+  box-shadow: $shadow-strong;
+  margin: $small-gap auto;
+  margin-bottom: 0;
+  display: inline-flex;
+  justify-content: center;
+
+  &.error {
+    background-color: $red;
+  }
+
+  &.info {
+    background-color: $dark-grey;
+  }
+
+  &.success {
+    background-color: $green;
+  }
+}

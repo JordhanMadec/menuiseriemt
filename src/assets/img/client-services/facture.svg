@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:5;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:bevel;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st3{stroke:#000000;stroke-miterlimit:10;}
+	.st4{font-family:'Code-Light';}
+	.st5{font-size:131.7984px;}
+</style>
+<circle class="st0" cx="250" cy="250" r="244"/>
+<g>
+	<line class="st1" x1="170.2" y1="176" x2="329.9" y2="176"/>
+	<line class="st1" x1="170.2" y1="150.1" x2="292.9" y2="150.1"/>
+	<line class="st1" x1="170.2" y1="201.8" x2="329.9" y2="201.8"/>
+	<g>
+		<polygon class="st2" points="309.9,110.2 150.2,110.2 150.2,389.7 349.9,389.7 349.9,150.1 309.9,150.1 		"/>
+		<line class="st1" x1="310.3" y1="109.9" x2="350.2" y2="149.8"/>
+	</g>
+	<text transform="matrix(1 0 0 1 203.5811 344.083)" class="st3 st4 st5">€</text>
+</g>
+</svg>

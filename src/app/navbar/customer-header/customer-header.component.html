@@ -1,0 +1,20 @@
+<div class="sub-nav">
+  <a [class.selected]="selectedNavItem === 'accueil'" routerLink="/espace-client">
+    <app-svg-icon name="home-icon" [size]="20"></app-svg-icon>
+    <div>Accueil</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'factures'" routerLink="/espace-client/factures">
+    <app-svg-icon name="invoice-icon" [size]="20"></app-svg-icon>
+    <div>Mes devis & factures</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'suivi-chantier'" routerLink="/espace-client/suivi-chantier">
+    <app-svg-icon name="calendar-icon" [size]="20"></app-svg-icon>
+    <div>Mes chantiers</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'profil'" routerLink="/espace-client/profil">
+    <app-svg-icon name="user-icon" [size]="20"></app-svg-icon>
+    <div>Informations personnelles</div>
+  </a>
+</div>
+
+
