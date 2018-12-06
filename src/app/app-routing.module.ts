@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import {HomeComponent} from './home/home.component';
@@ -39,6 +41,9 @@ const routes: Routes = [
     ]},
     {path: 'devis/:quoteId', component: CustomerQuoteComponent}
   ]},
+  {path: 'espace-admin', canActivate: [AdminGuard], children: [
+      {path: '', component: AdminHomeComponent},
+    ]},
   // default
   {path: '**', redirectTo: '/'},
 ];

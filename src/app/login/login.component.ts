@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).then(
       res => {
         this.loginFailed = false;
-        this.ngZone.run(() => this.router.navigate(['espace-client']));
       },
       error => {
         console.log('Login error', error);

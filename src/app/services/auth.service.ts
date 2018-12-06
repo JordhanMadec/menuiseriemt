@@ -2,7 +2,7 @@ import { EventEmitter, Injectable, NgZone, OnDestroy, OnInit } from '@angular/co
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
@@ -57,11 +57,12 @@ export class AuthService implements OnInit, OnDestroy {
     );
   }
 
-  refreshCurrentUser() {
-    this.databaseService.getCurrentUser().then(
-      userData => {
+  refreshCurrentUser(): Promise<User> {
+    return this.databaseService.getCurrentUser().then(
+      (userData: User) => {
         this._isAuthenticatedEmitter.emit(true);
         this._currentUser.next(userData);
+        return userData;
       }
     );
   }
@@ -69,17 +70,49 @@ export class AuthService implements OnInit, OnDestroy {
   isAuthenticated(): Observable<boolean> {
     return this.fireAuth.authState.pipe(
       take(1),
-      map(user => user !== null)
+      map(user => {
+        return user !== null;
+      })
     );
+  }
+
+  setAdmin() {
+    const userId = firebase.auth().currentUser.uid;
+    //admin.auth().setCustomUserClaims(userId, {admin: true}).then(() => {
+      // The new custom claims will propagate to the user's ID token the
+      // next time a new one is issued.
+    //});
+  }
+
+  isAdmin(): Promise<boolean> {
+    return firebase.auth().currentUser.getIdTokenResult()
+      .then((idTokenResult) => {
+        if (!!idTokenResult.claims.admin) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((error) => {
+        return false;
+      });
   }
 
   login(email: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
-          this.refreshCurrentUser();
-          this.alertService.success('Bienvenue dans votre espace client !');
-          resolve(res);
+          this.refreshCurrentUser().then((user: User) => {
+            this.alertService.success('Bienvenue dans votre espace client !');
+
+            if (user.isAdmin) {
+              this.ngZone.run(() => this.router.navigate(['espace-admin']));
+            } else {
+              this.ngZone.run(() => this.router.navigate(['espace-client']));
+            }
+
+            resolve(res);
+          });
         }, error => {
           this.alertService.error('Identifiant ou mot de passe incorrect');
           reject(error);

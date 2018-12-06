@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { AboutComponent } from './home/about/about.component';
@@ -58,6 +59,7 @@ import { CustomerProjectComponent } from './customer-area/customer-projects/cust
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
+import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +97,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
     PageTitleComponent,
     ProjectTimelineComponent,
     CustomerQuoteComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +121,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
   providers: [
     AuthGuard,
     NotAuthGuard,
+    AdminGuard,
     AuthService,
     AlertService,
     DatabaseService,

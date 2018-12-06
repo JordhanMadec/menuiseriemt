@@ -69,7 +69,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.hasNotificationSubscription = this.notificationService.hasNotification.subscribe(
       (notifs: Notif[]) => {
         this.notifs = notifs;
-        console.log(notifs);
         this.cd.detectChanges();
       }
     );

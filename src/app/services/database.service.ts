@@ -35,7 +35,8 @@ export class DatabaseService {
         mobilePhone: user.mobilePhone,
         city: user.city,
         zipcode: user.zipcode,
-        address: user.address
+        address: user.address,
+        isAdmin: false,
       })
       .then(
         res => {
