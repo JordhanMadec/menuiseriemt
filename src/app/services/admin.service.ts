@@ -1,11 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
-import { forEach } from '@angular/router/src/utils/collection';
+import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
-import { Observable, of } from 'rxjs';
-import { fromPromise } from 'rxjs-compat/observable/fromPromise';
-import { map, switchMap } from 'rxjs/operators';
-import { Project } from '../models/project';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
@@ -14,33 +9,10 @@ import { DatabaseService } from './database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService implements OnInit{
+export class AdminService {
 
-  private currentUser: User;
-
-  constructor(private alertService: AlertService, private databaseService: DatabaseService, private authService: AuthService) {
+  constructor(private alertService: AlertService) {
   }
-
-  ngOnInit() {
-
-  }
-
-  assertIsAdmin(): Promise<boolean> {
-    return this.databaseService.getCurrentUser().then(
-      (user: User) => {
-        console.log(user);
-        if (user && user.isAdmin) {
-          return true;
-        }
-
-        this.alertService.error('Vous n\'avez pas les droits adlinistrateur');
-        return false;
-      }
-    )
-  }
-
-
-
 
 
 
