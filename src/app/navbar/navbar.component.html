@@ -56,7 +56,13 @@
 
 <div class="main-container">
   <div class="sidenav-container" [class.visible]="isAuthenticated && sidenavVisible">
-    <app-customer-header class="sidenav" [user]="user"></app-customer-header>
+    <ng-container *ngIf="!user?.isAdmin">
+      <app-customer-header class="sidenav" [user]="user"></app-customer-header>
+    </ng-container>
+
+    <ng-container *ngIf="user?.isAdmin">
+      <app-admin-header class="sidenav" [user]="user"></app-admin-header>
+    </ng-container>
   </div>
 
   <div class="page-content" [class.hasSidenav]="isAuthenticated && sidenavVisible">

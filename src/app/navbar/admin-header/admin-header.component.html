@@ -1,0 +1,22 @@
+<div class="sub-nav">
+  <div class="tag success">Admin</div>
+
+  <a [class.selected]="selectedNavItem === 'accueil'" routerLink="/espace-admin">
+    <app-svg-icon name="home-icon" [size]="20"></app-svg-icon>
+    <div>Accueil</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'factures'" routerLink="/espace-admin/factures">
+    <app-svg-icon name="invoice-icon" [size]="20"></app-svg-icon>
+    <div>Devis & factures</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'chantiers'" routerLink="/espace-admin/suivi-chantier">
+    <app-svg-icon name="calendar-icon" [size]="20"></app-svg-icon>
+    <div>Chantiers</div>
+  </a>
+  <a [class.selected]="selectedNavItem === 'clients'" routerLink="/espace-admin/profil">
+    <app-svg-icon name="user-icon" [size]="20"></app-svg-icon>
+    <div>Clients</div>
+  </a>
+</div>
+
+

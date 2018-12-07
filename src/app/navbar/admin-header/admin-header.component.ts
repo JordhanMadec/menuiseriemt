@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 import { User } from '../../models/user';
 
 @Component({
-  selector: 'app-customer-header',
-  templateUrl: './customer-header.component.html',
-  styleUrls: ['./customer-header.component.scss']
+  selector: 'app-admin-header',
+  templateUrl: './admin-header.component.html',
+  styleUrls: ['../customer-header/customer-header.component.scss']
 })
-export class CustomerHeaderComponent implements OnInit, OnDestroy {
+export class AdminHeaderComponent implements OnInit, OnDestroy {
 
   @Input() user: User;
 
@@ -23,17 +23,17 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
       event => {
         this.selectedNavItem = '';
 
-        if (this.router.url.match('^/espace-client$')) {
+        if (this.router.url.match('^/espace-admin')) {
           this.selectedNavItem = 'accueil';
         }
-        if (this.router.url.match('^/espace-client/factures')) {
+        if (this.router.url.match('^/espace-admin/factures')) {
           this.selectedNavItem = 'factures';
         }
-        if (this.router.url.match('^/espace-client/suivi-chantier')) {
-          this.selectedNavItem = 'suivi-chantier';
+        if (this.router.url.match('^/espace-admin/chantiers')) {
+          this.selectedNavItem = 'chantiers';
         }
-        if (this.router.url.match('^/espace-client/profil$')) {
-          this.selectedNavItem = 'profil';
+        if (this.router.url.match('^/espace-admin/clients')) {
+          this.selectedNavItem = 'clients';
         }
 
         this.cd.detectChanges();

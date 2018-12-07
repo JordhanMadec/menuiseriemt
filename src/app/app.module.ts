@@ -60,6 +60,7 @@ import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
+import { AdminHeaderComponent } from './navbar/admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component
     ProjectTimelineComponent,
     CustomerQuoteComponent,
     AdminHomeComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     BrowserModule,
