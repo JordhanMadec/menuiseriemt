@@ -5,6 +5,7 @@
   color: $dark-grey;
   display: inline-block;
   border-radius: $middle-radius;
+  user-select: none !important;
 
   &.success {
     background-color: $green;

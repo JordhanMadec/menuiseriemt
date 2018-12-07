@@ -8,6 +8,7 @@ export class User {
   address: string;
   homePhone: string;
   mobilePhone: string;
+  isAdmin: boolean;
 
   constructor(user: any) {
     this.id = user.id;
@@ -19,6 +20,7 @@ export class User {
     this.address = user.address || '';
     this.homePhone = user.homePhone || '';
     this.mobilePhone = user.mobilePhone || '';
+    this.isAdmin = user.isAdmin || false;
   }
 
   equals(user: User): boolean {
@@ -29,6 +31,7 @@ export class User {
       this.zipcode === user.zipcode &&
       this.address === user.address &&
       this.homePhone === user.homePhone &&
-      this.mobilePhone === user.mobilePhone;
-}
+      this.mobilePhone === user.mobilePhone &&
+      this.isAdmin === user.isAdmin;
+  }
 }

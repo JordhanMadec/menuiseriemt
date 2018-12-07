@@ -2,8 +2,9 @@ import { EventEmitter, Injectable, NgZone, OnDestroy, OnInit } from '@angular/co
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { fromPromise } from 'rxjs-compat/observable/fromPromise';
+import { map, switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { DatabaseService } from './database.service';
@@ -30,12 +31,7 @@ export class AuthService implements OnInit, OnDestroy {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user) {
-          this.databaseService.getCurrentUser().then(
-            userData => {
-              this._isAuthenticatedEmitter.emit(true);
-              this._currentUser.next(userData);
-            }
-          );
+          this.refreshCurrentUser();
         } else {
           this._isAuthenticatedEmitter.emit(false);
           this._currentUser.next(null);
@@ -57,11 +53,12 @@ export class AuthService implements OnInit, OnDestroy {
     );
   }
 
-  refreshCurrentUser() {
-    this.databaseService.getCurrentUser().then(
-      userData => {
+  refreshCurrentUser(): Promise<User> {
+    return this.databaseService.getCurrentUser().then(
+      (userData: User) => {
         this._isAuthenticatedEmitter.emit(true);
         this._currentUser.next(userData);
+        return userData;
       }
     );
   }
@@ -73,13 +70,35 @@ export class AuthService implements OnInit, OnDestroy {
     );
   }
 
+  isAdmin(): Observable<boolean> {
+    return this.isAuthenticated().pipe(
+      take(1),
+      switchMap(() => fromPromise(this.databaseService.getCurrentUser())),
+      map((user: User) => {
+        if (!user || !user.isAdmin) {
+          return false;
+        }
+
+        return true;
+      })
+    );
+  }
+
   login(email: string, password: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
-          this.refreshCurrentUser();
-          this.alertService.success('Bienvenue dans votre espace client !');
-          resolve(res);
+          this.refreshCurrentUser().then((user: User) => {
+            this.alertService.success('Bienvenue dans votre espace client !');
+
+            if (user.isAdmin) {
+              this.ngZone.run(() => this.router.navigate(['espace-admin']));
+            } else {
+              this.ngZone.run(() => this.router.navigate(['espace-client']));
+            }
+
+            resolve(res);
+          });
         }, error => {
           this.alertService.error('Identifiant ou mot de passe incorrect');
           reject(error);
