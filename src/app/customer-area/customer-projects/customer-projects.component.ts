@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Project, ProjectStatus } from '../../models/project';
+import { Project } from '../../models/project';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';

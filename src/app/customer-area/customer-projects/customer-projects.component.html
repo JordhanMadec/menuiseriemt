@@ -5,7 +5,7 @@
       <app-page-title title="Suivi de mes chantiers"></app-page-title>
 
       <div *ngIf="projects; else spinner">
-        <div class="projects-list" *ngIf="projects.length; else emptyList">
+        <div class="list-container" *ngIf="projects.length; else emptyList">
           <ng-container *ngFor="let project of projects">
             <app-list-item icon="calendar-icon"
                            [title]="project.title"
@@ -19,7 +19,7 @@
         </div>
 
         <ng-template #emptyList>
-          <div class="projects-list empty-list">
+          <div class="list-container empty-list">
             <app-svg-icon name="calendar-icon" [size]="200"></app-svg-icon>
             Vous n'avez pas de chantier pour le moment
           </div>

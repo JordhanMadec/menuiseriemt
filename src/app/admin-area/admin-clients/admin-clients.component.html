@@ -1,3 +1,31 @@
-<p>
-  admin-clients works!
-</p>
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+  <div class="container">
+
+    <div>
+      <app-page-title title="Clients"></app-page-title>
+
+      <div *ngIf="users; else spinner">
+        <div class="list-container" *ngIf="users.length; else emptyList">
+          <ng-container *ngFor="let user of users">
+            <app-list-item icon="user-icon"
+                           [title]="user.firstName + ' ' + user.lastName"
+                           [subtitle]="user.email"
+                           link="/espace-admin/fiche-client/{{user.id}}">
+            </app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyList>
+          <div class="list-container empty-list">
+            <app-svg-icon name="calendar-icon" [size]="200"></app-svg-icon>
+            Vous n'avez pas de client pour le moment
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>

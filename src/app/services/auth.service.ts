@@ -17,6 +17,7 @@ export class AuthService implements OnInit, OnDestroy {
   private firebaseUser: Observable<firebase.User>;
   private _currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
+
   private userSubscription: Subscription;
 
   private _isAuthenticatedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
