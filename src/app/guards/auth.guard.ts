@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
       map(user => {
         if (!user) {
           this.ngZone.run(() => this.router.navigate(['login']));
-          return false;
         }
 
         return true;

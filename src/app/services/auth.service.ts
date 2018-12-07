@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { fromPromise } from 'rxjs-compat/observable/fromPromise';
+import { map, switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { DatabaseService } from './database.service';
@@ -30,12 +31,7 @@ export class AuthService implements OnInit, OnDestroy {
     firebase.auth().onAuthStateChanged(
       user => {
         if (user) {
-          this.databaseService.getCurrentUser().then(
-            userData => {
-              this._isAuthenticatedEmitter.emit(true);
-              this._currentUser.next(userData);
-            }
-          );
+          this.refreshCurrentUser();
         } else {
           this._isAuthenticatedEmitter.emit(false);
           this._currentUser.next(null);
@@ -70,32 +66,22 @@ export class AuthService implements OnInit, OnDestroy {
   isAuthenticated(): Observable<boolean> {
     return this.fireAuth.authState.pipe(
       take(1),
-      map(user => {
-        return user !== null;
-      })
+      map(user => user !== null)
     );
   }
 
-  setAdmin() {
-    const userId = firebase.auth().currentUser.uid;
-    //admin.auth().setCustomUserClaims(userId, {admin: true}).then(() => {
-      // The new custom claims will propagate to the user's ID token the
-      // next time a new one is issued.
-    //});
-  }
-
-  isAdmin(): Promise<boolean> {
-    return firebase.auth().currentUser.getIdTokenResult()
-      .then((idTokenResult) => {
-        if (!!idTokenResult.claims.admin) {
-          return true;
-        } else {
+  isAdmin(): Observable<boolean> {
+    return this.isAuthenticated().pipe(
+      take(1),
+      switchMap(() => fromPromise(this.databaseService.getCurrentUser())),
+      map((user: User) => {
+        if (!user || !user.isAdmin) {
           return false;
         }
+
+        return true;
       })
-      .catch((error) => {
-        return false;
-      });
+    );
   }
 
   login(email: string, password: string): Promise<any> {

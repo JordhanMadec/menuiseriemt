@@ -15,7 +15,6 @@ export class NotAuthGuard implements CanActivate {
       map(user => {
         if (user) {
           this.ngZone.run(() => this.router.navigate(['espace-client']));
-          return false;
         }
 
         return true;

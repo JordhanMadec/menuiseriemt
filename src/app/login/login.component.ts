@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
         this.loginFailed = false;
       },
       error => {
-        console.log('Login error', error);
         this.loginFailed = true;
         return null
       }
