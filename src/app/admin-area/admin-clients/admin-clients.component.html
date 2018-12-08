@@ -10,6 +10,8 @@
             <app-list-item icon="user-icon"
                            [title]="user.firstName + ' ' + user.lastName"
                            [subtitle]="user.email"
+                           [tags]="user.isAdmin ? ['Admin'] : []"
+                           [success]="user.isAdmin"
                            link="/espace-admin/fiche-client/{{user.id}}">
             </app-list-item>
           </ng-container>
