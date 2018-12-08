@@ -49,7 +49,6 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
 
     this.adminService.getUser(customerId).then(
       (user: User) => {
-        console.log(user);
         this.user = user;
         this.profileForm = new UserProfileValidator(this.fb, user).userProfileValidator;
         this.asChanged = false;
@@ -107,6 +106,21 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
         this.updateLoading = false;
       }
     );
+  }
+
+  deleteUser() {
+    if (!this.user) {
+      return;
+    }
+
+    this.updateLoading = true;
+
+    this.adminService.deleteUser(this.user.id).then(res => {
+      this.updateLoading = false;
+      this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
+    }, error => {
+      this.updateLoading = false;
+    })
   }
 
   ngOnDestroy() {

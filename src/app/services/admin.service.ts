@@ -93,8 +93,7 @@ export class AdminService {
   }
 
   private createUser(user: User): Promise<string> { // Return user uid
-    const config = environment.firebase;
-    const tempFb = firebase.initializeApp(config, 'Temporary App');
+    const tempFb = firebase.initializeApp(environment.firebase, 'Temporary App');
 
     return tempFb.auth().createUserWithEmailAndPassword(user.email, this.generatePassword()).then(firebaseUser => {
       this.alertService.success('Client créé avec succès');
@@ -103,13 +102,10 @@ export class AdminService {
       return firebaseUser.user.uid;
     }, error => {
       this.alertService.error('Impossible de créer le client');
+      tempFb.delete();
       return null;
     });
   }
-
-
-
-
 
   private generatePassword(): string {
     const chars = '0123456789abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ';

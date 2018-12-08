@@ -74,7 +74,7 @@
         <div class="input-container row-center">
           <div class="input-wrapper">
             <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
-              <button class="my-button error" *ngIf="user">
+              <button class="my-button error" *ngIf="user" (click)="deleteUser()">
                 Supprimer
               </button>
 
