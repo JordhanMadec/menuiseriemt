@@ -46,7 +46,7 @@
       <div class="project-subsection">
         <h4 class="green-text">Devis</h4>
 
-        <div class="invoices-list" *ngIf="quotes?.length; else emptyQuotes">
+        <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
           <ng-container *ngFor="let quote of quotes">
             <app-list-item icon="invoice-icon"
                            [title]="quote.title"
@@ -60,7 +60,7 @@
         </div>
 
         <ng-template #emptyQuotes>
-          <div class="invoices-list empty-list">
+          <div class="list-container empty-list">
             <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
             Pas encore de devis
           </div>
@@ -70,7 +70,7 @@
       <div class="project-subsection">
         <h4 class="green-text">Factures</h4>
 
-        <div class="invoices-list" *ngIf="invoices?.length; else emptyInvoices">
+        <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
           <ng-container *ngFor="let invoice of invoices">
             <app-list-item icon="invoice-icon"
                            [title]="invoice.title"
@@ -84,7 +84,7 @@
         </div>
 
         <ng-template #emptyInvoices>
-          <div class="invoices-list empty-list">
+          <div class="list-container empty-list">
             <app-svg-icon name="invoice-icon" [size]="200"></app-svg-icon>
             Pas encore de facture
           </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
@@ -43,7 +44,8 @@ const routes: Routes = [
   ]},
   {path: 'espace-admin', canActivate: [AdminGuard], children: [
       {path: '', component: AdminHomeComponent},
-    ]},
+      {path: 'clients', component: AdminClientsComponent},
+  ]},
   // default
   {path: '**', redirectTo: '/'},
 ];

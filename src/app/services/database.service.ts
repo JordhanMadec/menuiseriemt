@@ -50,6 +50,14 @@ export class DatabaseService {
     });
   }
 
+
+
+
+
+
+
+  // INVOICES & QUOTES
+
   getUserInvoices(userId: string): Promise<Invoice[]> {
     const invoices: Invoice[] = [];
 
@@ -112,6 +120,32 @@ export class DatabaseService {
       });
   }
 
+  getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
+    return this.getUserInvoices(userId).then(
+      (_invoices: Invoice[]) => _invoices.filter(invoice => invoice.projectId + '' === projectId)
+    )
+  }
+
+  getProjectQuotes(userId: string, projectId: string): Promise<Quote[]> {
+    return this.getUserQuotes(userId).then(
+      (_quotes: Quote[]) => _quotes.filter(quote => quote.projectId + '' === projectId)
+    )
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // PROJECTS
+
   getUserProjects(userId: string): Promise<Project[]> {
     const projects: Project[] = [];
 
@@ -141,17 +175,5 @@ export class DatabaseService {
         this.alertService.error('Impossible de récupérer le chantier');
         return null;
       });
-  }
-
-  getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
-    return this.getUserInvoices(userId).then(
-      (_invoices: Invoice[]) => _invoices.filter(invoice => invoice.projectId + '' === projectId)
-    )
-  }
-
-  getProjectQuotes(userId: string, projectId: string): Promise<Quote[]> {
-    return this.getUserQuotes(userId).then(
-      (_quotes: Quote[]) => _quotes.filter(quote => quote.projectId + '' === projectId)
-    )
   }
 }
