@@ -1,0 +1,70 @@
+<section id="customer-profile-section">
+  <div class="container">
+
+    <div *ngIf="user; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+      <app-page-title
+        [title]="user?.firstName + ' ' + user?.lastName"
+        [tags]="user.isAdmin ? ['Admin'] : []"
+        [tagSuccess]="user.isAdmin"
+        [hasBackButton]="true">
+      </app-page-title>
+
+      <h5 class="input-setcion-title">Contact</h5>
+
+      <div class="field-wrapper">
+        <div class="tag field-label">
+          <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.email}}
+      </div>
+
+      <div class="field-wrapper" *ngIf="user.homePhone">
+        <div class="tag field-label">
+          <app-svg-icon name="phone-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.homePhone}}
+      </div>
+
+      <div class="field-wrapper" *ngIf="user.mobilePhone">
+        <div class="tag field-label">
+          <app-svg-icon name="mobile-phone-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.mobilePhone}}
+      </div>
+
+      <br>
+
+      <h5 class="input-setcion-title">Adresse</h5>
+
+      <div class="field-wrapper">
+        <div class="tag field-label">
+          <app-svg-icon name="pin-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.address}}
+      </div>
+
+      <div class="field-wrapper">
+        <div class="tag field-label">
+          <app-svg-icon name="city-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.city}}
+      </div>
+
+      <div class="field-wrapper">
+        <div class="tag field-label">
+          <app-svg-icon name="zipcode-icon" [size]="20"></app-svg-icon>
+        </div>
+        {{user.zipcode}}
+      </div>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>
+
+<button class="circle-button fab-button accent" [routerLink]="'/espace-admin/clients/modifier-client/' + user?.id">
+  <app-svg-icon name="edit-icon"></app-svg-icon>
+</button>

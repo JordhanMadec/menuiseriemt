@@ -16,7 +16,6 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
   public user: User;
   public profileForm: FormGroup;
 
-  private userSubscription: Subscription;
   private formChangesSubscription: Subscription;
 
   public asChanged = false;
@@ -100,7 +99,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
           this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
         }
 
-        this.fetchCustomer();
+        this.ngZone.run(() => this.router.navigate(['/espace-admin/clients/fiche-client/' + this.user.id]));
       },
       error => {
         this.updateLoading = false;
@@ -124,9 +123,6 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
     if (this.formChangesSubscription) {
       this.formChangesSubscription.unsubscribe();
     }

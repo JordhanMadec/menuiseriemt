@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
+import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
 import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
       {path: '', component: AdminHomeComponent},
       {path: 'clients', children: [
           {path: '', component: AdminClientsComponent},
+          {path: 'fiche-client/:customerId', component: ClientDetailComponent},
           {path: 'modifier-client/:customerId', component: ClientWizardComponent},
           {path: 'nouveau-client', component: ClientWizardComponent},
       ]},
