@@ -74,9 +74,9 @@
         <div class="input-container row-center">
           <div class="input-wrapper">
             <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
-              <button class="my-button error" *ngIf="user" (click)="deleteUser()">
+             <!-- <button class="my-button error" *ngIf="user" (click)="deleteUser()">
                 Supprimer
-              </button>
+              </button>-->
 
               <button class="my-button accent" type="submit" [disabled]="(user && (!profileForm.valid || !asChanged)) || !profileForm.valid">
                 Enregistrer
