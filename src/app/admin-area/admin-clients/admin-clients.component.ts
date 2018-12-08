@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
 import { AuthService } from '../../services/auth.service';
@@ -10,9 +8,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './admin-clients.component.html',
   styleUrls: ['./admin-clients.component.scss']
 })
-export class AdminClientsComponent implements OnInit, OnDestroy {
-  public user: User;
-  private userSubscription: Subscription;
+export class AdminClientsComponent implements OnInit {
 
   public users: User[];
 
@@ -30,11 +26,5 @@ export class AdminClientsComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       }
     );
-  }
-
-  ngOnDestroy() {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
   }
 }

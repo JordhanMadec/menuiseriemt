@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
 import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
+import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
@@ -49,6 +50,9 @@ const routes: Routes = [
           {path: '', component: AdminClientsComponent},
           {path: 'modifier-client/:customerId', component: ClientWizardComponent},
           {path: 'nouveau-client', component: ClientWizardComponent},
+      ]},
+      {path: 'chantiers', children: [
+          {path: '', component: AdminProjectsComponent},
       ]},
   ]},
   // default
