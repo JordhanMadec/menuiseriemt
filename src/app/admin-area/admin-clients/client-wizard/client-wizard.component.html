@@ -1,0 +1,98 @@
+<section id="customer-profile-section">
+  <div class="container">
+
+    <div *ngIf="!loading; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+      <app-page-title [title]="user ? 'Modifier client' : 'Nouveau client'" [hasBackButton]="true"></app-page-title>
+
+      <small>Les champs avec une astérisque (*) sont obligatoires.</small>
+
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="contact">
+          <h5 class="input-setcion-title">Contact</h5>
+
+          <div class="input-container row">
+            <div class="input-wrapper col-lg-6">
+              <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
+              <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+            </div>
+
+            <div class="input-wrapper col-lg-6">
+              <input id="lastName" type="text" placeholder="Nom*" formControlName="lastName">
+              <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+            </div>
+
+            <div class="input-wrapper col-lg-12">
+              <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email">
+              <app-svg-icon class="input-icon" name="email-icon" [size]="20"></app-svg-icon>
+              <div class="input-hint error" *ngIf="profileForm.get('contact').get('email').hasError('email')">
+                Le format attendu est example@mail.com
+              </div>
+            </div>
+
+            <div class="input-wrapper col-lg-6">
+              <input id="homePhone" type="text" placeholder="Téléphone domicile" formControlName="homePhone">
+              <app-svg-icon class="input-icon" name="phone-icon" [size]="20"></app-svg-icon>
+              <div class="input-hint error" *ngIf="profileForm.get('contact').get('homePhone').hasError('pattern')">
+                Le format attendu est XX XX XX XX XX
+              </div>
+            </div>
+
+            <div class="input-wrapper col-lg-6">
+              <input id="mobilePhone" type="text" placeholder="Téléphone portable" formControlName="mobilePhone">
+              <app-svg-icon class="input-icon" name="mobile-phone-icon" [size]="20"></app-svg-icon>
+              <div class="input-hint error" *ngIf="profileForm.get('contact').get('mobilePhone').hasError('pattern')">
+                Le format attendu est XX XX XX XX XX
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div formGroupName="addressFields">
+          <h5 class="input-setcion-title">Adresse</h5>
+
+          <div class="input-container row">
+            <div class="input-wrapper col-lg-6">
+              <input id="city" type="text" placeholder="Ville*" formControlName="city">
+              <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
+            </div>
+
+            <div class="input-wrapper col-lg-6">
+              <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode">
+              <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
+              <div class="input-hint error" *ngIf="profileForm.get('addressFields').get('zipcode').hasError('pattern')">
+                Doit contenir 5 chiffres
+              </div>
+            </div>
+
+            <div class="input-wrapper col-lg-12">
+              <input id="address" type="text" placeholder="Adresse*" formControlName="address">
+              <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-container row-center">
+          <div class="input-wrapper">
+            <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+             <!-- <button class="my-button error" *ngIf="user" (click)="deleteUser()">
+                Supprimer
+              </button>-->
+
+              <button class="my-button accent" type="submit" [disabled]="(user && (!profileForm.valid || !asChanged)) || !profileForm.valid">
+                Enregistrer
+              </button>
+            </div>
+
+            <ng-template #buttonSpinner>
+              <app-spinner [size]="30"></app-spinner>
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>

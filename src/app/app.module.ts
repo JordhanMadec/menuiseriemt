@@ -62,6 +62,7 @@ import { CustomerQuoteComponent } from './customer-area/customer-invoices/custom
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminHeaderComponent } from './navbar/admin-header/admin-header.component';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
+import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.
     AdminHomeComponent,
     AdminHeaderComponent,
     AdminClientsComponent,
+    ClientWizardComponent,
   ],
   imports: [
     BrowserModule,

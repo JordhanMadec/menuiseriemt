@@ -9,6 +9,7 @@ button {
   padding: $small-gap;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 100%;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +69,8 @@ a.my-button, a.my-button:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
-.my-button.accent {
+.my-button.accent,
+.circle-button.accent {
   background-color: $green;
   color: $white;
 
@@ -77,12 +79,23 @@ a.my-button, a.my-button:hover {
   }
 }
 
-.my-button.primary {
+.my-button.primary,
+.circle-button.primary {
   background-color: $black;
   color: $white;
 
   app-svg-icon.button-icon, .button-icon {
     fill: $green;
+  }
+}
+
+.my-button.error,
+.circle-button.error {
+  background-color: $red;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $white;
   }
 }
 
@@ -110,5 +123,24 @@ a.my-button, a.my-button:hover {
   .circle-button {
     height: 40px;
     width: 40px;
+  }
+}
+
+.fab-button {
+  position: fixed;
+  bottom: $middle-gap;
+  right: $middle-gap;
+  animation-duration: $transition-fast;
+  animation-name: popin;
+}
+
+
+@keyframes popin {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
   }
 }

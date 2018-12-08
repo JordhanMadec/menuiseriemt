@@ -1,4 +1,4 @@
-<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', delay: 100, distance: '300px', duration: 500}">
   <div class="container">
 
     <div>
@@ -12,7 +12,7 @@
                            [subtitle]="user.email"
                            [tags]="user.isAdmin ? ['Admin'] : []"
                            [success]="user.isAdmin"
-                           link="/espace-admin/fiche-client/{{user.id}}">
+                           link="modifier-client/{{user.id}}">
             </app-list-item>
           </ng-container>
         </div>
@@ -31,3 +31,7 @@
     </div>
   </div>
 </section>
+
+<button class="circle-button fab-button accent" routerLink="nouveau-client">
+  <app-svg-icon name="add-icon"></app-svg-icon>
+</button>
