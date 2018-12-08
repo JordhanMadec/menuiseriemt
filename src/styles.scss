@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/style/variables";
 @import "assets/style/components";
-@import url('https://fonts.googleapis.com/css?family=Quicksand|Julius+Sans+One|Nanum+Gothic');
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Nanum+Gothic|Exo');
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/bootstrap';
 
 html, body{
   color: $black;
-  font-family: 'Nanum Gothic', 'Quicksand';
+  font-family: 'Nanum Gothic';
   overflow-x: hidden;
   position: relative;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Julius Sans One';
+  font-family: 'Exo', 'Julius Sans One';
 }
 
 a, a:hover, a:visited{
