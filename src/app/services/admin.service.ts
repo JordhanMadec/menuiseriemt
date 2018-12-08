@@ -36,4 +36,16 @@ export class AdminService {
         });
   }
 
+  getUser(userId: string): Promise<User> {
+    return firebase.database()
+      .ref('/users/' + userId)
+      .once('value')
+      .then(user => {
+        return new User(user.val());
+      }, error => {
+        this.alertService.error('Impossible de récupérer le client');
+        return null;
+      });
+  }
+
 }
