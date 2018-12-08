@@ -2,7 +2,7 @@
   <div class="container">
 
     <div *ngIf="!loading; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
-      <app-page-title [title]="user ? 'Modifier client' : 'Nouveau client'"></app-page-title>
+      <app-page-title [title]="user ? 'Modifier client' : 'Nouveau client'" [hasBackButton]="true"></app-page-title>
 
       <small>Les champs avec une astérisque (*) sont obligatoires.</small>
 
@@ -73,9 +73,15 @@
 
         <div class="input-container row-center">
           <div class="input-wrapper">
-            <button class="my-button accent" type="submit" *ngIf="!updateLoading; else buttonSpinner" [disabled]="!profileForm.valid || !asChanged">
-              Enregistrer
-            </button>
+            <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+              <button class="my-button error" *ngIf="user">
+                Supprimer
+              </button>
+
+              <button class="my-button accent" type="submit" [disabled]="(user && (!profileForm.valid || !asChanged)) || !profileForm.valid">
+                Enregistrer
+              </button>
+            </div>
 
             <ng-template #buttonSpinner>
               <app-spinner [size]="30"></app-spinner>

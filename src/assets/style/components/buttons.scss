@@ -89,6 +89,16 @@ a.my-button, a.my-button:hover {
   }
 }
 
+.my-button.error,
+.circle-button.error {
+  background-color: $red;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $white;
+  }
+}
+
 .icon-button {
   height: 40px;
   width: 40px;

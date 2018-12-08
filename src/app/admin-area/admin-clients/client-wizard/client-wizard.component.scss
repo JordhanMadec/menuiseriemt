@@ -1,0 +1,13 @@
+@import "../../../../assets/style/variables";
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: -$small-gap;
+
+  .my-button {
+    margin: $small-gap;
+  }
+}

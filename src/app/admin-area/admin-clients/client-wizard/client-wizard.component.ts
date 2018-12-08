@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -28,6 +28,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
     private adminService: AdminService,
     private cd: ChangeDetectorRef,
     private fb: FormBuilder,
+    private ngZone: NgZone,
     private route: ActivatedRoute) {
     this.profileForm = new UserProfileValidator(this.fb).userProfileValidator;
   }
@@ -68,7 +69,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
 
   private getUserFromForm(): User {
     const user = {
-      id: this.user.id,
+      id: this.user ? this.user.id : null,
       firstName: this.profileForm.get('contact').get('firstName').value,
       lastName: this.profileForm.get('contact').get('lastName').value,
       email: this.profileForm.get('contact').get('email').value,
@@ -82,20 +83,30 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (!this.asChanged || !this.profileForm.valid) {
-      return
+    if (this.user && (!this.asChanged || !this.profileForm.valid)) {
+      return;
+    }
+
+    if (!this.profileForm.valid) {
+      return;
     }
 
     this.updateLoading = true;
 
-    /*this.databaseService.createOrUpdateUser(this.getUserFromForm()).then(
+    this.adminService.createOrUpdateUser(this.getUserFromForm()).then(
       res => {
-        this.authService.refreshCurrentUser();
+        this.updateLoading = false;
+
+        if (!this.user) {
+          this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
+        }
+
+        this.fetchCustomer();
       },
       error => {
         this.updateLoading = false;
       }
-    );*/
+    );
   }
 
   ngOnDestroy() {
