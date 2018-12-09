@@ -14,10 +14,32 @@
         </a>
       </app-page-title>
 
-      <div class="subsection">
-        <h4 class="green-text">Chantier</h4>
+      <div class="row">
+        <div class="subsection col-lg-6" *ngIf="isAdmin">
+          <h4 class="green-text">Client</h4>
 
-        <div class="list-container" *ngIf="project; else emptyProjects">
+          <div class="list-container" *ngIf="user; else noUser">
+            <app-list-item icon="user-icon"
+                           [title]="user?.firstName + ' ' + user?.lastName"
+                           [subtitle]="user?.email"
+                           [tags]="user?.isAdmin ? ['Admin'] : []"
+                           [success]="user.isAdmin"
+                           link="/espace-admin/clients/{{user?.id}}">
+            </app-list-item>
+          </div>
+
+          <ng-template #noUser>
+            <div class="list-container empty-list">
+              <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+              Pas de client
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="subsection" [class.col-lg-6]="isAdmin" [class.col-lg-12]="!isAdmin">
+          <h4 class="green-text">Chantier</h4>
+
+          <div class="list-container" *ngIf="project; else emptyProjects">
             <app-list-item icon="calendar-icon"
                            [title]="project.title"
                            [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
@@ -26,28 +48,29 @@
                            [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
                            link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">
             </app-list-item>
+          </div>
+
+          <ng-template #emptyProjects>
+            <div class="list-container empty-list">
+              <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+              Pas de chantier
+            </div>
+          </ng-template>
         </div>
 
-        <ng-template #emptyProjects>
-          <div class="list-container empty-list">
-            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
-            Pas de chantier
+
+        <div class="subsection col-lg-12">
+          <h4 class="green-text">Document</h4>
+
+          <div class="document-container">
+            <div *ngIf="documentUrl; else documentSpinner">
+              <pdf-viewer [src]="documentUrl"></pdf-viewer>
+            </div>
+
+            <ng-template #documentSpinner>
+              <app-spinner></app-spinner>
+            </ng-template>
           </div>
-        </ng-template>
-      </div>
-
-
-      <div class="subsection">
-        <h4 class="green-text">Document</h4>
-
-        <div class="document-container">
-          <div *ngIf="documentUrl; else documentSpinner">
-            <pdf-viewer [src]="documentUrl"></pdf-viewer>
-          </div>
-
-          <ng-template #documentSpinner>
-            <app-spinner></app-spinner>
-          </ng-template>
         </div>
       </div>
 

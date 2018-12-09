@@ -9,8 +9,8 @@
           <app-project-timeline [project]="project"></app-project-timeline>
         </div>
 
-        <div class="row subsection project-info">
-          <div class="col-lg-6">
+        <div class="row project-info">
+          <div class="col-lg-6 subsection">
             <h4 class="green-text">Adresse</h4>
 
             <div class="field-wrapper">
@@ -35,7 +35,7 @@
             </div>
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-6 subsection">
             <h4 class="green-text">Informations</h4>
 
             <div class="field-wrapper">
@@ -70,76 +70,77 @@
               {{project?.notes}}
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="subsection" *ngIf="isAdmin">
-        <h4 class="green-text">Client</h4>
+          <div class="subsection col-lg-12" *ngIf="isAdmin">
+            <h4 class="green-text">Client</h4>
 
-        <div class="list-container" *ngIf="user; else noUser">
-          <app-list-item icon="user-icon"
-                         [title]="user?.firstName + ' ' + user?.lastName"
-                         [subtitle]="user?.email"
-                         [tags]="user?.isAdmin ? ['Admin'] : []"
-                         [success]="user.isAdmin"
-                         link="/espace-admin/clients/{{user?.id}}">
-          </app-list-item>
-        </div>
+            <div class="list-container" *ngIf="user; else noUser">
+              <app-list-item icon="user-icon"
+                             [title]="user?.firstName + ' ' + user?.lastName"
+                             [subtitle]="user?.email"
+                             [tags]="user?.isAdmin ? ['Admin'] : []"
+                             [success]="user.isAdmin"
+                             link="/espace-admin/clients/{{user?.id}}">
+              </app-list-item>
+            </div>
 
-        <ng-template #noUser>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Pas de client
+            <ng-template #noUser>
+              <div class="list-container empty-list">
+                <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+                Pas de client
+              </div>
+            </ng-template>
           </div>
-        </ng-template>
-      </div>
 
-      <div class="subsection">
-        <h4 class="green-text">Devis</h4>
+          <div class="subsection col-lg-6">
+            <h4 class="green-text">Devis</h4>
 
-        <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
-          <ng-container *ngFor="let quote of quotes">
-            <app-list-item icon="invoice-icon"
-                           [title]="quote?.title"
-                           [subtitle]="quote?.date"
-                           [tags]="quote?.done ? ['Signé'] : ['À valider']"
-                           [error]="!quote?.done"
-                           [success]="quote?.done"
-                           [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + quote?.id">
-            </app-list-item>
-          </ng-container>
-        </div>
+            <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
+              <ng-container *ngFor="let quote of quotes">
+                <app-list-item icon="invoice-icon"
+                               [title]="quote?.title"
+                               [subtitle]="quote?.date"
+                               [tags]="quote?.done ? ['Signé'] : ['À valider']"
+                               [error]="!quote?.done"
+                               [success]="quote?.done"
+                               [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + quote?.id">
+                </app-list-item>
+              </ng-container>
+            </div>
 
-        <ng-template #emptyQuotes>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Pas encore de devis
+            <ng-template #emptyQuotes>
+              <div class="list-container empty-list">
+                <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+                Pas encore de devis
+              </div>
+            </ng-template>
           </div>
-        </ng-template>
-      </div>
 
-      <div class="subsection">
-        <h4 class="green-text">Factures</h4>
+          <div class="subsection col-lg-6">
+            <h4 class="green-text">Factures</h4>
 
-        <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
-          <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon"
-                           [title]="invoice?.title"
-                           [subtitle]="invoice?.date"
-                           [tags]="invoice?.done ? ['Payée'] : ['À payer']"
-                           [error]="!invoice?.done"
-                           [success]="invoice?.done"
-                           [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + invoice?.id">
-            </app-list-item>
-          </ng-container>
-        </div>
+            <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
+              <ng-container *ngFor="let invoice of invoices">
+                <app-list-item icon="invoice-icon"
+                               [title]="invoice?.title"
+                               [subtitle]="invoice?.date"
+                               [tags]="invoice?.done ? ['Payée'] : ['À payer']"
+                               [error]="!invoice?.done"
+                               [success]="invoice?.done"
+                               [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + invoice?.id">
+                </app-list-item>
+              </ng-container>
+            </div>
 
-        <ng-template #emptyInvoices>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Pas encore de facture
+            <ng-template #emptyInvoices>
+              <div class="list-container empty-list">
+                <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+                Pas encore de facture
+              </div>
+            </ng-template>
           </div>
-        </ng-template>
+
+        </div>
       </div>
 
     </div>
