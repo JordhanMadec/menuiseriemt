@@ -90,8 +90,6 @@ export class AuthService implements OnInit, OnDestroy {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
           this.refreshCurrentUser().then((user: User) => {
-            this.alertService.success('Bienvenue dans votre espace client !');
-
             if (user.isAdmin) {
               this.ngZone.run(() => this.router.navigate(['espace-admin']));
             } else {

@@ -10,8 +10,8 @@
       </app-page-title>
 
       <div class="row">
-        <div class="col-lg-6">
-          <h4 class="input-setcion-title">Contact</h4>
+        <div class="col-lg-6 subsection">
+          <h4 class="green-text">Contact</h4>
 
           <div class="field-wrapper">
             <div class="tag field-label">
@@ -37,8 +37,8 @@
 
         <br>
 
-        <div class="col-lg-6">
-          <h4 class="input-setcion-title">Adresse</h4>
+        <div class="col-lg-6 subsection">
+          <h4 class="green-text">Adresse</h4>
 
           <div class="field-wrapper">
             <div class="tag field-label">
@@ -61,87 +61,89 @@
             {{user?.zipcode}}
           </div>
         </div>
-      </div>
 
 
-      <div class="customer-subsection">
-        <h4 class="green-text">Chantiers</h4>
 
-        <div class="list-container" *ngIf="projects?.length; else emptyProjects">
-          <ng-container *ngFor="let project of projects">
-            <app-list-item icon="calendar-icon"
-                           [title]="project.title"
-                           [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
-                           [tags]="[project.getStatus()]"
-                           [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
-                           [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
-                           link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">
-            </app-list-item>
-          </ng-container>
+
+        <div class="subsection col-lg-12">
+          <h4 class="green-text">Chantiers</h4>
+
+          <div class="list-container" *ngIf="projects?.length; else emptyProjects">
+            <ng-container *ngFor="let project of projects">
+              <app-list-item icon="calendar-icon"
+                             [title]="project.title"
+                             [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
+                             [tags]="[project.getStatus()]"
+                             [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
+                             [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
+                             link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">
+              </app-list-item>
+            </ng-container>
+          </div>
+
+          <ng-template #emptyProjects>
+            <div class="list-container empty-list">
+              <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+              Pas encore de chantier
+            </div>
+          </ng-template>
         </div>
 
-        <ng-template #emptyProjects>
-          <div class="list-container empty-list">
-            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
-            Pas encore de chantier
+
+
+
+        <div class="subsection col-lg-6">
+          <h4 class="green-text">Devis</h4>
+
+          <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
+            <ng-container *ngFor="let quote of quotes">
+              <app-list-item icon="invoice-icon"
+                             [title]="quote.title"
+                             [subtitle]="quote.date"
+                             [tags]="quote.done ? ['Signé'] : ['À valider']"
+                             [error]="!quote.done"
+                             [success]="quote.done"
+                             link="/espace-admin/devis/{{user.id}}/{{quote.id}}">
+              </app-list-item>
+            </ng-container>
           </div>
-        </ng-template>
-      </div>
 
-
-
-
-      <div class="customer-subsection">
-        <h4 class="green-text">Devis</h4>
-
-        <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
-          <ng-container *ngFor="let quote of quotes">
-            <app-list-item icon="invoice-icon"
-                           [title]="quote.title"
-                           [subtitle]="quote.date"
-                           [tags]="quote.done ? ['Signé'] : ['À valider']"
-                           [error]="!quote.done"
-                           [success]="quote.done"
-                           link="/espace-admin/devis/{{user.id}}/{{quote.id}}">
-            </app-list-item>
-          </ng-container>
+          <ng-template #emptyQuotes>
+            <div class="list-container empty-list">
+              <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+              Pas encore de devis
+            </div>
+          </ng-template>
         </div>
 
-        <ng-template #emptyQuotes>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Pas encore de devis
+
+
+
+        <div class="subsection col-lg-6">
+          <h4 class="green-text">Factures</h4>
+
+          <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
+            <ng-container *ngFor="let invoice of invoices">
+              <app-list-item icon="invoice-icon"
+                             [title]="invoice.title"
+                             [subtitle]="invoice.date"
+                             [tags]="invoice.done ? ['Payée'] : ['À payer']"
+                             [error]="!invoice.done"
+                             [success]="invoice.done"
+                             link="/espace-admin/facture/{{user.id}}/{{invoice.id}}">
+              </app-list-item>
+            </ng-container>
           </div>
-        </ng-template>
-      </div>
 
-
-
-
-      <div class="customer-subsection">
-        <h4 class="green-text">Factures</h4>
-
-        <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
-          <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon"
-                           [title]="invoice.title"
-                           [subtitle]="invoice.date"
-                           [tags]="invoice.done ? ['Payée'] : ['À payer']"
-                           [error]="!invoice.done"
-                           [success]="invoice.done"
-                           link="/espace-admin/factures/{{user.id}}/{{invoice.id}}">
-            </app-list-item>
-          </ng-container>
+          <ng-template #emptyInvoices>
+            <div class="list-container empty-list">
+              <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+              Pas encore de facture
+            </div>
+          </ng-template>
         </div>
 
-        <ng-template #emptyInvoices>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Pas encore de facture
-          </div>
-        </ng-template>
       </div>
-
     </div>
 
     <ng-template #spinner>

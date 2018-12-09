@@ -13,7 +13,7 @@
                            [tags]="quote.done ? ['Signé'] : ['À signer']"
                            [error]="!quote.done"
                            [success]="quote.done"
-                           link="/espace-client/devis/{{quote.id}}">
+                           link="/espace-client/devis/{{user?.id}}/{{quote.id}}">
             </app-list-item>
           </ng-container>
         </div>
@@ -39,7 +39,7 @@
                            [tags]="invoice.done ? ['Payée'] : ['À payer']"
                            [error]="!invoice.done"
                            [success]="invoice.done"
-                           link="/espace-client/factures/{{invoice.id}}">
+                           link="/espace-client/factures/{{user?.id}}/{{invoice.id}}">
             </app-list-item>
           </ng-container>
         </div>

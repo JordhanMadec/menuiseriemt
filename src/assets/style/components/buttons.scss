@@ -128,8 +128,8 @@ a.my-button, a.my-button:hover {
 
 .fab-button {
   position: fixed;
-  bottom: $middle-gap;
-  right: $middle-gap;
+  bottom: $big-gap;
+  right: $big-gap;
   animation-duration: $transition-fast;
   animation-name: popin;
 }

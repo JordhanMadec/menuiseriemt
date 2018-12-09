@@ -6,8 +6,8 @@ import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
-import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
+import { InvoiceViewerComponent } from './document-viewer/invoice-viewer.component';
+import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
@@ -41,9 +41,9 @@ const routes: Routes = [
     ]},
     {path: 'factures', children: [
       {path: '', component: CustomerInvoicesComponent},
-      {path: ':invoiceId', component: CustomerInvoiceComponent},
+      {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
     ]},
-    {path: 'devis/:quoteId', component: CustomerQuoteComponent}
+    {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
   {path: 'espace-admin', canActivate: [AdminGuard], children: [
       {path: '', component: AdminHomeComponent},
@@ -57,6 +57,8 @@ const routes: Routes = [
           {path: '', component: AdminProjectsComponent},
           {path: ':customerId/:projectId', component: ProjectDetailComponent},
       ]},
+      {path: 'facture/:customerId/:invoiceId', component: InvoiceViewerComponent},
+      {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
   // default
   {path: '**', redirectTo: '/'},

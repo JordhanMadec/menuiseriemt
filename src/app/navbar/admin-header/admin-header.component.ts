@@ -23,7 +23,7 @@ export class AdminHeaderComponent implements OnInit, OnDestroy {
       event => {
         this.selectedNavItem = '';
 
-        if (this.router.url.match('^/espace-admin')) {
+        if (this.router.url.match('^/espace-admin$')) {
           this.selectedNavItem = 'accueil';
         }
         if (this.router.url.match('^/espace-admin/factures')) {
