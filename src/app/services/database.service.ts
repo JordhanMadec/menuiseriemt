@@ -17,6 +17,10 @@ export class DatabaseService {
 
   getCurrentUser(): Promise<User> {
     const userId = firebase.auth().currentUser.uid;
+    return this.getUser(userId);
+  }
+
+  getUser(userId: string): Promise<User> {
     return firebase.database()
       .ref('/users/' + userId)
       .once('value')
@@ -145,6 +149,26 @@ export class DatabaseService {
 
 
   // PROJECTS
+
+  getAllProjects(): Promise<Project[]> {
+    return firebase.database()
+      .ref('/projects')
+      .once('value')
+      .then(_projects => {
+        const projects = [];
+
+        _projects.forEach(user => {
+          user.forEach(project => {
+            projects.push(new Project(project.val()));
+          })
+        })
+
+        return projects;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les chantiers');
+        return [];
+      });
+  }
 
   getUserProjects(userId: string): Promise<Project[]> {
     const projects: Project[] = [];

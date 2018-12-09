@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../../models/user';
 import { AdminService } from '../../../services/admin.service';
+import { DatabaseService } from '../../../services/database.service';
 import { UserProfileValidator } from '../../../shared/user-profile-validator';
 
 @Component({
@@ -24,7 +25,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
 
   constructor(
     public router: Router,
-    private adminService: AdminService,
+    private databaseService: DatabaseService,
     private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     private ngZone: NgZone,
@@ -46,7 +47,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.adminService.getUser(customerId).then(
+    this.databaseService.getUser(customerId).then(
       (user: User) => {
         this.user = user;
         this.profileForm = new UserProfileValidator(this.fb, user).userProfileValidator;
@@ -91,7 +92,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
 
     this.updateLoading = true;
 
-    this.adminService.createOrUpdateUser(this.getUserFromForm()).then(
+    this.databaseService.createOrUpdateUser(this.getUserFromForm()).then(
       res => {
         this.updateLoading = false;
 
@@ -105,21 +106,6 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
         this.updateLoading = false;
       }
     );
-  }
-
-  deleteUser() {
-    if (!this.user) {
-      return;
-    }
-
-    this.updateLoading = true;
-
-    this.adminService.deleteUser(this.user.id).then(res => {
-      this.updateLoading = false;
-      this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
-    }, error => {
-      this.updateLoading = false;
-    })
   }
 
   ngOnDestroy() {

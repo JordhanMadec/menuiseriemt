@@ -16,7 +16,6 @@ import { DatabaseService } from '../../../services/database.service';
 export class CustomerProjectComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
-  private routeSubscription: Subscription;
 
   public user: User;
   public invoices: Invoice[];
@@ -32,9 +31,7 @@ export class CustomerProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe(params => {
-      this.projectId = params['projectId'];
-    });
+    this.projectId = this.route.snapshot.paramMap.get('projectId');
 
     this.userSubscription = this.authService.currentUser.subscribe(
       (user: User) => {
@@ -75,9 +72,6 @@ export class CustomerProjectComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
-    }
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
     }
   }
 

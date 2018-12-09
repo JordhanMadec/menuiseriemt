@@ -5,6 +5,7 @@ import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/
 import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
+import { ProjectDetailComponent } from './admin-area/admin-projects/project-detail/project-detail.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
       {path: 'nouveau-client', component: ClientWizardComponent},
       {path: 'chantiers', children: [
           {path: '', component: AdminProjectsComponent},
+          {path: ':customerId/:projectId', component: ProjectDetailComponent},
       ]},
   ]},
   // default
