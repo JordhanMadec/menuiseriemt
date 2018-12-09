@@ -35,7 +35,6 @@ export class ClientDetailComponent implements OnInit {
     this.adminService.getUser(customerId).then(
       (user: User) => {
         this.user = user;
-        console.log(user);
         this.cd.detectChanges();
       }
     )
