@@ -10,16 +10,14 @@ export class StorageService {
 
   constructor(private alertService: AlertService) { }
 
-  getInvoiceUrl(fileName: string): Promise<string> {
-    const userId = firebase.auth().currentUser.uid;
+  getInvoiceUrl(userId: string, fileName: string): Promise<string> {
     return firebase.storage().ref('invoices/' + userId + '/' + fileName)
       .getDownloadURL()
       .then(url => url,
         error => this.alertService.error('Impossible de récupérer le document'));
   }
 
-  getQuoteUrl(fileName: string): Promise<string> {
-    const userId = firebase.auth().currentUser.uid;
+  getQuoteUrl(userId: string, fileName: string): Promise<string> {
     return firebase.storage().ref('quotes/' + userId + '/' + fileName)
       .getDownloadURL()
       .then(url => url,

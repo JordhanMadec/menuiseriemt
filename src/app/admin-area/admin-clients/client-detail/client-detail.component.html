@@ -129,7 +129,7 @@
                            [tags]="invoice.done ? ['Payée'] : ['À payer']"
                            [error]="!invoice.done"
                            [success]="invoice.done"
-                           link="/espace-admin/factures/{{user.id}}/{{invoice.id}}">
+                           link="/espace-admin/facture/{{user.id}}/{{invoice.id}}">
             </app-list-item>
           </ng-container>
         </div>

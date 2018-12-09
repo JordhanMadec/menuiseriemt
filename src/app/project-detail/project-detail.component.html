@@ -105,7 +105,7 @@
                            [tags]="quote?.done ? ['Signé'] : ['À valider']"
                            [error]="!quote?.done"
                            [success]="quote?.done"
-                           link="/espace-admin/devis/{{quote?.id}}">
+                           [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + quote?.id">
             </app-list-item>
           </ng-container>
         </div>
@@ -129,7 +129,7 @@
                            [tags]="invoice?.done ? ['Payée'] : ['À payer']"
                            [error]="!invoice?.done"
                            [success]="invoice?.done"
-                           link="/espace-admin/factures/{{invoice?.id}}">
+                           [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + invoice?.id">
             </app-list-item>
           </ng-container>
         </div>

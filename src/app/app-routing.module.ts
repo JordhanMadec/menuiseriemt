@@ -41,9 +41,9 @@ const routes: Routes = [
     ]},
     {path: 'factures', children: [
       {path: '', component: CustomerInvoicesComponent},
-      {path: ':invoiceId', component: InvoiceViewerComponent},
+      {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
     ]},
-    {path: 'devis/:quoteId', component: QuoteViewerComponent}
+    {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
   {path: 'espace-admin', canActivate: [AdminGuard], children: [
       {path: '', component: AdminHomeComponent},
@@ -57,6 +57,8 @@ const routes: Routes = [
           {path: '', component: AdminProjectsComponent},
           {path: ':customerId/:projectId', component: ProjectDetailComponent},
       ]},
+      {path: 'facture/:customerId/:invoiceId', component: InvoiceViewerComponent},
+      {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
   // default
   {path: '**', redirectTo: '/'},

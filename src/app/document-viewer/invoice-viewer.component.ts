@@ -1,10 +1,6 @@
-import { Location } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Invoice } from '../models/invoice';
-import { User } from '../models/user';
-import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { StorageService } from '../services/storage.service';
 
@@ -13,62 +9,36 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './document-viewer.component.html',
   styleUrls: ['./document-viewer.component.scss']
 })
-export class InvoiceViewerComponent implements OnInit, OnDestroy {
+export class InvoiceViewerComponent implements OnInit {
 
-  private userSubscription: Subscription;
-  private routeSubscription: Subscription;
-
-  public user: User;
   public document: Invoice;
   private documentId: string;
+  private customerId: string;
   public documentUrl: string;
 
   public tag: string;
 
   constructor(private cd: ChangeDetectorRef,
-              private authService: AuthService,
               private databaseService: DatabaseService,
               private storageService: StorageService,
-              private location: Location,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe(params => {
-      this.documentId = params['invoiceId'];
-    });
+    this.customerId = this.route.snapshot.paramMap.get('customerId');
+    this.documentId = this.route.snapshot.paramMap.get('invoiceId');
 
-    this.userSubscription = this.authService.currentUser.subscribe(
-      (user: User) => {
-        this.user = user;
+    this.databaseService.getUserInvoice(this.customerId, this.documentId).then(
+      (invoice: Invoice) => {
+        this.document = invoice;
+        this.tag = invoice.done ? 'Payée' : 'À payer';
         this.cd.detectChanges();
 
-        if (!user || !this.documentId ) {
-          return;
-        }
-
-        this.databaseService.getUserInvoice(this.user.id, this.documentId).then(
-          (invoice: Invoice) => {
-            this.document = invoice;
-            this.tag = invoice.done ? 'Payée' : 'À payer';
-            this.cd.detectChanges();
-
-            this.storageService.getInvoiceUrl(this.document.fileName).then(url => {
-              this.documentUrl = url;
-              this.cd.detectChanges();
-            });
-          }
-        );
+        this.storageService.getInvoiceUrl(this.customerId, this.document.fileName).then(url => {
+          this.documentUrl = url;
+          this.cd.detectChanges();
+        });
       }
     );
-  }
-
-  ngOnDestroy() {
-    if (this.userSubscription) {
-      this.userSubscription.unsubscribe();
-    }
-    if (this.routeSubscription) {
-      this.routeSubscription.unsubscribe();
-    }
   }
 }
