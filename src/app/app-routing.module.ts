@@ -5,20 +5,19 @@ import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/
 import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
-import { ProjectDetailComponent } from './admin-area/admin-projects/project-detail/project-detail.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
 import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
-import { CustomerProjectComponent } from './customer-area/customer-projects/customer-project/customer-project.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
-import {HomeComponent} from './home/home.component';
+import {HomeComponent} from './homepage/home.component';
 import {LoginComponent} from './login/login.component';
-import {AlbumComponent} from './album/album.component';
-import {LegalsComponent} from './legals/legals.component';
+import {AlbumComponent} from './homepage/album/album.component';
+import {LegalsComponent} from './homepage/legals/legals.component';
 import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {CustomerHomeComponent} from './customer-area/customer-home/customer-home.component';
@@ -26,7 +25,7 @@ import { SignupComponent } from './login/signup/signup.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [NotAuthGuard]},
-  {path: 'home', redirectTo: '/'},
+  {path: 'homepage', redirectTo: '/'},
   {path: 'album/:id', component: AlbumComponent, canActivate: [NotAuthGuard]},
   {path: 'mentions-legales', component: LegalsComponent},
   {path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
@@ -38,7 +37,7 @@ const routes: Routes = [
     {path: 'profil', component: CustomerProfileComponent},
     {path: 'suivi-chantier', children: [
         {path: '', component: CustomerProjectsComponent},
-        {path: ':projectId', component: CustomerProjectComponent},
+        {path: ':customerId/:projectId', component: ProjectDetailComponent},
     ]},
     {path: 'factures', children: [
       {path: '', component: CustomerInvoicesComponent},

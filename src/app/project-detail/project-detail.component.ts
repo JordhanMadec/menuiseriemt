@@ -1,20 +1,26 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Invoice } from '../../../models/invoice';
-import { Project } from '../../../models/project';
-import { Quote } from '../../../models/quote';
-import { User } from '../../../models/user';
-import { DatabaseService } from '../../../services/database.service';
+import { Subscription } from 'rxjs';
+import { Invoice } from '../models/invoice';
+import { Project } from '../models/project';
+import { Quote } from '../models/quote';
+import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   private customerId: string;
   private projectId: string;
+
+  private isAdminSubscription: Subscription;
+
+  public isAdmin = false;
 
   public invoices: Invoice[];
   public quotes: Quote[];
@@ -24,12 +30,18 @@ export class ProjectDetailComponent implements OnInit {
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
+              private authService: AuthService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.customerId = this.route.snapshot.paramMap.get('customerId');
     this.projectId = this.route.snapshot.paramMap.get('projectId');
+
+    this.isAdminSubscription = this.authService.isAdmin().subscribe(res => {
+      this.isAdmin = res;
+      this.cd.detectChanges();
+    })
 
     this.databaseService.getUser(this.customerId).then((user: User) => {
       this.user = user;
@@ -51,5 +63,11 @@ export class ProjectDetailComponent implements OnInit {
       this.quotes = quotes;
       this.cd.detectChanges();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.isAdminSubscription) {
+      this.isAdminSubscription.unsubscribe();
+    }
   }
 }
