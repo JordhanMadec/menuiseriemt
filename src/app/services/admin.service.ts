@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
 import { environment } from '../../environments/environment';
+import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
+import { Quote } from '../models/quote';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
@@ -147,6 +149,112 @@ export class AdminService {
         return projects;
       }, error => {
         this.alertService.error('Impossible de récupérer les chantiers');
+        return [];
+      });
+  }
+
+  getUserProjects(userId: string): Promise<Project[]> {
+    return firebase.database()
+      .ref('/projects/' + userId)
+      .once('value')
+      .then(_projects => {
+        const projects = [];
+
+        _projects.forEach(project => {
+          projects.push(new Project(project.val()));
+        })
+
+        return projects;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les chantiers');
+        return [];
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+  // INVOICES & QUOTES
+
+  getAllInvoices(): Promise<Invoice[]> {
+    return firebase.database()
+      .ref('/invoices')
+      .once('value')
+      .then(_invoices => {
+        const invoices = [];
+
+        _invoices.forEach(user => {
+          user.forEach(invoice => {
+            invoices.push(new Invoice(invoice.val()));
+          })
+        })
+
+        return invoices;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les factures');
+        return [];
+      });
+  }
+
+  getAllQuotes(): Promise<Quote[]> {
+    return firebase.database()
+      .ref('/quotes')
+      .once('value')
+      .then(_quotes => {
+        const quotes = [];
+
+        _quotes.forEach(user => {
+          user.forEach(quote => {
+            quotes.push(new Quote(quote.val()));
+          })
+        })
+
+        return quotes;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les devis');
+        return [];
+      });
+  }
+
+  getUserInvoices(userId: string): Promise<Invoice[]> {
+    return firebase.database()
+      .ref('/invoices/' + userId)
+      .once('value')
+      .then(_invoices => {
+        const invoices = [];
+
+        _invoices.forEach(invoice => {
+          invoices.push(new Invoice(invoice.val()));
+        })
+
+        return invoices;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les factures');
+        return [];
+      });
+  }
+
+  getUserQuotes(userId: string): Promise<Quote[]> {
+    return firebase.database()
+      .ref('/quotes/' + userId)
+      .once('value')
+      .then(_quotes => {
+        const quotes = [];
+
+        _quotes.forEach(quote => {
+          quotes.push(new Quote(quote.val()));
+        })
+
+        return quotes;
+      }, error => {
+        this.alertService.error('Impossible de récupérer les devis');
         return [];
       });
   }
