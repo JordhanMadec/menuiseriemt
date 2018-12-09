@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
+import * as _ from 'lodash';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';

@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
+import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
-import { Invoice } from '../models/invoice';
-import { Project } from '../models/project';
-import { Quote } from '../models/quote';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
-import { AuthService } from './auth.service';
-import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,25 +29,11 @@ export class AdminService {
             users.push(new User(user.val()));
           })
 
-          return users;
+          return _.sortBy(users, ['firstName', 'lastName']);
         }, error => {
           this.alertService.error('Impossible de récupérer les clients');
           return [];
         });
-  }
-
-  deleteUser(userId: string): Promise<boolean> {
-    return firebase.database()
-      .ref('/users/' + userId)
-      .remove(error => {
-        if (error) {
-          this.alertService.error('Impossible de supprimer le client');
-          return false;
-        }
-
-        this.alertService.success('Client supprimé avec succès');
-        return true;
-      });
   }
 
   createOrUpdateUser(user: User): Promise<boolean> {

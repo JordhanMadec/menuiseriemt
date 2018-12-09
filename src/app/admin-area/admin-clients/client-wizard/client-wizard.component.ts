@@ -26,6 +26,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     private databaseService: DatabaseService,
+    private adminService: AdminService,
     private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     private ngZone: NgZone,
@@ -92,7 +93,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
 
     this.updateLoading = true;
 
-    this.databaseService.createOrUpdateUser(this.getUserFromForm()).then(
+    this.adminService.createOrUpdateUser(this.getUserFromForm()).then(
       res => {
         this.updateLoading = false;
 
