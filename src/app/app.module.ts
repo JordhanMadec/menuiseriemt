@@ -53,11 +53,11 @@ import { CustomerProfileComponent } from './customer-area/customer-profile/custo
 import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
-import { CustomerInvoiceComponent } from './customer-area/customer-invoices/customer-document/customer-invoice.component';
+import { InvoiceDetailComponent } from './document-detail/invoice-detail.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
-import { CustomerQuoteComponent } from './customer-area/customer-invoices/customer-document/customer-quote.component';
+import { QuoteDetailComponent } from './document-detail/quote-detail.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminHeaderComponent } from './navbar/admin-header/admin-header.component';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
@@ -96,11 +96,11 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     AlertMessageComponent,
     CustomerInvoicesComponent,
     ListItemComponent,
-    CustomerInvoiceComponent,
+    InvoiceDetailComponent,
     CustomerProjectsComponent,
     PageTitleComponent,
     ProjectTimelineComponent,
-    CustomerQuoteComponent,
+    QuoteDetailComponent,
     AdminHomeComponent,
     AdminHeaderComponent,
     AdminClientsComponent,
