@@ -9,52 +9,58 @@
         [hasBackButton]="true">
       </app-page-title>
 
-      <h5 class="input-setcion-title">Contact</h5>
+      <div class="row">
+        <div class="col-lg-6">
+          <h4 class="input-setcion-title">Contact</h4>
 
-      <div class="field-wrapper">
-        <div class="tag field-label">
-          <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.email}}
+          </div>
+
+          <div class="field-wrapper" *ngIf="user.homePhone">
+            <div class="tag field-label">
+              <app-svg-icon name="phone-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.homePhone}}
+          </div>
+
+          <div class="field-wrapper" *ngIf="user.mobilePhone">
+            <div class="tag field-label">
+              <app-svg-icon name="mobile-phone-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.mobilePhone}}
+          </div>
         </div>
-        {{user.email}}
-      </div>
 
-      <div class="field-wrapper" *ngIf="user.homePhone">
-        <div class="tag field-label">
-          <app-svg-icon name="phone-icon" [size]="20"></app-svg-icon>
+        <br>
+
+        <div class="col-lg-6">
+          <h4 class="input-setcion-title">Adresse</h4>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="pin-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.address}}
+          </div>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="city-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.city}}
+          </div>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="zipcode-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.zipcode}}
+          </div>
         </div>
-        {{user.homePhone}}
-      </div>
-
-      <div class="field-wrapper" *ngIf="user.mobilePhone">
-        <div class="tag field-label">
-          <app-svg-icon name="mobile-phone-icon" [size]="20"></app-svg-icon>
-        </div>
-        {{user.mobilePhone}}
-      </div>
-
-      <br>
-
-      <h5 class="input-setcion-title">Adresse</h5>
-
-      <div class="field-wrapper">
-        <div class="tag field-label">
-          <app-svg-icon name="pin-icon" [size]="20"></app-svg-icon>
-        </div>
-        {{user.address}}
-      </div>
-
-      <div class="field-wrapper">
-        <div class="tag field-label">
-          <app-svg-icon name="city-icon" [size]="20"></app-svg-icon>
-        </div>
-        {{user.city}}
-      </div>
-
-      <div class="field-wrapper">
-        <div class="tag field-label">
-          <app-svg-icon name="zipcode-icon" [size]="20"></app-svg-icon>
-        </div>
-        {{user.zipcode}}
       </div>
 
     </div>

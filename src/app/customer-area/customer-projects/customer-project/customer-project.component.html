@@ -12,32 +12,62 @@
         <div class="row project-subsection project-info">
           <div class="col-lg-6">
             <h4 class="green-text">Adresse</h4>
-            <div>{{project?.address}}</div>
-            <div>{{project?.city}}</div>
-            <div>{{project?.zipcode}}</div>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                <app-svg-icon name="pin-icon" [size]="20"></app-svg-icon>
+              </div>
+              {{project?.address}}
+            </div>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                <app-svg-icon name="city-icon" [size]="20"></app-svg-icon>
+              </div>
+              {{project?.city}}
+            </div>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                <app-svg-icon name="zipcode-icon" [size]="20"></app-svg-icon>
+              </div>
+              {{project?.zipcode}}
+            </div>
           </div>
 
           <div class="col-lg-6">
             <h4 class="green-text">Informations</h4>
-            <div>
-              <b class="label">Début du chantier</b>
-              <span>{{project?.startDate}}</span>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                Début
+              </div>
+              {{project?.startDate}}
             </div>
-            <div>
-              <b class="label">Fin du chantier</b>
-              <span>{{project?.endDate ? project?.endDate : 'En cours...'}}</span>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                Fin
+              </div>
+              {{project?.endDate ? project?.endDate : 'En cours...'}}
             </div>
-            <div>
-              <b class="label">Statut</b>
+
+            <div class="field-wrapper">
+              <div class="tag field-label">
+                Statut
+              </div>
               <div class="tag"
                    [class.error]="project?.status === 'PENDING' || project?.status === 'WAITING_PAYMENT'"
                    [class.success]="project?.status !== 'PENDING' && project?.status !== 'WAITING_PAYMENT'">
                 {{project?.getStatus()}}
               </div>
             </div>
-            <div *ngIf="project?.notes?.length">
-              <b class="label">Commentaires</b>
-              <span>{{project?.notes}}</span>
+
+            <div class="field-wrapper" *ngIf="project?.notes">
+              <div class="tag field-label">
+                Notes
+              </div>
+              {{project?.notes}}
             </div>
           </div>
         </div>

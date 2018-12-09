@@ -6,6 +6,8 @@
 
   .field-label {
     margin-right: $small-gap;
+    font-weight: bold;
+    min-width: 60px;
 
     app-svg-icon {
       fill: $dark-grey;
