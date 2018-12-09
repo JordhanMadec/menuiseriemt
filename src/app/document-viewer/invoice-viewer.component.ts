@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Invoice } from '../models/invoice';
+import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { StorageService } from '../services/storage.service';
 
@@ -9,18 +11,23 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './document-viewer.component.html',
   styleUrls: ['./document-viewer.component.scss']
 })
-export class InvoiceViewerComponent implements OnInit {
+export class InvoiceViewerComponent implements OnInit, OnDestroy {
+
+  public documentId: string;
+  public customerId: string;
+
+  private isAdminSubscription: Subscription;
 
   public document: Invoice;
-  private documentId: string;
-  private customerId: string;
   public documentUrl: string;
-
+  public isAdmin = false;
+  public root = '/facture';
   public tag: string;
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
               private storageService: StorageService,
+              private authService: AuthService,
               private route: ActivatedRoute) {
   }
 
@@ -40,5 +47,16 @@ export class InvoiceViewerComponent implements OnInit {
         });
       }
     );
+
+    this.isAdminSubscription = this.authService.isAdmin().subscribe(res => {
+      this.isAdmin = res;
+      this.cd.detectChanges();
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.isAdminSubscription) {
+      this.isAdminSubscription.unsubscribe();
+    }
   }
 }

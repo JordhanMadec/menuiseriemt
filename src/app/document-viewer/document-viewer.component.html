@@ -9,7 +9,7 @@
                       [tagSuccess]="document?.done"
                       [hasBackButton]="true">
         <a class="my-button accent" [href]="documentUrl" target="_blank" *ngIf="documentUrl">
-          Télécharger ma facture
+          Télécharger
           <app-svg-icon class="button-icon" name="download-icon"></app-svg-icon>
         </a>
       </app-page-title>
@@ -31,3 +31,9 @@
     </ng-template>
   </div>
 </section>
+
+<button class="circle-button fab-button accent"
+        *ngIf="isAdmin"
+        [routerLink]="root + '/' + customerId + '/' + documentId + '/modifier'">
+  <app-svg-icon name="edit-icon"></app-svg-icon>
+</button>

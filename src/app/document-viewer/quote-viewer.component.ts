@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Quote } from '../models/quote';
+import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { StorageService } from '../services/storage.service';
 
@@ -9,18 +11,23 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './document-viewer.component.html',
   styleUrls: ['./document-viewer.component.scss']
 })
-export class QuoteViewerComponent implements OnInit {
+export class QuoteViewerComponent implements OnInit, OnDestroy {
+
+  public customerId: string;
+  public documentId: string;
+
+  private isAdminSubscription: Subscription;
 
   public document: Quote;
-  private customerId: string;
-  private documentId: string;
   public documentUrl: string;
-
+  public isAdmin = false;
+  public root = '/devis';
   public tag: string;
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
               private storageService: StorageService,
+              private authService: AuthService,
               private route: ActivatedRoute) {
   }
 
@@ -40,5 +47,16 @@ export class QuoteViewerComponent implements OnInit {
         });
       }
     );
+
+    this.isAdminSubscription = this.authService.isAdmin().subscribe(res => {
+      this.isAdmin = res;
+      this.cd.detectChanges();
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.isAdminSubscription) {
+      this.isAdminSubscription.unsubscribe();
+    }
   }
 }
