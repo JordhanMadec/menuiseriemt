@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-clients',
@@ -12,7 +11,7 @@ export class AdminClientsComponent implements OnInit {
 
   public users: User[];
 
-  constructor(private cd: ChangeDetectorRef, private authService: AuthService, private adminService: AdminService) {
+  constructor(private cd: ChangeDetectorRef, private adminService: AdminService) {
   }
 
   ngOnInit() {

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Project } from '../../models/project';
-import { AdminService } from '../../services/admin.service';
-import { AuthService } from '../../services/auth.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-admin-projects',
@@ -12,7 +11,7 @@ export class AdminProjectsComponent implements OnInit {
 
   public projects: Project[];
 
-  constructor(private cd: ChangeDetectorRef, private authService: AuthService, private adminService: AdminService) {
+  constructor(private cd: ChangeDetectorRef, private databaseService: DatabaseService) {
   }
 
   ngOnInit() {
@@ -20,7 +19,7 @@ export class AdminProjectsComponent implements OnInit {
   }
 
   fetchProjects() {
-    this.adminService.getAllProjects().then(
+    this.databaseService.getAllProjects().then(
       (projects: Project[]) => {
         this.projects = projects;
         this.cd.detectChanges();

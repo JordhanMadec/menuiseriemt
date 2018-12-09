@@ -5,6 +5,7 @@ import { Project } from '../../../models/project';
 import { Quote } from '../../../models/quote';
 import { User } from '../../../models/user';
 import { AdminService } from '../../../services/admin.service';
+import { DatabaseService } from '../../../services/database.service';
 
 @Component({
   selector: 'app-client-detail',
@@ -21,7 +22,7 @@ export class ClientDetailComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private adminService: AdminService,
+    private databaseService: DatabaseService,
     private cd: ChangeDetectorRef,
     private ngZone: NgZone,
     private route: ActivatedRoute) {
@@ -39,7 +40,7 @@ export class ClientDetailComponent implements OnInit {
       return;
     }
 
-    this.adminService.getUser(customerId).then(
+    this.databaseService.getUser(customerId).then(
       (user: User) => {
         this.user = user;
         this.fetchProjects();
@@ -51,21 +52,21 @@ export class ClientDetailComponent implements OnInit {
   }
 
   private fetchProjects() {
-    this.adminService.getUserProjects(this.user.id).then((projects: Project[]) => {
+    this.databaseService.getUserProjects(this.user.id).then((projects: Project[]) => {
       this.projects = projects;
       this.cd.detectChanges();
     })
   }
 
   private fetchQuotes() {
-    this.adminService.getUserQuotes(this.user.id).then((quotes: Quote[]) => {
+    this.databaseService.getUserQuotes(this.user.id).then((quotes: Quote[]) => {
       this.quotes = quotes;
       this.cd.detectChanges();
     })
   }
 
   private fetchInvoices() {
-    this.adminService.getUserInvoices(this.user.id).then((invoices: Invoice[]) => {
+    this.databaseService.getUserInvoices(this.user.id).then((invoices: Invoice[]) => {
       this.invoices = invoices;
       this.cd.detectChanges();
     })

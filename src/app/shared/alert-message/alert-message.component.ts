@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Alert, AlertService, AlertStatus } from '../services/alert.service';
+import { Alert, AlertService, AlertStatus } from '../../services/alert.service';
 
 @Component({
   selector: 'app-alert-message',

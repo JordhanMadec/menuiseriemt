@@ -13,7 +13,7 @@
                            [tags]="[project.getStatus()]"
                            [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
                            [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
-                           link="/espace-client/suivi-chantier/{{project.id}}">
+                           link="/espace-client/suivi-chantier/{{user?.id}}/{{project?.id}}">
             </app-list-item>
           </ng-container>
         </div>

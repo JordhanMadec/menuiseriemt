@@ -73,18 +73,39 @@
         </div>
       </div>
 
+      <div class="project-subsection" *ngIf="isAdmin">
+        <h4 class="green-text">Client</h4>
+
+        <div class="list-container" *ngIf="user; else noUser">
+          <app-list-item icon="user-icon"
+                         [title]="user?.firstName + ' ' + user?.lastName"
+                         [subtitle]="user?.email"
+                         [tags]="user?.isAdmin ? ['Admin'] : []"
+                         [success]="user.isAdmin"
+                         link="/espace-admin/clients/{{user?.id}}">
+          </app-list-item>
+        </div>
+
+        <ng-template #noUser>
+          <div class="list-container empty-list">
+            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+            Pas de client
+          </div>
+        </ng-template>
+      </div>
+
       <div class="project-subsection">
         <h4 class="green-text">Devis</h4>
 
         <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
           <ng-container *ngFor="let quote of quotes">
             <app-list-item icon="invoice-icon"
-                           [title]="quote.title"
-                           [subtitle]="quote.date"
-                           [tags]="quote.done ? ['Signé'] : ['À valider']"
-                           [error]="!quote.done"
-                           [success]="quote.done"
-                           link="/espace-client/devis/{{quote.id}}">
+                           [title]="quote?.title"
+                           [subtitle]="quote?.date"
+                           [tags]="quote?.done ? ['Signé'] : ['À valider']"
+                           [error]="!quote?.done"
+                           [success]="quote?.done"
+                           link="/espace-admin/devis/{{quote?.id}}">
             </app-list-item>
           </ng-container>
         </div>
@@ -103,12 +124,12 @@
         <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
           <ng-container *ngFor="let invoice of invoices">
             <app-list-item icon="invoice-icon"
-                           [title]="invoice.title"
-                           [subtitle]="invoice.date"
-                           [tags]="invoice.done ? ['Payée'] : ['À payer']"
-                           [error]="!invoice.done"
-                           [success]="invoice.done"
-                           link="/espace-client/factures/{{invoice.id}}">
+                           [title]="invoice?.title"
+                           [subtitle]="invoice?.date"
+                           [tags]="invoice?.done ? ['Payée'] : ['À payer']"
+                           [error]="!invoice?.done"
+                           [success]="invoice?.done"
+                           link="/espace-admin/factures/{{invoice?.id}}">
             </app-list-item>
           </ng-container>
         </div>
@@ -128,3 +149,9 @@
     </ng-template>
   </div>
 </section>
+
+<button class="circle-button fab-button accent"
+        *ngIf="isAdmin"
+        [routerLink]="'/espace-admin/chantiers/' + user?.id + '/' + project?.id + '/modifier'">
+  <app-svg-icon name="edit-icon"></app-svg-icon>
+</button>
