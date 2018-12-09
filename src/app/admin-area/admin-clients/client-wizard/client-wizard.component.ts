@@ -28,12 +28,12 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     private ngZone: NgZone,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute)
+  {
     this.profileForm = new UserProfileValidator(this.fb).userProfileValidator;
   }
 
   ngOnInit() {
-    this.profileForm = new UserProfileValidator(this.fb).userProfileValidator;
     this.fetchCustomer();
   }
 
@@ -99,7 +99,7 @@ export class ClientWizardComponent implements OnInit, OnDestroy {
           this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
         }
 
-        this.ngZone.run(() => this.router.navigate(['/espace-admin/clients/fiche-client/' + this.user.id]));
+        this.ngZone.run(() => this.router.navigate(['/espace-admin/clients/' + this.user.id]));
       },
       error => {
         this.updateLoading = false;

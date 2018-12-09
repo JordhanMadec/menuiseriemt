@@ -1,3 +1,7 @@
+.list-container {
+  margin-top: $middle-gap;
+}
+
 .empty-list {
   display: flex;
   flex-direction: column;
@@ -5,6 +9,7 @@
   align-items: center;
   color: $light-grey;
   font-size: 30px;
+  user-select: none;
 
   app-svg-icon {
     fill: $light-grey;
