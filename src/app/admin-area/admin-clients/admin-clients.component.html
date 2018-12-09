@@ -12,7 +12,7 @@
                            [subtitle]="user.email"
                            [tags]="user.isAdmin ? ['Admin'] : []"
                            [success]="user.isAdmin"
-                           link="fiche-client/{{user.id}}">
+                           link="{{user.id}}">
             </app-list-item>
           </ng-container>
         </div>

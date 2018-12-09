@@ -49,8 +49,8 @@ const routes: Routes = [
       {path: '', component: AdminHomeComponent},
       {path: 'clients', children: [
           {path: '', component: AdminClientsComponent},
-          {path: 'fiche-client/:customerId', component: ClientDetailComponent},
-          {path: 'modifier-client/:customerId', component: ClientWizardComponent},
+          {path: ':customerId', component: ClientDetailComponent},
+          {path: ':customerId/modifier', component: ClientWizardComponent},
           {path: 'nouveau-client', component: ClientWizardComponent},
       ]},
       {path: 'chantiers', children: [
