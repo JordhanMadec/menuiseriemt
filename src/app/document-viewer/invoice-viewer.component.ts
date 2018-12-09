@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Invoice } from '../models/invoice';
+import { Project } from '../models/project';
 import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { StorageService } from '../services/storage.service';
@@ -17,6 +18,8 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
   public customerId: string;
 
   private isAdminSubscription: Subscription;
+
+  public project: Project;
 
   public document: Invoice;
   public documentUrl: string;
@@ -45,6 +48,11 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
           this.documentUrl = url;
           this.cd.detectChanges();
         });
+
+        this.databaseService.getUserProject(this.customerId, this.document.projectId).then((project: Project) => {
+          this.project = project;
+          this.cd.detectChanges();
+        })
       }
     );
 

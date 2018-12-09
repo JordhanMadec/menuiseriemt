@@ -14,14 +14,41 @@
         </a>
       </app-page-title>
 
-      <div class="document-container">
-        <div *ngIf="documentUrl; else documentSpinner">
-          <pdf-viewer [src]="documentUrl"></pdf-viewer>
+      <div class="subsection">
+        <h4 class="green-text">Chantier</h4>
+
+        <div class="list-container" *ngIf="project; else emptyProjects">
+            <app-list-item icon="calendar-icon"
+                           [title]="project.title"
+                           [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
+                           [tags]="[project.getStatus()]"
+                           [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
+                           [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
+                           link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">
+            </app-list-item>
         </div>
 
-        <ng-template #documentSpinner>
-          <app-spinner></app-spinner>
+        <ng-template #emptyProjects>
+          <div class="list-container empty-list">
+            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+            Pas de chantier
+          </div>
         </ng-template>
+      </div>
+
+
+      <div class="subsection">
+        <h4 class="green-text">Document</h4>
+
+        <div class="document-container">
+          <div *ngIf="documentUrl; else documentSpinner">
+            <pdf-viewer [src]="documentUrl"></pdf-viewer>
+          </div>
+
+          <ng-template #documentSpinner>
+            <app-spinner></app-spinner>
+          </ng-template>
+        </div>
       </div>
 
     </div>

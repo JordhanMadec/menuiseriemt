@@ -5,11 +5,11 @@
       <app-page-title [title]="project?.title" [subtitle]="subtitle" [hasBackButton]="true"></app-page-title>
 
       <div class="project-container">
-        <div class="project-subsection">
+        <div class="subsection">
           <app-project-timeline [project]="project"></app-project-timeline>
         </div>
 
-        <div class="row project-subsection project-info">
+        <div class="row subsection project-info">
           <div class="col-lg-6">
             <h4 class="green-text">Adresse</h4>
 
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="project-subsection" *ngIf="isAdmin">
+      <div class="subsection" *ngIf="isAdmin">
         <h4 class="green-text">Client</h4>
 
         <div class="list-container" *ngIf="user; else noUser">
@@ -94,7 +94,7 @@
         </ng-template>
       </div>
 
-      <div class="project-subsection">
+      <div class="subsection">
         <h4 class="green-text">Devis</h4>
 
         <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
@@ -118,7 +118,7 @@
         </ng-template>
       </div>
 
-      <div class="project-subsection">
+      <div class="subsection">
         <h4 class="green-text">Factures</h4>
 
         <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">

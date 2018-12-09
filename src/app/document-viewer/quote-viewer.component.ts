@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Project } from '../models/project';
 import { Quote } from '../models/quote';
 import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
@@ -17,6 +18,8 @@ export class QuoteViewerComponent implements OnInit, OnDestroy {
   public documentId: string;
 
   private isAdminSubscription: Subscription;
+
+  public project: Project;
 
   public document: Quote;
   public documentUrl: string;
@@ -45,6 +48,11 @@ export class QuoteViewerComponent implements OnInit, OnDestroy {
           this.documentUrl = url;
           this.cd.detectChanges();
         });
+
+        this.databaseService.getUserProject(this.customerId, this.document.projectId).then((project: Project) => {
+          this.project = project;
+          this.cd.detectChanges();
+        })
       }
     );
 
