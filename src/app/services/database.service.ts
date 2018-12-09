@@ -75,7 +75,7 @@ export class DatabaseService {
           invoice.id = _invoice.key;
           invoices.push(invoice);
         });
-        return invoices;
+        return _.sortBy(invoices, ['date']);
       }, error => {
         this.alertService.error('Impossible de récupérer les factures');
         return invoices;
@@ -106,7 +106,7 @@ export class DatabaseService {
           quote.id = _quote.key;
           quotes.push(quote);
         });
-        return quotes;
+        return _.sortBy(quotes, ['date']);
       }, error => {
         this.alertService.error('Impossible de récupérer les devis');
         return quotes;
@@ -127,13 +127,19 @@ export class DatabaseService {
 
   getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
     return this.getUserInvoices(userId).then(
-      (_invoices: Invoice[]) => _invoices.filter(invoice => invoice.projectId + '' === projectId)
+      (_invoices: Invoice[]) => {
+        const invoices = _invoices.filter(invoice => invoice.projectId + '' === projectId);
+        return _.sortBy(_invoices, ['date']);
+      }
     )
   }
 
   getProjectQuotes(userId: string, projectId: string): Promise<Quote[]> {
     return this.getUserQuotes(userId).then(
-      (_quotes: Quote[]) => _quotes.filter(quote => quote.projectId + '' === projectId)
+      (_quotes: Quote[]) => {
+        const quotes = _quotes.filter(quote => quote.projectId + '' === projectId);
+        return _.sortBy(quotes, ['date']);
+      }
     )
   }
 
