@@ -51,8 +51,8 @@ const routes: Routes = [
           {path: '', component: AdminClientsComponent},
           {path: ':customerId', component: ClientDetailComponent},
           {path: ':customerId/modifier', component: ClientWizardComponent},
-          {path: 'nouveau-client', component: ClientWizardComponent},
       ]},
+      {path: 'nouveau-client', component: ClientWizardComponent},
       {path: 'chantiers', children: [
           {path: '', component: AdminProjectsComponent},
       ]},
