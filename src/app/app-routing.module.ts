@@ -6,8 +6,8 @@ import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-import { InvoiceDetailComponent } from './document-detail/invoice-detail.component';
-import { QuoteDetailComponent } from './document-detail/quote-detail.component';
+import { InvoiceViewerComponent } from './document-viewer/invoice-viewer.component';
+import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
@@ -41,9 +41,9 @@ const routes: Routes = [
     ]},
     {path: 'factures', children: [
       {path: '', component: CustomerInvoicesComponent},
-      {path: ':invoiceId', component: InvoiceDetailComponent},
+      {path: ':invoiceId', component: InvoiceViewerComponent},
     ]},
-    {path: 'devis/:quoteId', component: QuoteDetailComponent}
+    {path: 'devis/:quoteId', component: QuoteViewerComponent}
   ]},
   {path: 'espace-admin', canActivate: [AdminGuard], children: [
       {path: '', component: AdminHomeComponent},

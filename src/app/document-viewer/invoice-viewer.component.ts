@@ -2,24 +2,24 @@ import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Quote } from '../models/quote';
+import { Invoice } from '../models/invoice';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { DatabaseService } from '../services/database.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
-  selector: 'app-customer-quote',
-  templateUrl: './document-detail.component.html',
-  styleUrls: ['./document detail.component.scss']
+  selector: 'app-customer-invoice',
+  templateUrl: './document-viewer.component.html',
+  styleUrls: ['./document-viewer.component.scss']
 })
-export class QuoteDetailComponent implements OnInit, OnDestroy {
+export class InvoiceViewerComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
   private routeSubscription: Subscription;
 
   public user: User;
-  public document: Quote;
+  public document: Invoice;
   private documentId: string;
   public documentUrl: string;
 
@@ -35,7 +35,7 @@ export class QuoteDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
-      this.documentId = params['quoteId'];
+      this.documentId = params['invoiceId'];
     });
 
     this.userSubscription = this.authService.currentUser.subscribe(
@@ -47,13 +47,13 @@ export class QuoteDetailComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.databaseService.getUserQuote(this.user.id, this.documentId).then(
-          (quote: Quote) => {
-            this.document = quote;
-            this.tag = quote.done ? 'Signé' : 'À valider';
+        this.databaseService.getUserInvoice(this.user.id, this.documentId).then(
+          (invoice: Invoice) => {
+            this.document = invoice;
+            this.tag = invoice.done ? 'Payée' : 'À payer';
             this.cd.detectChanges();
 
-            this.storageService.getQuoteUrl(this.document.fileName).then(url => {
+            this.storageService.getInvoiceUrl(this.document.fileName).then(url => {
               this.documentUrl = url;
               this.cd.detectChanges();
             });
