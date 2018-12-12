@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { PasswordValidator } from '../../shared/password-validator';
+import { PasswordValidator } from '../../validators/password-validator';
 
 @Component({
   selector: 'app-reset-password',

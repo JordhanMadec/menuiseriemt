@@ -10,7 +10,7 @@ export class ProjectValidator {
       ownerId: [project && project.ownerId || '', Validators.required],
       information: fb.group({
         startDate: [project && project.startDate || '', Validators.required],
-        endDate: [project && project.endDate || '', Validators.required],
+        endDate: [project && project.endDate || ''],
         status: [project && project.status || '', Validators.required],
         notes: [project && project.notes || '', Validators.required],
       }),

@@ -39,6 +39,18 @@ export class Project {
         return 'Commande en cours';
     }
   }
+
+  equals(project: Project): boolean {
+    return this.title === project.title &&
+      this.ownerId === project.ownerId &&
+      this.startDate === project.startDate &&
+      this.endDate === project.endDate &&
+      this.city === project.city &&
+      this.zipcode === project.zipcode &&
+      this.address === project.address &&
+      this.status === project.status &&
+      this.notes === project.notes;
+  }
 }
 
 export enum ProjectStatus {

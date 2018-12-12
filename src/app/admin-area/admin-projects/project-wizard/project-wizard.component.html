@@ -6,86 +6,112 @@
 
       <div class="project-container">
         <div class="subsection">
-          <app-project-timeline [project]="project"></app-project-timeline>
+          <app-project-timeline [project]="projectTimeline"></app-project-timeline>
         </div>
 
-        <div class="row project-info">
-          <div class="subsection col-lg-12">
-            <h4 class="green-text">Client</h4>
-
-            <!-- TODO: User picker -->
-
-            <!--<div formGroupName="addressFields">-->
-            <div>
+        <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+          <div class="row project-info">
+            <div class="subsection col-lg-12">
+              <h4 class="green-text">Titre</h4>
 
               <div class="input-container row">
                 <div class="input-wrapper col-lg-12">
-                  <input id="customer" type="text" placeholder="Client*">
-                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                  <input id="title" type="text" placeholder="Nom du chantier*" formControlName="title">
+                  <app-svg-icon class="input-icon" name="edit-icon" [size]="20"></app-svg-icon>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-6 subsection">
-            <h4 class="green-text">Adresse</h4>
+            <div class="subsection col-lg-12">
+              <h4 class="green-text">Client</h4>
 
-            <!--<div formGroupName="addressFields">-->
-            <div>
+              <!-- TODO: User picker -->
 
-              <div class="input-container row">
-                <div class="input-wrapper col-lg-12">
-                  <input id="city" type="text" placeholder="Ville*">
-                  <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
-                </div>
+              <!--<div formGroupName="addressFields">-->
+              <div>
 
-                <div class="input-wrapper col-lg-12">
-                  <input id="zipcode" type="text" placeholder="Code postal*">
-                  <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
-                  <div class="input-hint error">
-                    Doit contenir 5 chiffres
+                <div class="input-container row">
+                  <div class="input-wrapper col-lg-12">
+                    <input id="ownerId" type="text" placeholder="Client*" formControlName="ownerId">
+                    <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
                   </div>
                 </div>
+              </div>
+            </div>
 
-                <div class="input-wrapper col-lg-12">
-                  <input id="address" type="text" placeholder="Adresse*">
-                  <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
+            <div class="col-lg-6 subsection">
+              <h4 class="green-text">Adresse</h4>
+
+              <div formGroupName="addressFields">
+
+                <div class="input-container row">
+                  <div class="input-wrapper col-lg-12">
+                    <input id="city" type="text" placeholder="Ville*" formControlName="city">
+                    <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode" maxlength="5">
+                    <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
+                    <div class="input-hint error" *ngIf="projectForm.get('addressFields').get('zipcode').hasError('pattern')">
+                      Doit contenir 5 chiffres
+                    </div>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <input id="address" type="text" placeholder="Adresse*" formControlName="address">
+                    <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-6 subsection">
-            <h4 class="green-text">Informations</h4>
+            <div class="col-lg-6 subsection">
+              <h4 class="green-text">Informations</h4>
 
-            <!--<div formGroupName="addressFields">-->
-            <div>
+              <div formGroupName="information">
 
-              <div class="input-container row">
-                <div class="input-wrapper col-lg-12">
-                  <input id="startDate" type="text" placeholder="Début*">
-                  <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
-                </div>
+                <div class="input-container row">
+                  <div class="input-wrapper col-lg-12">
+                    <input id="startDate" type="text" placeholder="Début*" formControlName="startDate">
+                    <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                  </div>
 
-                <div class="input-wrapper col-lg-12">
-                  <input id="endDate" type="text" placeholder="Fin*">
-                  <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
-                </div>
+                  <div class="input-wrapper col-lg-12">
+                    <input id="endDate" type="text" placeholder="Fin*" formControlName="endDate">
+                    <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                  </div>
 
-                <div class="input-wrapper col-lg-12">
-                  <input id="status" type="text" placeholder="Statut*">
-                  <app-svg-icon class="input-icon" name="clock-icon" [size]="20"></app-svg-icon>
-                </div>
+                  <div class="input-wrapper col-lg-12">
+                    <input id="status" type="text" placeholder="Statut*" formControlName="status">
+                    <app-svg-icon class="input-icon" name="clock-icon" [size]="20"></app-svg-icon>
+                  </div>
 
-                <div class="input-wrapper col-lg-12">
-                  <textarea id="notes" type="text" placeholder="Notes"></textarea>
-                  <app-svg-icon class="input-icon" name="note-icon" [size]="20"></app-svg-icon>
+                  <div class="input-wrapper col-lg-12">
+                    <textarea id="notes" type="text" placeholder="Notes" formControlName="notes"></textarea>
+                    <app-svg-icon class="input-icon" name="note-icon" [size]="20"></app-svg-icon>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-        </div>
+            <div class="input-container col-lg-12">
+              <div class="input-wrapper">
+                <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+                  <button class="my-button accent" type="submit" [disabled]="(project && (!projectForm.valid || !asChanged)) || !projectForm.valid">
+                    Enregistrer
+                  </button>
+                </div>
+
+                <ng-template #buttonSpinner>
+                  <app-spinner [size]="30"></app-spinner>
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
       </div>
 
     </div>

@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
-import { PasswordValidator } from '../../shared/password-validator';
-import { UserProfileValidator } from '../../shared/user-profile-validator';
+import { PasswordValidator } from '../../validators/password-validator';
+import { UserValidator } from '../../validators/user-validator';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +16,7 @@ export class SignupComponent {
   public signupForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private ngZone: NgZone) {
-    this.signupForm = new UserProfileValidator(fb).userProfileValidator;
+    this.signupForm = new UserValidator(fb).userValidator;
     this.signupForm.addControl('password', new PasswordValidator(fb).passwordValidator);
     this.signupForm.addControl('acceptConditions', new FormControl( '', Validators.requiredTrue));
   }

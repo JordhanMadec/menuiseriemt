@@ -68,7 +68,7 @@
             </div>
 
             <div class="input-wrapper col-lg-6">
-              <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode">
+              <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode" maxlength="5">
               <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('addressFields').get('zipcode').hasError('pattern')">
                 Doit contenir 5 chiffres
