@@ -1,3 +1,98 @@
-<p>
-  project-wizard works!
-</p>
+<section id="project-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+  <div class="container">
+
+    <div *ngIf="!loading; else spinner">
+      <app-page-title [title]="project ? project?.title : 'Nouveau chantier'" [subtitle]="subtitle" [hasBackButton]="true"></app-page-title>
+
+      <div class="project-container">
+        <div class="subsection">
+          <app-project-timeline [project]="project"></app-project-timeline>
+        </div>
+
+        <div class="row project-info">
+          <div class="col-lg-6 subsection">
+            <h4 class="green-text">Adresse</h4>
+
+            <!--<div formGroupName="addressFields">-->
+            <div>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="city" type="text" placeholder="Ville*">
+                  <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
+                </div>
+
+                <div class="input-wrapper col-lg-12">
+                  <input id="zipcode" type="text" placeholder="Code postal*">
+                  <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
+                  <div class="input-hint error">
+                    Doit contenir 5 chiffres
+                  </div>
+                </div>
+
+                <div class="input-wrapper col-lg-12">
+                  <input id="address" type="text" placeholder="Adresse*">
+                  <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 subsection">
+            <h4 class="green-text">Informations</h4>
+
+            <!--<div formGroupName="addressFields">-->
+            <div>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="startDate" type="text" placeholder="Début*">
+                  <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                </div>
+
+                <div class="input-wrapper col-lg-12">
+                  <input id="endDate" type="text" placeholder="Fin*">
+                  <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                </div>
+
+                <div class="input-wrapper col-lg-12">
+                  <input id="status" type="text" placeholder="Statut*">
+                  <app-svg-icon class="input-icon" name="clock-icon" [size]="20"></app-svg-icon>
+                </div>
+
+                <div class="input-wrapper col-lg-12">
+                  <input id="notes" type="text" placeholder="Notes">
+                  <app-svg-icon class="input-icon" name="note-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="subsection col-lg-12">
+            <h4 class="green-text">Client</h4>
+
+            <!-- TODO: User picker -->
+
+            <!--<div formGroupName="addressFields">-->
+            <div>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="customer" type="text" placeholder="Client*">
+                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>

@@ -15,6 +15,10 @@ export class ProjectTimelineComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.project) {
+      return;
+    }
+
     switch (this.project.status) {
       case ProjectStatus.NOT_STARTED:
         this.step = 0;
