@@ -11,6 +11,16 @@
           <h5 class="input-setcion-title">Contact</h5>
 
           <div class="input-container row">
+            
+            <div class="input-wrapper col-lg-12" *ngIf="user">
+              <div class="field-wrapper">
+                <div class="tag field-label">
+                  <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
+                </div>
+                {{user?.email}}
+              </div>
+            </div>
+
             <div class="input-wrapper col-lg-6">
               <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
               <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
@@ -21,7 +31,7 @@
               <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
             </div>
 
-            <div class="input-wrapper col-lg-12">
+            <div class="input-wrapper col-lg-12" *ngIf="!user">
               <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email">
               <app-svg-icon class="input-icon" name="email-icon" [size]="20"></app-svg-icon>
               <div class="input-hint error" *ngIf="profileForm.get('contact').get('email').hasError('email')">
