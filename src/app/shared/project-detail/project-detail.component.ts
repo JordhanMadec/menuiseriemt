@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Invoice } from '../models/invoice';
-import { Project } from '../models/project';
-import { Quote } from '../models/quote';
-import { User } from '../models/user';
-import { AuthService } from '../services/auth.service';
-import { DatabaseService } from '../services/database.service';
+import { Invoice } from '../../models/invoice';
+import { Project } from '../../models/project';
+import { Quote } from '../../models/quote';
+import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-project-detail',

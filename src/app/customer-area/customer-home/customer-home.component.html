@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-lg-4">
-          <div class="customer-service-wrapper" routerLink="/espace-client/profil">
+          <div class="customer-service-wrapper" [routerLink]="'/espace-client/profil/' + user?.id">
             <app-svg-icon name="user-icon" [size]="100"></app-svg-icon>
             <div>Mes informations personnelles</div>
           </div>

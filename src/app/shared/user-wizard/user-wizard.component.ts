@@ -2,17 +2,17 @@ import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angula
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from '../../../models/user';
-import { AdminService } from '../../../services/admin.service';
-import { DatabaseService } from '../../../services/database.service';
-import { UserProfileValidator } from '../../../shared/user-profile-validator';
+import { User } from '../../models/user';
+import { AdminService } from '../../services/admin.service';
+import { DatabaseService } from '../../services/database.service';
+import { UserProfileValidator } from '../user-profile-validator';
 
 @Component({
   selector: 'app-client-wizard',
-  templateUrl: './client-wizard.component.html',
-  styleUrls: ['./client-wizard.component.scss']
+  templateUrl: './user-wizard.component.html',
+  styleUrls: ['./user-wizard.component.scss']
 })
-export class ClientWizardComponent implements OnInit, OnDestroy {
+export class UserWizardComponent implements OnInit, OnDestroy {
 
   public user: User;
   public profileForm: FormGroup;

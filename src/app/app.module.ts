@@ -49,7 +49,6 @@ import { SignupComponent } from './login/signup/signup.component';
 import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
-import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
@@ -61,10 +60,10 @@ import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminHeaderComponent } from './navbar/admin-header/admin-header.component';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
-import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
+import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +91,6 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     CheckboxComponent,
     SpinnerComponent,
     CustomerHeaderComponent,
-    CustomerProfileComponent,
     AlertMessageComponent,
     CustomerInvoicesComponent,
     ListItemComponent,
@@ -104,7 +102,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     AdminHomeComponent,
     AdminHeaderComponent,
     AdminClientsComponent,
-    ClientWizardComponent,
+    UserWizardComponent,
     AdminProjectsComponent,
     ClientDetailComponent,
     ProjectDetailComponent,

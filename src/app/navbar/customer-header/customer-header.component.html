@@ -11,7 +11,7 @@
     <app-svg-icon name="calendar-icon" [size]="20"></app-svg-icon>
     <div>Mes chantiers</div>
   </a>
-  <a [class.selected]="selectedNavItem === 'profil'" routerLink="/espace-client/profil">
+  <a [class.selected]="selectedNavItem === 'profil'" [routerLink]="'/espace-client/profil/' + user?.id">
     <app-svg-icon name="user-icon" [size]="20"></app-svg-icon>
     <div>Informations personnelles</div>
   </a>

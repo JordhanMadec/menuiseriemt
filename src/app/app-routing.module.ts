@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
-import { ClientWizardComponent } from './admin-area/admin-clients/client-wizard/client-wizard.component';
+import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
-import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 import { InvoiceViewerComponent } from './document-viewer/invoice-viewer.component';
 import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
-import { CustomerProfileComponent } from './customer-area/customer-profile/customer-profile.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -34,7 +33,7 @@ const routes: Routes = [
   {path: 'nouveau-mot-de-passe/:userId', component: ResetPasswordComponent, canActivate: [AuthGuard]},
   {path: 'espace-client', canActivate: [AuthGuard], children: [
     {path: '', component: CustomerHomeComponent},
-    {path: 'profil', component: CustomerProfileComponent},
+    {path: 'profil/:customerId', component: UserWizardComponent},
     {path: 'suivi-chantier', children: [
         {path: '', component: CustomerProjectsComponent},
         {path: ':customerId/:projectId', component: ProjectDetailComponent},
@@ -50,9 +49,9 @@ const routes: Routes = [
       {path: 'clients', children: [
           {path: '', component: AdminClientsComponent},
           {path: ':customerId', component: ClientDetailComponent},
-          {path: ':customerId/modifier', component: ClientWizardComponent},
+          {path: ':customerId/modifier', component: UserWizardComponent},
       ]},
-      {path: 'nouveau-client', component: ClientWizardComponent},
+      {path: 'nouveau-client', component: UserWizardComponent},
       {path: 'chantiers', children: [
           {path: '', component: AdminProjectsComponent},
           {path: ':customerId/:projectId', component: ProjectDetailComponent},
