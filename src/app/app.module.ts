@@ -64,6 +64,7 @@ import { UserWizardComponent } from './shared/user-wizard/user-wizard.component'
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
+import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { ProjectDetailComponent } from './shared/project-detail/project-detail.c
     AdminProjectsComponent,
     ClientDetailComponent,
     ProjectDetailComponent,
+    ProjectWizardComponent,
   ],
   imports: [
     BrowserModule,

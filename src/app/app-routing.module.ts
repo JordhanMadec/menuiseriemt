@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
+import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
@@ -55,7 +56,9 @@ const routes: Routes = [
       {path: 'chantiers', children: [
           {path: '', component: AdminProjectsComponent},
           {path: ':customerId/:projectId', component: ProjectDetailComponent},
+          {path: ':customerId/:projectId/modifier', component: ProjectWizardComponent},
       ]},
+      {path: 'nouveau-chantier', component: ProjectWizardComponent},
       {path: 'facture/:customerId/:invoiceId', component: InvoiceViewerComponent},
       {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
