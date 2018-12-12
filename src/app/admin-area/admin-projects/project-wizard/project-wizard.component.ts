@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Project, ProjectStatus } from '../../../models/project';
 import { User } from '../../../models/user';
+import { AdminService } from '../../../services/admin.service';
 import { DatabaseService } from '../../../services/database.service';
 import { ProjectValidator } from '../../../validators/project-validator';
 
@@ -22,7 +23,6 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   public projectForm: FormGroup;
   public project: Project;
   public projectTimeline: Project;
-  public user: User;
   public subtitle = '';
   public loading = true;
   public asChanged = false;
@@ -30,7 +30,10 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
+              private adminService: AdminService,
               private fb: FormBuilder,
+              private ngZone: NgZone,
+              private router: Router,
               private route: ActivatedRoute) {
     this.projectForm = new ProjectValidator(this.fb).projectPattern;
   }
@@ -54,12 +57,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
           this.cd.detectChanges();
         });
 
-        this.databaseService.getUser(this.customerId).then((user: User) => {
-          this.user = user;
-          this.loading = false;
-          this.cd.detectChanges();
-        });
-
+        this.loading = false;
         this.cd.detectChanges();
       });
     } else {
@@ -72,7 +70,6 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       });
 
       this.loading = false;
-
       this.cd.detectChanges();
     }
   }
@@ -94,7 +91,30 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (this.project && (!this.asChanged || !this.projectForm.valid)) {
+      return;
+    }
 
+    if (!this.projectForm.valid) {
+      return;
+    }
+
+    this.updateLoading = true;
+
+    this.adminService.createOrUpdateProject(this.getProjectFromForm()).then(
+      res => {
+        this.updateLoading = false;
+
+        if (!this.customerId) {
+          this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers']));
+        }
+
+        this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers/' + this.customerId + '/' + this.projectId]));
+      },
+      error => {
+        this.updateLoading = false;
+      }
+    );
   }
 
   ngOnDestroy() {

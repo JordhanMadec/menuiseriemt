@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
+import { Project } from '../models/project';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';
 
@@ -91,4 +92,32 @@ export class AdminService {
     return password;
   }
 
+
+
+
+
+  // PROJECTS
+
+  public createOrUpdateProject(project: Project): Promise<boolean> {
+    if (project.id) {
+      return this.updateProject(project);
+    }
+
+    // TODO: create project
+    return null;
+  }
+
+  private updateProject(project: Project): Promise<boolean> {
+    return firebase.database()
+      .ref('/projects/' + project.ownerId + '/' + project.id)
+      .set(project, error => {
+        if (error) {
+          this.alertService.error('Impossible de modifier le chantier');
+          return false;
+        }
+
+        this.alertService.success('Chantier modifié avec succès');
+        return true;
+      });
+  }
 }
