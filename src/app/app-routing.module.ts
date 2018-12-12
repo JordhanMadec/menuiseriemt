@@ -7,8 +7,8 @@ import { UserWizardComponent } from './shared/user-wizard/user-wizard.component'
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
-import { InvoiceViewerComponent } from './document-viewer/invoice-viewer.component';
-import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
+import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
+import { QuoteViewerComponent } from './shared/document-viewer/quote-viewer.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AdminGuard } from './guards/admin.guard';

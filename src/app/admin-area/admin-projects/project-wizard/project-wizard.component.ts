@@ -54,7 +54,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       this.databaseService.getUserProject(this.customerId, this.projectId).then((project: Project) => {
         this.project = project;
         this.projectTimeline = project;
-        this.subtitle = project.startDate + ' - ' + (project.endDate ? project.endDate : this.project.getStatus());
+        this.subtitle = Utils.dateToString(project.startDate) + ' - ' + (project.endDate ? Utils.dateToString(project.endDate) : this.project.getStatus());
         this.projectForm = new ProjectValidator(this.fb, this.project).projectPattern;
 
         this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {

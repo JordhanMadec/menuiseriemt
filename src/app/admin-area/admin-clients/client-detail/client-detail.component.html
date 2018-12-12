@@ -72,7 +72,7 @@
             <ng-container *ngFor="let project of projects">
               <app-list-item icon="calendar-icon"
                              [title]="project.title"
-                             [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
+                             [subtitle]="(project.startDate | amDateFormat:'DD/MM/YYYY') + ' - ' + (project.endDate ? (project.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...')"
                              [tags]="[project.getStatus()]"
                              [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
                              [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"
@@ -99,7 +99,7 @@
             <ng-container *ngFor="let quote of quotes">
               <app-list-item icon="invoice-icon"
                              [title]="quote.title"
-                             [subtitle]="quote.date"
+                             [subtitle]="(quote.date | amDateFormat:'DD/MM/YYYY')"
                              [tags]="quote.done ? ['Signé'] : ['À valider']"
                              [error]="!quote.done"
                              [success]="quote.done"
@@ -126,7 +126,7 @@
             <ng-container *ngFor="let invoice of invoices">
               <app-list-item icon="invoice-icon"
                              [title]="invoice.title"
-                             [subtitle]="invoice.date"
+                             [subtitle]="(invoice.date | amDateFormat:'DD/MM/YYYY')"
                              [tags]="invoice.done ? ['Payée'] : ['À payer']"
                              [error]="!invoice.done"
                              [success]="invoice.done"

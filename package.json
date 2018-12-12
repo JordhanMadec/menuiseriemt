@@ -39,6 +39,7 @@
     "ng2-pdf-viewer": "^5.2.1",
     "ng2-smooth-scroll": "^1.0.1",
     "ngx-bootstrap": "^3.1.1",
+    "ngx-moment": "^3.3.0",
     "ngx-page-scroll": "^5.0.0",
     "ngx-scrollreveal": "^3.0.0",
     "ngx-scrollspy": "^1.2.1",

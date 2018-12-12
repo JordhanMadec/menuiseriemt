@@ -1,4 +1,5 @@
 import { ProjectStatus } from '../models/project';
+import * as moment from 'moment';
 
 export abstract class Utils {
 
@@ -17,6 +18,10 @@ export abstract class Utils {
       case ProjectStatus.ORDERED:
         return 'Commande en cours';
     }
+  }
+
+  public static dateToString(date: Date) {
+    return moment(date).format('DD/MM/YYYY');
   }
 
 }

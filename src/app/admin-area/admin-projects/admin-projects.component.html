@@ -9,7 +9,7 @@
           <ng-container *ngFor="let project of projects">
             <app-list-item icon="calendar-icon"
                            [title]="project.title"
-                           [subtitle]="project.startDate + ' - ' + (project.endDate ? project.endDate : 'En cours...')"
+                           [subtitle]="(project.startDate | amDateFormat:'DD/MM/YYYY') + ' - ' + (project.endDate ? (project.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...')"
                            [tags]="[project.getStatus()]"
                            [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
                            [success]="project.status !== 'PENDING' && project.status !== 'WAITING_PAYMENT'"

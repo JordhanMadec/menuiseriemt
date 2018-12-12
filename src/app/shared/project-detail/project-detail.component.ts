@@ -7,6 +7,7 @@ import { Quote } from '../../models/quote';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'app-project-detail',
@@ -50,7 +51,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
     this.databaseService.getUserProject(this.customerId, this.projectId).then((project: Project) => {
       this.project = project;
-      this.subtitle = project.startDate + ' - ' + (project.endDate ? project.endDate : this.project.getStatus());
+      this.subtitle = Utils.dateToString(project.startDate) + ' - ' + (project.endDate ? Utils.dateToString(project.endDate) : this.project.getStatus());
       this.cd.detectChanges();
     });
 
