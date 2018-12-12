@@ -8,6 +8,8 @@ import { DatabaseService } from '../../../services/database.service';
 import { Utils } from '../../../shared/utils';
 import { ProjectValidator } from '../../../validators/project-validator';
 
+declare var $: any;
+
 @Component({
   selector: 'app-project-wizard',
   templateUrl: './project-wizard.component.html',
@@ -104,9 +106,9 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
     return new Project(project);
   }
 
-  getProjectStatus(status: string): string {
-    return Utils.getProjectStatus(status)
-  }
+  openStatusSelect() {
+    $('ng-panel .ng-input').click();
+}
 
   onSubmit() {
     if (this.project && (!this.asChanged || !this.projectForm.valid)) {

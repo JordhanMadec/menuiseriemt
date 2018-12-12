@@ -39,18 +39,25 @@ textarea {
   input[type='email'],
   input[type='password'],
   textarea,
-  ng-select {
+  ng-select.ng-select {
     padding-left: 40px;
   }
 
-  app-svg-icon.input-icon {
+  app-svg-icon {
     fill: $dark-grey;
     position: absolute;
-    left: $small-gap + $small-gap;
     height: 20px;
-    width: 20px;
-    top: 25px + $small-gap;
+    width: 20px;    top: 25px + $small-gap;
     margin-top: -10px;
+
+    &.input-icon {
+      left: $small-gap + $small-gap;
+    }
+
+    &.select-dropdown-icon {
+      right: $small-gap + $small-gap;
+      cursor: pointer;
+    }
   }
 
   .input-hint {
@@ -64,8 +71,12 @@ textarea {
 }
 
 
-ng-select.ng-select, .ng-input {
+.ng-input {
   cursor: pointer;
+}
+
+ng-select.ng-select {
+  padding-right: 40px;
 }
 
 ng-dropdown-panel.ng-dropdown-panel {
@@ -73,6 +84,7 @@ ng-dropdown-panel.ng-dropdown-panel {
   border-radius: $small-radius;
   box-shadow: $shadow-light;
   left: 0;
+  overflow: hidden;
 }
 
 .ng-option {

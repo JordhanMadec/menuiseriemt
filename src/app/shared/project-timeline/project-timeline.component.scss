@@ -26,6 +26,17 @@
     width: 300px;
     height: 30px;
     text-align: center;
+
+    &.first {
+      text-align: left;
+      left: 0;
+    }
+
+    &.last {
+      text-align: right;
+      left: unset;
+      right: 0;
+    }
   }
 
   &.done {
