@@ -1,4 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { Project, ProjectStatus } from '../models/project';
 
 export class ProjectValidator {
@@ -9,8 +10,13 @@ export class ProjectValidator {
       title: [project && project.title || '', Validators.required],
       ownerId: [project && project.ownerId || '', Validators.required],
       information: fb.group({
-        startDate: [project && project.startDate || new Date(), Validators.required],
-        endDate: [project && project.endDate || ''],
+        startDate: [project && moment(project.startDate).format('DD/MM/YYYY') || new Date(), [
+          Validators.required,
+          Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$')
+        ]],
+        endDate: [project && project.endDate && moment(project.endDate).format('DD/MM/YYYY') || '', [
+          Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$')
+        ]],
         status: [project && project.status || ProjectStatus.NOT_STARTED, Validators.required],
         notes: [project && project.notes || '', Validators.required],
       }),
