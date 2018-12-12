@@ -73,7 +73,7 @@
 
                 <div class="input-container row">
                   <div class="input-wrapper col-lg-12">
-                    <input id="startDate" type="text" placeholder="Début*" formControlName="startDate" maxlength="10">
+                    <input id="startDate" type="text" placeholder="Début du chantier*" formControlName="startDate" maxlength="10">
                     <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
                     <div class="input-hint error" *ngIf="projectForm.get('information').get('startDate').hasError('pattern')">
                       Au format jj/mm/aaaa
@@ -81,7 +81,7 @@
                   </div>
 
                   <div class="input-wrapper col-lg-12">
-                    <input id="endDate" type="text" placeholder="Fin*" formControlName="endDate" maxlength="10">
+                    <input id="endDate" type="text" placeholder="Fin du chantier*" formControlName="endDate" maxlength="10">
                     <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
                     <div class="input-hint error" *ngIf="projectForm.get('information').get('endDate').hasError('pattern')">
                       Au format jj/mm/aaaa
