@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Project } from '../../../models/project';
+import { Project, ProjectStatus } from '../../../models/project';
 import { User } from '../../../models/user';
 import { DatabaseService } from '../../../services/database.service';
 import { ProjectValidator } from '../../../validators/project-validator';
@@ -46,7 +46,13 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
         this.project = project;
         this.projectTimeline = project;
         this.subtitle = project.startDate + ' - ' + (project.endDate ? project.endDate : this.project.getStatus());
-        this.projectForm = new ProjectValidator(this.fb , this.project).projectPattern;
+        this.projectForm = new ProjectValidator(this.fb, this.project).projectPattern;
+
+        this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
+          this.asChanged = this.project && !this.getProjectFromForm().equals(this.project) || true;
+          this.projectTimeline = this.getProjectFromForm();
+          this.cd.detectChanges();
+        });
 
         this.databaseService.getUser(this.customerId).then((user: User) => {
           this.user = user;
@@ -54,16 +60,19 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
           this.cd.detectChanges();
         });
 
-        this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
-          this.asChanged = !this.getProjectFromForm().equals(this.project);
-          this.projectTimeline = this.getProjectFromForm();
-          this.cd.detectChanges();
-        });
-
         this.cd.detectChanges();
       });
     } else {
+      this.projectTimeline = this.getProjectFromForm();
+
+      this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
+        this.asChanged = this.project && !this.getProjectFromForm().equals(this.project) || true;
+        this.projectTimeline = this.getProjectFromForm();
+        this.cd.detectChanges();
+      });
+
       this.loading = false;
+
       this.cd.detectChanges();
     }
   }

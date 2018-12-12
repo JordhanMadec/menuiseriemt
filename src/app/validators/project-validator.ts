@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Project } from '../models/project';
+import { Project, ProjectStatus } from '../models/project';
 
 export class ProjectValidator {
   private readonly _projectValidator: FormGroup;
@@ -9,9 +9,9 @@ export class ProjectValidator {
       title: [project && project.title || '', Validators.required],
       ownerId: [project && project.ownerId || '', Validators.required],
       information: fb.group({
-        startDate: [project && project.startDate || '', Validators.required],
+        startDate: [project && project.startDate || new Date(), Validators.required],
         endDate: [project && project.endDate || ''],
-        status: [project && project.status || '', Validators.required],
+        status: [project && project.status || ProjectStatus.NOT_STARTED, Validators.required],
         notes: [project && project.notes || '', Validators.required],
       }),
       addressFields: fb.group({

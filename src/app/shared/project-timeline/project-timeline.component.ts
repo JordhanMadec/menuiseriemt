@@ -46,6 +46,8 @@ export class ProjectTimelineComponent implements OnInit, OnChanges {
       case ProjectStatus.COMPLETED:
         this.step = 4;
         break;
+      default:
+        this.step = 0;
     }
   }
 
