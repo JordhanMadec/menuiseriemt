@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^6.1.10",
     "@angular/platform-server": "^6.1.10",
     "@angular/router": "^6.1.10",
+    "@ng-select/ng-select": "^2.13.1",
     "angular-scroll": "^1.0.2",
     "angularfire2": "^5.1.0",
     "bootstrap": "^4.1.3",

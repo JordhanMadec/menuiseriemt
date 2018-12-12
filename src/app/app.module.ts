@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { environment } from '../environments/environment';
@@ -127,6 +128,7 @@ import { ProjectWizardComponent } from './admin-area/admin-projects/project-wiza
     FlexLayoutModule,
     PdfViewerModule,
     BsDropdownModule.forRoot(),
+    NgSelectModule,
   ],
   providers: [
     AuthGuard,

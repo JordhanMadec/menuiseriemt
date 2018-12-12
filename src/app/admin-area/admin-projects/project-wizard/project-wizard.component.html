@@ -40,7 +40,7 @@
             </div>
 
             <div class="col-lg-6 subsection">
-              <h4 class="green-text">Adresse</h4>
+              <h4 class="green-text">Adresse du chantier</h4>
 
               <div formGroupName="addressFields">
 
@@ -89,7 +89,15 @@
                   </div>
 
                   <div class="input-wrapper col-lg-12">
-                    <input id="status" type="text" placeholder="Statut*" formControlName="status">
+                    <ng-select
+                      [items]="statusList"
+                      bindLabel="label"
+                      bindValue="value"
+                      formControlName="status"
+                      [clearable]="false"
+                      [searchable]="false"
+                    >
+                    </ng-select>
                     <app-svg-icon class="input-icon" name="clock-icon" [size]="20"></app-svg-icon>
                   </div>
 

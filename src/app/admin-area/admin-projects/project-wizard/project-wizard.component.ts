@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Project, ProjectStatus } from '../../../models/project';
-import { User } from '../../../models/user';
 import { AdminService } from '../../../services/admin.service';
 import { DatabaseService } from '../../../services/database.service';
+import { Utils } from '../../../shared/utils';
 import { ProjectValidator } from '../../../validators/project-validator';
 
 @Component({
@@ -26,7 +26,9 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   public subtitle = '';
   public loading = true;
   public asChanged = false;
-  private updateLoading = false;
+  public updateLoading = false;
+
+  statusList = [];
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
@@ -43,6 +45,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
 
     this.customerId = this.route.snapshot.paramMap.get('customerId');
     this.projectId = this.route.snapshot.paramMap.get('projectId');
+
+    this.buildStatusList();
 
     if (this.customerId && this.projectId) {
       this.databaseService.getUserProject(this.customerId, this.projectId).then((project: Project) => {
@@ -74,6 +78,16 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
     }
   }
 
+  private buildStatusList() {
+    Object.keys(ProjectStatus).forEach((status) => {
+      this.statusList.push({
+        value: status,
+        label: Utils.getProjectStatus(status)
+      })
+    });
+    this.cd.detectChanges();
+  }
+
   private getProjectFromForm(): Project {
     const project = {
       id: this.projectId ? this.projectId : null,
@@ -88,6 +102,10 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       address: this.projectForm.get('addressFields').get('address').value,
     }
     return new Project(project);
+  }
+
+  getProjectStatus(status: string): string {
+    return Utils.getProjectStatus(status)
   }
 
   onSubmit() {

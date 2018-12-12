@@ -1,7 +1,8 @@
 input[type='text'],
 input[type='email'],
 input[type='password'],
-textarea {
+textarea,
+ng-select.ng-select {
   border: none;
   background-color: $light-grey;
   background-position: 10px;
@@ -13,6 +14,8 @@ textarea {
   width: 100%;
   height: 50px;
   outline: none !important;
+  display: flex;
+  align-items: center;
 }
 
 textarea {
@@ -35,7 +38,8 @@ textarea {
   input[type='text'],
   input[type='email'],
   input[type='password'],
-  textarea {
+  textarea,
+  ng-select {
     padding-left: 40px;
   }
 
@@ -56,5 +60,26 @@ textarea {
     &.error {
       color: $red;
     }
+  }
+}
+
+
+ng-select.ng-select, .ng-input {
+  cursor: pointer;
+}
+
+ng-dropdown-panel.ng-dropdown-panel {
+  background-color: $white;
+  border-radius: $small-radius;
+  box-shadow: $shadow-light;
+  left: 0;
+}
+
+.ng-option {
+  padding: $small-gap;
+  transition: $transition-fast;
+
+  &:hover {
+    background-color: $light-grey;
   }
 }

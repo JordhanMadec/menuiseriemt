@@ -1,3 +1,5 @@
+import { Utils } from '../shared/utils';
+
 export class Project {
   id: string;
   title: string
@@ -24,20 +26,7 @@ export class Project {
   }
 
   getStatus(): string {
-    switch (this.status) {
-      case ProjectStatus.COMPLETED:
-        return 'Terminé';
-      case ProjectStatus.NOT_STARTED:
-        return 'En préparation';
-      case ProjectStatus.ONGOING:
-        return 'En cours';
-      case ProjectStatus.PENDING:
-        return 'En attente';
-      case ProjectStatus.WAITING_PAYMENT:
-        return 'En attente de paiement';
-      case ProjectStatus.ORDERED:
-        return 'Commande en cours';
-    }
+    return Utils.getProjectStatus(this.status);
   }
 
   equals(project: Project): boolean {
@@ -54,10 +43,10 @@ export class Project {
 }
 
 export enum ProjectStatus {
-  COMPLETED = 'COMPLETED',
+  NOT_STARTED = 'NOT_STARTED',
+  ORDERED = 'ORDERED',
   ONGOING = 'ONGOING',
   PENDING = 'PENDING',
-  ORDERED = 'ORDERED',
-  NOT_STARTED = 'NOT_STARTED',
   WAITING_PAYMENT = 'WAITING_PAYMENT',
+  COMPLETED = 'COMPLETED',
 }
