@@ -10,6 +10,23 @@
         </div>
 
         <div class="row project-info">
+          <div class="subsection col-lg-12">
+            <h4 class="green-text">Client</h4>
+
+            <!-- TODO: User picker -->
+
+            <!--<div formGroupName="addressFields">-->
+            <div>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="customer" type="text" placeholder="Client*">
+                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-lg-6 subsection">
             <h4 class="green-text">Adresse</h4>
 
@@ -61,30 +78,12 @@
                 </div>
 
                 <div class="input-wrapper col-lg-12">
-                  <input id="notes" type="text" placeholder="Notes">
+                  <textarea id="notes" type="text" placeholder="Notes"></textarea>
                   <app-svg-icon class="input-icon" name="note-icon" [size]="20"></app-svg-icon>
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="subsection col-lg-12">
-            <h4 class="green-text">Client</h4>
-
-            <!-- TODO: User picker -->
-
-            <!--<div formGroupName="addressFields">-->
-            <div>
-
-              <div class="input-container row">
-                <div class="input-wrapper col-lg-12">
-                  <input id="customer" type="text" placeholder="Client*">
-                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
         </div>
       </div>

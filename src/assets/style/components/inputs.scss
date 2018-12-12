@@ -15,6 +15,10 @@ textarea {
   outline: none !important;
 }
 
+textarea {
+  min-height: 200px;
+}
+
 .input-setcion-title {
   color: $green;
   margin: $small-gap 0;
