@@ -1,6 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+import { AlertService } from '../../services/alert.service';
 import {AlbumInfo} from './album-info.model';
 import {Http} from '@angular/http';
 import 'rxjs/add/observable/of';
@@ -31,7 +32,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   private path: string;
   private fullsScreenId = 0;
 
-  constructor(private route: ActivatedRoute, private http: Http) {}
+  constructor(private route: ActivatedRoute, private http: Http, private alertService: AlertService) {}
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -47,10 +48,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
             this.numbers = Array(album.length).fill(0).map((x, i) => i + 1);
             this.album = of(album);
             this.mAlbum = album;
-            console.log('GetAlbum SUCCESS: ', album);
           },
           error => {
-            console.log('GetAlbum ERROR: ', error);
+            this.alertService.error('Impossible de récupérer l\'album');
           });
       }
     );
@@ -73,10 +73,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
   private getAllPhotos(path:  string): Observable<any> {
     return this.http.get(path).pipe(
       map((res: any) => {
-        console.log('ALL PHOTOS: ', res);
       }),
       catchError(error => {
-        console.log('ALL PHOTOS ERROR: ', error);
+        this.alertService.error('Impossible de récupérer les photos');
         return of(error);
       })
     );
@@ -93,8 +92,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    // console.log(event);
-
     if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
       this.nextPhoto();
     }

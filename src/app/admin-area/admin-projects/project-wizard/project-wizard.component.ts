@@ -58,8 +58,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
         this.projectForm = new ProjectValidator(this.fb, this.project).projectPattern;
 
         this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
-          this.asChanged = this.project && !this.getProjectFromForm().equals(this.project) || true;
-          this.projectTimeline = this.getProjectFromForm();
+          this.asChanged = this.project && !this.project.equals(this.getProjectFromForm()) || true;
+          this.projectTimeline = new Project(this.getProjectFromForm());
           this.cd.detectChanges();
         });
 
@@ -70,8 +70,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       this.projectTimeline = this.getProjectFromForm();
 
       this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
-        this.asChanged = this.project && !this.getProjectFromForm().equals(this.project) || true;
-        this.projectTimeline = this.getProjectFromForm();
+        this.asChanged = this.project && !this.project.equals(this.getProjectFromForm()) || true;
+        this.projectTimeline = new Project(this.getProjectFromForm());
         this.cd.detectChanges();
       });
 
@@ -90,20 +90,22 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
-  private getProjectFromForm(): Project {
+  private getProjectFromForm(): any {
+    const endDate = this.projectForm.get('information').get('endDate').value;
+
     const project = {
       id: this.projectId ? this.projectId : null,
       title: this.projectForm.get('title').value,
       ownerId: this.projectForm.get('ownerId').value,
-      startDate: this.projectForm.get('information').get('startDate').value,
-      endDate: this.projectForm.get('information').get('endDate').value,
+      startDate: Utils.getDateDDMMYYYY(this.projectForm.get('information').get('startDate').value).toString(),
+      endDate: endDate && Utils.getDateDDMMYYYY(endDate).toString() || null,
       status: this.projectForm.get('information').get('status').value,
       notes: this.projectForm.get('information').get('notes').value,
       city: this.projectForm.get('addressFields').get('city').value,
       zipcode: this.projectForm.get('addressFields').get('zipcode').value,
       address: this.projectForm.get('addressFields').get('address').value,
     }
-    return new Project(project);
+    return project;
   }
 
   openStatusSelect() {
@@ -127,6 +129,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
 
         if (!this.customerId) {
           this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers']));
+          return;
         }
 
         this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers/' + this.customerId + '/' + this.projectId]));

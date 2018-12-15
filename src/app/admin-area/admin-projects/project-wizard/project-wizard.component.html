@@ -81,7 +81,7 @@
                   </div>
 
                   <div class="input-wrapper col-lg-12">
-                    <input id="endDate" type="text" placeholder="Fin du chantier*" formControlName="endDate" maxlength="10">
+                    <input id="endDate" type="text" placeholder="Fin du chantier" formControlName="endDate" maxlength="10">
                     <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
                     <div class="input-hint error" *ngIf="projectForm.get('information').get('endDate').hasError('pattern')">
                       Au format jj/mm/aaaa
@@ -114,7 +114,7 @@
               <div class="input-wrapper">
                 <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
                   <button class="my-button accent" type="submit" [disabled]="(project && (!projectForm.valid || !asChanged)) || !projectForm.valid">
-                    Enregistrer
+                    {{project?.id ? 'Enregistrer' : 'Valider'}}
                   </button>
                 </div>
 

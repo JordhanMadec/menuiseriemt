@@ -29,7 +29,7 @@ export class Project {
     return Utils.getProjectStatus(this.status);
   }
 
-  equals(project: Project): boolean {
+  equals(project: Project | any): boolean {
     return this.title === project.title &&
       this.ownerId === project.ownerId &&
       this.startDate === project.startDate &&

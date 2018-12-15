@@ -21,15 +21,13 @@ export class SignupComponent {
     this.signupForm.addControl('acceptConditions', new FormControl( '', Validators.requiredTrue));
   }
 
-  private signup(username: string, password: string) {
+  private signup(password: string) {
     const user = this.getUserFromForm();
     this.authService.signup(user, password).then(
       res => {
-        console.log('Signup successful', res);
         this.ngZone.run(() => this.router.navigate(['login']));
       },
       error => {
-        console.log('Signup error', error);
         return null
       }
     );
@@ -54,9 +52,8 @@ export class SignupComponent {
       return;
     }
 
-    const username = this.signupForm.get('contact').get('email').value.toString();
     const password = this.signupForm.get('password').get('password').value.toString();
-    this.signup(username, password);
+    this.signup(password);
   }
 
 }

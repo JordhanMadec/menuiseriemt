@@ -5,14 +5,16 @@ import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
 import { Project } from '../models/project';
 import { User } from '../models/user';
+import { Utils } from '../shared/utils';
 import { AlertService } from './alert.service';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(private alertService: AlertService) {
+  constructor(private alertService: AlertService, private databaseService: DatabaseService) {
   }
 
 
@@ -42,14 +44,7 @@ export class AdminService {
       return this.updateUser(user);
     }
 
-    return this.createUser(user).then((userId) => {
-      if (!userId) {
-        return false;
-      }
-
-      user.id = userId;
-      return this.updateUser(user);
-    });
+    return this.createUser(user);
   }
 
   private updateUser(user: User): Promise<boolean> {
@@ -66,30 +61,23 @@ export class AdminService {
       });
   }
 
-  private createUser(user: User): Promise<string> { // Return user uid
+  private createUser(user: User): Promise<boolean> { // Return user uid
     const tempFb = firebase.initializeApp(environment.firebase, 'Temporary App');
 
-    return tempFb.auth().createUserWithEmailAndPassword(user.email, this.generatePassword()).then(firebaseUser => {
-      this.alertService.success('Client créé avec succès');
+    return tempFb.auth().createUserWithEmailAndPassword(user.email, Utils.generateToken()).then(firebaseUser => {
       tempFb.auth().signOut();
       tempFb.delete();
-      return firebaseUser.user.uid;
+
+      user.id = firebaseUser.user.uid;
+
+      this.alertService.success('Client créé avec succès')
+
+      return this.updateUser(user);
     }, error => {
       this.alertService.error('Impossible de créer le client');
       tempFb.delete();
-      return null;
+      return false;
     });
-  }
-
-  private generatePassword(): string {
-    const chars = '0123456789abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let password = '';
-
-    for (let i = 0; i < 12; i++) {
-      password += chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    return password;
   }
 
 
@@ -103,8 +91,7 @@ export class AdminService {
       return this.updateProject(project);
     }
 
-    // TODO: create project
-    return null;
+    return this.createProject(project);
   }
 
   private updateProject(project: Project): Promise<boolean> {
@@ -119,5 +106,25 @@ export class AdminService {
         this.alertService.success('Chantier modifié avec succès');
         return true;
       });
+  }
+
+  private createProject(project: Project): Promise<boolean> {
+    return this.databaseService.getUserProjects(project.ownerId).then((projects: Project[]) => {
+      const projectIds = projects.map(_project => _project.id);
+      let projectId = Utils.generateToken();
+
+      while (projectIds.includes(projectId)) {
+        projectId = Utils.generateToken();
+      }
+
+      project.id = projectId;
+
+      this.alertService.success('Chantier créé avec succès')
+
+      return this.updateProject(project);
+    }, error => {
+      this.alertService.error('Impossible de créer le chantier');
+      return false;
+    })
   }
 }

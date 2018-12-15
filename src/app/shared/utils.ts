@@ -24,4 +24,19 @@ export abstract class Utils {
     return moment(date).format('DD/MM/YYYY');
   }
 
+  public static generateToken(): string {
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let password = '';
+
+    for (let i = 0; i < 12; i++) {
+      password += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    return password;
+  }
+
+  public static getDateDDMMYYYY(date: string): Date {
+    const dateParts = date.split('/');
+    return new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]);
+  }
 }

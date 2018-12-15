@@ -10,7 +10,7 @@ export class ProjectValidator {
       title: [project && project.title || '', Validators.required],
       ownerId: [project && project.ownerId || '', Validators.required],
       information: fb.group({
-        startDate: [project && moment(project.startDate).format('DD/MM/YYYY') || new Date(), [
+        startDate: [project && moment(project.startDate).format('DD/MM/YYYY') || moment(new Date()).format('DD/MM/YYYY'), [
           Validators.required,
           Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$')
         ]],
@@ -18,7 +18,7 @@ export class ProjectValidator {
           Validators.pattern('^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$')
         ]],
         status: [project && project.status || ProjectStatus.NOT_STARTED, Validators.required],
-        notes: [project && project.notes || '', Validators.required],
+        notes: [project && project.notes || ''],
       }),
       addressFields: fb.group({
         city: [project && project.city || '', Validators.required],
