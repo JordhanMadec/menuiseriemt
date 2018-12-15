@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
 import { Project, ProjectStatus } from '../../../models/project';
+import { User } from '../../../models/user';
 import { AdminService } from '../../../services/admin.service';
 import { DatabaseService } from '../../../services/database.service';
 import { Utils } from '../../../shared/utils';
@@ -34,6 +35,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
 
   statusList = [];
+  customers = [];
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
@@ -53,6 +55,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
     this.projectId = this.route.snapshot.paramMap.get('projectId');
 
     this.buildStatusList();
+    this.buildCustomersList();
 
     if (this.customerId && this.projectId) {
       this.databaseService.getUserProject(this.customerId, this.projectId).then((project: Project) => {
@@ -92,6 +95,18 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       })
     });
     this.cd.detectChanges();
+  }
+
+  private buildCustomersList() {
+    this.adminService.getAllUsers().then((users: User[]) => {
+      users.forEach((user: User) => {
+        this.customers.push({
+          userId: user.id,
+          userName: user.firstName + ' ' + user.lastName
+        })
+      });
+      this.cd.detectChanges();
+    })
   }
 
   private getProjectFromForm(): any {
