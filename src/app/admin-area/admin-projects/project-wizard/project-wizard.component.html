@@ -113,6 +113,10 @@
             <div class="input-container col-lg-12">
               <div class="input-wrapper">
                 <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+                  <button class="my-button error" *ngIf="project" (click)="openModal(template)">
+                    Supprimer
+                  </button>
+
                   <button class="my-button accent" type="submit" [disabled]="(project && (!projectForm.valid || !asChanged)) || !projectForm.valid">
                     {{project?.id ? 'Enregistrer' : 'Valider'}}
                   </button>
@@ -136,3 +140,25 @@
     </ng-template>
   </div>
 </section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Supprimer le chantier ?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <app-svg-icon name="close-icon" [size]="20"></app-svg-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    Cette action est irréversible et supprimera également les devis et factures associées.
+
+    <div class="buttons-wrapper">
+      <button class="my-button" (click)="modalRef.hide()">
+        Annuler
+      </button>
+
+      <button class="my-button error" (click)="onDelete()">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</ng-template>

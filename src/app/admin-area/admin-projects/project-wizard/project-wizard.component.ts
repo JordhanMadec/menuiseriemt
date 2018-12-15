@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Subscription } from 'rxjs';
 import { Project, ProjectStatus } from '../../../models/project';
 import { AdminService } from '../../../services/admin.service';
@@ -30,6 +31,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   public asChanged = false;
   public updateLoading = false;
 
+  modalRef: BsModalRef;
+
   statusList = [];
 
   constructor(private cd: ChangeDetectorRef,
@@ -38,7 +41,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
               private fb: FormBuilder,
               private ngZone: NgZone,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private modalService: BsModalService) {
     this.projectForm = new ProjectValidator(this.fb).projectPattern;
   }
 
@@ -67,7 +71,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
         this.cd.detectChanges();
       });
     } else {
-      this.projectTimeline = this.getProjectFromForm();
+      this.projectTimeline = new Project(this.getProjectFromForm());
 
       this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
         this.asChanged = this.project && !this.project.equals(this.getProjectFromForm()) || true;
@@ -138,6 +142,22 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
         this.updateLoading = false;
       }
     );
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  onDelete() {
+    if (!this.project || !this.customerId) {
+      this.modalRef.hide();
+      return;
+    }
+
+    this.adminService.deleteProject(this.customerId, this.projectId).then(() => {
+      this.modalRef.hide();
+      this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers']));
+    })
   }
 
   ngOnDestroy() {

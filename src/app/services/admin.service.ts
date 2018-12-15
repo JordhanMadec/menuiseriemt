@@ -3,18 +3,21 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
+import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
+import { Quote } from '../models/quote';
 import { User } from '../models/user';
 import { Utils } from '../shared/utils';
 import { AlertService } from './alert.service';
 import { DatabaseService } from './database.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(private alertService: AlertService, private databaseService: DatabaseService) {
+  constructor(private alertService: AlertService, private databaseService: DatabaseService, private storageService: StorageService) {
   }
 
 
@@ -126,5 +129,91 @@ export class AdminService {
       this.alertService.error('Impossible de créer le chantier');
       return false;
     })
+  }
+
+  public deleteProject(ownerId: string, projectId: string): Promise<boolean> {
+    return firebase.database()
+      .ref('/projects/' + ownerId + '/' + projectId)
+      .remove(error => {
+        if (error) {
+          this.alertService.error('Impossible de supprimer le chantier');
+          return false;
+        }
+
+        this.deleteProjectInvoices(ownerId, projectId);
+        this.deleteProjectQuotes(ownerId, projectId);
+
+        this.alertService.success('Chantier supprimé avec succès');
+
+        return true;
+      });
+  }
+
+  public deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
+    return this.databaseService.getProjectInvoices(ownerId, projectId).then((invoices: Invoice[]) => {
+      invoices.forEach((invoice: Invoice) => {
+        this.storageService.deleteInvoice(ownerId, invoice.fileName).then(deleteFileRes => {
+          if (!deleteFileRes) { return false; }
+
+          this.deleteInvoice(ownerId, invoice.id).then(res => {
+            if (!res) { return false; }
+          })
+        });
+      });
+
+      return true;
+    });
+  }
+
+  public deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
+    return this.databaseService.getProjectQuotes(ownerId, projectId).then((quotes: Quote[]) => {
+      quotes.forEach((quote: Quote) => {
+        this.storageService.deleteQuote(ownerId, quote.fileName).then(deleteFileRes => {
+          if (!deleteFileRes) { return false; }
+
+          this.deleteQuote(ownerId, quote.id).then(res => {
+            if (!res) { return false; }
+          })
+        });
+      });
+
+      return true;
+    });
+  }
+
+
+
+
+
+  // INVOICES & QUOTES
+
+  deleteInvoice(ownerId: string, invoiceId: string): Promise<boolean> {
+    return firebase.database()
+      .ref('/invoices/' + ownerId + '/' + invoiceId)
+      .remove(error => {
+        if (error) {
+          this.alertService.error('Impossible de supprimer la facture');
+          return false;
+        }
+
+        this.alertService.success('Facture supprimée avec succès');
+
+        return true;
+      });
+  }
+
+  deleteQuote(ownerId: string, quoteId: string): Promise<boolean> {
+    return firebase.database()
+      .ref('/quotes/' + ownerId + '/' + quoteId)
+      .remove(error => {
+        if (error) {
+          this.alertService.error('Impossible de supprimer le devis');
+          return false;
+        }
+
+        this.alertService.success('Devis supprimé avec succès');
+
+        return true;
+      });
   }
 }

@@ -23,4 +23,18 @@ export class StorageService {
       .then(url => url,
         error => this.alertService.error('Impossible de récupérer le document'));
   }
+
+  deleteInvoice(userId: string, fileName: string): Promise<boolean> {
+    return firebase.storage().ref('invoices/' + userId + '/' + fileName)
+      .delete()
+      .then(() => true)
+      .catch(() => false);
+  }
+
+  deleteQuote(userId: string, fileName: string): Promise<boolean> {
+    return firebase.storage().ref('quotes/' + userId + '/' + fileName)
+      .delete()
+      .then(() => true)
+      .catch(() => false);
+  }
 }

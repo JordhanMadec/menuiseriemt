@@ -129,7 +129,7 @@ export class DatabaseService {
     return this.getUserInvoices(userId).then(
       (_invoices: Invoice[]) => {
         const invoices = _invoices.filter(invoice => invoice.projectId + '' === projectId);
-        return _.sortBy(_invoices, ['date']);
+        return _.sortBy(invoices, ['date']);
       }
     )
   }
