@@ -75,7 +75,7 @@ export class DatabaseService {
           invoice.id = _invoice.key;
           invoices.push(invoice);
         });
-        return _.sortBy(invoices, ['date']);
+        return _.reverse(_.sortBy(invoices, ['date']));
       }, error => {
         this.alertService.error('Impossible de récupérer les factures');
         return invoices;
@@ -106,7 +106,7 @@ export class DatabaseService {
           quote.id = _quote.key;
           quotes.push(quote);
         });
-        return _.sortBy(quotes, ['date']);
+        return _.reverse(_.sortBy(quotes, ['date']));
       }, error => {
         this.alertService.error('Impossible de récupérer les devis');
         return quotes;
@@ -170,7 +170,7 @@ export class DatabaseService {
           })
         })
 
-        return projects;
+        return _.reverse(_.sortBy(projects, ['startDate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les chantiers');
         return [];
