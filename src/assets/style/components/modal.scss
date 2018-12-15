@@ -1,0 +1,16 @@
+modal-container.modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+
+  app-svg-icon {
+    fill: $dark-grey;
+  }
+}
+
+.modal-content {
+  box-shadow: $shadow-strong;
+  border: none !important;
+  border-radius: $small-radius !important;
+}
+

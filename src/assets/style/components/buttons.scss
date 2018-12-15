@@ -144,3 +144,15 @@ a.my-button, a.my-button:hover {
     transform: scale(1);
   }
 }
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: -$small-gap;
+
+  .my-button {
+    margin: $small-gap;
+  }
+}

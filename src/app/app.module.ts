@@ -4,8 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ModalModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MomentModule } from 'ngx-moment';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -52,11 +55,11 @@ import { CustomerHeaderComponent } from './navbar/customer-header/customer-heade
 import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
 import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
-import { InvoiceViewerComponent } from './document-viewer/invoice-viewer.component';
+import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { PageTitleComponent } from './shared/page-title/page-title.component';
 import { ProjectTimelineComponent } from './shared/project-timeline/project-timeline.component';
-import { QuoteViewerComponent } from './document-viewer/quote-viewer.component';
+import { QuoteViewerComponent } from './shared/document-viewer/quote-viewer.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminHeaderComponent } from './navbar/admin-header/admin-header.component';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
@@ -64,6 +67,7 @@ import { UserWizardComponent } from './shared/user-wizard/user-wizard.component'
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
+import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +110,7 @@ import { ProjectDetailComponent } from './shared/project-detail/project-detail.c
     AdminProjectsComponent,
     ClientDetailComponent,
     ProjectDetailComponent,
+    ProjectWizardComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,6 +130,9 @@ import { ProjectDetailComponent } from './shared/project-detail/project-detail.c
     FlexLayoutModule,
     PdfViewerModule,
     BsDropdownModule.forRoot(),
+    NgSelectModule,
+    MomentModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     AuthGuard,

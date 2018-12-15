@@ -42,14 +42,14 @@
               <div class="tag field-label">
                 Début
               </div>
-              {{project?.startDate}}
+              {{(project?.startDate | amDateFormat:'DD/MM/YYYY')}}
             </div>
 
             <div class="field-wrapper">
               <div class="tag field-label">
                 Fin
               </div>
-              {{project?.endDate ? project?.endDate : 'En cours...'}}
+              {{project?.endDate ? (project?.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...'}}
             </div>
 
             <div class="field-wrapper">

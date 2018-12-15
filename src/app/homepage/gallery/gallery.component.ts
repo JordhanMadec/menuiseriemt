@@ -1,5 +1,6 @@
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from '../../services/alert.service';
 import { AlbumInfo } from '../album/album-info.model';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -18,16 +19,15 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(private router: Router, private http: Http, private ngZone: NgZone) {}
+  constructor(private router: Router, private http: Http, private ngZone: NgZone, private alertService: AlertService) {}
 
   ngOnInit() {
     this.subscription = this.getAllAlbums().subscribe(
       data => {
         this.albums = of(data);
-        console.log('GetAllAlbums SUCCESS: ', data);
       },
       error => {
-        console.log('GetAllAlbums ERROR: ', error);
+        this.alertService.error('Impossible de récupérer les albums');
       });
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Project, ProjectStatus } from '../../models/project';
 
 @Component({
@@ -6,7 +6,7 @@ import { Project, ProjectStatus } from '../../models/project';
   templateUrl: './project-timeline.component.html',
   styleUrls: ['./project-timeline.component.scss']
 })
-export class ProjectTimelineComponent implements OnInit {
+export class ProjectTimelineComponent implements OnInit, OnChanges {
 
   @Input() project: Project;
 
@@ -15,6 +15,18 @@ export class ProjectTimelineComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.fetchStatus();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.fetchStatus();
+  }
+
+  private fetchStatus() {
+    if (!this.project) {
+      return;
+    }
+
     switch (this.project.status) {
       case ProjectStatus.NOT_STARTED:
         this.step = 0;
@@ -34,6 +46,8 @@ export class ProjectTimelineComponent implements OnInit {
       case ProjectStatus.COMPLETED:
         this.step = 4;
         break;
+      default:
+        this.step = 0;
     }
   }
 

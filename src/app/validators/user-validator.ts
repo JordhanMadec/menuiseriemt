@@ -1,14 +1,13 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../models/user';
-import { PasswordValidator } from './password-validator';
 
 export const phonePattern = '^[0-9]{10}$';
 
-export class UserProfileValidator {
-  private readonly _userProfileValidator: FormGroup;
+export class UserValidator {
+  private readonly _userValidator: FormGroup;
 
   constructor(fb: FormBuilder, user: User = null) {
-    this._userProfileValidator = fb.group({
+    this._userValidator = fb.group({
       contact: fb.group({
         firstName: [user && user.firstName || '', Validators.required],
         lastName: [user && user.lastName || '', Validators.required],
@@ -35,7 +34,7 @@ export class UserProfileValidator {
     });
   }
 
-  get userProfileValidator(): FormGroup {
-    return this._userProfileValidator;
+  get userValidator(): FormGroup {
+    return this._userValidator;
   }
 }

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
 import { DatabaseService } from '../../services/database.service';
-import { UserProfileValidator } from '../user-profile-validator';
+import { UserValidator } from '../../validators/user-validator';
 
 @Component({
   selector: 'app-client-wizard',
@@ -32,7 +32,7 @@ export class UserWizardComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
     private route: ActivatedRoute)
   {
-    this.profileForm = new UserProfileValidator(this.fb).userProfileValidator;
+    this.profileForm = new UserValidator(this.fb).userValidator;
   }
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class UserWizardComponent implements OnInit, OnDestroy {
     this.databaseService.getUser(customerId).then(
       (user: User) => {
         this.user = user;
-        this.profileForm = new UserProfileValidator(this.fb, user).userProfileValidator;
+        this.profileForm = new UserValidator(this.fb, user).userValidator;
         this.asChanged = false;
         this.updateLoading = false;
 

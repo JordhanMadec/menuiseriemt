@@ -4,7 +4,7 @@
     <app-svg-icon name="check-icon" [size]="30" *ngIf="step > 0"></app-svg-icon>
     <app-svg-icon name="clock-icon" [size]="30" *ngIf="step <= 0"></app-svg-icon>
 
-    <div class="step-label" *ngIf="step === 0">{{project.getStatus()}}</div>
+    <div class="step-label first" *ngIf="step === 0">{{project?.getStatus()}}</div>
   </div>
 
   <div class="link" [class.done]="step > 0"></div>
@@ -13,7 +13,7 @@
     <app-svg-icon name="check-icon" [size]="30" *ngIf="step > 1"></app-svg-icon>
     <app-svg-icon name="clock-icon" [size]="30" *ngIf="step <= 1"></app-svg-icon>
 
-    <div class="step-label" *ngIf="step === 1">{{project.getStatus()}}</div>
+    <div class="step-label" *ngIf="step === 1">{{project?.getStatus()}}</div>
   </div>
 
   <div class="link" [class.done]="step > 1"></div>
@@ -23,7 +23,7 @@
     <app-svg-icon name="close-icon" [size]="30" *ngIf="step === 2 && project?.status === 'PENDING'"></app-svg-icon>
     <app-svg-icon name="clock-icon" [size]="30" *ngIf="step <= 2  && project?.status !== 'PENDING'"></app-svg-icon>
 
-    <div class="step-label" *ngIf="step === 2">{{project.getStatus()}}</div>
+    <div class="step-label" *ngIf="step === 2">{{project?.getStatus()}}</div>
   </div>
 
   <div class="link" [class.done]="step > 2"></div>
@@ -33,7 +33,7 @@
     <app-svg-icon name="euro-icon" [size]="30" *ngIf="step === 3"></app-svg-icon>
     <app-svg-icon name="clock-icon" [size]="30" *ngIf="step < 3"></app-svg-icon>
 
-    <div class="step-label" *ngIf="step === 3">{{project.getStatus()}}</div>
+    <div class="step-label" *ngIf="step === 3">{{project?.getStatus()}}</div>
   </div>
 
   <div class="link"  [class.done]="step > 3"></div>
@@ -42,6 +42,6 @@
     <app-svg-icon name="check-icon" [size]="30" *ngIf="step > 3"></app-svg-icon>
     <app-svg-icon name="clock-icon" [size]="30" *ngIf="step <= 3"></app-svg-icon>
 
-    <div class="step-label" *ngIf="step > 3">{{project.getStatus()}}</div>
+    <div class="step-label last" *ngIf="step > 3">{{project?.getStatus()}}</div>
   </div>
 </div>
