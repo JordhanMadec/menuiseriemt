@@ -10,7 +10,7 @@
 
         <div class="tag-list">
           <ng-container *ngFor="let tag of tags">
-            <div class="tag" [class.dark]="!error && !success" [class.error]="error" [class.success]="success">{{tag}}</div>
+            <div class="tag" [class.error]="error" [class.success]="success">{{tag}}</div>
           </ng-container>
         </div>
       </div>

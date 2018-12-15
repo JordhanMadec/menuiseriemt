@@ -90,6 +90,8 @@ export class AdminService {
   // PROJECTS
 
   public createOrUpdateProject(project: Project): Promise<boolean> {
+    console.log(project);
+
     if (project.id) {
       return this.updateProject(project);
     }
