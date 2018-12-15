@@ -25,16 +25,21 @@
             <div class="subsection col-lg-12">
               <h4 class="green-text">Client</h4>
 
-              <!-- TODO: User picker -->
-
-              <!--<div formGroupName="addressFields">-->
-              <div>
-
-                <div class="input-container row">
-                  <div class="input-wrapper col-lg-12">
-                    <input id="ownerId" type="text" placeholder="Client*" formControlName="ownerId">
-                    <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
-                  </div>
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12" *ngIf="customers?.length">
+                  <ng-select
+                    [items]="customers"
+                    bindLabel="userName"
+                    bindValue="userId"
+                    formControlName="ownerId"
+                    [placeholder]="projectForm.get('ownerId').value ? '' : 'Client*'"
+                    [clearable]="false"
+                    [searchable]="true"
+                    [virtualScroll]="true"
+                  >
+                  </ng-select>
+                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                  <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20" (click)="openStatusSelect()"></app-svg-icon>
                 </div>
               </div>
             </div>
