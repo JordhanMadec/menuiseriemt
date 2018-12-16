@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { Project } from '../../models/project';
+import { User } from '../../models/user';
 import { DatabaseService } from '../../services/database.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { DatabaseService } from '../../services/database.service';
 export class AdminProjectsComponent implements OnInit {
 
   public projects: Project[];
+  public projectsFiltered: Project[];
+  public filterValue = '';
 
   constructor(private cd: ChangeDetectorRef, private databaseService: DatabaseService) {
   }
@@ -22,8 +26,17 @@ export class AdminProjectsComponent implements OnInit {
     this.databaseService.getAllProjects().then(
       (projects: Project[]) => {
         this.projects = projects;
+        this.projectsFiltered = projects;
         this.cd.detectChanges();
       }
     );
+  }
+
+  onSearch() {
+    this.projectsFiltered = _.filter(this.projects, (project: Project) => {
+      return project.title.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+        project.getStatus().toLowerCase().includes(this.filterValue.toLowerCase());
+    });
+    this.cd.detectChanges();
   }
 }
