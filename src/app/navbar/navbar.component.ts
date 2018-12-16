@@ -46,6 +46,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     $('body').scrollspy({ target: '#navbar' });
 
+    this.onResize();
+
     this.sidenavVisible = window.matchMedia('(min-width: 992px').matches;
 
     this.routerSubscription = this.router.events.subscribe(

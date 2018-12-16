@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, NgZone, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user';
@@ -32,7 +32,7 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
         if (this.router.url.match('^/espace-client/suivi-chantier')) {
           this.selectedNavItem = 'suivi-chantier';
         }
-        if (this.router.url.match('^/espace-client/profil$')) {
+        if (this.router.url.match('^/espace-client/profil')) {
           this.selectedNavItem = 'profil';
         }
 
