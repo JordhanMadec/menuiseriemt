@@ -4,9 +4,18 @@
     <div>
       <app-page-title title="Clients"></app-page-title>
 
+      <div class="list-filter-container">
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-12">
+            <input placeholder="Rechercher" (input)="onSearch()" [(ngModel)]="filterValue">
+            <app-svg-icon class="input-icon" name="search-icon" [size]="20"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="users; else spinner">
-        <div class="list-container" *ngIf="users.length; else emptyList">
-          <ng-container *ngFor="let user of users">
+        <div class="list-container" *ngIf="usersFiltered.length; else emptyList">
+          <ng-container *ngFor="let user of usersFiltered">
             <app-list-item icon="user-icon"
                            [title]="user.firstName + ' ' + user.lastName"
                            [subtitle]="user.email"
@@ -19,8 +28,8 @@
 
         <ng-template #emptyList>
           <div class="list-container empty-list">
-            <app-svg-icon name="calendar-icon" [size]="200"></app-svg-icon>
-            Vous n'avez pas de client pour le moment
+            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+            Aucun client
           </div>
         </ng-template>
       </div>

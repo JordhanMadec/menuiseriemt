@@ -4,9 +4,18 @@
     <div>
       <app-page-title title="Chantiers"></app-page-title>
 
+      <div class="list-filter-container">
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-12">
+            <input placeholder="Rechercher" (input)="onSearch()" [(ngModel)]="filterValue">
+            <app-svg-icon class="input-icon" name="search-icon" [size]="20"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="projects; else spinner">
-        <div class="list-container" *ngIf="projects.length; else emptyList">
-          <ng-container *ngFor="let project of projects">
+        <div class="list-container" *ngIf="projectsFiltered.length; else emptyList">
+          <ng-container *ngFor="let project of projectsFiltered">
             <app-list-item icon="calendar-icon"
                            [title]="project.title"
                            [subtitle]="(project.startDate | amDateFormat:'DD/MM/YYYY') + ' - ' + (project.endDate ? (project.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...')"
@@ -20,8 +29,8 @@
 
         <ng-template #emptyList>
           <div class="list-container empty-list">
-            <app-svg-icon name="calendar-icon" [size]="200"></app-svg-icon>
-            Vous n'avez pas de chantier pour le moment
+            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+            Pas de chantier
           </div>
         </ng-template>
       </div>

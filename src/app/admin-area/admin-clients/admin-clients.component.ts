@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
 
@@ -10,6 +11,8 @@ import { AdminService } from '../../services/admin.service';
 export class AdminClientsComponent implements OnInit {
 
   public users: User[];
+  public usersFiltered: User[];
+  public filterValue = '';
 
   constructor(private cd: ChangeDetectorRef, private adminService: AdminService) {
   }
@@ -22,8 +25,18 @@ export class AdminClientsComponent implements OnInit {
     this.adminService.getAllUsers().then(
       (users: User[]) => {
         this.users = users;
+        this.usersFiltered = users;
         this.cd.detectChanges();
       }
     );
+  }
+
+  onSearch() {
+    this.usersFiltered = _.filter(this.users, (user: User) => {
+      return user.firstName.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+        user.lastName.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+        user.email.toLowerCase().includes(this.filterValue.toLowerCase());
+    });
+    this.cd.detectChanges();
   }
 }
