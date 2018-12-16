@@ -2,25 +2,19 @@
   <div class="container">
 
     <div *ngIf="!loading; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
-      <app-page-title [title]="user ? 'Modifier client' : 'Nouveau client'" [hasBackButton]="true"></app-page-title>
+      <app-page-title [title]="user ? 'Modifier le client' : 'Nouveau client'" [hasBackButton]="true"></app-page-title>
 
       <small>Les champs avec une astérisque (*) sont obligatoires.</small>
 
       <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
         <div formGroupName="contact">
           <h5 class="input-setcion-title">Contact</h5>
 
           <div class="input-container row">
 
-            <div class="input-wrapper col-lg-12" *ngIf="user">
-              <div class="field-wrapper">
-                <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email" hidden>
-                <div class="tag field-label">
-                  <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
-                </div>
-                {{user?.email}}
-              </div>
-            </div>
+            <input id="mail" type="email" placeholder="Adresse mail*" formControlName="email" hidden *ngIf="user">
+
 
             <div class="input-wrapper col-lg-6">
               <input id="firstName" type="text" placeholder="Prénom*" formControlName="firstName">
