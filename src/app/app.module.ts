@@ -68,6 +68,7 @@ import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projec
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
+import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { ProjectWizardComponent } from './admin-area/admin-projects/project-wiza
     ClientDetailComponent,
     ProjectDetailComponent,
     ProjectWizardComponent,
+    AdminInvoicesComponent,
   ],
   imports: [
     BrowserModule,
