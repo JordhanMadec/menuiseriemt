@@ -1,7 +1,7 @@
 export class Document {
   id: string;
   title: string;
-  date: string;
+  lastUpdate: Date | string;
   fileName: string;
   ownerId: string;
   projectId: string;
@@ -11,7 +11,7 @@ export class Document {
   constructor(document: any) {
     this.id = document.id;
     this.title = document.title;
-    this.date = document.date;
+    this.lastUpdate = document.lastUpdate && new Date(document.lastUpdate) || null;
     this.fileName = document.fileName;
     this.ownerId = document.ownerId;
     this.projectId = document.projectId;

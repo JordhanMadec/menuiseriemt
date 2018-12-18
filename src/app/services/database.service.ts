@@ -75,7 +75,8 @@ export class DatabaseService {
           invoice.id = _invoice.key;
           invoices.push(invoice);
         });
-        return _.reverse(_.sortBy(invoices, ['date']));
+
+        return _.reverse(_.sortBy(invoices, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les factures');
         return invoices;
@@ -106,7 +107,8 @@ export class DatabaseService {
           quote.id = _quote.key;
           quotes.push(quote);
         });
-        return _.reverse(_.sortBy(quotes, ['date']));
+
+        return _.reverse(_.sortBy(quotes, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les devis');
         return quotes;
@@ -129,7 +131,7 @@ export class DatabaseService {
     return this.getUserInvoices(userId).then(
       (_invoices: Invoice[]) => {
         const invoices = _invoices.filter(invoice => invoice.projectId + '' === projectId);
-        return _.sortBy(invoices, ['date']);
+        return _.sortBy(invoices, ['lastUpdate']);
       }
     )
   }
@@ -138,7 +140,7 @@ export class DatabaseService {
     return this.getUserQuotes(userId).then(
       (_quotes: Quote[]) => {
         const quotes = _quotes.filter(quote => quote.projectId + '' === projectId);
-        return _.sortBy(quotes, ['date']);
+        return _.sortBy(quotes, ['lastUpdate']);
       }
     )
   }
@@ -170,7 +172,7 @@ export class DatabaseService {
           })
         })
 
-        return _.reverse(_.sortBy(projects, ['startDate']));
+        return _.reverse(_.sortBy(projects, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les chantiers');
         return [];
@@ -189,7 +191,8 @@ export class DatabaseService {
           project.id = _project.key;
           projects.push(project);
         });
-        return projects;
+
+        return _.reverse(_.sortBy(projects, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les chantiers');
         return projects;

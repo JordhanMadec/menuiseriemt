@@ -9,6 +9,7 @@ export class User {
   homePhone: string;
   mobilePhone: string;
   isAdmin: boolean;
+  lastUpdate: Date | string;
 
   constructor(user: any) {
     this.id = user.id;
@@ -21,6 +22,7 @@ export class User {
     this.homePhone = user.homePhone || '';
     this.mobilePhone = user.mobilePhone || '';
     this.isAdmin = user.isAdmin || false;
+    this.lastUpdate = user.lastUpdate && new Date(user.lastUpdate) || new Date();
   }
 
   equals(user: User): boolean {

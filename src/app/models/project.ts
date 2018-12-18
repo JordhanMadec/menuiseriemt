@@ -4,6 +4,7 @@ export class Project {
   ownerId: string;
   startDate: Date;
   endDate: Date;
+  lastUpdate: Date | string;
   status: ProjectStatus;
   city: string;
   zipcode: string;
@@ -14,8 +15,9 @@ export class Project {
     this.id = project.id;
     this.title = project.title;
     this.ownerId = project.ownerId;
-    this.startDate = new Date(project.startDate);
+    this.startDate = project.startDate && new Date(project.startDate) || new Date();
     this.endDate = project.endDate && new Date(project.endDate) || null;
+    this.lastUpdate = project.lastUpdate && new Date(project.lastUpdate) || this.startDate;
     this.status = project.status;
     this.city = project.city;
     this.zipcode = project.zipcode;

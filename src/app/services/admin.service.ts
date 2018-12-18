@@ -43,6 +43,8 @@ export class AdminService {
   }
 
   createOrUpdateUser(user: User): Promise<boolean> {
+    user.lastUpdate = (new Date()).toString();
+
     if (user.id) {
       return this.updateUser(user);
     }
@@ -90,7 +92,7 @@ export class AdminService {
   // PROJECTS
 
   public createOrUpdateProject(project: Project): Promise<boolean> {
-    console.log(project);
+    project.lastUpdate = (new Date()).toString();
 
     if (project.id) {
       return this.updateProject(project);
