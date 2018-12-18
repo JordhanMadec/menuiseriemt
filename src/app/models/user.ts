@@ -9,7 +9,7 @@ export class User {
   homePhone: string;
   mobilePhone: string;
   isAdmin: boolean;
-  lastUpdate: Date;
+  lastUpdate: Date | string;
 
   constructor(user: any) {
     this.id = user.id;

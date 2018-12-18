@@ -1,7 +1,7 @@
 export class Document {
   id: string;
   title: string;
-  lastUpdate: Date;
+  lastUpdate: Date | string;
   fileName: string;
   ownerId: string;
   projectId: string;

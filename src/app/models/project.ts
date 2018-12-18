@@ -4,7 +4,7 @@ export class Project {
   ownerId: string;
   startDate: Date;
   endDate: Date;
-  lastUpdate: Date;
+  lastUpdate: Date | string;
   status: ProjectStatus;
   city: string;
   zipcode: string;
@@ -30,7 +30,6 @@ export class Project {
       this.ownerId === project.ownerId &&
       this.startDate === project.startDate &&
       this.endDate === project.endDate &&
-      this.lastUpdate === project.lastUpdate &&
       this.city === project.city &&
       this.zipcode === project.zipcode &&
       this.address === project.address &&

@@ -1,5 +1,5 @@
 export class Notif {
-  date: Date;
+  date: Date | string;
   read: boolean;
   text: string;
   link: string;
