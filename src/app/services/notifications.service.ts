@@ -34,7 +34,7 @@ export class NotificationsService {
       invoices.filter(invoice => !invoice.done).forEach(invoice => {
         notifs.push(new Notif({
           text: 'Facture à payer',
-          date: 'Depuis le ' + invoice.date,
+          date: 'Depuis le ' + invoice.lastUpdate,
           link: '/espace-client/factures/' + invoice.id,
           read: false,
         }));
@@ -44,7 +44,7 @@ export class NotificationsService {
         quotes.filter(quote => !quote.done).forEach(quote => {
           notifs.push(new Notif({
             text: 'Devis à valider',
-            date: 'Depuis le ' + quote.date,
+            date: 'Depuis le ' + quote.lastUpdate,
             link: '/espace-client/devis/' + quote.id,
             read: false,
           }));
