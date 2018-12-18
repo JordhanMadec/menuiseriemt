@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { Notif } from '../models/notif';
 import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
