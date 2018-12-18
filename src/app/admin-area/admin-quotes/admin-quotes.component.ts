@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { Quote } from '../../models/quote';
 import { DatabaseService } from '../../services/database.service';
 
@@ -10,6 +11,8 @@ import { DatabaseService } from '../../services/database.service';
 export class AdminQuotesComponent implements OnInit {
 
   public quotes: Quote[];
+  public quotesFiltered: Quote[];
+  public filterValue = '';
 
   constructor(private cd: ChangeDetectorRef, private databaseService: DatabaseService) {
   }
@@ -18,9 +21,17 @@ export class AdminQuotesComponent implements OnInit {
     this.databaseService.getAllQuotes().then(
       (quotes: Quote[]) => {
         this.quotes = quotes;
+        this.quotesFiltered = quotes;
         this.cd.detectChanges();
       }
     );
+  }
+
+  onSearch() {
+    this.quotesFiltered = _.filter(this.quotes, (quote: Quote) => {
+      return quote.title.toLowerCase().includes(this.filterValue.toLowerCase());
+    });
+    this.cd.detectChanges();
   }
 
 }

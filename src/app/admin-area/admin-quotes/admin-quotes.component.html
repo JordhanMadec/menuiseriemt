@@ -4,9 +4,18 @@
     <div>
       <app-page-title title="Devis"></app-page-title>
 
+      <div class="list-filter-container">
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-12">
+            <input placeholder="Rechercher" (input)="onSearch()" [(ngModel)]="filterValue">
+            <app-svg-icon class="input-icon" name="search-icon" [size]="20"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="quotes; else spinner">
-        <div class="list-container" *ngIf="quotes.length; else emptyInvoices">
-          <ng-container *ngFor="let quote of quotes">
+        <div class="list-container" *ngIf="quotesFiltered.length; else emptyInvoices">
+          <ng-container *ngFor="let quote of quotesFiltered">
             <app-list-item icon="document-icon"
                            [title]="quote.title"
                            [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
@@ -32,3 +41,7 @@
     </div>
   </div>
 </section>
+
+<button class="circle-button fab-button accent" routerLink="/espace-admin/nouvelle-facture">
+  <app-svg-icon name="add-icon"></app-svg-icon>
+</button>
