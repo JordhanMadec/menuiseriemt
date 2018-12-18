@@ -1,7 +1,7 @@
 <section id="customer-profile-section">
   <div class="container">
 
-    <div *ngIf="!loading; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500}">
+    <div *ngIf="!loading; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
       <app-page-title [title]="user ? 'Modifier le client' : 'Nouveau client'" [hasBackButton]="true"></app-page-title>
 
       <small>Les champs avec une astérisque (*) sont obligatoires.</small>
