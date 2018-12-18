@@ -91,7 +91,7 @@ export class AdminService {
 
   // PROJECTS
 
-  public createOrUpdateProject(project: Project): Promise<boolean> {
+  createOrUpdateProject(project: Project): Promise<boolean> {
     project.lastUpdate = (new Date()).toString();
 
     if (project.id) {
@@ -135,7 +135,7 @@ export class AdminService {
     })
   }
 
-  public deleteProject(ownerId: string, projectId: string): Promise<boolean> {
+  deleteProject(ownerId: string, projectId: string): Promise<boolean> {
     return firebase.database()
       .ref('/projects/' + ownerId + '/' + projectId)
       .remove(error => {
@@ -153,7 +153,7 @@ export class AdminService {
       });
   }
 
-  public deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
+  deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
     return this.databaseService.getProjectInvoices(ownerId, projectId).then((invoices: Invoice[]) => {
       invoices.forEach((invoice: Invoice) => {
         this.storageService.deleteInvoice(ownerId, invoice.fileName).then(deleteFileRes => {
@@ -169,7 +169,7 @@ export class AdminService {
     });
   }
 
-  public deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
+  deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
     return this.databaseService.getProjectQuotes(ownerId, projectId).then((quotes: Quote[]) => {
       quotes.forEach((quote: Quote) => {
         this.storageService.deleteQuote(ownerId, quote.fileName).then(deleteFileRes => {

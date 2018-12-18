@@ -99,7 +99,7 @@
               <ng-container *ngFor="let quote of quotes">
                 <app-list-item icon="document-icon"
                                [title]="quote?.title"
-                               [subtitle]="quote?.lastUpdate | amDateFormat:'DD/MM/YYYY'"
+                               [subtitle]="(quote?.lastUpdate | amDateFormat:'DD/MM/YYYY')"
                                [tags]="quote?.done ? ['Signé'] : ['À valider']"
                                [error]="!quote?.done"
                                [success]="quote?.done"
@@ -123,7 +123,7 @@
               <ng-container *ngFor="let invoice of invoices">
                 <app-list-item icon="document-icon"
                                [title]="invoice?.title"
-                               [subtitle]="invoice?.lastUpdate | amDateFormat:'DD/MM/YYYY'"
+                               [subtitle]="(invoice?.lastUpdate | amDateFormat:'DD/MM/YYYY')"
                                [tags]="invoice?.done ? ['Payée'] : ['À payer']"
                                [error]="!invoice?.done"
                                [success]="invoice?.done"

@@ -1,3 +1,34 @@
-<p>
-  admin-invoices works!
-</p>
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div>
+      <app-page-title title="Factures"></app-page-title>
+
+      <div *ngIf="invoices; else spinner">
+        <div class="list-container" *ngIf="invoices.length; else emptyInvoices">
+          <ng-container *ngFor="let invoice of invoices">
+            <app-list-item icon="document-icon"
+                           [title]="invoice.title"
+                           [subtitle]="(invoice.lastUpdate | amDateFormat:'DD/MM/YYYY')"
+                           [tags]="invoice.done ? ['Payée'] : ['À payer']"
+                           [error]="!invoice.done"
+                           [success]="invoice.done"
+                           link="/espace-admin/factures/{{invoice.ownerId}}/{{invoice.id}}">
+            </app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyInvoices>
+          <div class="list-container empty-list">
+            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
+            Vous n'avez pas de facture
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>

@@ -7,7 +7,7 @@
       <div *ngIf="quotes; else spinner">
         <div class="list-container" *ngIf="quotes.length; else emptyQuotes">
           <ng-container *ngFor="let quote of quotes">
-            <app-list-item icon="invoice-icon"
+            <app-list-item icon="document-icon"
                            [title]="quote.title"
                            [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
                            [tags]="quote.done ? ['Signé'] : ['À signer']"
@@ -33,7 +33,7 @@
       <div *ngIf="invoices; else spinner">
         <div class="list-container" *ngIf="invoices.length; else emptyInvoices">
           <ng-container *ngFor="let invoice of invoices">
-            <app-list-item icon="invoice-icon"
+            <app-list-item icon="document-icon"
                            [title]="invoice.title"
                            [subtitle]="(invoice.lastUpdate | amDateFormat:'DD/MM/YYYY')"
                            [tags]="invoice.done ? ['Payée'] : ['À payer']"

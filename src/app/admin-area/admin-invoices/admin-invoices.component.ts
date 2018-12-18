@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Invoice } from '../../models/invoice';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-admin-invoices',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminInvoicesComponent implements OnInit {
 
-  constructor() { }
+  public invoices: Invoice[];
 
-  ngOnInit() {
+  constructor(private cd: ChangeDetectorRef, private databaseService: DatabaseService) {
   }
 
+  ngOnInit() {
+      this.databaseService.getAllInvoices().then(
+        (invoices: Invoice[]) => {
+          this.invoices = invoices;
+          this.cd.detectChanges();
+        }
+      );
+  }
 }
