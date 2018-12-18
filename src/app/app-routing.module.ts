@@ -4,6 +4,7 @@ import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
+import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
 import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
@@ -68,7 +69,10 @@ const routes: Routes = [
           {path: '', component: AdminInvoicesComponent},
           {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
       ]},
-      {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
+      {path: 'devis', children: [
+          {path: '', component: AdminQuotesComponent},
+          {path: ':customerId/:quoteId', component: QuoteViewerComponent},
+      ]},
   ]},
 
 

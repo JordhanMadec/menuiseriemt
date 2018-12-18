@@ -1,0 +1,34 @@
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div>
+      <app-page-title title="Devis"></app-page-title>
+
+      <div *ngIf="quotes; else spinner">
+        <div class="list-container" *ngIf="quotes.length; else emptyInvoices">
+          <ng-container *ngFor="let quote of quotes">
+            <app-list-item icon="document-icon"
+                           [title]="quote.title"
+                           [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
+                           [tags]="quote.done ? ['Signé'] : ['À signer']"
+                           [error]="!quote.done"
+                           [success]="quote.done"
+                           link="/espace-admin/devis/{{quote.ownerId}}/{{quote.id}}">
+            </app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyInvoices>
+          <div class="list-container empty-list">
+            <app-svg-icon name="quote-icon" [size]="100"></app-svg-icon>
+            Vous n'avez pas de facture
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>
