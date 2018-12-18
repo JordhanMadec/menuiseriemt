@@ -69,6 +69,7 @@ import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
+import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoic
     ProjectDetailComponent,
     ProjectWizardComponent,
     AdminInvoicesComponent,
+    AdminQuotesComponent,
   ],
   imports: [
     BrowserModule,
