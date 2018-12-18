@@ -127,7 +127,7 @@
                                [tags]="invoice?.done ? ['Payée'] : ['À payer']"
                                [error]="!invoice?.done"
                                [success]="invoice?.done"
-                               [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + invoice?.id">
+                               [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/facture/' + user?.id + '/' + invoice?.id">
                 </app-list-item>
               </ng-container>
             </div>

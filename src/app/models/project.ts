@@ -1,5 +1,3 @@
-import { Utils } from '../shared/utils';
-
 export class Project {
   id: string;
   title: string
