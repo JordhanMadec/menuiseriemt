@@ -76,8 +76,27 @@ export class DatabaseService {
           })
         })
 
-        console.log(invoices);
         return _.reverse(_.sortBy(invoices, ['lastUpdate']));
+      }, error => {
+        this.alertService.error('Impossible de récupérer les chantiers');
+        return [];
+      });
+  }
+
+  getAllQuotes(): Promise<Quote[]> {
+    return firebase.database()
+      .ref('/quotes')
+      .once('value')
+      .then(_quotes => {
+        const quotes = [];
+
+        _quotes.forEach(user => {
+          user.forEach(quote => {
+            quotes.push(new Quote(quote.val()));
+          })
+        })
+
+        return _.reverse(_.sortBy(quotes, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les chantiers');
         return [];

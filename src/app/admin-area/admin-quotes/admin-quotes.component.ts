@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Quote } from '../../models/quote';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-admin-quotes',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminQuotesComponent implements OnInit {
 
-  constructor() { }
+  public quotes: Quote[];
+
+  constructor(private cd: ChangeDetectorRef, private databaseService: DatabaseService) {
+  }
 
   ngOnInit() {
+    this.databaseService.getAllQuotes().then(
+      (quotes: Quote[]) => {
+        this.quotes = quotes;
+        this.cd.detectChanges();
+      }
+    );
   }
 
 }
