@@ -73,7 +73,7 @@
               <app-list-item icon="calendar-icon"
                              [title]="project.title"
                              [subtitle]="(project.startDate | amDateFormat:'DD/MM/YYYY') + ' - ' + (project.endDate ? (project.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...')"
-                             [tags]="[project.getStatus()]"
+                             [tags]="[getProjectStatus(project)]"
                              [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
                              [success]="project.status === 'COMPLETED'"
                              link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">

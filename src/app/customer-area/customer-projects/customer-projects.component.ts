@@ -4,6 +4,7 @@ import { Project } from '../../models/project';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
+import { Utils } from '../../shared/utils';
 
 @Component({
   selector: 'app-customer-projects',
@@ -37,6 +38,10 @@ export class CustomerProjectsComponent implements OnInit, OnDestroy {
         );
       }
     );
+  }
+
+  getProjectStatus(project: Project) {
+    return Utils.getProjectStatus(project.status);
   }
 
   ngOnDestroy() {

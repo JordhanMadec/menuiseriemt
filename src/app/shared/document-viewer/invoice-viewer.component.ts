@@ -7,6 +7,7 @@ import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 import { StorageService } from '../../services/storage.service';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'app-customer-invoice',
@@ -22,12 +23,12 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
 
   public project: Project;
   public user: User;
-
   public document: Invoice;
   public documentUrl: string;
   public isAdmin = false;
   public root = '/facture';
   public tag: string;
+  public projectStatus = '';
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
@@ -58,6 +59,7 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
 
         this.databaseService.getUserProject(this.customerId, this.document.projectId).then((project: Project) => {
           this.project = project;
+          this.projectStatus = Utils.getProjectStatus(project.status) || '';
           this.cd.detectChanges();
         })
       }

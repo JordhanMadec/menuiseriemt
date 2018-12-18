@@ -28,6 +28,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   public project: Project;
   public user: User;
   public subtitle = '';
+  public status = '';
 
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
@@ -51,7 +52,8 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
     this.databaseService.getUserProject(this.customerId, this.projectId).then((project: Project) => {
       this.project = project;
-      this.subtitle = Utils.dateToString(project.startDate) + ' - ' + (project.endDate ? Utils.dateToString(project.endDate) : this.project.getStatus());
+      this.status = project && Utils.getProjectStatus(project.status) || '';
+      this.subtitle = Utils.dateToString(project.startDate) + ' - ' + (project.endDate ? Utils.dateToString(project.endDate) : Utils.getProjectStatus(this.project.status));
       this.cd.detectChanges();
     });
 

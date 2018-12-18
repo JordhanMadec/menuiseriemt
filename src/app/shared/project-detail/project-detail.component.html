@@ -59,7 +59,7 @@
               <div class="tag"
                    [class.error]="project?.status === 'PENDING' || project?.status === 'WAITING_PAYMENT'"
                    [class.success]="project?.status !== 'PENDING' && project?.status !== 'WAITING_PAYMENT'">
-                {{project?.getStatus()}}
+                {{status}}
               </div>
             </div>
 

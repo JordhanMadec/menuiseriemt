@@ -1,8 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Project } from '../../models/project';
-import { User } from '../../models/user';
 import { DatabaseService } from '../../services/database.service';
+import { Utils } from '../../shared/utils';
 
 @Component({
   selector: 'app-admin-projects',
@@ -32,10 +32,14 @@ export class AdminProjectsComponent implements OnInit {
     );
   }
 
+  getProjectStatus(project: Project) {
+    return Utils.getProjectStatus(project.status);
+  }
+
   onSearch() {
     this.projectsFiltered = _.filter(this.projects, (project: Project) => {
       return project.title.toLowerCase().includes(this.filterValue.toLowerCase()) ||
-        project.getStatus().toLowerCase().includes(this.filterValue.toLowerCase());
+        Utils.getProjectStatus(project.status).toLowerCase().includes(this.filterValue.toLowerCase());
     });
     this.cd.detectChanges();
   }

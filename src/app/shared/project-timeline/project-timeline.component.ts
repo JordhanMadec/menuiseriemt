@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Project, ProjectStatus } from '../../models/project';
+import { Utils } from '../utils';
 
 @Component({
   selector: 'app-project-timeline',
@@ -11,6 +12,7 @@ export class ProjectTimelineComponent implements OnInit, OnChanges {
   @Input() project: Project;
 
   public step = 0;
+  public status = '';
 
   constructor() { }
 
@@ -26,6 +28,8 @@ export class ProjectTimelineComponent implements OnInit, OnChanges {
     if (!this.project) {
       return;
     }
+
+    this.status = Utils.getProjectStatus(this.project.status) || '';
 
     switch (this.project.status) {
       case ProjectStatus.NOT_STARTED:

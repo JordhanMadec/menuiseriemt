@@ -25,10 +25,6 @@ export class Project {
     this.notes = project.notes;
   }
 
-  getStatus(): string {
-    return Utils.getProjectStatus(this.status);
-  }
-
   equals(project: Project | any): boolean {
     return this.title === project.title &&
       this.ownerId === project.ownerId &&

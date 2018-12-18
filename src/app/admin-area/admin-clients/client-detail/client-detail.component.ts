@@ -6,6 +6,7 @@ import { Quote } from '../../../models/quote';
 import { User } from '../../../models/user';
 import { AdminService } from '../../../services/admin.service';
 import { DatabaseService } from '../../../services/database.service';
+import { Utils } from '../../../shared/utils';
 
 @Component({
   selector: 'app-client-detail',
@@ -70,5 +71,9 @@ export class ClientDetailComponent implements OnInit {
       this.invoices = invoices;
       this.cd.detectChanges();
     })
+  }
+
+  getProjectStatus(project: Project) {
+    return Utils.getProjectStatus(project.status);
   }
 }
