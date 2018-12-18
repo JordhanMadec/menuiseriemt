@@ -63,6 +63,27 @@ export class DatabaseService {
 
   // INVOICES & QUOTES
 
+  getAllInvoices(): Promise<Invoice[]> {
+    return firebase.database()
+      .ref('/invoices')
+      .once('value')
+      .then(_invoices => {
+        const invoices = [];
+
+        _invoices.forEach(user => {
+          user.forEach(invoice => {
+            invoices.push(new Invoice(invoice.val()));
+          })
+        })
+
+        console.log(invoices);
+        return _.reverse(_.sortBy(invoices, ['lastUpdate']));
+      }, error => {
+        this.alertService.error('Impossible de récupérer les chantiers');
+        return [];
+      });
+  }
+
   getUserInvoices(userId: string): Promise<Invoice[]> {
     const invoices: Invoice[] = [];
 

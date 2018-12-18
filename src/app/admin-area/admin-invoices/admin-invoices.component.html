@@ -2,33 +2,7 @@
   <div class="container">
 
     <div>
-      <app-page-title title="Mes devis"></app-page-title>
-
-      <div *ngIf="quotes; else spinner">
-        <div class="list-container" *ngIf="quotes.length; else emptyQuotes">
-          <ng-container *ngFor="let quote of quotes">
-            <app-list-item icon="document-icon"
-                           [title]="quote.title"
-                           [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                           [tags]="quote.done ? ['Signé'] : ['À signer']"
-                           [error]="!quote.done"
-                           [success]="quote.done"
-                           link="/espace-client/devis/{{user?.id}}/{{quote.id}}">
-            </app-list-item>
-          </ng-container>
-        </div>
-
-        <ng-template #emptyQuotes>
-          <div class="list-container empty-list">
-            <app-svg-icon name="invoice-icon" [size]="100"></app-svg-icon>
-            Vous n'avez pas de devis
-          </div>
-        </ng-template>
-      </div>
-
-      <div class="gap"></div>
-
-      <app-page-title title="Mes factures"></app-page-title>
+      <app-page-title title="Factures"></app-page-title>
 
       <div *ngIf="invoices; else spinner">
         <div class="list-container" *ngIf="invoices.length; else emptyInvoices">
@@ -39,7 +13,7 @@
                            [tags]="invoice.done ? ['Payée'] : ['À payer']"
                            [error]="!invoice.done"
                            [success]="invoice.done"
-                           link="/espace-client/factures/{{user?.id}}/{{invoice.id}}">
+                           link="/espace-admin/factures/{{invoice.ownerId}}/{{invoice.id}}">
             </app-list-item>
           </ng-container>
         </div>

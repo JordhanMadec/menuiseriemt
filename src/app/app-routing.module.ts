@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminClientsComponent } from './admin-area/admin-clients/admin-clients.component';
 import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/client-detail.component';
+import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
@@ -32,6 +33,8 @@ const routes: Routes = [
   {path: 'inscription', component: SignupComponent, canActivate: [NotAuthGuard]},
   {path: 'mot-de-passe-oublie', component: ForgotPasswordComponent, canActivate: [NotAuthGuard]},
   {path: 'nouveau-mot-de-passe/:userId', component: ResetPasswordComponent, canActivate: [AuthGuard]},
+
+
   {path: 'espace-client', canActivate: [AuthGuard], children: [
     {path: '', component: CustomerHomeComponent},
     {path: 'profil/:customerId', component: UserWizardComponent},
@@ -45,6 +48,8 @@ const routes: Routes = [
     ]},
     {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
+
+
   {path: 'espace-admin', canActivate: [AdminGuard], children: [
       {path: '', component: AdminHomeComponent},
       {path: 'clients', children: [
@@ -59,9 +64,14 @@ const routes: Routes = [
           {path: ':customerId/:projectId/modifier', component: ProjectWizardComponent},
       ]},
       {path: 'nouveau-chantier', component: ProjectWizardComponent},
-      {path: 'facture/:customerId/:invoiceId', component: InvoiceViewerComponent},
+      {path: 'factures', children: [
+          {path: '', component: AdminInvoicesComponent},
+          {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
+      ]},
       {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
+
+
   // default
   {path: '**', redirectTo: '/'},
 ];
