@@ -1,4 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Quote } from '../models/quote';
 
@@ -12,6 +13,7 @@ export class DocumentValidator {
       ownerId: [document && document.ownerId || '', Validators.required],
       projectId: [document && document.projectId || '', Validators.required],
       done: [document && document.done || false, Validators.required],
+      type: [document && document.type || DocumentType.INVOICE, Validators.required]
     });
   }
 

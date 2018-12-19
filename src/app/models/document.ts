@@ -17,6 +17,15 @@ export class Document {
     this.projectId = document.projectId;
     this.done = document.done
   }
+
+  equals(document: Document | any): boolean {
+    return this.title === document.title &&
+      this.fileName === document.fileName &&
+      this.ownerId === document.ownerId &&
+      this.projectId === document.projectId &&
+      this.done === document.done &&
+      this.type === document.type;
+  }
 }
 
 export enum DocumentType {

@@ -1,3 +1,153 @@
-<p>
-  document-wizard works!
-</p>
+<section id="project-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div *ngIf="!loading; else spinner">
+      <app-page-title [title]="title" [hasBackButton]="true"></app-page-title>
+
+      <div class="project-container">
+        <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+          <div class="row project-info">
+            <div class="subsection col-lg-12">
+              <h4 class="green-text">Informations</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="title" type="text" placeholder="Titre du document*" formControlName="title">
+                  <app-svg-icon class="input-icon" name="edit-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+
+              <div class="input-container row" fxLayoutAlign="start center">
+                <div class="input-wrapper col-lg-6" *ngIf="!documentId">
+                  <ng-select
+                    [items]="documentTypes"
+                    bindLabel="label"
+                    bindValue="value"
+                    formControlName="type"
+                    [clearable]="false"
+                    [searchable]="false"
+                  >
+                  </ng-select>
+                  <app-svg-icon class="input-icon" name="document-icon" [size]="20"></app-svg-icon>
+                  <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20"></app-svg-icon>
+                </div>
+
+                <div class="input-wrapper" [class.col-lg-6]="!documentId" [class.col-lg-12]="documentId">
+                  <app-checkbox>
+                    <input role="checkbox" id="done" type="checkbox" formControlName="done">
+                    <span role="text">{{isInvoice ? 'Payée' : 'Signé'}}</span>
+                  </app-checkbox>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection col-lg-6">
+              <h4 class="green-text">Client</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12" *ngIf="customers.length">
+                  <ng-select
+                    [items]="customers"
+                    bindLabel="userName"
+                    bindValue="userId"
+                    formControlName="ownerId"
+                    notFoundText="Pas de client"
+                    [placeholder]="documentForm.get('ownerId').value?.length ? '' : 'Client*'"
+                    [clearable]="false"
+                    [searchable]="true"
+                    [virtualScroll]="true"
+                    (change)="onChangeCustomer()"
+                  >
+                  </ng-select>
+                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                  <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection col-lg-6">
+              <h4 class="green-text">Chantier</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <ng-select
+                    [items]="projects"
+                    bindLabel="projectTitle"
+                    bindValue="projectId"
+                    formControlName="projectId"
+                    notFoundText="Pas de chantier"
+                    [placeholder]="documentForm.get('projectId').value?.length ? '' : 'Chantier*'"
+                    [clearable]="false"
+                    [searchable]="true"
+                    [virtualScroll]="true"
+                  >
+                  </ng-select>
+                  <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                  <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection col-lg-12">
+              <h4 class="green-text">Document</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="fileName" type="text" placeholder="Document*" formControlName="fileName">
+                  <app-svg-icon class="input-icon" name="document-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection input-container col-lg-12">
+              <div class="input-wrapper">
+                <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+                  <button class="my-button error" *ngIf="document" (click)="openModal(template)">
+                    Supprimer
+                  </button>
+
+                  <button class="my-button accent" type="submit" [disabled]="(document && (!documentForm.valid || !asChanged)) || !documentForm.valid">
+                    {{document?.id ? 'Enregistrer' : 'Valider'}}
+                  </button>
+                </div>
+
+                <ng-template #buttonSpinner>
+                  <app-spinner [size]="30"></app-spinner>
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Supprimer le document ?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <app-svg-icon name="close-icon" [size]="20"></app-svg-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    Cette action est irréversible.
+
+    <div class="buttons-wrapper">
+      <button class="my-button" (click)="modalRef.hide()">
+        Annuler
+      </button>
+
+      <button class="my-button error" (click)="onDelete()">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</ng-template>
