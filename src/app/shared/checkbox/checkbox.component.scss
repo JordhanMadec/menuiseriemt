@@ -19,6 +19,8 @@ $checkbox-size: 25px;
 
   app-svg-icon.check-icon {
     fill: $green;
+    position: unset;
+    margin: 0 !important;
     transition: $transition-fast;
     transform: scale(0);
   }

@@ -90,22 +90,24 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
   }
 
   private buildStatusList() {
+    this.statusList = [];
     Object.keys(ProjectStatus).forEach((status) => {
-      this.statusList.push({
+      this.statusList = [...this.statusList, {
         value: status,
         label: Utils.getProjectStatus(status)
-      })
+      }];
     });
     this.cd.detectChanges();
   }
 
   private buildCustomersList() {
+    this.customers = [];
     this.adminService.getAllUsers().then((users: User[]) => {
       users.forEach((user: User) => {
-        this.customers.push({
+        this.customers = [...this.customers, {
           userId: user.id,
           userName: user.firstName + ' ' + user.lastName
-        })
+        }];
       });
       this.cd.detectChanges();
     })
@@ -116,15 +118,15 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
 
     const project = {
       id: this.projectId ? this.projectId : null,
-      title: this.projectForm.get('title').value,
+      title: this.projectForm.get('title').value.toString().trim(),
       ownerId: this.projectForm.get('ownerId').value,
       startDate: Utils.getDateDDMMYYYY(this.projectForm.get('information').get('startDate').value).toString(),
       endDate: endDate && Utils.getDateDDMMYYYY(endDate).toString() || null,
       status: this.projectForm.get('information').get('status').value,
-      notes: this.projectForm.get('information').get('notes').value,
-      city: this.projectForm.get('addressFields').get('city').value,
+      notes: this.projectForm.get('information').get('notes').value.toString().trim(),
+      city: this.projectForm.get('addressFields').get('city').value.toString().trim(),
       zipcode: this.projectForm.get('addressFields').get('zipcode').value,
-      address: this.projectForm.get('addressFields').get('address').value,
+      address: this.projectForm.get('addressFields').get('address').value.toString().trim(),
     }
     return project;
   }
