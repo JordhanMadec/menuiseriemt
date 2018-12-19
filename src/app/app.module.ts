@@ -70,6 +70,7 @@ import { ProjectDetailComponent } from './shared/project-detail/project-detail.c
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
+import { DocumentWizardComponent } from './admin-area/document-wizard/document-wizard.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.com
     ProjectWizardComponent,
     AdminInvoicesComponent,
     AdminQuotesComponent,
+    DocumentWizardComponent,
   ],
   imports: [
     BrowserModule,

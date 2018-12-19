@@ -5,6 +5,7 @@ import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
+import { DocumentWizardComponent } from './admin-area/document-wizard/document-wizard.component';
 import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
@@ -68,12 +69,18 @@ const routes: Routes = [
       {path: 'factures', children: [
           {path: '', component: AdminInvoicesComponent},
           {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
+          {path: ':customerId/:invoiceId/modifier', component: DocumentWizardComponent},
+          {path: ':customerId/:invoiceId/nouveau', component: DocumentWizardComponent},
       ]},
+      {path: 'nouvelle-facture', component: DocumentWizardComponent},
       {path: 'devis', children: [
           {path: '', component: AdminQuotesComponent},
           {path: ':customerId/:quoteId', component: QuoteViewerComponent},
+          {path: ':customerId/:quoteId/modifier', component: DocumentWizardComponent},
+          {path: ':customerId/:quoteId/nouveau', component: DocumentWizardComponent},
       ]},
-  ]},
+      {path: 'nouveau-devis', component: DocumentWizardComponent},
+    ]},
 
 
   // default
