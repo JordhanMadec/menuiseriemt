@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -44,7 +45,8 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
               private ngZone: NgZone,
               private router: Router,
               private route: ActivatedRoute,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private location: Location) {
     this.projectForm = new ProjectValidator(this.fb).projectPattern;
   }
 
@@ -145,13 +147,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
     this.adminService.createOrUpdateProject(this.getProjectFromForm()).then(
       res => {
         this.updateLoading = false;
-
-        if (!this.customerId) {
-          this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers']));
-          return;
-        }
-
-        this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers/' + this.customerId + '/' + this.projectId]));
+        this.location.back();
       },
       error => {
         this.updateLoading = false;
@@ -171,7 +167,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
 
     this.adminService.deleteProject(this.customerId, this.projectId).then(() => {
       this.modalRef.hide();
-      this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers']));
+      this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers'], {skipLocationChange: true}));
     })
   }
 

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,7 +31,8 @@ export class UserWizardComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private fb: FormBuilder,
     private ngZone: NgZone,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    private location: Location)
   {
     this.profileForm = new UserValidator(this.fb).userValidator;
   }
@@ -96,12 +98,7 @@ export class UserWizardComponent implements OnInit, OnDestroy {
     this.adminService.createOrUpdateUser(this.getUserFromForm()).then(
       res => {
         this.updateLoading = false;
-
-        if (!this.user) {
-          this.ngZone.run(() => this.router.navigate(['/espace-admin/clients']));
-        }
-
-        this.ngZone.run(() => this.router.navigate(['/espace-admin/clients/' + this.user.id]));
+        this.location.back();
       },
       error => {
         this.updateLoading = false;
