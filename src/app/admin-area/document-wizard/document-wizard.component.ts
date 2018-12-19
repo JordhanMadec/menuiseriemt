@@ -138,7 +138,13 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
   }
 
   private buildProjectsList() {
-    const ownerId = this.customerId || this.getDocumentFromForm().ownerId || null;
+    let ownerId = this.customerId;
+
+    if (this.document && this.document.ownerId !== this.documentForm.get('ownerId').value) {
+      ownerId = this.documentForm.get('ownerId').value;
+    } else {
+      ownerId = this.customerId || this.getDocumentFromForm().ownerId || null;
+    }
 
     if (!ownerId || !ownerId.length) {
       this.projects = [];
