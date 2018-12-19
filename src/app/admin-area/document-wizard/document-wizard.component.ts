@@ -93,7 +93,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       }
 
       this.formChangesSubscription = this.documentForm.valueChanges.subscribe(res => {
-        this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm()) || true;
+        this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm());
         this.buildProjectsList();
         this.cd.detectChanges();
       });
@@ -107,7 +107,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
     this.documentForm = new DocumentValidator(this.fb, this.document).documentValidator;
 
     this.formChangesSubscription = this.documentForm.valueChanges.subscribe(res => {
-      this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm()) || true;
+      this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm());
       this.buildProjectsList();
       this.cd.detectChanges();
     });
@@ -165,6 +165,8 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       ownerId: this.documentForm.get('ownerId').value,
       projectId: this.documentForm.get('projectId').value,
       done: this.documentForm.get('done').value,
+      fileName: this.documentForm.get('fileName').value.toString().trim(),
+      type: this.documentForm.get('type').value,
     }
     return document;
   }

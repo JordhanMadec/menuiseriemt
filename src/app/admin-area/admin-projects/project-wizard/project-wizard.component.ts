@@ -67,7 +67,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
         this.projectForm = new ProjectValidator(this.fb, this.project).projectPattern;
 
         this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
-          this.asChanged = this.project && !this.project.equals(this.getProjectFromForm()) || true;
+          this.asChanged = this.project && !this.project.equals(this.getProjectFromForm());
           this.projectTimeline = new Project(this.getProjectFromForm());
           this.cd.detectChanges();
         });
@@ -79,7 +79,7 @@ export class ProjectWizardComponent implements OnInit, OnDestroy {
       this.projectTimeline = new Project(this.getProjectFromForm());
 
       this.formChangesSubscription = this.projectForm.valueChanges.subscribe(res => {
-        this.asChanged = this.project && !this.project.equals(this.getProjectFromForm()) || true;
+        this.asChanged = this.project && !this.project.equals(this.getProjectFromForm());
         this.projectTimeline = new Project(this.getProjectFromForm());
         this.cd.detectChanges();
       });
