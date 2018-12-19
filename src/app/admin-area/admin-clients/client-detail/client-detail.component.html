@@ -152,6 +152,6 @@
   </div>
 </section>
 
-<button class="circle-button fab-button accent" [routerLink]="'/espace-admin/clients/' + user?.id + '/modifier'">
+<button class="circle-button fab-button accent" [routerLink]="'/espace-admin/clients/' + user?.id + '/modifier'" [skipLocationChange]="true">
   <app-svg-icon name="edit-icon"></app-svg-icon>
 </button>
