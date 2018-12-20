@@ -191,17 +191,19 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    /*this.updateLoading = true;
+    this.updateLoading = true;
 
-    this.adminService.createOrUpdateProject(this.getProjectFromForm()).then(
-      res => {
-        this.updateLoading = false;
-        this.location.back();
-      },
-      error => {
-        this.updateLoading = false;
-      }
-    );*/
+    if (this.documentId) {
+      this.adminService.updateDocument(this.getDocumentFromForm()).then(
+        res => {
+          this.updateLoading = false;
+          this.location.back();
+        },
+        error => {
+          this.updateLoading = false;
+        }
+      );
+    }
   }
 
   openModal(template: TemplateRef<any>) {

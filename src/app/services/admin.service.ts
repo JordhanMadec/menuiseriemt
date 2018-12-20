@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
+import { DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';
@@ -217,6 +218,22 @@ export class AdminService {
 
         this.alertService.success('Devis supprimé avec succès');
 
+        return true;
+      });
+  }
+
+  updateDocument(doc: Invoice | Quote): Promise<boolean> {
+    const documentType = doc.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
+    return firebase.database()
+      .ref('/' + documentType + '/' + doc.ownerId + '/' + doc.id)
+      .set(doc, error => {
+        if (error) {
+          this.alertService.error('Impossible de modifier le document');
+          return false;
+        }
+
+        this.alertService.success('Document modifié avec succès');
         return true;
       });
   }
