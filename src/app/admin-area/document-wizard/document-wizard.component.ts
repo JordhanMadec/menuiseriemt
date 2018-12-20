@@ -216,10 +216,10 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       return;
     }
 
-    /*this.adminService.deleteProject(this.customerId, this.projectId).then(() => {
+    this.adminService.deleteDocument(this.document).then(() => {
       this.modalRef.hide();
       this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers'], {skipLocationChange: true}));
-    })*/
+    })
   }
 
   ngOnDestroy() {

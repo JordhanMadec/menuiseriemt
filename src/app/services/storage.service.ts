@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
+import { DocumentType } from '../models/document';
 import { AlertService } from './alert.service';
 
 @Injectable({
@@ -24,17 +25,16 @@ export class StorageService {
         error => this.alertService.error('Impossible de récupérer le document'));
   }
 
-  deleteInvoice(userId: string, fileName: string): Promise<boolean> {
-    return firebase.storage().ref('invoices/' + userId + '/' + fileName)
+  deleteDocument(userId: string, fileName: string, type: DocumentType): Promise<boolean> {
+    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
+    return firebase.storage().ref( documentType + '/' + userId + '/' + fileName)
       .delete()
       .then(() => true)
-      .catch(() => false);
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
   }
 
-  deleteQuote(userId: string, fileName: string): Promise<boolean> {
-    return firebase.storage().ref('quotes/' + userId + '/' + fileName)
-      .delete()
-      .then(() => true)
-      .catch(() => false);
-  }
 }

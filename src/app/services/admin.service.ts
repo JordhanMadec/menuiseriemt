@@ -157,10 +157,10 @@ export class AdminService {
   deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
     return this.databaseService.getProjectInvoices(ownerId, projectId).then((invoices: Invoice[]) => {
       invoices.forEach((invoice: Invoice) => {
-        this.storageService.deleteInvoice(ownerId, invoice.fileName).then(deleteFileRes => {
+        this.storageService.deleteDocument(ownerId, invoice.fileName, DocumentType.INVOICE).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
 
-          this.deleteInvoice(ownerId, invoice.id).then(res => {
+          this.deleteDocument(invoice).then(res => {
             if (!res) { return false; }
           })
         });
@@ -173,10 +173,10 @@ export class AdminService {
   deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
     return this.databaseService.getProjectQuotes(ownerId, projectId).then((quotes: Quote[]) => {
       quotes.forEach((quote: Quote) => {
-        this.storageService.deleteQuote(ownerId, quote.fileName).then(deleteFileRes => {
+        this.storageService.deleteDocument(ownerId, quote.fileName, DocumentType.QUOTE).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
 
-          this.deleteQuote(ownerId, quote.id).then(res => {
+          this.deleteDocument(quote).then(res => {
             if (!res) { return false; }
           })
         });
@@ -192,42 +192,37 @@ export class AdminService {
 
   // INVOICES & QUOTES
 
-  deleteInvoice(ownerId: string, invoiceId: string): Promise<boolean> {
-    return firebase.database()
-      .ref('/invoices/' + ownerId + '/' + invoiceId)
-      .remove(error => {
-        if (error) {
-          this.alertService.error('Impossible de supprimer la facture');
-          return false;
-        }
+  deleteDocument(document: Invoice | Quote): Promise<boolean> {
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-        this.alertService.success('Facture supprimée avec succès');
+    return this.storageService.deleteDocument(document.ownerId, document.fileName, document.type).then(deleteFileRes => {
+      if (!deleteFileRes) {
+        return false;
+      }
 
-        return true;
-      });
+      return firebase.database()
+        .ref(documentType + '/' + document.ownerId + '/' + document.id)
+        .remove(error => {
+          if (error) {
+            this.alertService.error('Impossible de supprimer le document');
+            return false;
+          }
+
+          this.alertService.success('Document supprimé avec succès');
+
+          return true;
+        });
+    });
   }
 
-  deleteQuote(ownerId: string, quoteId: string): Promise<boolean> {
-    return firebase.database()
-      .ref('/quotes/' + ownerId + '/' + quoteId)
-      .remove(error => {
-        if (error) {
-          this.alertService.error('Impossible de supprimer le devis');
-          return false;
-        }
+  updateDocument(document: Invoice | Quote): Promise<boolean> {
+    document.lastUpdate = (new Date()).toString();
 
-        this.alertService.success('Devis supprimé avec succès');
-
-        return true;
-      });
-  }
-
-  updateDocument(doc: Invoice | Quote): Promise<boolean> {
-    const documentType = doc.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
     return firebase.database()
-      .ref('/' + documentType + '/' + doc.ownerId + '/' + doc.id)
-      .set(doc, error => {
+      .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
+      .set(document, error => {
         if (error) {
           this.alertService.error('Impossible de modifier le document');
           return false;
