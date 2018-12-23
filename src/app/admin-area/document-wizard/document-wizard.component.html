@@ -6,6 +6,7 @@
 
       <div class="project-container">
         <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+
           <div class="row project-info">
             <div class="subsection col-lg-12">
               <h4 class="green-text">Informations</h4>
@@ -88,8 +89,6 @@
               </div>
             </div>
 
-            <input type="text" *ngIf="document" formControl="fileName" hidden>
-
             <div class="subsection col-lg-12" *ngIf="!document">
               <h4 class="green-text">Document</h4>
 
@@ -97,7 +96,7 @@
                 <div class="input-wrapper col-lg-12">
                   <div class="dropzone-wrapper">
                     <div class="dropzone-header">
-                      <input type="text" placeholder="Document*" formControlName="fileName" disabled>
+                      <input type="text" placeholder="Document*" disabled>
                       <app-svg-icon class="input-icon" name="document-icon" [size]="20"></app-svg-icon>
                     </div>
 
@@ -113,7 +112,7 @@
                       </div>
                     </div>
 
-                    <input id="fileName" type="file" accept="application/pdf" placeholder="Document*" (change)="onFileChange($event)">
+                    <input id="fileName" type="file" accept="application/pdf" (change)="onFileChange($event)">
                   </div>
                 </div>
               </div>

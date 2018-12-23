@@ -25,10 +25,10 @@ export class StorageService {
       });
   }
 
-  deleteDocument(userId: string, fileName: string, type: DocumentType): Promise<boolean> {
-    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+  deleteDocument(document: Invoice | Quote): Promise<boolean> {
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-    return firebase.storage().ref( userId + '/' + documentType + '/' + fileName)
+    return firebase.storage().ref( document.ownerId + '/' + documentType + '/' + document.id)
       .delete()
       .then(() => true)
       .catch((error) => {
@@ -37,10 +37,10 @@ export class StorageService {
       });
   }
 
-  uploadDocument(userId: string, documentId: string, type: DocumentType, file: File): Promise<boolean> {
-    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+  uploadDocument(document: Invoice | Quote, file: File): Promise<boolean> {
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-    return firebase.storage().ref(userId + '/' + documentType + '/' + documentId)
+    return firebase.storage().ref(document.ownerId + '/' + documentType + '/' + document.id)
       .put(file)
       .then(() => true)
       .catch(() => {

@@ -163,12 +163,12 @@ export class AdminService {
   }
 
   deleteProjectDocuments(ownerId: string, projectId: string, type: DocumentType): Promise<boolean> {
-    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((invoices: Invoice[]) => {
-      invoices.forEach((invoice: Invoice) => {
-        this.storageService.deleteDocument(ownerId, invoice.fileName, type).then(deleteFileRes => {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((documents: Invoice[] | Quote[]) => {
+      documents.forEach((document: Invoice | Quote) => {
+        this.storageService.deleteDocument(document).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
 
-          this.deleteDocument(invoice).then(res => {
+          this.deleteDocument(document).then(res => {
             if (!res) { return false; }
           })
         });
@@ -187,7 +187,7 @@ export class AdminService {
   deleteDocument(document: Invoice | Quote): Promise<boolean> {
     const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-    return this.storageService.deleteDocument(document.ownerId, document.fileName, document.type).then(deleteFileRes => {
+    return this.storageService.deleteDocument(document).then(deleteFileRes => {
       if (!deleteFileRes) {
         return false;
       }
@@ -238,7 +238,7 @@ export class AdminService {
       document.id = documentId;
       document.lastUpdate = (new Date()).toString();
 
-      return this.storageService.uploadDocument(document.ownerId, document.id, document.type, file).then(res => {
+      return this.storageService.uploadDocument(document, file).then(res => {
         if (res) {
           return firebase.database()
             .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)

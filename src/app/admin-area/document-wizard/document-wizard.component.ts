@@ -166,7 +166,6 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       ownerId: this.documentForm.get('ownerId').value,
       projectId: this.documentForm.get('projectId').value,
       done: this.documentForm.get('done').value,
-      fileName: this.documentForm.get('fileName').value.toString().trim(),
       type: this.documentForm.get('type').value,
     }
     return document;
@@ -234,7 +233,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       this.file = event.target.files[0];
 
       this.documentForm.patchValue({
-        fileName: this.file.name
+        file: this.file.name
       });
 
       reader.readAsDataURL(this.file);
