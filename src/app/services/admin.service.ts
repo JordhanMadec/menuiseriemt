@@ -153,8 +153,8 @@ export class AdminService {
           return false;
         }
 
-        this.deleteProjectInvoices(ownerId, projectId);
-        this.deleteProjectQuotes(ownerId, projectId);
+        this.deleteProjectDocuments(ownerId, projectId, DocumentType.INVOICE);
+        this.deleteProjectDocuments(ownerId, projectId, DocumentType.QUOTE);
 
         this.alertService.success('Chantier supprimé avec succès');
 
@@ -162,29 +162,13 @@ export class AdminService {
       });
   }
 
-  deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectDocuments(ownerId, projectId, DocumentType.INVOICE).then((invoices: Invoice[]) => {
+  deleteProjectDocuments(ownerId: string, projectId: string, type: DocumentType): Promise<boolean> {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((invoices: Invoice[]) => {
       invoices.forEach((invoice: Invoice) => {
-        this.storageService.deleteDocument(ownerId, invoice.fileName, DocumentType.INVOICE).then(deleteFileRes => {
+        this.storageService.deleteDocument(ownerId, invoice.fileName, type).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
 
           this.deleteDocument(invoice).then(res => {
-            if (!res) { return false; }
-          })
-        });
-      });
-
-      return true;
-    });
-  }
-
-  deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectDocuments(ownerId, projectId, DocumentType.QUOTE).then((quotes: Quote[]) => {
-      quotes.forEach((quote: Quote) => {
-        this.storageService.deleteDocument(ownerId, quote.fileName, DocumentType.QUOTE).then(deleteFileRes => {
-          if (!deleteFileRes) { return false; }
-
-          this.deleteDocument(quote).then(res => {
             if (!res) { return false; }
           })
         });

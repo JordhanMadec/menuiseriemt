@@ -70,30 +70,22 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
     this.buildCustomersList();
     this.buildProjectsList();
 
+    const documentType = this.isInvoice ? DocumentType.INVOICE : DocumentType.QUOTE;
+
     if (this.customerId && this.documentId) {
-      if (this.isInvoice) {
-        this.title = 'Modifier la facture';
+      this.title = this.isInvoice ? 'Modifier la facture' : 'Modifier le devis';
 
-        this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.INVOICE).then((invoice: Invoice) => {
-          this.document = invoice;
-          this.initForm();
-        });
-      } else {
-        this.title = 'Modifier le devis';
+      this.databaseService.getUserDocument(this.customerId, this.documentId, documentType).then((document: Invoice | Quote) => {
+        this.document = document;
+        this.initForm();
+      });
 
-        this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.QUOTE).then((quote: Quote) => {
-          this.document = quote;
-          this.initForm();
-        });
-      }
     } else {
       this.title = this.isInvoice ? 'Nouvelle facture' : 'Nouveau devis';
 
-      if (this.isInvoice) {
-        this.documentForm.get('type').setValue(DocumentType.INVOICE)
-      } else {
-        this.documentForm.get('type').setValue(DocumentType.QUOTE)
-      }
+      this.documentForm.patchValue({
+        type: documentType
+      })
 
       this.formChangesSubscription = this.documentForm.valueChanges.subscribe(res => {
         this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm());

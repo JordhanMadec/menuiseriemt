@@ -64,68 +64,82 @@ export class DatabaseService {
 
   // INVOICES & QUOTES
 
-  getAllDocuments(type: DocumentType): Promise<Invoice[]> {
+  getAllDocuments(type: DocumentType): Promise<Invoice[] | Quote[]> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
     return firebase.database()
       .ref(documentType)
       .once('value')
-      .then(_invoices => {
-        const invoices = [];
+      .then(_documents => {
+        const documents: Invoice[] | Quote[] = [];
 
-        _invoices.forEach(user => {
-          user.forEach(invoice => {
-            invoices.push(new Invoice(invoice.val()));
+        _documents.forEach(user => {
+          user.forEach(document => {
+            if (document.val().type === DocumentType.INVOICE) {
+              documents.push(new Invoice(document.val()));
+            } else {
+              documents.push(new Quote(document.val()));
+            }
           })
         })
 
-        return _.reverse(_.sortBy(invoices, ['lastUpdate']));
+        return _.reverse(_.sortBy(documents, ['lastUpdate']));
       }, error => {
         this.alertService.error('Impossible de récupérer les documents');
         return [];
       });
   }
 
-  getUserDocuments(userId: string, type: DocumentType): Promise<Invoice[]> {
+  getUserDocuments(userId: string, type: DocumentType): Promise<Invoice[] | Quote[]> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
-    const invoices: Invoice[] = [];
+    const documents: Invoice[] | Quote[] = [];
 
     return firebase.database()
       .ref(documentType + '/' + userId)
       .once('value')
       .then(res => {
-        res.forEach(_invoice => {
-          const invoice: Invoice = new Invoice(_invoice.val());
-          invoice.id = _invoice.key;
-          invoices.push(invoice);
+        res.forEach(_document => {
+          let document: Invoice | Quote = null;
+
+          if (_document.val().type === DocumentType.INVOICE) {
+            document = new Invoice(_document.val());
+          } else {
+            document = new Quote(_document.val());
+          }
+          document.id = _document.key;
+          documents.push(document);
         });
 
-        return _.reverse(_.sortBy(invoices, ['lastUpdate']));
-      }, error => {
+        return _.reverse(_.sortBy(documents, ['lastUpdate']));
+      }, () => {
         this.alertService.error('Impossible de récupérer les documents');
-        return invoices;
+        return documents;
       });
   }
 
-  getUserDocument(userId: string, invoiceId: string, type: DocumentType): Promise<Invoice> {
+  getUserDocument(userId: string, invoiceId: string, type: DocumentType): Promise<Invoice | Quote> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
     return firebase.database()
       .ref(documentType + '/' + userId + '/' + invoiceId)
       .once('value')
-      .then(invoice => {
-        return new Invoice(invoice.val());
-      }, error => {
+      .then(document => {
+        if (document.val().type === DocumentType.INVOICE) {
+          return new Invoice(document.val());
+        } else {
+          return new Quote(document.val());
+        }
+      }, () => {
         this.alertService.error('Impossible de récupérer le document');
         return null;
       });
   }
 
-  getProjectDocuments(userId: string, projectId: string, type: DocumentType): Promise<Invoice[]> {
+  getProjectDocuments(userId: string, projectId: string, type: DocumentType): Promise<Invoice[] | Quote[]> {
     return this.getUserDocuments(userId, type).then(
-      (_invoices: Invoice[]) => {
-        const invoices = _invoices.filter(invoice => invoice.projectId + '' === projectId);
-        return _.sortBy(invoices, ['lastUpdate']);
+      (_documents: Invoice[] | Quote[]) => {
+        const documents = _documents.filter(invoice => invoice.projectId + '' === projectId);
+        return _.sortBy(documents, ['lastUpdate']);
       }
     )
   }
