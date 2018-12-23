@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
 import { DocumentType } from '../models/document';
+import { Invoice } from '../models/invoice';
+import { Quote } from '../models/quote';
 import { AlertService } from './alert.service';
 
 @Injectable({
@@ -11,22 +13,14 @@ export class StorageService {
 
   constructor(private alertService: AlertService) { }
 
-  getInvoiceUrl(userId: string, fileName: string): Promise<string> {
-    return firebase.storage().ref('invoices/' + userId + '/' + fileName)
-      .getDownloadURL()
-      .then(url => url)
-      .catch(error => {
-        this.alertService.error('Impossible de récupérer le document');
-        return null;
-      });
-  }
+  getDocumentUrl(document: Invoice | Quote): Promise<string> {
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-  getQuoteUrl(userId: string, fileName: string): Promise<string> {
-    return firebase.storage().ref('quotes/' + userId + '/' + fileName)
+    return firebase.storage().ref(document.ownerId + '/' + documentType + '/' + document.id)
       .getDownloadURL()
       .then(url => url)
       .catch(() => {
-        this.alertService.error('Impossible de récupérer le document')
+        this.alertService.error('Impossible de récupérer le document');
         return null;
       });
   }
@@ -34,7 +28,7 @@ export class StorageService {
   deleteDocument(userId: string, fileName: string, type: DocumentType): Promise<boolean> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-    return firebase.storage().ref( documentType + '/' + userId + '/' + fileName)
+    return firebase.storage().ref( userId + '/' + documentType + '/' + fileName)
       .delete()
       .then(() => true)
       .catch((error) => {
@@ -43,10 +37,10 @@ export class StorageService {
       });
   }
 
-  uploadDocument(userId: string, type: DocumentType, fileName: string, file: File): Promise<boolean> {
+  uploadDocument(userId: string, documentId: string, type: DocumentType, file: File): Promise<boolean> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
 
-    return firebase.storage().ref(documentType + '/' + userId + '/' + fileName)
+    return firebase.storage().ref(userId + '/' + documentType + '/' + documentId)
       .put(file)
       .then(() => true)
       .catch(() => {

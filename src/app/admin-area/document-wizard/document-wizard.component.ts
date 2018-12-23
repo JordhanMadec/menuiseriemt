@@ -199,7 +199,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.adminService.uploadDocument(this.getDocumentFromForm(), this.file).then(
+      this.adminService.createDocument(this.getDocumentFromForm(), this.file).then(
         res => {
           this.updateLoading = false;
           this.location.back();

@@ -48,7 +48,7 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
         this.tag = invoice.done ? 'Payée' : 'À payer';
         this.cd.detectChanges();
 
-        this.storageService.getInvoiceUrl(this.customerId, this.document.fileName).then(url => {
+        this.storageService.getDocumentUrl(invoice).then(url => {
           this.documentUrl = url;
           this.cd.detectChanges();
         });

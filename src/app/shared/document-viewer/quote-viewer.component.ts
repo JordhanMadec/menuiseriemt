@@ -48,7 +48,7 @@ export class QuoteViewerComponent implements OnInit, OnDestroy {
         this.tag = quote.done ? 'Signé' : 'À valider';
         this.cd.detectChanges();
 
-        this.storageService.getQuoteUrl(this.customerId, this.document.fileName).then(url => {
+        this.storageService.getDocumentUrl(quote).then(url => {
           this.documentUrl = url;
           this.cd.detectChanges();
         });

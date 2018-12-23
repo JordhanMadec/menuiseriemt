@@ -225,33 +225,34 @@ export class AdminService {
       });
   }
 
-  uploadDocument(document: Invoice | Quote, file: File): Promise<boolean> {
-    document.lastUpdate = (new Date()).toString();
+  createDocument(document: Invoice | Quote, file: File): Promise<boolean> {
+    return this.databaseService.getUserDocuments(document.ownerId, document.type).then((documents: Invoice[] | Quote[]) => {
+      const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+      const documentIds = documents.map(_document => _document.id);
+      let documentId = Utils.generateToken();
 
-    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
-
-    const documentId = Utils.generateToken();
-
-    /*while (projectIds.includes(documentId)) {
-      documentId = Utils.generateToken();
-    }*/
-
-    document.id = documentId;
-
-    return this.storageService.uploadDocument(document.ownerId, document.type, document.fileName, file).then(res => {
-      if (res) {
-        return firebase.database()
-          .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
-          .set(document, error => {
-            if (error) {
-              this.alertService.error('Impossible de créer le document');
-              return false;
-            }
-
-            this.alertService.success('Document créé avec succès');
-            return true;
-          });
+      while (documentIds.includes(documentId)) {
+        documentId = Utils.generateToken();
       }
-    })
+
+      document.id = documentId;
+      document.lastUpdate = (new Date()).toString();
+
+      return this.storageService.uploadDocument(document.ownerId, document.id, document.type, file).then(res => {
+        if (res) {
+          return firebase.database()
+            .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
+            .set(document, error => {
+              if (error) {
+                this.alertService.error('Impossible de créer le document');
+                return false;
+              }
+
+              this.alertService.success('Document créé avec succès');
+              return true;
+            });
+        }
+      });
+    });
   }
 }
