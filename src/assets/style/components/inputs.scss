@@ -23,9 +23,6 @@ textarea {
   ng-select.ng-select {
     border: none;
     background-color: $light-grey;
-    background-position: 10px;
-    background-repeat: no-repeat;
-    background-size: 20px;
     color: $dark-grey;
     border-radius: $small-radius;
     padding: $small-gap $middle-gap;
@@ -36,34 +33,34 @@ textarea {
     display: flex;
     align-items: center;
   }
-
-  app-svg-icon {
-    fill: $dark-grey;
-    position: absolute;
-    height: 20px;
-    width: 20px;    top: 25px + $small-gap;
-    margin-top: -10px;
-
-    &.input-icon {
-      left: $small-gap + $small-gap;
-    }
-
-    &.select-dropdown-icon {
-      right: $small-gap + $small-gap;
-      cursor: pointer;
-    }
-  }
-
-  .input-hint {
-    color: $dark-grey;
-    font-size: 12px;
-
-    &.error {
-      color: $red;
-    }
-  }
 }
 
+app-svg-icon.input-icon,
+app-svg-icon.select-dropdown-icon {
+  fill: $dark-grey;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 25px + $small-gap;
+  margin-top: -10px;
+}
+
+app-svg-icon.input-icon {
+  left: $small-gap + $small-gap;
+}
+
+app-svg-icon.select-dropdown-icon {
+  right: $small-gap + $small-gap;
+}
+
+.input-hint {
+  color: $dark-grey;
+  font-size: 12px;
+
+  &.error {
+    color: $red;
+  }
+}
 
 .ng-placeholder {
   opacity: .7;
@@ -98,5 +95,61 @@ ng-dropdown-panel.ng-dropdown-panel {
 
   &:hover, &:focus, &:focus-within, &:active {
     background-color: $light-grey;
+  }
+}
+
+.dropzone-wrapper {
+  color: $light-grey;
+  position: relative;
+  cursor: pointer;
+
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}
+
+.dropzone-header {
+  position: relative;
+
+  input[type='text'] {
+    border: none;
+    background-color: $light-grey;
+    color: $dark-grey;
+    border-radius: $small-radius;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: $small-gap $middle-gap;
+    padding-left: 40px;
+    width: 100%;
+    height: 50px;
+    outline: none !important;
+    display: flex;
+    align-items: center;
+  }
+
+  app-svg-icon.input-icon {
+    left: 10px;
+    top: 25px;
+  }
+}
+
+.dropzone {
+  text-align: center;
+  padding: $big-gap $small-gap;
+  border: dashed 2px $light-grey;
+  border-top: none;
+  border-radius: $small-radius;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  app-svg-icon {
+    fill: $light-grey;
   }
 }

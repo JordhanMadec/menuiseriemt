@@ -35,6 +35,9 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
   public asChanged = false;
   public updateLoading = false;
 
+  public file: File;
+  public filePreviewUrl: File;
+
   modalRef: BsModalRef;
 
   customers = [];
@@ -220,6 +223,27 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       this.modalRef.hide();
       this.ngZone.run(() => this.router.navigate(['/espace-admin/chantiers'], {skipLocationChange: true}));
     })
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      this.file = event.target.files[0];
+
+      this.documentForm.patchValue({
+        fileName: this.file.name
+      });
+
+      reader.readAsDataURL(this.file);
+
+      reader.onload = () => {
+        this.filePreviewUrl = reader.result;
+        this.cd.detectChanges();
+      }
+
+      this.cd.detectChanges();
+    }
   }
 
   ngOnDestroy() {
