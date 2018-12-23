@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DocumentType } from '../../models/document';
 import { Invoice } from '../../models/invoice';
 import { Project } from '../../models/project';
 import { User } from '../../models/user';
@@ -41,13 +42,13 @@ export class InvoiceViewerComponent implements OnInit, OnDestroy {
     this.customerId = this.route.snapshot.paramMap.get('customerId');
     this.documentId = this.route.snapshot.paramMap.get('invoiceId');
 
-    this.databaseService.getUserInvoice(this.customerId, this.documentId).then(
+    this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.INVOICE).then(
       (invoice: Invoice) => {
         this.document = invoice;
         this.tag = invoice.done ? 'Payée' : 'À payer';
         this.cd.detectChanges();
 
-        this.storageService.getInvoiceUrl(this.customerId, this.document.fileName).then(url => {
+        this.storageService.getDocumentUrl(invoice).then(url => {
           this.documentUrl = url;
           this.cd.detectChanges();
         });

@@ -5,13 +5,14 @@ import { ClientDetailComponent } from './admin-area/admin-clients/client-detail/
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
+import { DocumentWizardComponent } from './admin-area/document-wizard/document-wizard.component';
 import { UserWizardComponent } from './shared/user-wizard/user-wizard.component';
 import { AdminHomeComponent } from './admin-area/admin-home/admin-home.component';
 import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projects.component';
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
 import { QuoteViewerComponent } from './shared/document-viewer/quote-viewer.component';
-import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
+import { CustomerDocumentsComponent } from './customer-area/customer-documents/customer-documents.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -43,10 +44,8 @@ const routes: Routes = [
         {path: '', component: CustomerProjectsComponent},
         {path: ':customerId/:projectId', component: ProjectDetailComponent},
     ]},
-    {path: 'factures', children: [
-      {path: '', component: CustomerInvoicesComponent},
-      {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
-    ]},
+    {path: 'documents', component: CustomerDocumentsComponent},
+    {path: 'factures/:customerId/:invoiceId', component: InvoiceViewerComponent},
     {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
 
@@ -68,12 +67,18 @@ const routes: Routes = [
       {path: 'factures', children: [
           {path: '', component: AdminInvoicesComponent},
           {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
+          {path: ':customerId/:invoiceId/modifier', component: DocumentWizardComponent},
+          {path: ':customerId/:invoiceId/nouveau', component: DocumentWizardComponent},
       ]},
+      {path: 'nouvelle-facture', component: DocumentWizardComponent},
       {path: 'devis', children: [
           {path: '', component: AdminQuotesComponent},
           {path: ':customerId/:quoteId', component: QuoteViewerComponent},
+          {path: ':customerId/:quoteId/modifier', component: DocumentWizardComponent},
+          {path: ':customerId/:quoteId/nouveau', component: DocumentWizardComponent},
       ]},
-  ]},
+      {path: 'nouveau-devis', component: DocumentWizardComponent},
+    ]},
 
 
   // default

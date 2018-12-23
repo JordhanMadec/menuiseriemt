@@ -72,14 +72,14 @@ export class UserWizardComponent implements OnInit, OnDestroy {
   private getUserFromForm(): User {
     const user = {
       id: this.user ? this.user.id : null,
-      firstName: this.profileForm.get('contact').get('firstName').value,
-      lastName: this.profileForm.get('contact').get('lastName').value,
-      email: this.profileForm.get('contact').get('email').value,
-      homePhone: this.profileForm.get('contact').get('homePhone').value,
-      mobilePhone: this.profileForm.get('contact').get('mobilePhone').value,
-      city: this.profileForm.get('addressFields').get('city').value,
+      firstName: this.profileForm.get('contact').get('firstName').value.toString().trim(),
+      lastName: this.profileForm.get('contact').get('lastName').value.toString().trim(),
+      email: this.profileForm.get('contact').get('email').value.toString().trim(),
+      homePhone: this.profileForm.get('contact').get('homePhone').value.toString().trim(),
+      mobilePhone: this.profileForm.get('contact').get('mobilePhone').value.toString().trim(),
+      city: this.profileForm.get('addressFields').get('city').value.toString().trim(),
       zipcode: this.profileForm.get('addressFields').get('zipcode').value,
-      address: this.profileForm.get('addressFields').get('address').value,
+      address: this.profileForm.get('addressFields').get('address').value.toString().trim(),
     }
     return new User(user);
   }

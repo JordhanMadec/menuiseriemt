@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
+import { DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';
@@ -75,9 +76,17 @@ export class AdminService {
 
       user.id = firebaseUser.user.uid;
 
-      this.alertService.success('Client créé avec succès')
+      return firebase.database()
+        .ref('/users/' + user.id)
+        .set(user, error => {
+          if (error) {
+            this.alertService.error('Impossible de créer le client');
+            return false;
+          }
 
-      return this.updateUser(user);
+          this.alertService.success('Client créé avec succès');
+          return true;
+        });
     }, error => {
       this.alertService.error('Impossible de créer le client');
       tempFb.delete();
@@ -144,8 +153,8 @@ export class AdminService {
           return false;
         }
 
-        this.deleteProjectInvoices(ownerId, projectId);
-        this.deleteProjectQuotes(ownerId, projectId);
+        this.deleteProjectDocuments(ownerId, projectId, DocumentType.INVOICE);
+        this.deleteProjectDocuments(ownerId, projectId, DocumentType.QUOTE);
 
         this.alertService.success('Chantier supprimé avec succès');
 
@@ -153,29 +162,13 @@ export class AdminService {
       });
   }
 
-  deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectInvoices(ownerId, projectId).then((invoices: Invoice[]) => {
-      invoices.forEach((invoice: Invoice) => {
-        this.storageService.deleteInvoice(ownerId, invoice.fileName).then(deleteFileRes => {
+  deleteProjectDocuments(ownerId: string, projectId: string, type: DocumentType): Promise<boolean> {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((documents: Invoice[] | Quote[]) => {
+      documents.forEach((document: Invoice | Quote) => {
+        this.storageService.deleteDocument(document).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
 
-          this.deleteInvoice(ownerId, invoice.id).then(res => {
-            if (!res) { return false; }
-          })
-        });
-      });
-
-      return true;
-    });
-  }
-
-  deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectQuotes(ownerId, projectId).then((quotes: Quote[]) => {
-      quotes.forEach((quote: Quote) => {
-        this.storageService.deleteQuote(ownerId, quote.fileName).then(deleteFileRes => {
-          if (!deleteFileRes) { return false; }
-
-          this.deleteQuote(ownerId, quote.id).then(res => {
+          this.deleteDocument(document).then(res => {
             if (!res) { return false; }
           })
         });
@@ -191,33 +184,75 @@ export class AdminService {
 
   // INVOICES & QUOTES
 
-  deleteInvoice(ownerId: string, invoiceId: string): Promise<boolean> {
+  deleteDocument(document: Invoice | Quote): Promise<boolean> {
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
+    return this.storageService.deleteDocument(document).then(deleteFileRes => {
+      if (!deleteFileRes) {
+        return false;
+      }
+
+      return firebase.database()
+        .ref(documentType + '/' + document.ownerId + '/' + document.id)
+        .remove(error => {
+          if (error) {
+            this.alertService.error('Impossible de supprimer le document');
+            return false;
+          }
+
+          this.alertService.success('Document supprimé avec succès');
+
+          return true;
+        });
+    });
+  }
+
+  updateDocument(document: Invoice | Quote): Promise<boolean> {
+    document.lastUpdate = (new Date()).toString();
+
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
     return firebase.database()
-      .ref('/invoices/' + ownerId + '/' + invoiceId)
-      .remove(error => {
+      .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
+      .set(document, error => {
         if (error) {
-          this.alertService.error('Impossible de supprimer la facture');
+          this.alertService.error('Impossible de modifier le document');
           return false;
         }
 
-        this.alertService.success('Facture supprimée avec succès');
-
+        this.alertService.success('Document modifié avec succès');
         return true;
       });
   }
 
-  deleteQuote(ownerId: string, quoteId: string): Promise<boolean> {
-    return firebase.database()
-      .ref('/quotes/' + ownerId + '/' + quoteId)
-      .remove(error => {
-        if (error) {
-          this.alertService.error('Impossible de supprimer le devis');
-          return false;
+  createDocument(document: Invoice | Quote, file: File): Promise<boolean> {
+    return this.databaseService.getUserDocuments(document.ownerId, document.type).then((documents: Invoice[] | Quote[]) => {
+      const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+      const documentIds = documents.map(_document => _document.id);
+      let documentId = Utils.generateToken();
+
+      while (documentIds.includes(documentId)) {
+        documentId = Utils.generateToken();
+      }
+
+      document.id = documentId;
+      document.lastUpdate = (new Date()).toString();
+
+      return this.storageService.uploadDocument(document, file).then(res => {
+        if (res) {
+          return firebase.database()
+            .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
+            .set(document, error => {
+              if (error) {
+                this.alertService.error('Impossible de créer le document');
+                return false;
+              }
+
+              this.alertService.success('Document créé avec succès');
+              return true;
+            });
         }
-
-        this.alertService.success('Devis supprimé avec succès');
-
-        return true;
       });
+    });
   }
 }

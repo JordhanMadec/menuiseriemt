@@ -53,7 +53,7 @@ import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
 import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
-import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
+import { CustomerDocumentsComponent } from './customer-area/customer-documents/customer-documents.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
 import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
@@ -70,6 +70,7 @@ import { ProjectDetailComponent } from './shared/project-detail/project-detail.c
 import { ProjectWizardComponent } from './admin-area/admin-projects/project-wizard/project-wizard.component';
 import { AdminInvoicesComponent } from './admin-area/admin-invoices/admin-invoices.component';
 import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.component';
+import { DocumentWizardComponent } from './admin-area/document-wizard/document-wizard.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.com
     SpinnerComponent,
     CustomerHeaderComponent,
     AlertMessageComponent,
-    CustomerInvoicesComponent,
+    CustomerDocumentsComponent,
     ListItemComponent,
     InvoiceViewerComponent,
     CustomerProjectsComponent,
@@ -115,6 +116,7 @@ import { AdminQuotesComponent } from './admin-area/admin-quotes/admin-quotes.com
     ProjectWizardComponent,
     AdminInvoicesComponent,
     AdminQuotesComponent,
+    DocumentWizardComponent,
   ],
   imports: [
     BrowserModule,

@@ -64,7 +64,10 @@
 
           <div class="document-container">
             <div *ngIf="documentUrl; else documentSpinner">
-              <pdf-viewer [src]="documentUrl"></pdf-viewer>
+              <pdf-viewer [src]="documentUrl"
+                          [autoresize]="true"
+                          [original-size]="false">
+              </pdf-viewer>
             </div>
 
             <ng-template #documentSpinner>
@@ -84,6 +87,6 @@
 
 <button class="circle-button fab-button accent"
         *ngIf="isAdmin"
-        [routerLink]="root + '/' + customerId + '/' + documentId + '/modifier'">
+        [routerLink]="'modifier'">
   <app-svg-icon name="edit-icon"></app-svg-icon>
 </button>

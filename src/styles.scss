@@ -330,6 +330,11 @@ section{
   box-shadow: $shadow-strong;
 }
 
+pdf-viewer {
+  max-width: 100%;
+  display: block;
+}
+
 .pdfViewer .page {
   box-shadow: $shadow-strong !important;
 }

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DocumentType } from '../../models/document';
 import { Invoice } from '../../models/invoice';
 import { Project } from '../../models/project';
 import { Quote } from '../../models/quote';
@@ -57,12 +58,12 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
 
-    this.databaseService.getProjectInvoices(this.customerId, this.projectId).then((invoices: Invoice[]) => {
+    this.databaseService.getProjectDocuments(this.customerId, this.projectId, DocumentType.INVOICE).then((invoices: Invoice[]) => {
       this.invoices = invoices;
       this.cd.detectChanges();
     });
 
-    this.databaseService.getProjectQuotes(this.customerId, this.projectId).then((quotes: Quote[]) => {
+    this.databaseService.getProjectDocuments(this.customerId, this.projectId, DocumentType.QUOTE).then((quotes: Quote[]) => {
       this.quotes = quotes;
       this.cd.detectChanges();
     });

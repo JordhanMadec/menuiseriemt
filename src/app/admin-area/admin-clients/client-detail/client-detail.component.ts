@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DocumentType } from '../../../models/document';
 import { Invoice } from '../../../models/invoice';
 import { Project } from '../../../models/project';
 import { Quote } from '../../../models/quote';
 import { User } from '../../../models/user';
-import { AdminService } from '../../../services/admin.service';
 import { DatabaseService } from '../../../services/database.service';
 import { Utils } from '../../../shared/utils';
 
@@ -60,14 +60,14 @@ export class ClientDetailComponent implements OnInit {
   }
 
   private fetchQuotes() {
-    this.databaseService.getUserQuotes(this.user.id).then((quotes: Quote[]) => {
+    this.databaseService.getUserDocuments(this.user.id, DocumentType.QUOTE).then((quotes: Quote[]) => {
       this.quotes = quotes;
       this.cd.detectChanges();
     })
   }
 
   private fetchInvoices() {
-    this.databaseService.getUserInvoices(this.user.id).then((invoices: Invoice[]) => {
+    this.databaseService.getUserDocuments(this.user.id, DocumentType.INVOICE).then((invoices: Invoice[]) => {
       this.invoices = invoices;
       this.cd.detectChanges();
     })
