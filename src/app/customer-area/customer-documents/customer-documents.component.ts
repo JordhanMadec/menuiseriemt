@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { DocumentType } from '../../models/document';
 import { Invoice } from '../../models/invoice';
 import { Quote } from '../../models/quote';
 import { User } from '../../models/user';
@@ -8,10 +9,10 @@ import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-customer-invoices',
-  templateUrl: './customer-invoices.component.html',
-  styleUrls: ['./customer-invoices.component.scss']
+  templateUrl: './customer-documents.component.html',
+  styleUrls: ['./customer-documents.component.scss']
 })
-export class CustomerInvoicesComponent implements OnInit, OnDestroy {
+export class CustomerDocumentsComponent implements OnInit, OnDestroy {
 
   public user: User;
   private userSubscription: Subscription;
@@ -32,14 +33,14 @@ export class CustomerInvoicesComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.databaseService.getUserInvoices(this.user.id).then(
+        this.databaseService.getUserDocuments(this.user.id, DocumentType.INVOICE).then(
           (invoices: Invoice[]) => {
             this.invoices = invoices;
             this.cd.detectChanges();
           }
         );
 
-        this.databaseService.getUserQuotes(this.user.id).then(
+        this.databaseService.getUserDocuments(this.user.id, DocumentType.QUOTE).then(
           (quotes: Quote[]) => {
             this.quotes = quotes;
             this.cd.detectChanges();

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DocumentType } from '../../models/document';
 import { Project } from '../../models/project';
 import { Quote } from '../../models/quote';
 import { User } from '../../models/user';
@@ -41,7 +42,7 @@ export class QuoteViewerComponent implements OnInit, OnDestroy {
     this.customerId = this.route.snapshot.paramMap.get('customerId');
     this.documentId = this.route.snapshot.paramMap.get('quoteId');
 
-    this.databaseService.getUserQuote(this.customerId, this.documentId).then(
+    this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.QUOTE).then(
       (quote: Quote) => {
         this.document = quote;
         this.tag = quote.done ? 'Signé' : 'À valider';

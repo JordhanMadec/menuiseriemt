@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
+import { DocumentType } from '../../models/document';
 import { Quote } from '../../models/quote';
 import { DatabaseService } from '../../services/database.service';
 
@@ -18,7 +19,7 @@ export class AdminQuotesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.databaseService.getAllQuotes().then(
+    this.databaseService.getAllDocuments(DocumentType.QUOTE).then(
       (quotes: Quote[]) => {
         this.quotes = quotes;
         this.quotesFiltered = quotes;

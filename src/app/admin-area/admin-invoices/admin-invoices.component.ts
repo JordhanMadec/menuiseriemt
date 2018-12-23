@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
+import { DocumentType } from '../../models/document';
 import { Invoice } from '../../models/invoice';
 import { DatabaseService } from '../../services/database.service';
 
@@ -18,7 +19,7 @@ export class AdminInvoicesComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.databaseService.getAllInvoices().then(
+      this.databaseService.getAllDocuments(DocumentType.INVOICE).then(
         (invoices: Invoice[]) => {
           this.invoices = invoices;
           this.invoicesFiltered = invoices;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
+import { DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';
@@ -63,9 +64,11 @@ export class DatabaseService {
 
   // INVOICES & QUOTES
 
-  getAllInvoices(): Promise<Invoice[]> {
+  getAllDocuments(type: DocumentType): Promise<Invoice[]> {
+    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
     return firebase.database()
-      .ref('/invoices')
+      .ref(documentType)
       .once('value')
       .then(_invoices => {
         const invoices = [];
@@ -78,36 +81,17 @@ export class DatabaseService {
 
         return _.reverse(_.sortBy(invoices, ['lastUpdate']));
       }, error => {
-        this.alertService.error('Impossible de récupérer les chantiers');
+        this.alertService.error('Impossible de récupérer les documents');
         return [];
       });
   }
 
-  getAllQuotes(): Promise<Quote[]> {
-    return firebase.database()
-      .ref('/quotes')
-      .once('value')
-      .then(_quotes => {
-        const quotes = [];
-
-        _quotes.forEach(user => {
-          user.forEach(quote => {
-            quotes.push(new Quote(quote.val()));
-          })
-        })
-
-        return _.reverse(_.sortBy(quotes, ['lastUpdate']));
-      }, error => {
-        this.alertService.error('Impossible de récupérer les chantiers');
-        return [];
-      });
-  }
-
-  getUserInvoices(userId: string): Promise<Invoice[]> {
+  getUserDocuments(userId: string, type: DocumentType): Promise<Invoice[]> {
+    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
     const invoices: Invoice[] = [];
 
     return firebase.database()
-      .ref('/invoices/' + userId)
+      .ref(documentType + '/' + userId)
       .once('value')
       .then(res => {
         res.forEach(_invoice => {
@@ -118,69 +102,30 @@ export class DatabaseService {
 
         return _.reverse(_.sortBy(invoices, ['lastUpdate']));
       }, error => {
-        this.alertService.error('Impossible de récupérer les factures');
+        this.alertService.error('Impossible de récupérer les documents');
         return invoices;
       });
   }
 
-  getUserInvoice(userId: string, invoiceId: string): Promise<Invoice> {
+  getUserDocument(userId: string, invoiceId: string, type: DocumentType): Promise<Invoice> {
+    const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
     return firebase.database()
-      .ref('/invoices/' + userId + '/' + invoiceId)
+      .ref(documentType + '/' + userId + '/' + invoiceId)
       .once('value')
       .then(invoice => {
         return new Invoice(invoice.val());
       }, error => {
-        this.alertService.error('Impossible de récupérer la facture');
+        this.alertService.error('Impossible de récupérer le document');
         return null;
       });
   }
 
-  getUserQuotes(userId: string): Promise<Quote[]> {
-    const quotes: Quote[] = [];
-
-    return firebase.database()
-      .ref('/quotes/' + userId)
-      .once('value')
-      .then(res => {
-        res.forEach(_quote => {
-          const quote: Quote = new Quote(_quote.val());
-          quote.id = _quote.key;
-          quotes.push(quote);
-        });
-
-        return _.reverse(_.sortBy(quotes, ['lastUpdate']));
-      }, error => {
-        this.alertService.error('Impossible de récupérer les devis');
-        return quotes;
-      });
-  }
-
-  getUserQuote(userId: string, quoteId: string): Promise<Quote> {
-    return firebase.database()
-      .ref('/quotes/' + userId + '/' + quoteId)
-      .once('value')
-      .then(quote => {
-        return new Quote(quote.val());
-      }, error => {
-        this.alertService.error('Impossible de récupérer le devis');
-        return null;
-      });
-  }
-
-  getProjectInvoices(userId: string, projectId: string): Promise<Invoice[]> {
-    return this.getUserInvoices(userId).then(
+  getProjectDocuments(userId: string, projectId: string, type: DocumentType): Promise<Invoice[]> {
+    return this.getUserDocuments(userId, type).then(
       (_invoices: Invoice[]) => {
         const invoices = _invoices.filter(invoice => invoice.projectId + '' === projectId);
         return _.sortBy(invoices, ['lastUpdate']);
-      }
-    )
-  }
-
-  getProjectQuotes(userId: string, projectId: string): Promise<Quote[]> {
-    return this.getUserQuotes(userId).then(
-      (_quotes: Quote[]) => {
-        const quotes = _quotes.filter(quote => quote.projectId + '' === projectId);
-        return _.sortBy(quotes, ['lastUpdate']);
       }
     )
   }

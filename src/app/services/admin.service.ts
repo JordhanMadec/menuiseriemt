@@ -76,9 +76,17 @@ export class AdminService {
 
       user.id = firebaseUser.user.uid;
 
-      this.alertService.success('Client créé avec succès')
+      return firebase.database()
+        .ref('/users/' + user.id)
+        .set(user, error => {
+          if (error) {
+            this.alertService.error('Impossible de créer le client');
+            return false;
+          }
 
-      return this.updateUser(user);
+          this.alertService.success('Client créé avec succès');
+          return true;
+        });
     }, error => {
       this.alertService.error('Impossible de créer le client');
       tempFb.delete();
@@ -155,7 +163,7 @@ export class AdminService {
   }
 
   deleteProjectInvoices(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectInvoices(ownerId, projectId).then((invoices: Invoice[]) => {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, DocumentType.INVOICE).then((invoices: Invoice[]) => {
       invoices.forEach((invoice: Invoice) => {
         this.storageService.deleteDocument(ownerId, invoice.fileName, DocumentType.INVOICE).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
@@ -171,7 +179,7 @@ export class AdminService {
   }
 
   deleteProjectQuotes(ownerId: string, projectId: string): Promise<boolean> {
-    return this.databaseService.getProjectQuotes(ownerId, projectId).then((quotes: Quote[]) => {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, DocumentType.QUOTE).then((quotes: Quote[]) => {
       quotes.forEach((quote: Quote) => {
         this.storageService.deleteDocument(ownerId, quote.fileName, DocumentType.QUOTE).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
@@ -231,5 +239,35 @@ export class AdminService {
         this.alertService.success('Document modifié avec succès');
         return true;
       });
+  }
+
+  uploadDocument(document: Invoice | Quote, file: File): Promise<boolean> {
+    document.lastUpdate = (new Date()).toString();
+
+    const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
+
+    const documentId = Utils.generateToken();
+
+    /*while (projectIds.includes(documentId)) {
+      documentId = Utils.generateToken();
+    }*/
+
+    document.id = documentId;
+
+    return this.storageService.uploadDocument(document.ownerId, document.type, document.fileName, file).then(res => {
+      if (res) {
+        return firebase.database()
+          .ref('/' + documentType + '/' + document.ownerId + '/' + document.id)
+          .set(document, error => {
+            if (error) {
+              this.alertService.error('Impossible de créer le document');
+              return false;
+            }
+
+            this.alertService.success('Document créé avec succès');
+            return true;
+          });
+      }
+    })
   }
 }

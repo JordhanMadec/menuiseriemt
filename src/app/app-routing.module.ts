@@ -12,7 +12,7 @@ import { AdminProjectsComponent } from './admin-area/admin-projects/admin-projec
 import { ProjectDetailComponent } from './shared/project-detail/project-detail.component';
 import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
 import { QuoteViewerComponent } from './shared/document-viewer/quote-viewer.component';
-import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
+import { CustomerDocumentsComponent } from './customer-area/customer-documents/customer-documents.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -44,10 +44,8 @@ const routes: Routes = [
         {path: '', component: CustomerProjectsComponent},
         {path: ':customerId/:projectId', component: ProjectDetailComponent},
     ]},
-    {path: 'factures', children: [
-      {path: '', component: CustomerInvoicesComponent},
-      {path: ':customerId/:invoiceId', component: InvoiceViewerComponent},
-    ]},
+    {path: 'documents', component: CustomerDocumentsComponent},
+    {path: 'factures/:customerId/:invoiceId', component: InvoiceViewerComponent},
     {path: 'devis/:customerId/:quoteId', component: QuoteViewerComponent},
   ]},
 

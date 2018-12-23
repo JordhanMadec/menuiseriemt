@@ -26,8 +26,8 @@ export class CustomerHeaderComponent implements OnInit, OnDestroy {
         if (this.router.url.match('^/espace-client$')) {
           this.selectedNavItem = 'accueil';
         }
-        if (this.router.url.match('^/espace-client/factures')) {
-          this.selectedNavItem = 'factures';
+        if (this.router.url.match('^/espace-client/(documents|factures|devis)')) {
+          this.selectedNavItem = 'documents';
         }
         if (this.router.url.match('^/espace-client/suivi-chantier')) {
           this.selectedNavItem = 'suivi-chantier';

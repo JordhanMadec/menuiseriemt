@@ -74,14 +74,14 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       if (this.isInvoice) {
         this.title = 'Modifier la facture';
 
-        this.databaseService.getUserInvoice(this.customerId, this.documentId).then((invoice: Invoice) => {
+        this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.INVOICE).then((invoice: Invoice) => {
           this.document = invoice;
           this.initForm();
         });
       } else {
         this.title = 'Modifier le devis';
 
-        this.databaseService.getUserQuote(this.customerId, this.documentId).then((quote: Quote) => {
+        this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.QUOTE).then((quote: Quote) => {
           this.document = quote;
           this.initForm();
         });
@@ -198,6 +198,16 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
 
     if (this.documentId) {
       this.adminService.updateDocument(this.getDocumentFromForm()).then(
+        res => {
+          this.updateLoading = false;
+          this.location.back();
+        },
+        error => {
+          this.updateLoading = false;
+        }
+      );
+    } else {
+      this.adminService.uploadDocument(this.getDocumentFromForm(), this.file).then(
         res => {
           this.updateLoading = false;
           this.location.back();

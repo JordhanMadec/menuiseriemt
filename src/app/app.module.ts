@@ -53,7 +53,7 @@ import { CheckboxComponent } from './shared/checkbox/checkbox.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CustomerHeaderComponent } from './navbar/customer-header/customer-header.component';
 import { AlertMessageComponent } from './shared/alert-message/alert-message.component';
-import { CustomerInvoicesComponent } from './customer-area/customer-invoices/customer-invoices.component';
+import { CustomerDocumentsComponent } from './customer-area/customer-documents/customer-documents.component';
 import { ListItemComponent } from './shared/list-item/list-item.component';
 import { InvoiceViewerComponent } from './shared/document-viewer/invoice-viewer.component';
 import { CustomerProjectsComponent } from './customer-area/customer-projects/customer-projects.component';
@@ -99,7 +99,7 @@ import { DocumentWizardComponent } from './admin-area/document-wizard/document-w
     SpinnerComponent,
     CustomerHeaderComponent,
     AlertMessageComponent,
-    CustomerInvoicesComponent,
+    CustomerDocumentsComponent,
     ListItemComponent,
     InvoiceViewerComponent,
     CustomerProjectsComponent,
