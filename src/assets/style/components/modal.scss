@@ -14,3 +14,17 @@ modal-container.modal {
   border-radius: $small-radius !important;
 }
 
+.modal-header {
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.modal-body {
+  padding-top: $big-gap !important;
+  padding-bottom: $big-gap !important;
+}
+
+.modal-footer {
+  justify-content: center !important;
+  align-items: center !important;
+}

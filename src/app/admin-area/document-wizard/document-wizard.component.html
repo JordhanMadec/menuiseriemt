@@ -161,15 +161,18 @@
       <app-svg-icon name="close-icon" [size]="20"></app-svg-icon>
     </button>
   </div>
+
   <div class="modal-body">
     Cette action est irréversible.
+  </div>
 
+  <div class="modal-footer">
     <div class="buttons-wrapper">
-      <button class="my-button" (click)="modalRef.hide()">
+      <button class="my-button no-shadow" (click)="modalRef.hide()">
         Annuler
       </button>
 
-      <button class="my-button error" (click)="onDelete()">
+      <button class="my-button no-shadow error" (click)="onDelete()">
         Supprimer
       </button>
     </div>

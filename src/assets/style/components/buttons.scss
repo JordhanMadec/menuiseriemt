@@ -52,6 +52,10 @@ a.my-button, a.my-button:hover {
   cursor: pointer;
   transition: $transition-fast;
 
+  &.no-shadow {
+    box-shadow: none !important;
+  }
+
   app-svg-icon.button-icon, .button-icon {
     fill: white;
     margin-left: $small-gap;
@@ -61,7 +65,7 @@ a.my-button, a.my-button:hover {
     background-color: $light-grey !important;
     color: $white !important;
     box-shadow: none !important;
-    cursor: default;
+    cursor: default !important;
   }
 }
 
@@ -150,7 +154,7 @@ a.my-button, a.my-button:hover {
   justify-content: center;
   align-items: center;
 
-  padding: -$small-gap;
+  margin: -$small-gap;
 
   .my-button {
     margin: $small-gap;

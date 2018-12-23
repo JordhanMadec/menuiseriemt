@@ -155,13 +155,15 @@
   </div>
   <div class="modal-body">
     Cette action est irréversible et supprimera également les devis et factures associées.
+  </div>
 
+  <div class="modal-footer">
     <div class="buttons-wrapper">
-      <button class="my-button" (click)="modalRef.hide()">
+      <button class="my-button no-shadow" (click)="modalRef.hide()">
         Annuler
       </button>
 
-      <button class="my-button error" (click)="onDelete()">
+      <button class="my-button no-shadow error" (click)="onDelete()">
         Supprimer
       </button>
     </div>
