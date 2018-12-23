@@ -64,7 +64,10 @@
 
           <div class="document-container">
             <div *ngIf="documentUrl; else documentSpinner">
-              <pdf-viewer [src]="documentUrl"></pdf-viewer>
+              <pdf-viewer [src]="documentUrl"
+                          [autoresize]="true"
+                          [original-size]="false">
+              </pdf-viewer>
             </div>
 
             <ng-template #documentSpinner>

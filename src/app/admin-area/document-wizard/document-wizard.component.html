@@ -117,7 +117,11 @@
             </div>
 
             <div class="subsection col-lg-12">
-              <pdf-viewer [src]="filePreviewUrl" *ngIf="filePreviewUrl"></pdf-viewer>
+              <pdf-viewer [src]="filePreviewUrl"
+                          [autoresize]="true"
+                          [original-size]="false"
+                          *ngIf="filePreviewUrl">
+              </pdf-viewer>
             </div>
 
             <div class="subsection input-container col-lg-12">
