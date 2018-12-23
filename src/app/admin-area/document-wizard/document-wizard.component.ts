@@ -261,7 +261,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     }
 
-    this.isDragged = !this.isDragged;
+    this.isDragged = false;
 
     this.cd.detectChanges();
   }

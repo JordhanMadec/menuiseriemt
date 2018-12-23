@@ -125,7 +125,10 @@ ng-dropdown-panel.ng-dropdown-panel {
   &.dragged {
     border-style: solid;
     background-color: $light-grey;
-    color: $green;
+  }
+
+  &.valid, &.dragged {
+    color: $dark-grey;
 
     app-svg-icon {
       fill: $dark-grey;

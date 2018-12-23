@@ -95,7 +95,7 @@
               <div class="input-container row">
                 <div class="input-wrapper col-lg-12">
                   <div class="dropzone-wrapper">
-                    <div class="dropzone" [class.dragged]="isDragged">
+                    <div class="dropzone" [class.dragged]="isDragged" [class.valid]="file">
                       <div *ngIf="file && !isDragged">
                         <app-svg-icon [size]="100" name="check-icon"></app-svg-icon>
                         <h4>{{file.name}}</h4>
