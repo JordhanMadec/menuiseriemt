@@ -115,41 +115,25 @@ ng-dropdown-panel.ng-dropdown-panel {
   }
 }
 
-.dropzone-header {
-  position: relative;
-
-  input[type='text'] {
-    border: none;
-    background-color: $light-grey;
-    color: $dark-grey;
-    border-radius: $small-radius;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: $small-gap $middle-gap;
-    padding-left: 40px;
-    width: 100%;
-    height: 50px;
-    outline: none !important;
-    display: flex;
-    align-items: center;
-  }
-
-  app-svg-icon.input-icon {
-    left: 10px;
-    top: 25px;
-  }
-}
-
 .dropzone {
   text-align: center;
   padding: $big-gap $small-gap;
   border: dashed 2px $light-grey;
-  border-top: none;
   border-radius: $small-radius;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  transition: $transition-fast;
+
+  &.dragged {
+    border-style: solid;
+    background-color: $light-grey;
+    color: $green;
+
+    app-svg-icon {
+      fill: $dark-grey;
+    }
+  }
 
   app-svg-icon {
     fill: $light-grey;
+    transition: $transition-fast;
   }
 }

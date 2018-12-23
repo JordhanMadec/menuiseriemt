@@ -95,24 +95,22 @@
               <div class="input-container row">
                 <div class="input-wrapper col-lg-12">
                   <div class="dropzone-wrapper">
-                    <div class="dropzone-header">
-                      <input type="text" placeholder="Document*" disabled>
-                      <app-svg-icon class="input-icon" name="document-icon" [size]="20"></app-svg-icon>
-                    </div>
-
-                    <div class="dropzone">
-                      <div *ngIf="file">
+                    <div class="dropzone" [class.dragged]="isDragged">
+                      <div *ngIf="file && !isDragged">
                         <app-svg-icon [size]="100" name="check-icon"></app-svg-icon>
                         <h4>{{file.name}}</h4>
                       </div>
 
-                      <div *ngIf="!file">
-                        <app-svg-icon [size]="100" name="document-icon"></app-svg-icon>
+                      <div *ngIf="!file || isDragged">
+                        <app-svg-icon [size]="100" name="add-document-icon"></app-svg-icon>
                         <h4>Glisser-déposer votre document en PDF ici</h4>
                       </div>
                     </div>
 
-                    <input id="fileName" type="file" accept="application/pdf" (change)="onFileChange($event)">
+                    <input id="fileName" type="file" accept="application/pdf"
+                           (change)="onFileChange($event)"
+                           (dragenter)="onDropzoneDraggedToggle()"
+                           (dragleave)="onDropzoneDraggedToggle()">
                   </div>
                 </div>
               </div>

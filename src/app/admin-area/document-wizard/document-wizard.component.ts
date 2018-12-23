@@ -10,8 +10,11 @@ import { Project } from '../../models/project';
 import { Quote } from '../../models/quote';
 import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
+import { AlertService } from '../../services/alert.service';
 import { DatabaseService } from '../../services/database.service';
 import { DocumentValidator } from '../../validators/document-validator';
+
+declare var $: any;
 
 @Component({
   selector: 'app-document-wizard',
@@ -20,23 +23,24 @@ import { DocumentValidator } from '../../validators/document-validator';
 })
 export class DocumentWizardComponent implements OnInit, OnDestroy {
 
-  public customerId: string;
-  public documentId: string;
-
   private formChangesSubscription: Subscription;
 
-  public isInvoice = false;
+  customerId: string;
+  documentId: string;
 
-  public documentForm: FormGroup;
-  public document: Invoice | Quote;
-  public title = '';
-  public subtitle = '';
-  public loading = true;
-  public asChanged = false;
-  public updateLoading = false;
+  isInvoice = false;
 
-  public file: File;
-  public filePreviewUrl: File;
+  documentForm: FormGroup;
+  document: Invoice | Quote;
+  title = '';
+  subtitle = '';
+  loading = true;
+  asChanged = false;
+  updateLoading = false;
+
+  file: File;
+  filePreviewUrl: File;
+  isDragged = false;
 
   modalRef: BsModalRef;
 
@@ -47,6 +51,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
   constructor(private cd: ChangeDetectorRef,
               private databaseService: DatabaseService,
               private adminService: AdminService,
+              private alertService: AlertService,
               private fb: FormBuilder,
               private ngZone: NgZone,
               private router: Router,
@@ -227,24 +232,38 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
   }
 
   onFileChange(event) {
-    const reader = new FileReader();
-
     if (event.target.files && event.target.files.length) {
-      this.file = event.target.files[0];
+      this.updateFile(event.target.files[0]);
+    }
+  }
 
+  onDropzoneDraggedToggle() {
+    this.isDragged = !this.isDragged;
+    this.cd.detectChanges();
+  }
+
+  updateFile(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      if (!file.type.match('pdf')) {
+        this.alertService.error('Un document PDF est attendu');
+        return;
+      }
+
+      this.file = file;
       this.documentForm.patchValue({
         file: this.file.name
       });
 
-      reader.readAsDataURL(this.file);
-
-      reader.onload = () => {
-        this.filePreviewUrl = reader.result;
-        this.cd.detectChanges();
-      }
-
+      this.filePreviewUrl = reader.result;
       this.cd.detectChanges();
     }
+
+    this.isDragged = !this.isDragged;
+
+    this.cd.detectChanges();
   }
 
   ngOnDestroy() {
