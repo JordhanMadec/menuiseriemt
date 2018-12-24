@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
 import { environment } from '../../environments/environment';
-import { DocumentType } from '../models/document';
+import { Document, DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';
@@ -163,7 +163,7 @@ export class AdminService {
   }
 
   deleteProjectDocuments(ownerId: string, projectId: string, type: DocumentType): Promise<boolean> {
-    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((documents: Invoice[] | Quote[]) => {
+    return this.databaseService.getProjectDocuments(ownerId, projectId, type).then((documents: Document[]) => {
       documents.forEach((document: Invoice | Quote) => {
         this.storageService.deleteDocument(document).then(deleteFileRes => {
           if (!deleteFileRes) { return false; }
@@ -226,9 +226,9 @@ export class AdminService {
   }
 
   createDocument(document: Invoice | Quote, file: File): Promise<boolean> {
-    return this.databaseService.getUserDocuments(document.ownerId, document.type).then((documents: Invoice[] | Quote[]) => {
+    return this.databaseService.getUserDocuments(document.ownerId, document.type).then((documents: Document[]) => {
       const documentType = document.type === DocumentType.INVOICE ? 'invoices' : 'quotes';
-      const documentIds = documents.map(_document => _document.id);
+      const documentIds = documents.map((_document: Invoice | Quote) => _document.id);
       let documentId = Utils.generateToken();
 
       while (documentIds.includes(documentId)) {

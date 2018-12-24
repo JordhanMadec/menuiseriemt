@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { DocumentType } from '../models/document';
+import { Document, DocumentType } from '../models/document';
 import { Notif } from '../models/notif';
 import { AlertService } from './alert.service';
 import { AuthService } from './auth.service';
@@ -31,7 +31,7 @@ export class NotificationsService {
   fetchNotifications(userId: string) {
     const notifs: Notif[] = [];
 
-    this.databaseService.getUserDocuments(userId, DocumentType.INVOICE).then(invoices => {
+    this.databaseService.getUserDocuments(userId, DocumentType.INVOICE).then((invoices: Document[]) => {
       invoices.filter(invoice => !invoice.done).forEach(invoice => {
         notifs.push(new Notif({
           text: 'Facture à payer',
@@ -41,7 +41,7 @@ export class NotificationsService {
         }));
       });
 
-      this.databaseService.getUserDocuments(userId, DocumentType.QUOTE).then(quotes => {
+      this.databaseService.getUserDocuments(userId, DocumentType.QUOTE).then((quotes: Document[]) => {
         quotes.filter(quote => !quote.done).forEach(quote => {
           notifs.push(new Notif({
             text: 'Devis à valider',

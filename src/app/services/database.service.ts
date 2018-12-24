@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/app';
 import * as _ from 'lodash';
-import { DocumentType } from '../models/document';
+import { Document, DocumentType } from '../models/document';
 import { Invoice } from '../models/invoice';
 import { Project } from '../models/project';
 import { Quote } from '../models/quote';
@@ -71,7 +71,7 @@ export class DatabaseService {
       .ref(documentType)
       .once('value')
       .then(_documents => {
-        const documents: Invoice[] | Quote[] = [];
+        const documents: Document[] = [];
 
         _documents.forEach(user => {
           user.forEach(document => {
@@ -92,7 +92,7 @@ export class DatabaseService {
 
   getUserDocuments(userId: string, type: DocumentType): Promise<Invoice[] | Quote[]> {
     const documentType = type === DocumentType.INVOICE ? 'invoices' : 'quotes';
-    const documents: Invoice[] | Quote[] = [];
+    const documents: Document[] = [];
 
     return firebase.database()
       .ref(documentType + '/' + userId)
@@ -106,6 +106,7 @@ export class DatabaseService {
           } else {
             document = new Quote(_document.val());
           }
+
           document.id = _document.key;
           documents.push(document);
         });
@@ -137,7 +138,7 @@ export class DatabaseService {
 
   getProjectDocuments(userId: string, projectId: string, type: DocumentType): Promise<Invoice[] | Quote[]> {
     return this.getUserDocuments(userId, type).then(
-      (_documents: Invoice[] | Quote[]) => {
+      (_documents: Document[]) => {
         const documents = _documents.filter(invoice => invoice.projectId + '' === projectId);
         return _.sortBy(documents, ['lastUpdate']);
       }
