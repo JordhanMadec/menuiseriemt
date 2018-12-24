@@ -94,6 +94,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
 
       this.formChangesSubscription = this.documentForm.valueChanges.subscribe(res => {
         this.asChanged = this.document && !this.document.equals(this.getDocumentFromForm());
+        this.isInvoice = this.documentForm.get('type').value === DocumentType.INVOICE;
         this.buildProjectsList();
         this.cd.detectChanges();
       });

@@ -6,19 +6,20 @@
 	.st0{fill:none;stroke:#FFFFFF;stroke-width:5;stroke-miterlimit:10;}
 	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-linejoin:bevel;stroke-miterlimit:10;}
 	.st2{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
-	.st3{stroke:#000000;stroke-miterlimit:10;}
-	.st4{font-family:'Code-Light';}
-	.st5{font-size:131.7984px;}
+	.st3{font-family:'Code-Light';}
+	.st4{font-size:129.5374px;}
+	.st5{fill:none;stroke:#000000;stroke-miterlimit:10;}
 </style>
 <circle class="st0" cx="250" cy="250" r="244"/>
 <g>
-	<line class="st1" x1="170.2" y1="176" x2="329.9" y2="176"/>
-	<line class="st1" x1="170.2" y1="150.1" x2="292.9" y2="150.1"/>
-	<line class="st1" x1="170.2" y1="201.8" x2="329.9" y2="201.8"/>
+	<line class="st1" x1="171.6" y1="177.3" x2="328.5" y2="177.3"/>
+	<line class="st1" x1="171.6" y1="151.8" x2="292.2" y2="151.8"/>
+	<line class="st1" x1="171.6" y1="202.6" x2="328.5" y2="202.6"/>
 	<g>
-		<polygon class="st2" points="309.9,110.2 150.2,110.2 150.2,389.7 349.9,389.7 349.9,150.1 309.9,150.1 		"/>
-		<line class="st1" x1="310.3" y1="109.9" x2="350.2" y2="149.8"/>
+		<polygon class="st2" points="308.9,112.6 151.9,112.6 151.9,387.3 348.2,387.3 348.2,151.8 308.9,151.8 		"/>
+		<line class="st1" x1="309.3" y1="112.3" x2="348.5" y2="151.5"/>
 	</g>
-	<text transform="matrix(1 0 0 1 203.5811 344.083)" class="st3 st4 st5">€</text>
+	<text transform="matrix(1 0 0 1 204.3809 342.4648)" class="st3 st4">€</text>
+	<text transform="matrix(1 0 0 1 204.3809 342.4648)" class="st5 st3 st4">€</text>
 </g>
 </svg>

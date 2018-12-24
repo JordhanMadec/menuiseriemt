@@ -100,7 +100,7 @@
                 <app-list-item icon="document-icon"
                                [title]="quote?.title"
                                [subtitle]="(quote?.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                               [tags]="quote?.done ? ['Signé'] : ['À valider']"
+                               [tags]="quote?.done ? ['Accepté'] : ['En attente']"
                                [error]="!quote?.done"
                                [success]="quote?.done"
                                [link]="(isAdmin ? '/espace-admin' : '/espace-client') + '/devis/' + user?.id + '/' + quote?.id">

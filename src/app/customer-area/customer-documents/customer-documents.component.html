@@ -10,7 +10,7 @@
             <app-list-item icon="document-icon"
                            [title]="quote.title"
                            [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                           [tags]="quote.done ? ['Signé'] : ['À signer']"
+                           [tags]="quote.done ? ['Accepté'] : ['En attente']"
                            [error]="!quote.done"
                            [success]="quote.done"
                            link="/espace-client/devis/{{user?.id}}/{{quote.id}}">

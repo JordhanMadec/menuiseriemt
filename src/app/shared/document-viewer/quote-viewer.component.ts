@@ -45,7 +45,7 @@ export class QuoteViewerComponent implements OnInit, OnDestroy {
     this.databaseService.getUserDocument(this.customerId, this.documentId, DocumentType.QUOTE).then(
       (quote: Quote) => {
         this.document = quote;
-        this.tag = quote.done ? 'Signé' : 'À valider';
+        this.tag = quote.done ? 'Accepté' : 'En attente';
         this.cd.detectChanges();
 
         this.storageService.getDocumentUrl(quote).then(url => {
