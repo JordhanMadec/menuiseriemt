@@ -5,4 +5,8 @@ export class Quote extends Document {
     super(quote);
     this.type = DocumentType.QUOTE;
   }
+
+  getStatus() {
+    return this.done ? 'Accepté' : 'En attente';
+  }
 }

@@ -30,7 +30,8 @@ export class AdminInvoicesComponent implements OnInit {
 
   onSearch() {
     this.invoicesFiltered = _.filter(this.invoices, (invoice: Invoice) => {
-      return invoice.title.toLowerCase().includes(this.filterValue.toLowerCase());
+      return invoice.title.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+      invoice.getStatus().toLowerCase().includes(this.filterValue.toLowerCase());
     });
     this.cd.detectChanges();
   }

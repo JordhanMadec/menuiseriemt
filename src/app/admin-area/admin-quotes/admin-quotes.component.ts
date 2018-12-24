@@ -30,7 +30,8 @@ export class AdminQuotesComponent implements OnInit {
 
   onSearch() {
     this.quotesFiltered = _.filter(this.quotes, (quote: Quote) => {
-      return quote.title.toLowerCase().includes(this.filterValue.toLowerCase());
+      return quote.title.toLowerCase().includes(this.filterValue.toLowerCase()) ||
+      quote.getStatus().toLowerCase().includes(this.filterValue.toLowerCase());
     });
     this.cd.detectChanges();
   }

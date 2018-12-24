@@ -6,4 +6,8 @@ export class Invoice extends Document {
     super(invoice)
     this.type = DocumentType.INVOICE;
   }
+
+  getStatus() {
+    return this.done ? 'Payée' : 'À payer';
+  }
 }

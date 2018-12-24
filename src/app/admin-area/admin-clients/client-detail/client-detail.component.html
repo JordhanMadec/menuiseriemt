@@ -100,7 +100,7 @@
               <app-list-item icon="document-icon"
                              [title]="quote.title"
                              [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                             [tags]="quote.done ? ['Accepté'] : ['En attente']"
+                             [tags]="[quote.getStatus()]"
                              [error]="!quote.done"
                              [success]="quote.done"
                              link="/espace-admin/devis/{{user.id}}/{{quote.id}}">
@@ -127,7 +127,7 @@
               <app-list-item icon="document-icon"
                              [title]="invoice.title"
                              [subtitle]="(invoice.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                             [tags]="invoice.done ? ['Payée'] : ['À payer']"
+                             [tags]="[invoice.getStatus()]"
                              [error]="!invoice.done"
                              [success]="invoice.done"
                              link="/espace-admin/factures/{{user.id}}/{{invoice.id}}">

@@ -19,7 +19,7 @@
             <app-list-item icon="document-icon"
                            [title]="quote.title"
                            [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                           [tags]="quote.done ? ['Accepté'] : ['En attente']"
+                           [tags]="[quote.getStatus()]"
                            [error]="!quote.done"
                            [success]="quote.done"
                            link="/espace-admin/devis/{{quote.ownerId}}/{{quote.id}}">

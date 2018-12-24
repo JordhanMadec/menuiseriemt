@@ -19,7 +19,7 @@
             <app-list-item icon="document-icon"
                            [title]="invoice.title"
                            [subtitle]="(invoice.lastUpdate | amDateFormat:'DD/MM/YYYY')"
-                           [tags]="invoice.done ? ['Payée'] : ['À payer']"
+                           [tags]="[invoice.getStatus()]"
                            [error]="!invoice.done"
                            [success]="invoice.done"
                            link="/espace-admin/factures/{{invoice.ownerId}}/{{invoice.id}}">
