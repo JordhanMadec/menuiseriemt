@@ -76,7 +76,7 @@
           <div class="input-wrapper col-lg-6">
             <input id="password" type="password" placeholder="Mot de passe*" formControlName="password">
             <app-svg-icon class="input-icon" name="lock-icon" [size]="20"></app-svg-icon>
-            <div class="input-hint" *ngIf="!signupForm.get('password').controls.password.valid">
+            <div class="input-hint" *ngIf="signupForm.get('password').get('password').invalid">
               8 caractères minimum dont 1 chiffre au moins.
             </div>
           </div>

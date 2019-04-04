@@ -22,7 +22,7 @@ export class UserWizardComponent implements OnInit, OnDestroy {
 
   public asChanged = false;
   private updateLoading = false;
-  private loading = true;
+  loading = true;
 
   constructor(
     public router: Router,
