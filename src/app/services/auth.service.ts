@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { fromPromise } from 'rxjs-compat/observable/fromPromise';
+import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { AlertService } from './alert.service';

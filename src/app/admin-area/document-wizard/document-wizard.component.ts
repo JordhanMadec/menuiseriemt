@@ -258,6 +258,7 @@ export class DocumentWizardComponent implements OnInit, OnDestroy {
         file: this.file.name
       });
 
+      // @ts-ignore
       this.filePreviewUrl = reader.result;
       this.cd.detectChanges();
     }

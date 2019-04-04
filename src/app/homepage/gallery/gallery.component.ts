@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { AlbumInfo } from '../album/album-info.model';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable ,  Subscription ,  of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',

@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { fromPromise } from 'rxjs-compat/observable/fromPromise';
+import { fromPromise } from 'rxjs/internal-compatibility';
 import { map, switchMap, take } from 'rxjs/operators';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
 
         return fromPromise(this.authService.refreshCurrentUser());
       }),
-      map((user: User) =>{
+      map((user: User) => {
         if (user && user.isAdmin) {
           this.ngZone.run(() => this.router.navigate(['espace-admin']));
         }

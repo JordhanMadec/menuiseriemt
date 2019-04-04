@@ -3,12 +3,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ModalModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MomentModule } from 'ngx-moment';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -121,7 +121,6 @@ import { DocumentWizardComponent } from './admin-area/document-wizard/document-w
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     HttpClientModule,
     NgxPageScrollModule,
     ScrollSpyModule.forRoot(),
@@ -148,7 +147,8 @@ import { DocumentWizardComponent } from './admin-area/document-wizard/document-w
     AlertService,
     DatabaseService,
     StorageService,
-    NotificationsService
+    NotificationsService,
+    PageScrollService
   ],
   bootstrap: [AppComponent]
 })

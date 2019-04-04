@@ -1,11 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import { Observable, Subscription } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import {AlbumInfo} from './album-info.model';
 import {Http} from '@angular/http';
-import 'rxjs/add/observable/of';
-import {Subscription} from 'rxjs/Subscription';
 import {catchError, map} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
 
