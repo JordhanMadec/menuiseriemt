@@ -1,14 +1,71 @@
-<header class="hidden-md-down">
-  <nav class="navbar fixed-top bg-faded">
-    <div class="container">
-     <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>-->
+<header>
+  <nav class="navbar">
 
-      <a class="navbar-brand" pageScroll href="#header-section" routerLink="/">
-        <img src="/assets/img/logo_mt.jpg">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <a class="toggleButton" (click)="toggleSidenav()" *ngIf="isAuthenticated">
+        <app-svg-icon name="menu-icon"></app-svg-icon>
       </a>
 
+      <a class="navbar-brand" (click)="goToHome()">
+        <img src="/assets/img/logo_mt.jpg">
+      </a>
+    </div>
+
+    <div class="nav-links-container">
+
+      <!-- Notifications -->
+      <span dropdown class="dropdown-container" [hidden]="!isAuthenticated">
+        <a href id="basic-link" class="nav-link" dropdownToggle (click)="false" aria-controls="basic-link-dropdown">
+          <app-svg-icon [name]="notifs.length ? 'notif-on-icon' : 'notif-off-icon'"></app-svg-icon>
+        </a>
+
+        <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="basic-link">
+
+            <ng-container *ngIf="notifs.length; else emptyNotifs">
+              <ng-container *ngFor="let notif of notifs">
+                <li [routerLink]="notif.link" class="my-dropdown-item">
+                  <div class="my-dropdown-title">{{notif.text}}</div>
+                  <small class="my-dropdown-subtitle">{{notif.date}}</small>
+                </li>
+              </ng-container>
+            </ng-container>
+
+            <ng-template #emptyNotifs>
+              <li class="my-dropdown-item disabled">Vous n'avez pas de notification</li>
+            </ng-template>
+
+          </ul>
+      </span>
+
+
+      <!-- Espace client -->
+      <a class="nav-link" routerLink="/login" *ngIf="isHome">
+        <div>Espace Client</div>
+        <app-svg-icon class="button-icon" name="user-icon"></app-svg-icon>
+      </a>
+
+      <!-- Déconnexion -->
+      <a class="nav-link" (click)="logout()" *ngIf="isAuthenticated">
+        <div>Se déconnecter</div>
+      </a>
     </div>
   </nav>
 </header>
+
+
+<div class="main-container">
+  <div class="sidenav-container" [class.visible]="isAuthenticated && sidenavVisible">
+    <ng-container *ngIf="!user?.isAdmin">
+      <app-customer-header class="sidenav" [user]="user"></app-customer-header>
+    </ng-container>
+
+    <ng-container *ngIf="user?.isAdmin">
+      <app-admin-header class="sidenav" [user]="user"></app-admin-header>
+    </ng-container>
+  </div>
+
+  <div class="page-content" [class.hasSidenav]="isAuthenticated && sidenavVisible">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,27 +1,20 @@
 @import "../../assets/style/variables";
 
-header {
-  display: flex;
-  justify-content: center;
+.navbar {
   position: fixed;
-  //top: 50%;
-  //margin-top: -226px;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-}
-
-.navbar {
   height: $navbar-height;
   background-color: $black;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  box-shadow: $shadow-strong;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 $big-gap;
+  z-index: 10000;
 }
 
 .navbar-brand img {
@@ -29,126 +22,96 @@ header {
   width: 70px;
 }
 
-#navbar {
-  background-color: #000;
+.nav-links-container {
+  color: $white;
   display: flex;
-  border-radius: 50px;
-  //max-width: 60px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  padding: 0 16px;
-  transition: .3s;
-  z-index: inherit;
-
-
-  ul.nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-}
-
-#navbar:hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.38), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-}
-
-.label {
-  display: flex;
+  justify-content: end;
   align-items: center;
-  justify-content: center;
-  background-color: $white;
-  color: $black;
-  font-weight: bold;
-  border-radius: 20px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  min-width: 150px;
-  padding: 0 8px;
-  height: 40px;
-  position: absolute;
-  //right: 222px;
-  //margin-top: 12px;
-  top: -48px;
-  left: 50%;
-  margin-left: -75px;
-  transition: .5s;
-  transform: scale(0);
-  z-index: -10;
-  opacity: 0;
+  margin: -$small-gap;
 }
 
-.bullet {
-  display: inline-block;
-  background-color: $white;
-  height: 12px;
-  width: 12px;
-  border-radius: 100%;
-  transition: .3s;
-}
-
-.nav-item {
+a.nav-link {
   display: flex;
-  position: relative;
-  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: $small-gap;
+  color: white !important;
 
-  a, a:hover, a:active {
-    display: flex;
-    background-color: transparent;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    width: 60px;
-    height: 60px;
+  app-svg-icon {
+    fill: $white;
+    margin-left: $very-small-gap;
+  }
 
-    img {
-      display: inline-block;
-      height: auto;
-      width: 38px;
+  &:hover {
+    text-decoration: none !important;
+    color: $green !important;
+
+    app-svg-icon {
+      fill: $green;
     }
   }
 }
 
-.nav-item:hover {
-  .bullet {
-    background-color: $green;
-    height: 16px;
-    width: 16px;
-  }
-
-  .label {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.nav-item.spinner a img{
-  transform: rotate(0deg);
-  transition: .8s;
-}
-
-.nav-item.spinner a:active {
-  img {
-    transform: rotate(-360deg);
-    transition: 0s;
-  }
-}
-
-.nav-item.active {
-  .bullet {
-    background-color: $green;
-    height: 16px;
-    width: 16px;
-  }
-}
-
-.nav-item.active:after {
-  content: "";
+.button-icon {
   display: inline-block;
-  background-color: $green;
-  height: 3px;
-  width: 32px;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  margin-left: -16px;
-  //right: 50px;
-  //margin-top: -16px;
+  margin-left: 10px;
+}
+
+
+
+
+ .main-container {
+   height: 100%;
+ }
+
+ .sidenav-container {
+   width: $sidenav-width;
+   position: fixed;
+   left: -$sidenav-width;
+   bottom: 0;
+   top: $navbar-height;
+   display: flex;
+   visibility: hidden;
+   flex-direction: column;
+   background-color: $light-grey;
+   box-shadow: $shadow-strong;
+   transition: $transition-slow;
+   z-index: 1000;
+
+   &.visible {
+     left: 0;
+     visibility: visible;
+   }
+ }
+
+ .sidenav {
+   margin: $middle-gap $small-gap;
+   flex: 1;
+ }
+
+ .page-content {
+   transition: $transition-slow;
+
+   &.hasSidenav {
+     margin-left: $sidenav-width;
+   }
+ }
+
+ .toggleButton {
+   margin-right: $small-gap;
+ }
+
+@media (max-width: 992px) {
+  &.hasSidenav {
+    margin-left: 0 !important;
+  }
+
+  .sidenav-container {
+    left: -60%;
+
+    &.visible {
+      width: 60%;
+    }
+  }
 }

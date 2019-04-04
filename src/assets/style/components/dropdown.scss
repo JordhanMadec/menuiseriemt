@@ -1,0 +1,39 @@
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  box-shadow: $shadow-strong;
+  border: none !important;
+  border-radius: $small-radius !important;
+  width: 300px;
+  right: 0 !important;
+  left: auto !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.my-dropdown-item {
+  padding: $middle-gap;
+  cursor: pointer;
+  transition: $transition-fast;
+  outline: none !important;
+
+  a, a:hover, a:focus, a:active {
+    color: $dark-grey !important;
+    text-decoration: none !important;
+  }
+
+  &:hover {
+    background-color: $light-grey;
+  }
+
+  &.disabled:hover {
+    background-color: transparent;
+  }
+}
+
+.my-dropdown-title {
+  color: $green;
+  font-weight: bold;
+}

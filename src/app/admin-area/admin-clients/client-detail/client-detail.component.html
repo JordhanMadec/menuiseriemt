@@ -1,0 +1,157 @@
+<section id="customer-profile-section">
+  <div class="container">
+
+    <div *ngIf="user; else spinner" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+      <app-page-title
+        [title]="user?.firstName + ' ' + user?.lastName"
+        [tags]="user.isAdmin ? ['Admin'] : []"
+        [tagSuccess]="user.isAdmin"
+        [hasBackButton]="true">
+      </app-page-title>
+
+      <div class="row">
+        <div class="col-lg-6 subsection">
+          <h4 class="green-text">Contact</h4>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="email-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.email}}
+          </div>
+
+          <div class="field-wrapper" *ngIf="user.homePhone">
+            <div class="tag field-label">
+              <app-svg-icon name="phone-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.homePhone}}
+          </div>
+
+          <div class="field-wrapper" *ngIf="user.mobilePhone">
+            <div class="tag field-label">
+              <app-svg-icon name="mobile-phone-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.mobilePhone}}
+          </div>
+        </div>
+
+        <br>
+
+        <div class="col-lg-6 subsection">
+          <h4 class="green-text">Adresse</h4>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="pin-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.address}}
+          </div>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="city-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.city}}
+          </div>
+
+          <div class="field-wrapper">
+            <div class="tag field-label">
+              <app-svg-icon name="zipcode-icon" [size]="20"></app-svg-icon>
+            </div>
+            {{user?.zipcode}}
+          </div>
+        </div>
+
+
+
+
+        <div class="subsection col-lg-12">
+          <h4 class="green-text">Chantiers</h4>
+
+          <div class="list-container" *ngIf="projects?.length; else emptyProjects">
+            <ng-container *ngFor="let project of projects">
+              <app-list-item icon="calendar-icon"
+                             [title]="project.title"
+                             [subtitle]="(project.startDate | amDateFormat:'DD/MM/YYYY') + ' - ' + (project.endDate ? (project.endDate | amDateFormat:'DD/MM/YYYY') : 'En cours...')"
+                             [tags]="[getProjectStatus(project)]"
+                             [error]="project.status === 'PENDING' || project.status === 'WAITING_PAYMENT'"
+                             [success]="project.status === 'COMPLETED'"
+                             link="/espace-admin/chantiers/{{project.ownerId}}/{{project.id}}">
+              </app-list-item>
+            </ng-container>
+          </div>
+
+          <ng-template #emptyProjects>
+            <div class="list-container empty-list">
+              <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+              Pas encore de chantier
+            </div>
+          </ng-template>
+        </div>
+
+
+
+
+        <div class="subsection col-lg-6">
+          <h4 class="green-text">Devis</h4>
+
+          <div class="list-container" *ngIf="quotes?.length; else emptyQuotes">
+            <ng-container *ngFor="let quote of quotes">
+              <app-list-item icon="document-icon"
+                             [title]="quote.title"
+                             [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
+                             [tags]="[quote.getStatus()]"
+                             [error]="!quote.done"
+                             [success]="quote.done"
+                             link="/espace-admin/devis/{{user.id}}/{{quote.id}}">
+              </app-list-item>
+            </ng-container>
+          </div>
+
+          <ng-template #emptyQuotes>
+            <div class="list-container empty-list">
+              <app-svg-icon name="document-icon" [size]="100"></app-svg-icon>
+              Pas encore de devis
+            </div>
+          </ng-template>
+        </div>
+
+
+
+
+        <div class="subsection col-lg-6">
+          <h4 class="green-text">Factures</h4>
+
+          <div class="list-container" *ngIf="invoices?.length; else emptyInvoices">
+            <ng-container *ngFor="let invoice of invoices">
+              <app-list-item icon="document-icon"
+                             [title]="invoice.title"
+                             [subtitle]="(invoice.lastUpdate | amDateFormat:'DD/MM/YYYY')"
+                             [tags]="[invoice.getStatus()]"
+                             [error]="!invoice.done"
+                             [success]="invoice.done"
+                             link="/espace-admin/factures/{{user.id}}/{{invoice.id}}">
+              </app-list-item>
+            </ng-container>
+          </div>
+
+          <ng-template #emptyInvoices>
+            <div class="list-container empty-list">
+              <app-svg-icon name="document-icon" [size]="100"></app-svg-icon>
+              Pas encore de facture
+            </div>
+          </ng-template>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>
+
+<button class="circle-button fab-button accent" [routerLink]="'/espace-admin/clients/' + user?.id + '/modifier'">
+  <app-svg-icon name="edit-icon"></app-svg-icon>
+</button>

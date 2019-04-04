@@ -1,0 +1,92 @@
+@import "../../../assets/style/variables";
+
+#gallery-section {
+  background-color: $white;
+  //background-image: url('../../assets/img/background-lines.svg');
+  //background-size: cover;
+  //background-position: right bottom;
+  color: $black;
+}
+
+.album{
+  border-radius: $middle-radius;
+  background-color: $light-grey;
+  background-position: center;
+  background-size: cover;
+  height: 200px;
+  margin: 16px 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.album-filter {
+  background-color: rgba(0, 0, 0, .4);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 16px;
+  height: 100%;
+  transition: $transition-fast;
+
+  .album-title{
+    color: $white;
+    transform: translateY(32px);
+    transition: $transition-fast;
+  }
+
+  .album-title-hover {
+    color: $white;
+    visibility: hidden;
+    transform: translateY(32px);
+    opacity: 0;
+    transition: 0s;
+  }
+}
+
+.album-filter:hover {
+  background-color: rgba(0, 0, 0, .7);
+
+  .album-title{
+    color: $white;
+    transform: translateY(-32px);
+    opacity: 0;
+    transition: 0s;
+  }
+
+  .album-title-hover {
+    visibility: visible;
+    display: inline-block;
+    transform: translateY(-8px);
+    opacity: 1;
+    transition: $transition-fast;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .album-container {
+    width: 50%;
+  }
+
+  .album {
+    height: 100px;
+  }
+
+  .album-title {
+    font-size: .8rem;
+  }
+
+  .album-title-hover {
+    font-size: .8rem;
+    margin: 0;
+  }
+
+  .album-filter {
+    padding: 8px;
+  }
+
+  .album-filter:hover {
+    .album-title-hover {
+      transform: translateY(0px);
+    }
+  }
+}

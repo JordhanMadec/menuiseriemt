@@ -1,0 +1,47 @@
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div>
+      <app-page-title title="Devis"></app-page-title>
+
+      <div class="list-filter-container">
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-12">
+            <input placeholder="Rechercher" (input)="onSearch()" [(ngModel)]="filterValue">
+            <app-svg-icon class="input-icon" name="search-icon" [size]="20"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="quotes; else spinner">
+        <div class="list-container" *ngIf="quotesFiltered.length; else emptyInvoices">
+          <ng-container *ngFor="let quote of quotesFiltered">
+            <app-list-item icon="document-icon"
+                           [title]="quote.title"
+                           [subtitle]="(quote.lastUpdate | amDateFormat:'DD/MM/YYYY')"
+                           [tags]="[quote.getStatus()]"
+                           [error]="!quote.done"
+                           [success]="quote.done"
+                           link="/espace-admin/devis/{{quote.ownerId}}/{{quote.id}}">
+            </app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyInvoices>
+          <div class="list-container empty-list">
+            <app-svg-icon name="document-icon" [size]="100"></app-svg-icon>
+            Vous n'avez pas de devis
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+<button class="circle-button fab-button accent" routerLink="/espace-admin/nouveau-devis">
+  <app-svg-icon name="add-icon"></app-svg-icon>
+</button>

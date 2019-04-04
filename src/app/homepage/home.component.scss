@@ -1,0 +1,9 @@
+@import "../../assets/style/variables";
+
+.rge-badge {
+  position: fixed;
+  bottom: $middle-gap;
+  right: $middle-gap;
+  height: 110px;
+  width: 110px;
+}

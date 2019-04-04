@@ -1,0 +1,16 @@
+.field-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: $small-gap;
+
+  .field-label {
+    margin-right: $small-gap;
+    font-weight: bold;
+    min-width: 60px;
+
+    app-svg-icon {
+      fill: $dark-grey;
+    }
+  }
+}

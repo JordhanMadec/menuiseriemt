@@ -1,0 +1,35 @@
+.tag {
+  padding: $very-small-gap $small-gap;
+  font-size: 12px;
+  background-color: $light-grey;
+  color: $dark-grey;
+  display: inline-block;
+  border-radius: $middle-radius;
+  user-select: none !important;
+
+  &.success {
+    background-color: $green;
+    color: $white;
+  }
+
+  &.error {
+    background-color: $red;
+    color: $white;
+  }
+
+  &.dark {
+    background-color: $dark-grey;
+    color: $white;
+  }
+}
+
+.tag-list {
+  margin: -$small-gap;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  .tag {
+    margin: $small-gap;
+  }
+}

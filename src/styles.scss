@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/style/variables";
-@import "assets/fonts/atami/stylesheet.css";
-@import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
+@import "assets/style/components";
+@import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Nanum+Gothic|Exo');
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
 @import '~bootstrap/scss/bootstrap';
 
 html, body{
   color: $black;
-  font-family: 'Quicksand';
+  font-family: 'Nanum Gothic';
   overflow-x: hidden;
   position: relative;
 }
@@ -18,31 +18,55 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Julius Sans One', 'Archivo';
+  font-family: 'Exo', 'Julius Sans One';
 }
 
 a, a:hover, a:visited{
-  color: inherit;
+  color: $green;
   text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: $green;
+  text-decoration: underline;
+}
+
+app-svg-icon {
+  fill: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 section{
-  padding: 64px 0;
+  padding: $very-big-gap 0;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: $big-gap;
 }
 
-.green-line {
+.gap {
+  margin: $very-big-gap 0;
+}
+
+.gap-line {
   width: 100px;
   height: 2px;
   display: inline-block;
   background-color: $green;
-  margin: 24px 0;
+  margin: $big-gap 0;
 }
 
+.green-text {
+  color: $green;
+}
+
+.red-text {
+  color: $red;
+}
 
 
 
@@ -231,48 +255,6 @@ section{
 
 
 
-
-
-
-.circle-button {
-  height: 60px;
-  width: 60px;
-  padding: 8px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .3s;
-  cursor: pointer;
-
-  img {
-    height: 30px;
-    transform: rotate(0deg);
-    transition: .3s;
-  }
-}
-
-.circle-button.circle-button-small {
-  height: 30px;
-  width: 30px;
-  padding: 4px;
-
-  img {
-    height: 20px;
-  }
-}
-
-.circle-button:hover {
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-
-  img {
-    height: 32px;
-  }
-}
-
-
-
 @media screen and (min-width: 768px) {
   .section-title:after,
   .section-title:before {
@@ -291,6 +273,10 @@ section{
 
   .section-title:after {
     left: 12px;
+  }
+
+  .container {
+    padding: 0 $very-big-gap;
   }
 }
 
@@ -329,9 +315,34 @@ section{
   h6 {
     font-size: 1rem;
   }
+}
 
-  .circle-button {
-    height: 40px;
-    width: 40px;
-  }
+.row-center {
+  display: flex;
+  justify-content: center;
+}
+
+.shadow-light {
+  box-shadow: $shadow-light;
+}
+
+.shadow-strong {
+  box-shadow: $shadow-strong;
+}
+
+pdf-viewer {
+  max-width: 100%;
+  display: block;
+}
+
+.pdfViewer .page {
+  box-shadow: $shadow-strong !important;
+}
+
+.ng2-pdf-viewer-container {
+  overflow: visible !important;
+}
+
+.subsection {
+  margin-top: $big-gap;
 }

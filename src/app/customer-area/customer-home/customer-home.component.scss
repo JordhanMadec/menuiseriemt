@@ -1,0 +1,39 @@
+@import "../../../assets/style/variables";
+
+.user-name {
+  color: $green;
+}
+
+.customer-service-container {
+  margin-top: $very-big-gap;
+}
+
+.customer-service-wrapper {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px $light-grey;
+  border-radius: $middle-radius;
+  transition: $transition-fast;
+  color: $dark-grey;
+  cursor: pointer;
+  padding: $small-gap;
+  margin: $small-gap 0;
+  outline: none !important;
+
+  app-svg-icon {
+    fill: $light-grey;
+    margin-bottom: $small-gap;
+    transition: $transition-fast;
+  }
+
+  &:hover {
+    background-color: $light-grey;
+
+    app-svg-icon {
+      fill: $green;
+    }
+  }
+}

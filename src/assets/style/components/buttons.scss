@@ -1,0 +1,162 @@
+button {
+  outline: none !important;
+  cursor: pointer;
+}
+
+.circle-button {
+  height: 60px;
+  width: 60px;
+  padding: $small-gap;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-fast;
+  cursor: pointer;
+
+  img {
+    height: 30px;
+    transform: rotate(0deg);
+    transition: $transition-fast;
+  }
+}
+
+.circle-button.circle-button-small {
+  height: 30px;
+  width: 30px;
+  padding: 4px;
+
+  img {
+    height: 20px;
+  }
+}
+
+.circle-button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+a.my-button, a.my-button:hover {
+  text-decoration: none;
+}
+
+.my-button {
+  border-radius: $small-radius;
+  padding: $small-gap $middle-gap;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &.no-shadow {
+    box-shadow: none !important;
+  }
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: white;
+    margin-left: $small-gap;
+  }
+
+  &:disabled {
+    background-color: $light-grey !important;
+    color: $white !important;
+    box-shadow: none !important;
+    cursor: default !important;
+  }
+}
+
+.my-button:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.my-button.accent,
+.circle-button.accent {
+  background-color: $green;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $dark-grey;
+  }
+}
+
+.my-button.primary,
+.circle-button.primary {
+  background-color: $black;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $green;
+  }
+}
+
+.my-button.error,
+.circle-button.error {
+  background-color: $red;
+  color: $white;
+
+  app-svg-icon.button-icon, .button-icon {
+    fill: $white;
+  }
+}
+
+.icon-button {
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: $transition-fast;
+  cursor: pointer;
+
+  app-svg-icon {
+    fill: $dark-grey;
+  }
+
+  &:hover app-svg-icon {
+    fill: $green;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .circle-button {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.fab-button {
+  position: fixed;
+  bottom: $big-gap;
+  right: $big-gap;
+  animation-duration: $transition-fast;
+  animation-name: popin;
+}
+
+
+@keyframes popin {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: -$small-gap;
+
+  .my-button {
+    margin: $small-gap;
+  }
+}

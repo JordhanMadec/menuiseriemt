@@ -1,0 +1,171 @@
+<section id="project-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div *ngIf="!loading; else spinner">
+      <app-page-title [title]="project ? project?.title : 'Nouveau chantier'" [subtitle]="subtitle" [hasBackButton]="true"></app-page-title>
+
+      <div class="project-container">
+        <div class="subsection">
+          <app-project-timeline [project]="projectTimeline"></app-project-timeline>
+        </div>
+
+        <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+          <div class="row project-info">
+            <div class="subsection col-lg-12">
+              <h4 class="green-text">Titre</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12">
+                  <input id="title" type="text" placeholder="Nom du chantier*" formControlName="title">
+                  <app-svg-icon class="input-icon" name="edit-icon" [size]="20"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection col-lg-12" *ngIf="!customerId">
+              <h4 class="green-text">Client</h4>
+
+              <div class="input-container row">
+                <div class="input-wrapper col-lg-12" *ngIf="customers?.length">
+                  <ng-select
+                    [items]="customers"
+                    bindLabel="userName"
+                    bindValue="userId"
+                    formControlName="ownerId"
+                    [placeholder]="projectForm.get('ownerId').value ? '' : 'Client*'"
+                    [clearable]="false"
+                    [searchable]="true"
+                    [virtualScroll]="true"
+                  >
+                  </ng-select>
+                  <app-svg-icon class="input-icon" name="user-icon" [size]="20"></app-svg-icon>
+                  <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20" (click)="openStatusSelect()"></app-svg-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 subsection">
+              <h4 class="green-text">Adresse du chantier</h4>
+
+              <div formGroupName="addressFields">
+
+                <div class="input-container row">
+                  <div class="input-wrapper col-lg-12">
+                    <input id="city" type="text" placeholder="Ville*" formControlName="city">
+                    <app-svg-icon class="input-icon" name="city-icon" [size]="20"></app-svg-icon>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <input id="zipcode" type="text" placeholder="Code postal*" formControlName="zipcode" maxlength="5">
+                    <app-svg-icon class="input-icon" name="zipcode-icon" [size]="20"></app-svg-icon>
+                    <div class="input-hint error" *ngIf="projectForm.get('addressFields').get('zipcode').hasError('pattern')">
+                      Doit contenir 5 chiffres
+                    </div>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <input id="address" type="text" placeholder="Adresse*" formControlName="address">
+                    <app-svg-icon class="input-icon" name="pin-icon" [size]="20"></app-svg-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 subsection">
+              <h4 class="green-text">Informations</h4>
+
+              <div formGroupName="information">
+
+                <div class="input-container row">
+                  <div class="input-wrapper col-lg-12">
+                    <input id="startDate" type="text" placeholder="Début du chantier*" formControlName="startDate" maxlength="10">
+                    <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                    <div class="input-hint error" *ngIf="projectForm.get('information').get('startDate').hasError('pattern')">
+                      Au format jj/mm/aaaa
+                    </div>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <input id="endDate" type="text" placeholder="Fin du chantier" formControlName="endDate" maxlength="10">
+                    <app-svg-icon class="input-icon" name="calendar-icon" [size]="20"></app-svg-icon>
+                    <div class="input-hint error" *ngIf="projectForm.get('information').get('endDate').hasError('pattern')">
+                      Au format jj/mm/aaaa
+                    </div>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <ng-select
+                      [items]="statusList"
+                      bindLabel="label"
+                      bindValue="value"
+                      formControlName="status"
+                      [clearable]="false"
+                      [searchable]="false"
+                    >
+                    </ng-select>
+                    <app-svg-icon class="input-icon" name="clock-icon" [size]="20"></app-svg-icon>
+                    <app-svg-icon class="select-dropdown-icon" name="chevron-down-icon" [size]="20" (click)="openStatusSelect()"></app-svg-icon>
+                  </div>
+
+                  <div class="input-wrapper col-lg-12">
+                    <textarea id="notes" type="text" placeholder="Notes" formControlName="notes"></textarea>
+                    <app-svg-icon class="input-icon" name="note-icon" [size]="20"></app-svg-icon>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="subsection input-container col-lg-12">
+              <div class="input-wrapper">
+                <div class="buttons-wrapper" *ngIf="!updateLoading; else buttonSpinner">
+                  <button class="my-button error" *ngIf="project" (click)="openModal(template)">
+                    Supprimer
+                  </button>
+
+                  <button class="my-button accent" type="submit" [disabled]="(project && (!projectForm.valid || !asChanged)) || !projectForm.valid">
+                    {{project?.id ? 'Enregistrer' : 'Valider'}}
+                  </button>
+                </div>
+
+                <ng-template #buttonSpinner>
+                  <app-spinner [size]="30"></app-spinner>
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Supprimer le chantier ?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <app-svg-icon name="close-icon" [size]="20"></app-svg-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    Cette action est irréversible et supprimera également les devis et factures associées.
+  </div>
+
+  <div class="modal-footer">
+    <div class="buttons-wrapper">
+      <button class="my-button no-shadow" (click)="modalRef.hide()">
+        Annuler
+      </button>
+
+      <button class="my-button no-shadow error" (click)="onDelete()">
+        Supprimer
+      </button>
+    </div>
+  </div>
+</ng-template>

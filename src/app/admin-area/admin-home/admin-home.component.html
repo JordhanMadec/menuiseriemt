@@ -1,0 +1,44 @@
+<section id="customer-home-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', distance: 300, delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+    <div *ngIf="user; else spinner">
+      <h1>Bonjour, <span class="user-name">{{user?.firstName}}</span></h1>
+      <br>
+      <p>Bienvenue dans votre espace administrateur !</p>
+      <p>Dans cet espace vous pourrez gérer vos chantiers, vos clients, vos devis et factures ainsi que vos employés</p>
+
+      <div class="row customer-service-container">
+        <div class="col-lg-6">
+          <div class="customer-service-wrapper" routerLink="/espace-admin/devis">
+            <app-svg-icon name="document-icon" [size]="100"></app-svg-icon>
+            <div>Devis</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="customer-service-wrapper" routerLink="/espace-admin/factures">
+            <app-svg-icon name="document-icon" [size]="100"></app-svg-icon>
+            <div>Factures</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="customer-service-wrapper" routerLink="/espace-admin/chantiers">
+            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+            <div>Chantier</div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="customer-service-wrapper" routerLink="/espace-admin/clients">
+            <app-svg-icon name="user-icon" [size]="100"></app-svg-icon>
+            <div>Clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<section id="factures-section" [ngsReveal]="{scale: 1, opacity: 0, origin: 'right', delay: 100, distance: '300px', duration: 500, useDelay:'onload'}">
+  <div class="container">
+
+    <div>
+      <app-page-title title="Clients"></app-page-title>
+
+      <div class="list-filter-container">
+        <div class="input-container row">
+          <div class="input-wrapper col-lg-12">
+            <input placeholder="Rechercher" (input)="onSearch()" [(ngModel)]="filterValue">
+            <app-svg-icon class="input-icon" name="search-icon" [size]="20"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="users; else spinner">
+        <div class="list-container" *ngIf="usersFiltered.length; else emptyList">
+          <ng-container *ngFor="let user of usersFiltered">
+            <app-list-item icon="user-icon"
+                           [title]="user.firstName + ' ' + user.lastName"
+                           [subtitle]="user.email"
+                           [tags]="user.isAdmin ? ['Admin'] : []"
+                           [success]="user.isAdmin"
+                           link="{{user.id}}">
+            </app-list-item>
+          </ng-container>
+        </div>
+
+        <ng-template #emptyList>
+          <div class="list-container empty-list">
+            <app-svg-icon name="calendar-icon" [size]="100"></app-svg-icon>
+            Aucun client
+          </div>
+        </ng-template>
+      </div>
+
+      <ng-template #spinner>
+        <app-spinner></app-spinner>
+      </ng-template>
+    </div>
+  </div>
+</section>
+
+<button class="circle-button fab-button accent" routerLink="/espace-admin/nouveau-client">
+  <app-svg-icon name="add-icon"></app-svg-icon>
+</button>

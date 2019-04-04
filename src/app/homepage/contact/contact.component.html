@@ -1,0 +1,78 @@
+<section id="contact-section">
+  <div class="container">
+    <h1 class="section-title">Contact</h1>
+    <!--<form>-->
+      <!--<div class="form-group">-->
+        <!--<input type="text" class="form-control" name="name" value="" placeholder="Nom" required="true">-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<input type="email" class="form-control" name="mail" value="" placeholder="Email" required="true">-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<textarea class="form-control" name="message" rows="8" cols="80" placeholder="Message"></textarea>-->
+      <!--</div>-->
+      <!--<input type="submit"  name="" value="Envoyer">-->
+    <!--</form>-->
+
+    <div class="row">
+      <app-person name="Jacques Madec"
+                  phone="06 12 31 66 84"
+                  role="Associé"
+                  img="../../../assets/img/trump.png"
+                  class="col-lg-6"
+                  ngsReveal></app-person>
+      <app-person name="Philippe Thébault"
+                  phone="06 45 35 81 17"
+                  role="Associé"
+                  img="../../../assets/img/trump.png"
+                  class="col-lg-6"
+                  ngsReveal></app-person>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 company-info">
+        <div class="row">
+          <div [ngsReveal]="{delay: 150}" class="col-lg-4 company-info-item">
+            <img src="../../../assets/img/contact/pin.svg">
+            <div class="company-info-item-text">
+              36 bis rue de belle ville <br>
+              22400 Coëtmieux
+            </div>
+          </div>
+
+          <div [ngsReveal]="{delay: 300}" class="col-lg-4 company-info-item">
+            <img src="../../../assets/img/contact/phone.svg">
+            <div class="company-info-item-text">
+              02 96 34 60 64 <br>
+              02 96 34 64 92 (Fax)
+            </div>
+          </div>
+
+          <div [ngsReveal]="{delay: 450}" class="col-lg-4 company-info-item">
+            <img src="../../../assets/img/contact/mail.svg">
+            <div class="company-info-item-text">
+              menuiserie.mt@orange.fr
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div [ngsReveal]="{delay: 550}" class="row">
+      <div class="col-lg-12 nice-message">
+        <h3>Venez discuter de votre projet !</h3>
+        <div class="gap-line"></div>
+        <h4>Ensemble nous trouverons une solution adaptée à votre besoin</h4>
+      </div>
+    </div>
+
+    <div [ngsReveal]="{delay: 650}" class="row map-container">
+      <a class="col-lg-12" href="https://www.google.fr/maps/place/Menuiserie+M%26T/@48.484385,-2.580825,15z/data=!4m5!3m4!1s0x0:0x3d52f3e513c63604!8m2!3d48.484385!4d-2.580825" target="_blank">
+        <img src="../../../assets/img/contact/map.png" alt="map" width="100%">
+      </a>
+    </div>
+
+  </div>
+
+</section>
