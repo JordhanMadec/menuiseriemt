@@ -1,8 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { AlbumInfo } from '../album/album-info.model';
-import { Http } from '@angular/http';
 import { Observable ,  Subscription ,  of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(private router: Router, private http: Http, private ngZone: NgZone, private alertService: AlertService) {}
+  constructor(private router: Router, private http: HttpClient, private ngZone: NgZone, private alertService: AlertService) {}
 
   ngOnInit() {
     this.subscription = this.getAllAlbums().subscribe(
@@ -34,8 +34,8 @@ export class GalleryComponent implements OnInit, OnDestroy {
   }
 
   private getAllAlbums(): Observable<AlbumInfo[]> {
-    return this.http.get('/assets/gallery-db.json').pipe(
-      map((res: any) => res.json())
+    return this.http.get('assets/gallery-db.json').pipe(
+      map((res: AlbumInfo[]) => res)
     );
 
   }

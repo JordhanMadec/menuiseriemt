@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AlertService } from '../../services/alert.service';
 import {AlbumInfo} from './album-info.model';
-import {Http} from '@angular/http';
 import {catchError, map} from 'rxjs/operators';
 import {of} from 'rxjs/internal/observable/of';
 
@@ -30,7 +30,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   private path: string;
   private fullsScreenId = 0;
 
-  constructor(private route: ActivatedRoute, private http: Http, private alertService: AlertService) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private alertService: AlertService) {}
 
   ngOnInit() {
     window.scrollTo(0, 0);
