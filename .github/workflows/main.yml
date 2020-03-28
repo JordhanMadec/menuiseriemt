@@ -2,7 +2,7 @@ name: Firebase deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [ develop, master ]
 
 jobs:
   firebase-deploy:
