@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/style/variables";
 @import "assets/fonts/atami/stylesheet.css";
-@import url('https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One');
-@import '~bootstrap/scss/bootstrap-reboot';
-@import '~bootstrap/scss/bootstrap-grid';
-@import '~bootstrap/scss/bootstrap';
+@import url("https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One");
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/bootstrap";
 
-html, body{
+html,
+body {
   color: $black;
-  font-family: 'Quicksand';
+  font-family: "Quicksand";
   overflow-x: hidden;
   position: relative;
 }
@@ -17,16 +18,28 @@ body {
   margin-top: $navbar-height;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Julius Sans One', 'Archivo';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Julius Sans One", "Archivo";
 }
 
-a, a:hover, a:visited{
-  color: inherit;
+a,
+a:visited {
+  color: $green;
+  font-size: bold;
   text-decoration: none;
 }
 
-section{
+a:hover {
+  color: $green;
+  text-decoration: underline;
+}
+
+section {
   padding: 64px 0;
 }
 
@@ -43,12 +56,8 @@ section{
   margin: 24px 0;
 }
 
-
-
-
-
 //Loader
-#loader{
+#loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -72,11 +81,16 @@ section{
 }
 
 .cssload-cssload-loader-line-wrap-wrap {
-  animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
-  -o-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
-  -ms-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
-  -webkit-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
-  -moz-animation: cssload-spin 2600ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  animation: cssload-spin 2600ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
+  -o-animation: cssload-spin 2600ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
+  -ms-animation: cssload-spin 2600ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
+  -webkit-animation: cssload-spin 2600ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
+  -moz-animation: cssload-spin 2600ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    infinite;
   box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -114,68 +128,76 @@ section{
   top: 0;
   width: 175px;
 }
-.cssload-cssload-loader-line-wrap-wrap:nth-child(1) { animation-delay: -65ms;
+.cssload-cssload-loader-line-wrap-wrap:nth-child(1) {
+  animation-delay: -65ms;
   -o-animation-delay: -65ms;
   -ms-animation-delay: -65ms;
   -webkit-animation-delay: -65ms;
-  -moz-animation-delay: -65ms; }
-.cssload-cssload-loader-line-wrap-wrap:nth-child(2) { animation-delay: -130ms;
+  -moz-animation-delay: -65ms;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(2) {
+  animation-delay: -130ms;
   -o-animation-delay: -130ms;
   -ms-animation-delay: -130ms;
   -webkit-animation-delay: -130ms;
-  -moz-animation-delay: -130ms; }
-.cssload-cssload-loader-line-wrap-wrap:nth-child(3) { animation-delay: -195ms;
+  -moz-animation-delay: -130ms;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(3) {
+  animation-delay: -195ms;
   -o-animation-delay: -195ms;
   -ms-animation-delay: -195ms;
   -webkit-animation-delay: -195ms;
-  -moz-animation-delay: -195ms; }
-.cssload-cssload-loader-line-wrap-wrap:nth-child(4) { animation-delay: -260ms;
+  -moz-animation-delay: -195ms;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(4) {
+  animation-delay: -260ms;
   -o-animation-delay: -260ms;
   -ms-animation-delay: -260ms;
   -webkit-animation-delay: -260ms;
-  -moz-animation-delay: -260ms; }
-.cssload-cssload-loader-line-wrap-wrap:nth-child(5) { animation-delay: -325ms;
+  -moz-animation-delay: -260ms;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(5) {
+  animation-delay: -325ms;
   -o-animation-delay: -325ms;
   -ms-animation-delay: -325ms;
   -webkit-animation-delay: -325ms;
-  -moz-animation-delay: -325ms; }
+  -moz-animation-delay: -325ms;
+}
 
 .cssload-cssload-loader-line-wrap-wrap:nth-child(1) .cssload-loader-line-wrap {
-  border-color: rgb(0,0,0);
+  border-color: rgb(0, 0, 0);
   height: 158px;
   width: 158px;
   top: 12px;
 }
 .cssload-cssload-loader-line-wrap-wrap:nth-child(2) .cssload-loader-line-wrap {
-  border-color: rgb(178,231,55);
+  border-color: rgb(178, 231, 55);
   height: 133px;
   width: 133px;
   top: 25px;
 }
 .cssload-cssload-loader-line-wrap-wrap:nth-child(3) .cssload-loader-line-wrap {
-  border-color: rgb(0,0,0);
+  border-color: rgb(0, 0, 0);
   height: 109px;
   width: 109px;
   top: 37px;
 }
 .cssload-cssload-loader-line-wrap-wrap:nth-child(4) .cssload-loader-line-wrap {
-  border-color: rgb(178,231,55);
+  border-color: rgb(178, 231, 55);
   height: 84px;
   width: 84px;
   top: 49px;
 }
 .cssload-cssload-loader-line-wrap-wrap:nth-child(5) .cssload-loader-line-wrap {
-  border-color: rgb(0,0,0);
+  border-color: rgb(0, 0, 0);
   height: 60px;
   width: 60px;
   top: 61px;
 }
 
-
-
-
 @keyframes cssload-spin {
-  0%, 15% {
+  0%,
+  15% {
     transform: rotate(0);
     transform: rotate(0);
   }
@@ -186,7 +208,8 @@ section{
 }
 
 @-o-keyframes cssload-spin {
-  0%, 15% {
+  0%,
+  15% {
     -o-transform: rotate(0);
     transform: rotate(0);
   }
@@ -197,7 +220,8 @@ section{
 }
 
 @-ms-keyframes cssload-spin {
-  0%, 15% {
+  0%,
+  15% {
     -ms-transform: rotate(0);
     transform: rotate(0);
   }
@@ -208,7 +232,8 @@ section{
 }
 
 @-webkit-keyframes cssload-spin {
-  0%, 15% {
+  0%,
+  15% {
     -webkit-transform: rotate(0);
     transform: rotate(0);
   }
@@ -219,7 +244,8 @@ section{
 }
 
 @-moz-keyframes cssload-spin {
-  0%, 15% {
+  0%,
+  15% {
     -moz-transform: rotate(0);
     transform: rotate(0);
   }
@@ -228,11 +254,6 @@ section{
     transform: rotate(360deg);
   }
 }
-
-
-
-
-
 
 .circle-button {
   height: 60px;
@@ -243,13 +264,13 @@ section{
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
 
   img {
     height: 30px;
     transform: rotate(0deg);
-    transition: .3s;
+    transition: 0.3s;
   }
 }
 
@@ -271,12 +292,10 @@ section{
   }
 }
 
-
-
 @media screen and (min-width: 768px) {
   .section-title:after,
   .section-title:before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 70px;
     height: 2px;
@@ -300,7 +319,7 @@ section{
   }
 
   .section-title:before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 70px;
     height: 2px;

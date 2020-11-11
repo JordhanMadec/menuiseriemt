@@ -1,0 +1,20 @@
+.rge-badge-container {
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.1);
+  background-color: white;
+  cursor: pointer;
+  transition: 0.3s;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 20px 0px rgba(#000, 0.2);
+  }
+}

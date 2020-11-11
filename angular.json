@@ -124,6 +124,9 @@
       "component": {
         "spec": false
       }
+    },
+    "@schematics/angular:component": {
+      "styleext": "scss"
     }
   }
 }

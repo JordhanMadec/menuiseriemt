@@ -1,0 +1,45 @@
+@import "../../../assets/style/variables.scss";
+@import "../../../assets/style/colors.scss";
+
+.rge-modal-overlay {
+  position: fixed;
+  top: $navbar-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(#000, 0.6);
+  padding: 20px 0;
+  display: flex;
+  overflow-y: auto;
+}
+
+.rge-modal-container {
+  max-width: 800px;
+  margin: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.3);
+}
+
+.rge-modal-header {
+  text-align: center;
+  padding: 16px 46px;
+  border-bottom: solid 1px $light-grey;
+  position: relative;
+
+  .rge-modal-header-title {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .rge-modal-close {
+    position: absolute;
+    right: 8px;
+    top: calc(50% - 15px);
+  }
+}
+
+.rge-modal-content {
+  padding: 16px;
+}
