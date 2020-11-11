@@ -3,14 +3,23 @@
     <h1 class="section-title">Nos réalisations</h1>
 
     <div class="row">
-      <div [ngsReveal]="{delay: i*50}" class="col-lg-4 col-md-6 col-xs-6 album-container" *ngFor="let album of (albums | async), let i = index">
-        <div class="album"
-             [style.background-image]="'url('+album.thumbnail+')'"
-             (click)="goToAlbum(album.id)">
+      <div
+        [ngsReveal]="{ delay: i * 50 }"
+        class="col-lg-4 col-md-6 col-xs-6 album-container"
+        *ngFor="let album of albums | async; let i = index"
+      >
+        <div class="album" (click)="goToAlbum(album.id)">
+          <div
+            class="album-background"
+            [style.background-image]="'url(' + album.thumbnail + ')'"
+          ></div>
+
           <div class="album-filter">
             <div>
               <h4 class="album-title">{{ album.title }}</h4>
-              <h5 class="album-title-hover"><img src="/assets/img/forward-arrow.svg"> Voir l'album</h5>
+              <h5 class="album-title-hover">
+                <img src="/assets/img/forward-arrow.svg" /> Voir l'album
+              </h5>
             </div>
           </div>
         </div>

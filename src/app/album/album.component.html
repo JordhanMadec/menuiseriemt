@@ -1,9 +1,14 @@
 <div class="album-container" scroll="no">
-  <header *ngIf="(album | async)">
-    <div class="header-container"
-         [style.background-image]="'url(' + (album | async)?.thumbnail + ')'">
+  <header *ngIf="album | async">
+    <div
+      class="header-container"
+      [style.background-image]="'url(' + (album | async)?.thumbnail + ')'"
+    >
       <div class="header-filter">
-        <div [ngsReveal]="{delay: 150, origin: 'right', distance: '100px'}" class="container">
+        <div
+          [ngsReveal]="{ delay: 150, origin: 'right', distance: '100px' }"
+          class="container"
+        >
           <h1 class="header-title">{{ (album | async)?.title }}</h1>
         </div>
       </div>
@@ -12,41 +17,63 @@
 
   <section>
     <div class="container">
-      <div class="row gallery-container" *ngIf="(album | async)">
-        <div [ngsReveal]="{delay: 300 + i*50}" class="gallery-image-container col-lg-3 col-md-4 col-xs-6" *ngFor="let i of numbers">
-          <div class="gallery-image" [style.background-image]="'url(' + (album | async)?.path + '/' + i + '.png)'">
+      <div class="row gallery-container" *ngIf="album | async">
+        <div
+          [ngsReveal]="{ delay: 300 + i * 50 }"
+          class="gallery-image-container col-lg-3 col-md-4 col-xs-6"
+          *ngFor="let i of numbers"
+        >
+          <div class="gallery-image">
+            <div
+              class="gallery-image-background"
+              [style.background-image]="
+                'url(' + (album | async)?.path + '/' + i + '.png)'
+              "
+            ></div>
+
             <div class="gallery-image-filter" (click)="showFullScreen(i)">
-              <h5 class="gallery-image-title"><img src="/assets/img/forward-arrow.svg"> Agrandir</h5>
+              <h5 class="gallery-image-title">
+                <img src="/assets/img/forward-arrow.svg" /> Agrandir
+              </h5>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
 </div>
 
-<a class="circle-button back-button" routerLink="/" href="#gallery-section" pageScroll>
-  <img src="../../assets/img/back-arrow.svg">
+<a
+  class="circle-button back-button"
+  routerLink="/"
+  href="#gallery-section"
+  pageScroll
+>
+  <img src="../../assets/img/back-arrow.svg" />
 </a>
 
-
 <div class="full-screen-photo-container">
-  <div class="full-screen-photo-filter" (mouseenter)="showCommands()" (mouseleave)="hideCommands()">
-    <img id="full-screen-photo" class="full-screen-photo" src="">
+  <div
+    class="full-screen-photo-filter"
+    (mouseenter)="showCommands()"
+    (mouseleave)="hideCommands()"
+  >
+    <img id="full-screen-photo" class="full-screen-photo" src="" />
   </div>
 
-  <div class="circle-button circle-button-small close-button" (click)="hideFullScreen()">
-    <img src="../../assets/img/clear.svg">
+  <div
+    class="circle-button circle-button-small close-button"
+    (click)="hideFullScreen()"
+  >
+    <img src="../../assets/img/clear.svg" />
   </div>
 
   <div id="commands" (mouseenter)="showCommands()">
     <div class="circle-button previous-button" (click)="previousPhoto()">
-      <img src="../../assets/img/back-arrow-black.svg">
+      <img src="../../assets/img/back-arrow-black.svg" />
     </div>
     <div class="circle-button next-button" (click)="nextPhoto()">
-      <img src="../../assets/img/forward-arrow-black.svg">
+      <img src="../../assets/img/forward-arrow-black.svg" />
     </div>
   </div>
-
 </div>

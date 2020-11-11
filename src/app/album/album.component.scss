@@ -1,6 +1,6 @@
 @import "../../assets/style/variables";
 
-.album-container{
+.album-container {
   overflow: hidden;
 }
 
@@ -16,11 +16,27 @@
 .header-filter {
   height: 300px;
   width: 100%;
-  background-color: rgba(0, 0, 0, .4);
-  background-image: -webkit-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: -o-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: -moz-linear-gradient(right, rgba(0,0,0,.7), rgba(0,0,0,0));;
-  background-image: linear-gradient(to right, rgba(0,0,0,.7), rgba(0,0,0,0));;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-image: -webkit-linear-gradient(
+    right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  );
+  background-image: -o-linear-gradient(
+    right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  );
+  background-image: -moz-linear-gradient(
+    right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  );
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0)
+  );
   color: $white;
   display: flex;
   align-items: center;
@@ -29,7 +45,7 @@
 .header-title {
   font-size: 70px;
   margin: 0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .back-button {
@@ -55,25 +71,37 @@
   justify-content: center;
   width: 100%;
   height: 200px;
-  background-color: $light-grey;
   color: $dark-grey;
-  background-size: cover;
-  background-position: center;
   overflow: hidden;
   border-radius: $radius;
+  position: relative;
+}
+
+.gallery-image-background {
+  height: 100%;
+  width: 100%;
+  background-color: $light-grey;
+  background-position: center;
+  background-size: cover;
+  transition: 0.3s;
 }
 
 .gallery-image-filter {
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: flex-end;
   padding: 8px 16px;
   height: 100%;
   width: 100%;
-  transition: .3s;
+  transition: 0.3s;
   overflow: hidden;
   opacity: 0;
   cursor: pointer;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   .gallery-image-title {
     color: $white;
@@ -84,21 +112,26 @@
   }
 }
 
-.gallery-image-filter:hover{
-  opacity: 1;
+.gallery-image:hover {
+  .gallery-image-background {
+    transform: scale(1.2);
+  }
 
-  .gallery-image-title {
-    visibility: visible;
-    display: inline-block;
-    transform: translateY(0px);
+  .gallery-image-filter {
     opacity: 1;
-    transition: .3s;
+
+    .gallery-image-title {
+      visibility: visible;
+      display: inline-block;
+      transform: translateY(0px);
+      opacity: 1;
+      transition: 0.3s;
+    }
   }
 }
 
-
 .full-screen-photo-container,
-.full-screen-photo-filter{
+.full-screen-photo-filter {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -112,12 +145,13 @@
 }
 
 .full-screen-photo-filter {
-  background-color: rgba(0, 0, 0, .98);
+  background-color: rgba(0, 0, 0, 0.98);
   display: flex;
   align-items: center;
   justify-content: center;
 
-  full-screen-photo, img {
+  full-screen-photo,
+  img {
     display: inline-block;
     width: 100%;
     max-width: 100% !important;
@@ -188,12 +222,12 @@ full-screen-photo {
   }
 
   .gallery-image-title {
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin: 0;
   }
 
   .gallery-image-title-hover {
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin: 0;
   }
 
