@@ -16,6 +16,8 @@
   padding: 0;
   overflow: hidden;
   position: relative;
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.1);
+  transition: 0.3s;
 }
 
 .album-background {
@@ -57,6 +59,8 @@
 }
 
 .album:hover {
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.3);
+
   .album-background {
     transform: scale(1.2);
   }

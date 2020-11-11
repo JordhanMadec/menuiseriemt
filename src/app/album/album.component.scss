@@ -75,6 +75,8 @@
   overflow: hidden;
   border-radius: $radius;
   position: relative;
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.1);
+  transition: 0.3s;
 }
 
 .gallery-image-background {
@@ -113,6 +115,8 @@
 }
 
 .gallery-image:hover {
+  box-shadow: 0px 0px 20px 0px rgba(#000, 0.3);
+
   .gallery-image-background {
     transform: scale(1.2);
   }

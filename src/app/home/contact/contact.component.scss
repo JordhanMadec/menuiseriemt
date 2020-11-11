@@ -1,7 +1,7 @@
 @import "../../../assets/style/colors";
 @import "../../../assets/style/variables";
 
-#contact-section{
+#contact-section {
   background-color: $light-grey;
   //background-image: url('../../assets/img/background-pics-top.svg');
   //background-size: cover;
@@ -12,6 +12,12 @@
 .map-container {
   img {
     border-radius: $radius;
+    box-shadow: 0px 0px 20px 0px rgba(#000, 0.1);
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 0px 0px 20px 0px rgba(#000, 0.2);
+    }
   }
 }
 
@@ -34,37 +40,36 @@
   }
 }
 
-#map-section{
+#map-section {
   background-color: $light-grey;
   text-align: center;
 }
 
-#map-section img{
+#map-section img {
   //display: inline-block;
   width: 100%;
   height: auto;
 }
 
-#adresse{
+#adresse {
   background-color: $green;
   padding: 32px 0;
   text-align: center;
 }
 
-form{
+form {
   display: inline-block;
   padding: 32px 0;
 }
 
 input,
-textarea
-{
+textarea {
   border: none;
   border-radius: 0;
   box-shadow: none;
 }
 
-input[type="submit"]{
+input[type="submit"] {
   display: inline-block;
   background-color: $green;
   border: none;
