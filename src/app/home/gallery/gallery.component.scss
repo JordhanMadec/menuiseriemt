@@ -45,16 +45,21 @@
 
   .album-title {
     color: $white;
-    transform: translateY(32px);
+    transform: translateY(24px);
     transition: 0.3s;
+    margin: 0;
   }
 
   .album-title-hover {
     color: $white;
     visibility: hidden;
-    transform: translateY(32px);
+    transform: translateY(24px);
+    display: flex;
+    align-items: center;
     opacity: 0;
     transition: 0s;
+    margin: 0;
+    line-height: 1;
   }
 }
 

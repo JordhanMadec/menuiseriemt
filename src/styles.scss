@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/style/variables";
 @import "assets/fonts/atami/stylesheet.css";
-@import url("https://fonts.googleapis.com/css?family=Archivo|Quicksand|Julius+Sans+One");
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web:wght@300|Overpass");
 @import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/bootstrap-grid";
 @import "~bootstrap/scss/bootstrap";
@@ -9,7 +9,7 @@
 html,
 body {
   color: $black;
-  font-family: "Quicksand";
+  font-family: "Titillium Web";
   overflow-x: hidden;
   position: relative;
 }
@@ -24,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Julius Sans One", "Archivo";
+  font-family: "Overpass";
 }
 
 a,
